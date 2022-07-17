@@ -33,13 +33,15 @@ public class Dormitory extends JFrame {
     public Dormitory(){
         this.setTitle("Dormitory");
         this.setContentPane(mainPanel);
-        this.setSize(550,210);
+        this.setSize(650,700);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
-
         filterList.addItem("Year of Students");
         filterList.addItem("Available space");
+
+        ImageIcon searchButtonIcon = new ImageIcon("Icons/SearchIcon.png");
+        searchButton.setIcon(searchButtonIcon);
 
     }
 
