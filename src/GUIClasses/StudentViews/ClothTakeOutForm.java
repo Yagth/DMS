@@ -28,7 +28,7 @@ public class ClothTakeOutForm extends JFrame implements Views {
     private ArrayList<Cloth> clothList;
     private int clothCount;
 
-    ClothTakeOutForm(){
+    public ClothTakeOutForm(){
         clothList = new ArrayList<>();
         setUpGUi();
     }

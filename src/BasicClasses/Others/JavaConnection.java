@@ -51,6 +51,6 @@ public class JavaConnection {
         return tmpResultSet;
     }
     public boolean isConnected(){
-        return !(connection==null);//Connection is not initialised or, it is null if the connection is not successful.
+        return !(connection.equals(null));//Connection is not initialised or, it is null if the connection is not successful.
     }
 }
