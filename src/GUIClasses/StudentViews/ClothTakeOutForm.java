@@ -80,6 +80,9 @@ public class ClothTakeOutForm extends JFrame implements Views {
                     if(tmp.getClothName().equals(""))
                         JOptionPane.showMessageDialog(mainPanel,"Name can't be empty",
                                 "Invalid Input error",JOptionPane.ERROR_MESSAGE);
+                    else if(checkSimilarNameCloth(tmp))
+                        JOptionPane.showMessageDialog(mainPanel,"You can't add same cloth twice.",
+                                "Invalid Input error",JOptionPane.ERROR_MESSAGE);
                     else{
                         clothList.addCloth(tmp);
                         addClothToView(tmp);
@@ -133,13 +136,13 @@ public class ClothTakeOutForm extends JFrame implements Views {
     public Integer updateDataBase() {
         String url = "jdbc:sqlserver://DESKTOP-AA4PR2S\\SQLEXPRESS;DatabaseName=DMS;" +
                 "encrypt=true;trustServerCertificate=true;IntegratedSecurity=true;";
-        String query = "INSERT INTO clothRequest(requestID,reporterID,ClothName,clothAmount,reportedDate)";
         Date date = new Date(Calendar.getInstance().getTimeInMillis());
         String reportType = this.getTitle();
         JavaConnection javaConnection = new JavaConnection(url);
         Integer updateStatus = 0;
         for (Cloth c : clothList.getClothsList()) {
-            query += "VALUES(\'" +clothList.getRequestId()+"\',\'"+ reporterId + "\',\'" + c.getClothName()+ "\',\'" +
+            String query = "INSERT INTO clothRequest(requestID,reporterID,ClothName,clothAmount,reportedDate)" +
+                            "VALUES(\'" +clothList.getRequestId()+"\',\'"+ reporterId + "\',\'" + c.getClothName()+ "\',\'" +
                     c.getClothAmount()+"\',\'"+ date + "\');";
             if (javaConnection.isConnected()) updateStatus = javaConnection.insertQuery(query);
         }
@@ -166,5 +169,11 @@ public class ClothTakeOutForm extends JFrame implements Views {
         }catch(SQLException ex){
             return 0;
         }
+    }
+    public boolean checkSimilarNameCloth(Cloth cloth){
+        for(Cloth c: clothList.getClothsList()){
+            return (c.getClothName().equalsIgnoreCase(cloth.getClothName()));
+        }
+        return false;
     }
 }
