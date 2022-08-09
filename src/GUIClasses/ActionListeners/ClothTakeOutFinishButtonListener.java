@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class ClothTakeOutFinishButtonListener implements ActionListener {
     ClothTakeOutForm parentComponent;
-    ClothTakeOutFinishButtonListener(ClothTakeOutForm parentComponent){
+    public ClothTakeOutFinishButtonListener(ClothTakeOutForm parentComponent){
         this.parentComponent = parentComponent;
     }
     @Override

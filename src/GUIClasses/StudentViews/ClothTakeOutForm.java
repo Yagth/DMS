@@ -4,6 +4,7 @@ import BasicClasses.Others.Cloth;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.ClothTakeOutRequest;
 import GUIClasses.ActionListeners.ClothTakeOutAddButtonListener;
+import GUIClasses.ActionListeners.ClothTakeOutFinishButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 import GUIClasses.Interfaces.Views;
 
@@ -52,7 +53,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         this.setVisible(true);
         clothListPanel.setLayout(new BoxLayout(clothListPanel, BoxLayout.Y_AXIS));
         addButton.addActionListener(new ClothTakeOutAddButtonListener(this));
-        finishButton.addActionListener(new FinishButtonListener());
+        finishButton.addActionListener(new ClothTakeOutFinishButtonListener(this));
         clothAmountPanel.setLayout(new BoxLayout(clothAmountPanel, BoxLayout.Y_AXIS));
     }
 
