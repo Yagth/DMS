@@ -35,6 +35,8 @@ public class ClothTakeOutForm extends JFrame implements Views {
     public final int HEIGHT = 200;
 
     public ClothTakeOutForm(){
+        Integer lastRequestId = this.getLastClothRequestId();
+        clothList = new ClothTakeOutRequest(reporterId,lastRequestId);
         setUpGUi();
     }
     @Override
@@ -129,11 +131,9 @@ public class ClothTakeOutForm extends JFrame implements Views {
     }
 
     public Integer updateDataBase() {
-        Integer lastRequestId = this.getLastClothRequestId();
-        clothList = new ClothTakeOutRequest(reporterId,lastRequestId);
         String url = "jdbc:sqlserver://DESKTOP-AA4PR2S\\SQLEXPRESS;DatabaseName=DMS;" +
                 "encrypt=true;trustServerCertificate=true;IntegratedSecurity=true;";
-        String query = "INSERT INTO clothRequest(reportID,reporterID,ClothName,clothAmount,reportedDate)";
+        String query = "INSERT INTO clothRequest(requestID,reporterID,ClothName,clothAmount,reportedDate)";
         Date date = new Date(Calendar.getInstance().getTimeInMillis());
         String reportType = this.getTitle();
         JavaConnection javaConnection = new JavaConnection(url);
@@ -164,7 +164,11 @@ public class ClothTakeOutForm extends JFrame implements Views {
             lastRequestId = Integer.parseInt(tmp);
             return lastRequestId;
         }catch(SQLException ex){
-            return null;
+            return 0;
+        }
+        catch (NullPointerException ex){
+            ex.printStackTrace();
+            return 0;
         }
     }
 }

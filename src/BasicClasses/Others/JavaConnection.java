@@ -37,15 +37,17 @@ public class JavaConnection {
             statement.execute(query);
             return 1;
         }catch (SQLException ex){
+            ex.printStackTrace();
             return 0;
         }
     }
 
     public ResultSet selectQuery(String query){
-        ResultSet tmpResultSet = null;
+        ResultSet tmpResultSet;
         try{
             tmpResultSet = statement.executeQuery(query);
         }catch (SQLException ex){
+            ex.printStackTrace();
             return null;
         }
         return tmpResultSet;

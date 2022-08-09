@@ -28,10 +28,7 @@ public class ClothTakeOutRequest extends Request {
         cloths.add(cloth);
     }
     public void setRequestCount(Integer requestCount){
-        if(requestCount.equals(null)){
-            requestCount = 0;
-        }
-        else this.requestCount = requestCount;
+        this.requestCount = requestCount;
     }
 
     @Override
