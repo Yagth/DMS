@@ -2,6 +2,7 @@ package GUIClasses.StudentViews;
 
 import BasicClasses.Others.Cloth;
 import BasicClasses.Others.JavaConnection;
+import BasicClasses.Requests.ClothTakeOutRequest;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
@@ -25,13 +26,14 @@ public class ClothTakeOutForm extends JFrame implements Views {
     private JPanel clothPanel;
     private JPanel clothListPanel;
     private JPanel clothAmountPanel;
-    private ArrayList<Cloth> clothList;
+    private ClothTakeOutRequest clothList;
+    String reportId = "yep it is"; // This part here is only for debugging. It will be removed when the project is complete.
     private int clothCount;
     public final int WIDTH = 400;
     public final int HEIGHT = 200;
 
     public ClothTakeOutForm(){
-        clothList = new ArrayList<>();
+        clothList = new ClothTakeOutRequest(reportId);
         setUpGUi();
     }
     @Override
@@ -51,9 +53,10 @@ public class ClothTakeOutForm extends JFrame implements Views {
     private class FinishButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (clothList.size() != 0) {
-                updateDataBase();
-                clothList.clear();
+            if (clothList.getClothsList().size() != 0) {
+                Integer updateStatus = updateDataBase();
+                displayUpdateStatus(updateStatus);
+                ClothTakeOutForm.this.dispose();
             }
             else{
                 JOptionPane.showMessageDialog(ClothTakeOutForm.this,
@@ -75,7 +78,7 @@ public class ClothTakeOutForm extends JFrame implements Views {
                         JOptionPane.showMessageDialog(mainPanel,"Name can't be empty",
                                 "Invalid Input error",JOptionPane.ERROR_MESSAGE);
                     else{
-                        clothList.add(tmp);
+                        clothList.addCloth(tmp);
                         addClothToView(tmp);
                         clear();
                     }
@@ -124,28 +127,25 @@ public class ClothTakeOutForm extends JFrame implements Views {
         clothAmount.setText("");
     }
 
-    public void updateDataBase(){
+    public Integer updateDataBase() {
         String url = "jdbc:sqlserver://DESKTOP-AA4PR2S\\SQLEXPRESS;DatabaseName=DMS;" +
                 "encrypt=true;trustServerCertificate=true;IntegratedSecurity=true;";
-        String query = "INSERT INTO clothRequest(reporterID,description,reportedDate,reportType)";
-        String reportId = "yep it is";
+        String query = "INSERT INTO clothRequest(reportID,reporterID,ClothName,Amount,reportedDate)";
         Date date = new Date(Calendar.getInstance().getTimeInMillis());
-        String description = "";
         String reportType = this.getTitle();
-        for(Cloth cl: clothList){
-            description += cl.getClothName()+":"+cl.getClothAmount()+" ";
-        }
-
-        query+="VALUES(\'"+reportId+"\',\'"+description+"\',\'"+date+"\',\'"+reportType+"\');";
         JavaConnection javaConnection = new JavaConnection(url);
-        if(javaConnection.isConnected()){
-            int updateStatus = javaConnection.insertQuery(query);
-            if(updateStatus==1) JOptionPane.showMessageDialog(null,"Request sent successfully","Connection error",JOptionPane.INFORMATION_MESSAGE);
-            else JOptionPane.showMessageDialog(null,"Sorry couldn't send your request","Connection error",JOptionPane.ERROR_MESSAGE);
+        Integer updateStatus = 0;
+        for (Cloth c : clothList.getClothsList()) {
+            query += "VALUES(\'" + reportId + "\',\'" + c.getClothName()+ "\',\'" +
+                    c.getClothAmount()+"\',\'"+ date + "\',\'" + reportType + "\');";
+            if (javaConnection.isConnected()) updateStatus = javaConnection.insertQuery(query);
         }
-
-        this.dispose();
+        return updateStatus;
     }
-
-
+    public void displayUpdateStatus(Integer updateStatus){
+        if (updateStatus.equals(1))
+            JOptionPane.showMessageDialog(null, "Request sent successfully", "Message sent", JOptionPane.INFORMATION_MESSAGE);
+        else
+            JOptionPane.showMessageDialog(null, "Sorry couldn't send your request due to connection error", "Connection error", JOptionPane.ERROR_MESSAGE);
+    }
 }

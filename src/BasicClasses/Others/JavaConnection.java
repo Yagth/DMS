@@ -37,7 +37,6 @@ public class JavaConnection {
             statement.execute(query);
             return 1;
         }catch (SQLException ex){
-            JOptionPane.showMessageDialog(null,"Couldn't Execute the query","Connection error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -46,7 +45,7 @@ public class JavaConnection {
         try{
             tmpResultSet = statement.executeQuery(query);
         }catch (SQLException ex){
-            JOptionPane.showMessageDialog(null,"Couldn't Execute the query","Connection error",JOptionPane.ERROR_MESSAGE);
+            return null;
         }
         return tmpResultSet;
     }

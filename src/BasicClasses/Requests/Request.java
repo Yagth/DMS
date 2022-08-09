@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.Calendar;
 
 public abstract class Request {
+    private int requestId;
     private String description;
     private String requesterId;
     private String handlerId;
@@ -15,6 +16,13 @@ public abstract class Request {
         this.requestType = requestType;
         this.requesterId = requesterId;
         this.requestedDate = getCurrentDate();
+    }
+    public int getRequestId(){
+        return requestId;
+    }
+
+    public void setRequestId(int requestId) {
+        this.requestId = requestId;
     }
 
     public String getDescription() {

@@ -3,7 +3,6 @@ package BasicClasses.Requests;
 public class MaintenanceRequest extends Request {
     private String roomNO;
     private String buildingNo;
-
     public MaintenanceRequest(String requesterId){
         super("Maintenance",requesterId);
     }
