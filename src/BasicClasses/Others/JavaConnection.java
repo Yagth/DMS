@@ -40,6 +40,7 @@ public class JavaConnection {
             return 0;
         }
     }
+
     public ResultSet selectQuery(String query){
         ResultSet tmpResultSet = null;
         try{

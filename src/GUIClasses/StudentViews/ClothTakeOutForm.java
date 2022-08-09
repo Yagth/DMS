@@ -8,6 +8,8 @@ import GUIClasses.Interfaces.Views;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import java.sql.Date;
 
@@ -33,7 +35,6 @@ public class ClothTakeOutForm extends JFrame implements Views {
     public final int HEIGHT = 200;
 
     public ClothTakeOutForm(){
-        clothList = new ClothTakeOutRequest(reporterId);
         setUpGUi();
     }
     @Override
@@ -128,6 +129,8 @@ public class ClothTakeOutForm extends JFrame implements Views {
     }
 
     public Integer updateDataBase() {
+        Integer lastRequestId = this.getLastClothRequestId();
+        clothList = new ClothTakeOutRequest(reporterId,lastRequestId);
         String url = "jdbc:sqlserver://DESKTOP-AA4PR2S\\SQLEXPRESS;DatabaseName=DMS;" +
                 "encrypt=true;trustServerCertificate=true;IntegratedSecurity=true;";
         String query = "INSERT INTO clothRequest(reportID,reporterID,ClothName,clothAmount,reportedDate)";
@@ -147,5 +150,21 @@ public class ClothTakeOutForm extends JFrame implements Views {
             JOptionPane.showMessageDialog(null, "Request sent successfully", "Message sent", JOptionPane.INFORMATION_MESSAGE);
         else
             JOptionPane.showMessageDialog(null, "Sorry couldn't send your request due to connection error", "Connection error", JOptionPane.ERROR_MESSAGE);
+    }
+    public Integer getLastClothRequestId(){
+        int lastRequestId = 0;
+        String url = "jdbc:sqlserver://DESKTOP-AA4PR2S\\SQLEXPRESS;DatabaseName=DMS;" +
+                "encrypt=true;trustServerCertificate=true;IntegratedSecurity=true;";
+        JavaConnection javaConnection = new JavaConnection(url);
+        String query = "SELECT TOP 1 * FROM clothRequest ORDER BY requestId DESC, clothName DESC;";
+        ResultSet resultSet = javaConnection.selectQuery(query);
+        try{
+            resultSet.next();
+            String tmp = resultSet.getString("requestId");
+            lastRequestId = Integer.parseInt(tmp);
+            return lastRequestId;
+        }catch(SQLException ex){
+            return null;
+        }
     }
 }

@@ -8,8 +8,9 @@ public class ClothTakeOutRequest extends Request {
     private ArrayList<Cloth> cloths;
     private static int requestCount;
     private int requestId;
-    public ClothTakeOutRequest(String requesterId){
+    public ClothTakeOutRequest(String requesterId,int requestCount){
         super("ClothTakeOutForm",requesterId);
+        setRequestCount(requestCount);
         cloths = new ArrayList<>();
         requestCount++;
         this.requestId = requestCount;
@@ -25,6 +26,12 @@ public class ClothTakeOutRequest extends Request {
 
     public void addCloth(Cloth cloth){
         cloths.add(cloth);
+    }
+    public void setRequestCount(Integer requestCount){
+        if(requestCount.equals(null)){
+            requestCount = 0;
+        }
+        else this.requestCount = requestCount;
     }
 
     @Override
