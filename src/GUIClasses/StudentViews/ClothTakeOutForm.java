@@ -27,13 +27,13 @@ public class ClothTakeOutForm extends JFrame implements Views {
     private JPanel clothListPanel;
     private JPanel clothAmountPanel;
     private ClothTakeOutRequest clothList;
-    String reportId = "yep it is"; // This part here is only for debugging. It will be removed when the project is complete.
+    String reporterId = "yep it is"; // This part here is only for debugging. It will be removed when the project is complete.
     private int clothCount;
     public final int WIDTH = 400;
     public final int HEIGHT = 200;
 
     public ClothTakeOutForm(){
-        clothList = new ClothTakeOutRequest(reportId);
+        clothList = new ClothTakeOutRequest(reporterId);
         setUpGUi();
     }
     @Override
@@ -130,14 +130,14 @@ public class ClothTakeOutForm extends JFrame implements Views {
     public Integer updateDataBase() {
         String url = "jdbc:sqlserver://DESKTOP-AA4PR2S\\SQLEXPRESS;DatabaseName=DMS;" +
                 "encrypt=true;trustServerCertificate=true;IntegratedSecurity=true;";
-        String query = "INSERT INTO clothRequest(reportID,reporterID,ClothName,Amount,reportedDate)";
+        String query = "INSERT INTO clothRequest(reportID,reporterID,ClothName,clothAmount,reportedDate)";
         Date date = new Date(Calendar.getInstance().getTimeInMillis());
         String reportType = this.getTitle();
         JavaConnection javaConnection = new JavaConnection(url);
         Integer updateStatus = 0;
         for (Cloth c : clothList.getClothsList()) {
-            query += "VALUES(\'" + reportId + "\',\'" + c.getClothName()+ "\',\'" +
-                    c.getClothAmount()+"\',\'"+ date + "\',\'" + reportType + "\');";
+            query += "VALUES(\'" +clothList.getRequestId()+"\',\'"+ reporterId + "\',\'" + c.getClothName()+ "\',\'" +
+                    c.getClothAmount()+"\',\'"+ date + "\');";
             if (javaConnection.isConnected()) updateStatus = javaConnection.insertQuery(query);
         }
         return updateStatus;
