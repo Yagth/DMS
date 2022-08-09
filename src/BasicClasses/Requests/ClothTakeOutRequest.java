@@ -8,15 +8,15 @@ public class ClothTakeOutRequest extends Request {
     private ArrayList<Cloth> cloths;
     private static int requestCount;
     private int requestId;
-    public ClothTakeOutRequest(String requesterId,int requestCount){
+    public ClothTakeOutRequest(String requesterId,Integer requestCount){
         super("ClothTakeOutForm",requesterId);
         setRequestCount(requestCount);
         cloths = new ArrayList<>();
         requestCount++;
         this.requestId = requestCount;
     }
-    public ClothTakeOutRequest(Cloth cloth, String requesterId){
-        this(requesterId);
+    public ClothTakeOutRequest(Cloth cloth, String requesterId,Integer requestCount){
+        this(requesterId,requestCount);
         cloths.add(cloth);
     }
 
