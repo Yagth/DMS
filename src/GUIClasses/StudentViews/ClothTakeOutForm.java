@@ -64,22 +64,6 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         return mainPanel;
     }
 
-    private class FinishButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (clothList.getClothsList().size() != 0) {
-                Integer updateStatus = updateDataBase();
-                displayUpdateStatus(updateStatus);
-                ClothTakeOutForm.this.dispose();
-            }
-            else{
-                JOptionPane.showMessageDialog(ClothTakeOutForm.this,
-                        "No cloths added. Make sure to add First","Empty List",
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-    }
-
     public Cloth getClothInfo() throws NumberFormatException{
         String name = clothName.getText();
         int amount = Integer.parseInt(clothAmount.getText());
