@@ -1,10 +1,11 @@
 package GUIClasses.StudentViews;
 
+import GUIClasses.Interfaces.RequestViews;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
 
-public class MaintananceRequest extends JFrame implements Views {
+public class MaintananceRequest extends JFrame implements RequestViews {
     private JPanel mainPanel;
     private JPanel innerPanel;
     private JLabel locationLabel;
@@ -36,4 +37,14 @@ public class MaintananceRequest extends JFrame implements Views {
         this.setVisible(true);
     }
 
+
+    @Override
+    public Integer updateDataBase() {
+        return null;
+    }
+
+    @Override
+    public void displayUpdateStatus(Integer updateStatus) {
+
+    }
 }

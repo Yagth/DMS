@@ -3,6 +3,7 @@ package GUIClasses.StudentViews;
 import BasicClasses.Others.Cloth;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.ClothTakeOutRequest;
+import GUIClasses.Interfaces.RequestViews;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.sql.Date;
 
-public class ClothTakeOutForm extends JFrame implements Views {
+public class ClothTakeOutForm extends JFrame implements RequestViews {
     private JTextField clothName;
     private JTextField clothAmount;
     private JButton addButton;
