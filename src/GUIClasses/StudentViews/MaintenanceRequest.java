@@ -1,6 +1,7 @@
 package GUIClasses.StudentViews;
 
 import BasicClasses.Others.JavaConnection;
+import GUIClasses.ActionListeners.MaintenanceSubmitButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 
 import javax.swing.*;
@@ -38,6 +39,8 @@ public class MaintenanceRequest extends JFrame implements RequestViews {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
+        submitButton.addActionListener(new MaintenanceSubmitButtonListener(this));
+
     }
     public int getBlockNumber(){
         int tmp;
@@ -72,9 +75,9 @@ public class MaintenanceRequest extends JFrame implements RequestViews {
         String reportType = this.getTitle();
         JavaConnection javaConnection = new JavaConnection(url);
         Integer updateStatus = 0;
-        String query = "INSERT INTO request(reporterID,requestType,roomNO,blockNo,reportedDate)" +
+        String query = "INSERT INTO request(reportedID,requestType,roomNO,blockNo,reportDate,description)" +
                 "VALUES(\'" +reporterId+"\',\'"+ this.getTitle() + "\',\'" + getRoomNumber()+ "\',\'" +
-                this.getBlockNumber()+"\',\'"+ date + "\');";
+                getBlockNumber()+"\',\'"+ date + "\',\'"+getDescription()+"\');";
         if (javaConnection.isConnected()) updateStatus = javaConnection.insertQuery(query);
         return updateStatus;
     }
@@ -85,6 +88,5 @@ public class MaintenanceRequest extends JFrame implements RequestViews {
             JOptionPane.showMessageDialog(null, "Request sent successfully", "Message sent", JOptionPane.INFORMATION_MESSAGE);
         else
             JOptionPane.showMessageDialog(null, "Sorry couldn't send your request due to connection error", "Connection error", JOptionPane.ERROR_MESSAGE);
-
     }
 }
