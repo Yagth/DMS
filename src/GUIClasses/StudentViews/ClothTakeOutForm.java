@@ -166,9 +166,5 @@ public class ClothTakeOutForm extends JFrame implements Views {
         }catch(SQLException ex){
             return 0;
         }
-        catch (NullPointerException ex){
-            ex.printStackTrace();
-            return 0;
-        }
     }
 }
