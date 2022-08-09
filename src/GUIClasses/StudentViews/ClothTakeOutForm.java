@@ -3,6 +3,7 @@ package GUIClasses.StudentViews;
 import BasicClasses.Others.Cloth;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.ClothTakeOutRequest;
+import GUIClasses.ActionListeners.ClothTakeOutAddButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 import GUIClasses.Interfaces.Views;
 
@@ -50,10 +51,19 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         this.setResizable(false);
         this.setVisible(true);
         clothListPanel.setLayout(new BoxLayout(clothListPanel, BoxLayout.Y_AXIS));
-        addButton.addActionListener(new AddButtonListener());
+        addButton.addActionListener(new ClothTakeOutAddButtonListener(this));
         finishButton.addActionListener(new FinishButtonListener());
         clothAmountPanel.setLayout(new BoxLayout(clothAmountPanel, BoxLayout.Y_AXIS));
     }
+
+    public ClothTakeOutRequest getClothList() {
+        return clothList;
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
     private class FinishButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -66,37 +76,6 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
                 JOptionPane.showMessageDialog(ClothTakeOutForm.this,
                         "No cloths added. Make sure to add First","Empty List",
                         JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-    }
-
-
-
-    private class AddButtonListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try{
-                Cloth tmp = getClothInfo();
-                if(tmp.getClothAmount()>0)
-                    if(tmp.getClothName().equals(""))
-                        JOptionPane.showMessageDialog(mainPanel,"Name can't be empty",
-                                "Invalid Input error",JOptionPane.ERROR_MESSAGE);
-                    else if(checkSimilarNameCloth(tmp))
-                        JOptionPane.showMessageDialog(mainPanel,"You can't add same cloth twice.",
-                                "Invalid Input error",JOptionPane.ERROR_MESSAGE);
-                    else{
-                        clothList.addCloth(tmp);
-                        addClothToView(tmp);
-                        clear();
-                    }
-                else
-                    JOptionPane.showMessageDialog(mainPanel,"Amount is invalid. cloth not added. " +
-                            "Make sure to enter amount greater than zero","Invalid Input error",
-                            JOptionPane.INFORMATION_MESSAGE);
-            }
-            catch (NumberFormatException ex){
-                JOptionPane.showMessageDialog(mainPanel,"Amount can't be empty",
-                        "Invalid amount error",JOptionPane.ERROR_MESSAGE);
             }
         }
     }
