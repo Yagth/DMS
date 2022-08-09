@@ -27,6 +27,8 @@ public class ClothTakeOutForm extends JFrame implements Views {
     private JPanel clothAmountPanel;
     private ArrayList<Cloth> clothList;
     private int clothCount;
+    public final int WIDTH = 400;
+    public final int HEIGHT = 200;
 
     public ClothTakeOutForm(){
         clothList = new ArrayList<>();
@@ -36,7 +38,7 @@ public class ClothTakeOutForm extends JFrame implements Views {
     public void setUpGUi() {
         this.setTitle("Student cloth Take Out Form");
         this.setContentPane(mainPanel);
-        this.setSize(400,200);
+        this.setSize(WIDTH,HEIGHT);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
