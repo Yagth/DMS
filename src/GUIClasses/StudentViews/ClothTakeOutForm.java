@@ -21,6 +21,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
     private JPanel buttonPanel;
     private JPanel titlePanel;
     private JTable clothTable;
+    private JLabel descriptionLabel;
     private JScrollPane scrollPane;
     private ClothTakeOutRequest clothList;
     String reporterId = "yep it is"; // This part here is only for debugging. It will be removed when the project is complete.
@@ -31,6 +32,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         Integer lastRequestId = this.getLastClothRequestId();
         clothList = new ClothTakeOutRequest(reporterId,lastRequestId);
         setUpGUi();
+        setUpTable();
     }
     @Override
     public void setUpGUi() {
@@ -44,8 +46,20 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
     }
 
     public void setUpTable(){
+        Vector<String> title = new Vector<>();
+        Vector<Vector<Object>> data = new Vector<>();
+        Vector<Cloth> cloths = clothList.getClothsList();
 
-        clothTable.setModel(new DefaultTableModel());
+        for(Cloth c : cloths ){
+            Vector<Object> tmp = new Vector<>();
+            tmp.add(c.getClothName());
+            tmp.add(c.getClothAmount());
+            data.add(tmp);
+        }
+
+        title.add("Cloth Name");
+        title.add("Amount");
+        clothTable.setModel(new DefaultTableModel(data,title));
     }
 
     public ClothTakeOutRequest getClothTable() {
