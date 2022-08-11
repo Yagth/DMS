@@ -3,14 +3,10 @@ package GUIClasses.StudentViews;
 import BasicClasses.Others.Cloth;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.ClothTakeOutRequest;
-import GUIClasses.ActionListeners.ClothTakeOutAddButtonListener;
-import GUIClasses.ActionListeners.ClothTakeOutFinishButtonListener;
 import GUIClasses.Interfaces.RequestViews;
-import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -22,18 +18,12 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
     private JButton addButton;
     private JButton finishButton;
     private JPanel mainPanel;
-    private JLabel clotheLabel;
-    private JLabel amountLabel;
     private JPanel buttonPanel;
     private JPanel titlePanel;
-    private JLabel descriptionLabel;
-    private JLabel numberLabel;
-    private JPanel clothPanel;
-    private JPanel clothListPanel;
-    private JPanel clothAmountPanel;
+    private JTable clothTable;
+    private JScrollPane scrollPane;
     private ClothTakeOutRequest clothList;
     String reporterId = "yep it is"; // This part here is only for debugging. It will be removed when the project is complete.
-    private int clothCount;
     public final int WIDTH = 400;
     public final int HEIGHT = 200;
 
@@ -51,13 +41,14 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
-        clothListPanel.setLayout(new BoxLayout(clothListPanel, BoxLayout.Y_AXIS));
-        addButton.addActionListener(new ClothTakeOutAddButtonListener(this));
-        finishButton.addActionListener(new ClothTakeOutFinishButtonListener(this));
-        clothAmountPanel.setLayout(new BoxLayout(clothAmountPanel, BoxLayout.Y_AXIS));
     }
 
-    public ClothTakeOutRequest getClothList() {
+    public void setUpTable(){
+
+        clothTable.setModel(new DefaultTableModel());
+    }
+
+    public ClothTakeOutRequest getClothTable() {
         return clothList;
     }
 
@@ -71,26 +62,6 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         return new Cloth(name,amount);
     }
     public void addClothToView(Cloth cloth){
-        clothCount++;
-
-        JLabel tmp = new JLabel((clothCount)+". "+cloth.getClothName());
-        JLabel tmp2 = new JLabel(String.valueOf(cloth.getClothAmount()));
-        tmp.setHorizontalTextPosition(JLabel.RIGHT);
-        tmp2.setHorizontalTextPosition(JLabel.RIGHT);
-        tmp.setHorizontalAlignment(JLabel.CENTER);
-        tmp2.setHorizontalAlignment(JLabel.CENTER);
-
-        clothListPanel.add(tmp);
-        clothAmountPanel.add(tmp2);
-
-        numberLabel.setText(String.valueOf(clothCount+1));
-        ///Resizing the frame when the list is greater than the current size.
-        if(clothCount>=5){
-            Dimension dimension= this.getSize();
-            dimension.setSize(dimension.getWidth(),dimension.getHeight()+15);//Increasing the height of the frame when the list is long.
-            this.setSize(dimension);
-        }
-        clothName.requestFocus();
         this.revalidate();
     }
     public void clear(){

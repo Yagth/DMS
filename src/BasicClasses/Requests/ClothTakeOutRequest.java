@@ -3,15 +3,16 @@ package BasicClasses.Requests;
 import BasicClasses.Others.Cloth;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class ClothTakeOutRequest extends Request {
-    private ArrayList<Cloth> cloths;
+    private Vector<Cloth> cloths;
     private static int requestCount;
     private int requestId;
     public ClothTakeOutRequest(String requesterId,Integer requestCount){
         super("ClothTakeOutForm",requesterId);
         setRequestCount(requestCount);
-        cloths = new ArrayList<>();
+        cloths = new Vector<>();
         requestCount++;
         this.requestId = requestCount;
     }
@@ -20,7 +21,7 @@ public class ClothTakeOutRequest extends Request {
         cloths.add(cloth);
     }
 
-    public ArrayList<Cloth> getClothsList() {
+    public Vector<Cloth> getClothsList() {
         return cloths;
     }
 

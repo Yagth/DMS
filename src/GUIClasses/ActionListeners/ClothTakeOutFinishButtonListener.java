@@ -13,7 +13,7 @@ public class ClothTakeOutFinishButtonListener implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (parentComponent.getClothList().getClothsList().size() != 0) {
+        if (parentComponent.getClothTable().getClothsList().size() != 0) {
             Integer updateStatus = parentComponent.updateDataBase();
             parentComponent.displayUpdateStatus(updateStatus);
             parentComponent.dispose();

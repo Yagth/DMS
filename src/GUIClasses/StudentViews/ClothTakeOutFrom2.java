@@ -5,6 +5,8 @@ import javax.swing.table.TableColumn;
 
 public class ClothTakeOutFrom2 extends JFrame{
     private JPanel mainPanel;
+    private JTable table1;
+    private JScrollPane myTable;
     private JTable clothList;
 
     ClothTakeOutFrom2(){

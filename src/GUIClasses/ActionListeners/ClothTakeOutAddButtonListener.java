@@ -24,7 +24,7 @@ public class ClothTakeOutAddButtonListener implements ActionListener {
                     JOptionPane.showMessageDialog(parentComponent.getMainPanel(),"You can't add same cloth twice.",
                             "Invalid Input error",JOptionPane.ERROR_MESSAGE);
                 else{
-                    parentComponent.getClothList().addCloth(tmp);
+                    parentComponent.getClothTable().addCloth(tmp);
                     parentComponent.addClothToView(tmp);
                     parentComponent.clear();
                 }
