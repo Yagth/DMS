@@ -3,6 +3,8 @@ package GUIClasses.StudentViews;
 import BasicClasses.Others.Cloth;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.ClothTakeOutRequest;
+import GUIClasses.ActionListeners.ClothTakeOutAddButtonListener;
+import GUIClasses.ActionListeners.ClothTakeOutFinishButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 
 import javax.swing.*;
@@ -13,8 +15,6 @@ import java.util.*;
 import java.sql.Date;
 
 public class ClothTakeOutForm extends JFrame implements RequestViews {
-    private JTextField clothName;
-    private JTextField clothAmount;
     private JButton addButton;
     private JButton finishButton;
     private JPanel mainPanel;
@@ -23,9 +23,14 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
     private JTable clothTable;
     private JLabel descriptionLabel;
     private JScrollPane scrollPane;
+    private JPanel userInputPanel;
+    private JTextField clothNameTF;
+    private JTextField clothAmountTF;
+    private JLabel clothNameL;
+    private JLabel clothAmountL;
     private ClothTakeOutRequest clothList;
     String reporterId = "yep it is"; // This part here is only for debugging. It will be removed when the project is complete.
-    public final int WIDTH = 400;
+    public final int WIDTH = 500;
     public final int HEIGHT = 200;
 
     public ClothTakeOutForm(){
@@ -43,6 +48,8 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
+        this.addButton.addActionListener(new ClothTakeOutAddButtonListener(this));
+        this.finishButton.addActionListener(new ClothTakeOutFinishButtonListener(this));
     }
 
     public void setUpTable(){
@@ -71,16 +78,18 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
     }
 
     public Cloth getClothInfo() throws NumberFormatException{
-        String name = clothName.getText();
-        int amount = Integer.parseInt(clothAmount.getText());
+        String name = clothNameTF.getText();
+        int amount = Integer.parseInt(clothAmountTF.getText());
         return new Cloth(name,amount);
     }
     public void addClothToView(Cloth cloth){
-        this.revalidate();
+       DefaultTableModel tableModel = (DefaultTableModel) clothTable.getModel();
+       tableModel.fireTableDataChanged();
     }
+
     public void clear(){
-        clothName.setText("");
-        clothAmount.setText("");
+        clothNameTF.setText("");
+        clothAmountTF.setText("");
     }
 
     public Integer updateDataBase() {

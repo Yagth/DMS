@@ -14,6 +14,7 @@ public class ClothTakeOutAddButtonListener implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("Add action listener called");
         try{
             Cloth tmp = parentComponent.getClothInfo();
             if(tmp.getClothAmount()>0)
