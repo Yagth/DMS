@@ -32,7 +32,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
     Vector<Vector<Object>> data;
     String reporterId = "yep it is"; // This part here is only for debugging. It will be removed when the project is complete.
     public final int WIDTH = 500;
-    public final int HEIGHT = 200;
+    public final int HEIGHT = 300;
 
     public ClothTakeOutForm(){
         Integer lastRequestId = this.getLastClothRequestId();
@@ -58,9 +58,11 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         Vector<String> title = new Vector<>();
         Vector<Cloth> cloths = clothList.getClothsList();
 
+        title.add("No");
         title.add("Cloth Name");
         title.add("Amount");
         clothTable.setModel(new DefaultTableModel(data,title));
+        clothTable.getColumn("No").setMaxWidth(50);
 
     }
 
@@ -69,6 +71,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
     }
     public void addDataToTable(Cloth cloth){
         Vector<Object> tmp = new Vector<>();
+        tmp.add(clothList.getClothsList().size());
         tmp.add(cloth.getClothName());
         tmp.add(cloth.getClothAmount());
         data.add(tmp);
