@@ -29,6 +29,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
     private JLabel clothNameL;
     private JLabel clothAmountL;
     private ClothTakeOutRequest clothList;
+    Vector<Vector<Object>> data;
     String reporterId = "yep it is"; // This part here is only for debugging. It will be removed when the project is complete.
     public final int WIDTH = 500;
     public final int HEIGHT = 200;
@@ -36,6 +37,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
     public ClothTakeOutForm(){
         Integer lastRequestId = this.getLastClothRequestId();
         clothList = new ClothTakeOutRequest(reporterId,lastRequestId);
+        data = new Vector<>();
         setUpGUi();
         setUpTable();
     }
@@ -54,23 +56,22 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
 
     public void setUpTable(){
         Vector<String> title = new Vector<>();
-        Vector<Vector<Object>> data = new Vector<>();
         Vector<Cloth> cloths = clothList.getClothsList();
-
-        for(Cloth c : cloths ){
-            Vector<Object> tmp = new Vector<>();
-            tmp.add(c.getClothName());
-            tmp.add(c.getClothAmount());
-            data.add(tmp);
-        }
 
         title.add("Cloth Name");
         title.add("Amount");
         clothTable.setModel(new DefaultTableModel(data,title));
+
     }
 
-    public ClothTakeOutRequest getClothTable() {
+    public ClothTakeOutRequest getClothRequest() {
         return clothList;
+    }
+    public void addDataToTable(Cloth cloth){
+        Vector<Object> tmp = new Vector<>();
+        tmp.add(cloth.getClothName());
+        tmp.add(cloth.getClothAmount());
+        data.add(tmp);
     }
 
     public JPanel getMainPanel() {
@@ -82,7 +83,12 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         int amount = Integer.parseInt(clothAmountTF.getText());
         return new Cloth(name,amount);
     }
-    public void addClothToView(Cloth cloth){
+
+    public JTextField getClothAmountTF() {
+        return clothAmountTF;
+    }
+
+    public void refreshTable(){
        DefaultTableModel tableModel = (DefaultTableModel) clothTable.getModel();
        tableModel.fireTableDataChanged();
     }

@@ -14,7 +14,6 @@ public class ClothTakeOutAddButtonListener implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Add action listener called");
         try{
             Cloth tmp = parentComponent.getClothInfo();
             if(tmp.getClothAmount()>0)
@@ -25,8 +24,9 @@ public class ClothTakeOutAddButtonListener implements ActionListener {
                     JOptionPane.showMessageDialog(parentComponent.getMainPanel(),"You can't add same cloth twice.",
                             "Invalid Input error",JOptionPane.ERROR_MESSAGE);
                 else{
-                    parentComponent.getClothTable().addCloth(tmp);
-                    parentComponent.addClothToView(tmp);
+                    parentComponent.getClothRequest().addCloth(tmp);
+                    parentComponent.addDataToTable(tmp);
+                    parentComponent.refreshTable();
                     parentComponent.clear();
                 }
             else
@@ -35,7 +35,12 @@ public class ClothTakeOutAddButtonListener implements ActionListener {
                         JOptionPane.INFORMATION_MESSAGE);
         }
         catch (NumberFormatException ex){
-            JOptionPane.showMessageDialog(parentComponent.getMainPanel(),"Amount can't be empty",
+            boolean amountIsEmpty = parentComponent.getClothAmountTF().getText().equals("");
+            if(amountIsEmpty)
+                JOptionPane.showMessageDialog(parentComponent.getMainPanel(),"Amount can't be empty",
+                        "Empty amount error",JOptionPane.ERROR_MESSAGE);
+            else
+            JOptionPane.showMessageDialog(parentComponent.getMainPanel(),"Invalid input in the amount field",
                     "Invalid amount error",JOptionPane.ERROR_MESSAGE);
         }
     }
