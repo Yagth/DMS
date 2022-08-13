@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.sql.Date;
 import java.util.Calendar;
 
-public class MaintenanceRequest extends JFrame implements RequestViews {
+public class MaintenanceRequestForm extends JFrame implements RequestViews {
     private JPanel mainPanel;
     private JPanel innerPanel;
     private JLabel locationLabel;
@@ -21,12 +21,13 @@ public class MaintenanceRequest extends JFrame implements RequestViews {
     private JLabel buildingNoLabel;
     private JLabel roomNoLabel;
     private JTextPane descriptionTextPane;
+    private JScrollPane descriptionSP;
     String reporterId = "yep it is"; // This part here is only for debugging. It will be removed when the project is complete.
     public final int WIDTH = 500;
     public final int HEIGHT = 230;
 
 
-    public MaintenanceRequest(){
+    public MaintenanceRequestForm(){
        setUpGUi();
     }
 

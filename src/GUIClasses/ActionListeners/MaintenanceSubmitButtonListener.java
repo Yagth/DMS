@@ -1,6 +1,6 @@
 package GUIClasses.ActionListeners;
 
-import GUIClasses.StudentViews.MaintenanceRequest;
+import GUIClasses.StudentViews.MaintenanceRequestForm;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 
 public class MaintenanceSubmitButtonListener implements ActionListener {
 
-    private MaintenanceRequest parentComponent;
-    public MaintenanceSubmitButtonListener(MaintenanceRequest parentComponent){
+    private MaintenanceRequestForm parentComponent;
+    public MaintenanceSubmitButtonListener(MaintenanceRequestForm parentComponent){
         this.parentComponent = parentComponent;
     }
     @Override
