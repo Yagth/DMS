@@ -28,6 +28,7 @@ public class ClothTakeOutAddButtonListener implements ActionListener {
                     parentComponent.addDataToTable(tmp);
                     parentComponent.refreshTable();
                     parentComponent.clear();
+                    parentComponent.getClothNameTF().requestFocus();
                 }
             else
                 JOptionPane.showMessageDialog(parentComponent.getMainPanel(),"Amount is invalid. cloth not added. " +

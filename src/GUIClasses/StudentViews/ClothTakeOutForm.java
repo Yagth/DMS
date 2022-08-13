@@ -91,6 +91,10 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         return clothAmountTF;
     }
 
+    public JTextField getClothNameTF() {
+        return clothNameTF;
+    }
+
     public void refreshTable(){
        DefaultTableModel tableModel = (DefaultTableModel) clothTable.getModel();
        tableModel.fireTableDataChanged();
