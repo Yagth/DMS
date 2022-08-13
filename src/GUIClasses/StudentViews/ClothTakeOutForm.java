@@ -9,6 +9,8 @@ import GUIClasses.Interfaces.RequestViews;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -63,7 +65,6 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         title.add("Amount");
         clothTable.setModel(new DefaultTableModel(data,title));
         clothTable.getColumn("No").setMaxWidth(50);
-
     }
 
     public ClothTakeOutRequest getClothRequest() {

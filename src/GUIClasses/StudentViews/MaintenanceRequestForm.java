@@ -77,7 +77,7 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
         JavaConnection javaConnection = new JavaConnection(url);
         Integer updateStatus = 0;
         String query = "INSERT INTO request(reportedID,requestType,roomNO,blockNo,reportDate,description)" +
-                "VALUES(\'" +reporterId+"\',\'"+ this.getTitle() + "\',\'" + getRoomNumber()+ "\',\'" +
+                "VALUES(\'" +reporterId+"\',\'"+ reportType + "\',\'" + getRoomNumber()+ "\',\'" +
                 getBlockNumber()+"\',\'"+ date + "\',\'"+getDescription()+"\');";
         if (javaConnection.isConnected()) updateStatus = javaConnection.insertQuery(query);
         return updateStatus;

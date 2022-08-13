@@ -1,9 +1,12 @@
 package GUIClasses.StudentViews;
 
+import BasicClasses.Others.JavaConnection;
 import GUIClasses.Interfaces.RequestViews;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Date;
+import java.util.Calendar;
 
 public class ExtendDormStayForm extends JFrame implements RequestViews {
     private JPanel mainPanel;
@@ -12,6 +15,9 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
     private JLabel titleLabel;
     private JButton submitButton;
     private JScrollPane descriptionSP;
+    private int roomNo = 49; //This part is only for debugging.
+    private int buildingNo = 40; //This part is only for debugging.
+    private int reporterId = 4565; //This part is only for debugging.
     private static final int WIDTH = 550;
     private static final int HEIGHT = 250;
 
@@ -19,14 +25,28 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
         setUpGUi();
     }
 
+    public String getDescription(){
+        return descriptionPane.getText();
+    }
     @Override
     public Integer updateDataBase() {
-        return null;
+        String url = "jdbc:sqlserver://DESKTOP-AA4PR2S\\SQLEXPRESS;DatabaseName=DMS;" +
+                "encrypt=true;trustServerCertificate=true;IntegratedSecurity=true;";
+        Date date = new Date(Calendar.getInstance().getTimeInMillis());
+        String requestType = this.getTitle();
+        JavaConnection javaConnection = new JavaConnection(url);
+        Integer updateStatus = 0;
+        String query = "INSERT INTO request(reportedID,requestType,roomNO,blockNo,reportDate,description)" +
+                "VALUES(\'"+reporterId+"\',\'"+requestType+"\',\'"+roomNo+"\',\'"+buildingNo+"\',\'"+date+"\',\'"+this.getDescription()+"\')";
+        if (javaConnection.isConnected()) updateStatus = javaConnection.insertQuery(query);
+        return updateStatus;
     }
-
     @Override
     public void displayUpdateStatus(Integer updateStatus) {
-
+        if (updateStatus.equals(1))
+            JOptionPane.showMessageDialog(null, "Request sent successfully", "Message sent", JOptionPane.INFORMATION_MESSAGE);
+        else
+            JOptionPane.showMessageDialog(null, "Sorry couldn't send your request due to connection error", "Connection error", JOptionPane.ERROR_MESSAGE);
     }
 
     @Override
