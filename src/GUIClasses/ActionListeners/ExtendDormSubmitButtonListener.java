@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class ExtendDormSubmitButtonListener implements ActionListener {
     private ExtendDormStayForm parentComponent;
-    ExtendDormSubmitButtonListener(ExtendDormStayForm parentComponent){
+    public ExtendDormSubmitButtonListener(ExtendDormStayForm parentComponent){
         this.parentComponent = parentComponent;
     }
 

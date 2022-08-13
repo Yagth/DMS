@@ -1,6 +1,7 @@
 package GUIClasses.StudentViews;
 
 import BasicClasses.Others.JavaConnection;
+import GUIClasses.ActionListeners.ExtendDormSubmitButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 
 import javax.swing.*;
@@ -57,5 +58,6 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+        submitButton.addActionListener(new ExtendDormSubmitButtonListener(this));
     }
 }
