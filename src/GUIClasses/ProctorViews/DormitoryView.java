@@ -1,8 +1,10 @@
 package GUIClasses.ProctorViews;
 
+import GUIClasses.Interfaces.Views;
+
 import javax.swing.*;
 
-public class Dormitory extends JFrame {
+public class DormitoryView extends JFrame implements Views {
     private JFormattedTextField searchDormTA;
     private JButton searchButton;
     private JButton filterButton;
@@ -29,11 +31,19 @@ public class Dormitory extends JFrame {
     private JPanel numberOfStudentsPanel;
     private JPanel dormListPanel;
     private JComboBox filterList;
+    private static final int WIDTH = 650;
+    private static final int HEIGHT = 700;
 
-    public Dormitory(){
-        this.setTitle("Dormitory");
+    public DormitoryView(){
+        setUpGUi();
+    }
+
+
+    @Override
+    public void setUpGUi() {
+        this.setTitle("DormitoryView");
         this.setContentPane(mainPanel);
-        this.setSize(650,700);
+        this.setSize(WIDTH,HEIGHT);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
@@ -42,8 +52,5 @@ public class Dormitory extends JFrame {
 
         ImageIcon searchButtonIcon = new ImageIcon("Icons/SearchIcon.png");
         searchButton.setIcon(searchButtonIcon);
-
     }
-
-
 }

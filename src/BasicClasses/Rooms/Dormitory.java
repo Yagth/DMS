@@ -8,7 +8,7 @@ public class Dormitory extends Room{
     private String keyHolderId;
 
     Dormitory(String roomNo, String buildingNo){
-        super("Dormitory",roomNo,buildingNo);
+        super("DormitoryView",roomNo,buildingNo);
         keyHolderId="";
     }
 
