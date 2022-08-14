@@ -58,8 +58,11 @@ public class RequestForDormitory extends JFrame implements RequestViews {
 
     @Override
     public void displayUpdateStatus(Integer updateStatus) {
+        boolean hasEmptyField = getWoreda().equals("") || getSubcity().equals("") || getDescription().equals("");
         if (updateStatus.equals(1))
             JOptionPane.showMessageDialog(null, "Request sent successfully", "Message sent", JOptionPane.INFORMATION_MESSAGE);
+        else if(hasEmptyField)
+            JOptionPane.showMessageDialog(null, "Please make sure that all fields are filled", "Empty field error", JOptionPane.ERROR_MESSAGE);
         else
             JOptionPane.showMessageDialog(null, "Sorry couldn't send your request due to connection error", "Connection error", JOptionPane.ERROR_MESSAGE);
     }
