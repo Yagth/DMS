@@ -13,7 +13,21 @@ public class StudentPage extends JFrame implements Views {
     Student user;
     ResultSet dormMates;
     private JPanel MainPanel;
-    private JPanel Center;
+    private JPanel topPanel;
+    private JLabel studentName;
+    private JLabel studentID;
+    private JLabel studentDormNo;
+    private JLabel studentBuildingNo;
+    private JLabel titleL;
+    private JLabel nameL;
+    private JLabel IDL;
+    private JLabel dormNoL;
+    private JLabel buildingNoL;
+    private JPanel studentInfoPanel;
+    private JLabel dormMateL;
+    private JPanel dormMatesInfo;
+    private JTable dormMateTable;
+    private JScrollPane tableSP;
     private static final SizeOfMajorClasses WIDTH = SizeOfMajorClasses.WIDTH;
     private static final SizeOfMajorClasses HEIGHT = SizeOfMajorClasses.HEIGHT;
 
@@ -21,7 +35,10 @@ public class StudentPage extends JFrame implements Views {
     public StudentPage(Student student){
         user = student;
         setUpGUi();
+    }
 
+    public StudentPage(){  //This constructor is only here for debugging purposes.
+        setUpGUi();
     }
 
     public void loadDormMates(){
@@ -39,18 +56,16 @@ public class StudentPage extends JFrame implements Views {
 
     @Override
     public void setUpGUi() {
-        this.setTitle("Dormitory Management System - Student");
+        this.setTitle("My Dormitory");
         this.setContentPane(MainPanel);
         this.setSize(WIDTH.getSize(), HEIGHT.getSize());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
 
         JMenuBar Services = new JMenuBar();
         Services.setBackground(new Color(72,131,184));
         JMenu Service = new JMenu("Services");
         Service.setForeground(Color.white);
-        MainPanel.add(Services, BorderLayout.NORTH);
-        Services.add(Service);
+
         JMenuItem maintainanceReport = new JMenuItem("maintainanceReport");
         maintainanceReport.setForeground(new Color(72,131,184));
         JMenuItem StayRequest = new JMenuItem("Prolog Dormitary stay request");
@@ -60,7 +75,14 @@ public class StudentPage extends JFrame implements Views {
         JMenuItem SeeRequests = new JMenuItem("See your requests");
         SeeRequests.setForeground(new Color(72,131,184));
 
-        Service.add(maintainanceReport);Service.add(StayRequest);
-        Service.add(RequestForDorm);Service.add(SeeRequests);
+        Service.add(maintainanceReport);
+        Service.add(StayRequest);
+        Service.add(RequestForDorm);
+        Service.add(SeeRequests);
+
+        Services.add(Service);
+
+        this.setJMenuBar(Services);
+        this.setVisible(true);
     }
 }
