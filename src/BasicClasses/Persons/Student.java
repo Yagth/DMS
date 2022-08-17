@@ -8,7 +8,7 @@ public class Student extends Person{
     private int buildingNo;
     private boolean eligblity;
 
-    Student(String fName, String lName, String id, char gender){
+    public Student(String fName, String lName, String id, String gender){
         super(fName,lName,gender);
         this.sId = id;
         this.department = "";

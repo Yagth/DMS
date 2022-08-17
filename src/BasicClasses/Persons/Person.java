@@ -4,9 +4,9 @@ public abstract class Person {
     private String fName;
     private String lName;
     private String placeOfOrigin;
-    private char gender;
+    private String gender;
     private String phoneNumber;
-    Person(String fName, String lName, char gender){
+    Person(String fName, String lName, String gender){
         this.fName = fName;
         this.lName = lName;
         this.gender = gender;
