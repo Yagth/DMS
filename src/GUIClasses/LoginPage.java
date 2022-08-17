@@ -26,6 +26,7 @@ public class LoginPage extends JFrame implements Views {
     private JPanel WestSpace;
     private JLabel DMS;
     JavaConnection javaConnection;
+
     private static final int WIDTH = 900;
     private static final int HEIGHT = 400;
 
