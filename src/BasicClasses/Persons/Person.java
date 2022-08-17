@@ -28,7 +28,7 @@ public abstract class Person {
         return phoneNumber;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
     public String getPlaceOfOrigin() {
@@ -46,7 +46,7 @@ public abstract class Person {
         this.placeOfOrigin = placeOfOrigin;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
