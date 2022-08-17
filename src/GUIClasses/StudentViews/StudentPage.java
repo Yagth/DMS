@@ -3,15 +3,17 @@ package GUIClasses.StudentViews;
 import javax.swing.*;
 import java.awt.*;
 import BasicClasses.Others.DormMates;
+import BasicClasses.Persons.Student;
 
 public class StudentPage extends JFrame {
+    Student user;
     DormMates dormMates =  new DormMates();
     private JPanel MainPanel;
     JPanel WestBoarder = new JPanel(null);
     private JPanel Center;
 
-    public StudentPage(){
-
+    public StudentPage(Student student){
+        user = student;
         additionalForms();
         Dormatesinfo();
         this.setTitle("Dormitory Management System - Student");
