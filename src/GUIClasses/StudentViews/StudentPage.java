@@ -1,15 +1,19 @@
 package GUIClasses.StudentViews;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.ResultSet;
+import java.util.Vector;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
+import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
-public class StudentPage extends JFrame implements Views {
+public class StudentPage extends JFrame implements TableViews {
     Student user;
     ResultSet dormMates;
     private JPanel MainPanel;
@@ -28,6 +32,7 @@ public class StudentPage extends JFrame implements Views {
     private JPanel dormMatesInfo;
     private JTable dormMateTable;
     private JScrollPane tableSP;
+    private Vector<Vector<String>> tableData;
     private static final SizeOfMajorClasses WIDTH = SizeOfMajorClasses.WIDTH;
     private static final SizeOfMajorClasses HEIGHT = SizeOfMajorClasses.HEIGHT;
 
@@ -54,9 +59,26 @@ public class StudentPage extends JFrame implements Views {
 
     }
 
+    @Override
     public void setUpTable(){
+        Vector<String> title = new Vector<>();
+        tableData = new Vector<>();
+
+        title.add("Name");
+        title.add("Phone Number");
+        dormMateTable.setModel(new DefaultTableModel(tableData,title));
+    }
+
+    @Override
+    public void addDataToTable(Object object) {
 
     }
+
+    @Override
+    public void refreshTable() {
+
+    }
+
     @Override
     public void setUpGUi() {
         this.setTitle("My Dormitory");

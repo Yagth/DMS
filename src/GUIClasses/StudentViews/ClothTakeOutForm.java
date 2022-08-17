@@ -6,6 +6,7 @@ import BasicClasses.Requests.ClothTakeOutRequest;
 import GUIClasses.ActionListeners.ClothTakeOutAddButtonListener;
 import GUIClasses.ActionListeners.ClothTakeOutFinishButtonListener;
 import GUIClasses.Interfaces.RequestViews;
+import GUIClasses.Interfaces.TableViews;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.sql.Date;
 
-public class ClothTakeOutForm extends JFrame implements RequestViews {
+public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews {
     private JButton addButton;
     private JButton finishButton;
     private JPanel mainPanel;
@@ -54,6 +55,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         this.finishButton.addActionListener(new ClothTakeOutFinishButtonListener(this));
     }
 
+    @Override
     public void setUpTable(){
         Vector<String> title = new Vector<>();
 
@@ -67,7 +69,9 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
     public ClothTakeOutRequest getClothRequest() {
         return clothList;
     }
-    public void addDataToTable(Cloth cloth){
+    @Override
+    public void addDataToTable(Object object){
+        Cloth cloth = (Cloth) object;
         Vector<Object> tmp = new Vector<>();
         tmp.add(clothList.getClothsList().size());
         tmp.add(cloth.getClothName());
@@ -93,6 +97,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         return clothNameTF;
     }
 
+    @Override
     public void refreshTable(){
        DefaultTableModel tableModel = (DefaultTableModel) clothTable.getModel();
        tableModel.fireTableDataChanged();
