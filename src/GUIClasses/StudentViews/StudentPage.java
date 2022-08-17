@@ -54,6 +54,9 @@ public class StudentPage extends JFrame implements Views {
 
     }
 
+    public void setUpTable(){
+
+    }
     @Override
     public void setUpGUi() {
         this.setTitle("My Dormitory");
@@ -85,4 +88,5 @@ public class StudentPage extends JFrame implements Views {
         this.setJMenuBar(Services);
         this.setVisible(true);
     }
+
 }

@@ -9,8 +9,6 @@ import GUIClasses.Interfaces.RequestViews;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -31,7 +29,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
     private JLabel clothNameL;
     private JLabel clothAmountL;
     private ClothTakeOutRequest clothList;
-    Vector<Vector<Object>> data;
+    Vector<Vector<Object>> tableData;
     String reporterId = "yep it is"; // This part here is only for debugging. It will be removed when the project is complete.
     public final int WIDTH = 500;
     public final int HEIGHT = 300;
@@ -39,7 +37,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
     public ClothTakeOutForm(){
         Integer lastRequestId = this.getLastClothRequestId();
         clothList = new ClothTakeOutRequest(reporterId,lastRequestId);
-        data = new Vector<>();
+        tableData = new Vector<>();
         setUpGUi();
         setUpTable();
     }
@@ -58,12 +56,11 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
 
     public void setUpTable(){
         Vector<String> title = new Vector<>();
-        Vector<Cloth> cloths = clothList.getClothsList();
 
         title.add("No");
         title.add("Cloth Name");
         title.add("Amount");
-        clothTable.setModel(new DefaultTableModel(data,title));
+        clothTable.setModel(new DefaultTableModel(tableData,title));
         clothTable.getColumn("No").setMaxWidth(50);
     }
 
@@ -75,7 +72,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews {
         tmp.add(clothList.getClothsList().size());
         tmp.add(cloth.getClothName());
         tmp.add(cloth.getClothAmount());
-        data.add(tmp);
+        tableData.add(tmp);
     }
 
     public JPanel getMainPanel() {
