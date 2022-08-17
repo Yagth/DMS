@@ -1,17 +1,16 @@
 package GUIClasses.StudentViews;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
 import GUIClasses.Interfaces.TableViews;
-import GUIClasses.Interfaces.Views;
 
 public class StudentPage extends JFrame implements TableViews {
     Student user;
@@ -40,6 +39,8 @@ public class StudentPage extends JFrame implements TableViews {
     public StudentPage(Student student){
         user = student;
         setUpGUi();
+        setUpTable();
+        addDormMatesToView();
     }
 
     public StudentPage(){  //This constructor is only here for debugging purposes.
@@ -49,14 +50,16 @@ public class StudentPage extends JFrame implements TableViews {
     public void loadDormMates(){
         String url = "jdbc:sqlserver://DESKTOP-AA4PR2S\\SQLEXPRESS;DatabaseName=DMS;" +
         "encrypt=true;trustServerCertificate=true;IntegratedSecurity=true;";
-        String query = "SELECT * FROM Student WHERE BuildingNumber=\'"
+        String query = "SELECT Fname, Lname, PhoneNumber FROM Student as S, Student_Phonenumber as SP WHERE S.SID = SP.SID AND BuildingNumber=\'"
                 +user.getBuildingNo()+"\' AND RoomNumber=\'"+user.getDormNo()+"\'";
         JavaConnection javaConnection = new JavaConnection(url);
         dormMates = javaConnection.selectQuery(query);
     }
 
     public void addDormMatesToView(){
-
+        loadDormMates();
+        addDataToTable(dormMates);
+        refreshTable();
     }
 
     @Override
@@ -71,12 +74,26 @@ public class StudentPage extends JFrame implements TableViews {
 
     @Override
     public void addDataToTable(Object object) {
-
+        ResultSet resultSet = (ResultSet) object;
+        try{
+            while(resultSet.next()){
+                Vector<String> tmp = new Vector<>();
+                tmp.add(resultSet.getString("Fname")+" "+resultSet.getString("Lname"));
+                tmp.add(resultSet.getString("Phonenumber"));
+                tableData.add(tmp);
+            }
+        }
+        catch (SQLException ex){
+            JOptionPane.showMessageDialog(this,"Couldn't find dorm mates due to connection error",
+                    "Connection error",JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace(); // This part is only here for debugging purposes.
+        }
     }
 
     @Override
     public void refreshTable() {
-
+        DefaultTableModel tableModel = (DefaultTableModel) dormMateTable.getModel();
+        tableModel.fireTableDataChanged();
     }
 
     @Override
