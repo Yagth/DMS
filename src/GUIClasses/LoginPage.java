@@ -18,7 +18,7 @@ public class LoginPage extends JFrame implements Views {
     private JPanel CentralPanel;
     private JPanel TopPanel;
     private JLabel Tittle;
-    private JTextField Textfield;
+    private JTextField UsernameTF;
     private JPasswordField passwordField;
     private JButton LoginButton;
     private JLabel Username;
@@ -46,15 +46,22 @@ public class LoginPage extends JFrame implements Views {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
 
-        LoginButton.addActionListener(new LoginActionListener(this));
+        LoginButton.addActionListener(new LoginButtonActionListener(this));
     }
 
+    public JTextField getUsernameTF(){
+        return UsernameTF;
+    }
     public String getUsername(){
-        return Username.getText();
+        return UsernameTF.getText();
     }
 
     public String getPassword(){
-        return Password.getText();
+        return passwordField.getText();
+    }
+
+    public UserStatus getUserStatus() {
+        return userStatus;
     }
 
     public void clear(){
@@ -127,10 +134,10 @@ public class LoginPage extends JFrame implements Views {
     }
 
 
-   public class LoginActionListener implements ActionListener {
+   public class LoginButtonActionListener implements ActionListener {
         LoginPage parentComponent;
 
-        public LoginActionListener(LoginPage parentComponent){
+        public LoginButtonActionListener(LoginPage parentComponent){
             this.parentComponent = parentComponent;
         }
 
