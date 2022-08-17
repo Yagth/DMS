@@ -82,6 +82,9 @@ public class LoginPage extends JFrame implements Views {
                 student = new Student(temp.getString("Fname"),
                         temp.getString("Lname"),
                         getUsername(),temp.getString("Gender"));
+                student.setDepartment(temp.getString("Department"));
+                student.setYear(temp.getInt("Year"));
+                student.set
             }
         }catch (SQLException ex){
 

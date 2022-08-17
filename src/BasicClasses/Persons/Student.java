@@ -6,7 +6,7 @@ public class Student extends Person{
     private int year;
     private int dormNo;
     private int buildingNo;
-    private boolean eligblity;
+    private boolean eligibility;
 
     public Student(String fName, String lName, String id, String gender){
         super(fName,lName,gender);
@@ -37,5 +37,23 @@ public class Student extends Person{
     public void setYear(int year) {
         this.year = year;
     }
+    public boolean isEligibility() {
+        return eligibility;
+    }
+    public int getBuildingNo() {
+        return buildingNo;
+    }
 
+    public int getDormNo() {
+        return dormNo;
+    }
+    public void setEligibility(boolean eligibility) {
+        this.eligibility = eligibility;
+    }
+    public void setBuildingNo(String buildingNo) {
+        this.buildingNo = Integer.parseInt(buildingNo);
+    }
+    public void setDormNo(String dormNo) {
+        this.dormNo = Integer.parseInt(dormNo);
+    }
 }
