@@ -4,6 +4,7 @@ import BasicClasses.Enums.UserStatus;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Persons.Student;
+import GUIClasses.ActionListeners.LoginButtonActionListener;
 import GUIClasses.Interfaces.Views;
 import GUIClasses.StudentViews.StudentPage;
 
@@ -78,15 +79,20 @@ public class LoginPage extends JFrame implements Views {
         String query;
         ResultSet temp = null;
         checkAndSetUserStatus();
-        if (userStatus.equals(UserStatus.STUDENT)){
-            query = "SELECT * FROM Student WHERE SID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
-            temp = javaConnection.selectQuery(query);
+        try{
+            if (userStatus.equals(UserStatus.STUDENT)){
+                query = "SELECT * FROM Student WHERE SID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
+                temp = javaConnection.selectQuery(query);
+            }
+            else if(userStatus.equals(UserStatus.PROCTOR)){     //If the result set is null, the user might be Proctor.
+                query = "SELECT * FROM Proctor WHERE EID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
+                temp = javaConnection.selectQuery(query);
+            }
         }
-        else if(userStatus.equals(UserStatus.PROCTOR)){     //If the result set is null, the user might be Proctor.
-            query = "SELECT * FROM Proctor WHERE EID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
-            temp = javaConnection.selectQuery(query);
+        catch (NullPointerException ex){
+            userStatus = null;
         }
-        return !(temp.equals(null)); // If the temp is still null, the user doesn't exist.
+        return !(temp == null); // If the temp is still null, the user doesn't exist.
     }
 
     public Student createStudent(){

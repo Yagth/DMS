@@ -3,6 +3,7 @@ package GUIClasses.ActionListeners;
 import BasicClasses.Enums.UserStatus;
 import GUIClasses.LoginPage;
 import GUIClasses.StudentViews.StudentPage;
+import jdk.swing.interop.SwingInterOpUtils;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +18,8 @@ public class LoginButtonActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            boolean isUser = parentComponent.checkUser();
+            boolean  isUser = parentComponent.checkUser();
+            System.out.println(isUser);
 
             if(isUser){
                 if(parentComponent.getUserStatus().equals(UserStatus.STUDENT))
