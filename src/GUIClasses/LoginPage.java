@@ -69,7 +69,7 @@ public class LoginPage extends JFrame implements Views {
         Password.setText("");
     }
     public void checkAndSetUserStatus(){
-        String tmp = getUsername().substring(0,2);
+        String tmp = getUsername().substring(0,3);
         if(tmp.equals("UGR") || tmp.equals("PGR")) userStatus = UserStatus.STUDENT; // If the user is undergraduate(UGR) or is postgraduate(PGR).
         else if(tmp.equals("EMP")) userStatus = UserStatus.PROCTOR;  //If the user is employee(EMP).
     }
@@ -79,7 +79,7 @@ public class LoginPage extends JFrame implements Views {
         ResultSet temp = null;
         checkAndSetUserStatus();
         if (userStatus.equals(UserStatus.STUDENT)){
-            query = "SELECT * FROM Student WHERE SID="+getUsername()+"AND Password="+getPassword();
+            query = "SELECT * FROM Student WHERE SID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
             temp = javaConnection.selectQuery(query);
         }
         else if(userStatus.equals(UserStatus.PROCTOR)){     //If the result set is null, the user might be Proctor.
