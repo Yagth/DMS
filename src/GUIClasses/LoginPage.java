@@ -83,7 +83,7 @@ public class LoginPage extends JFrame implements Views {
             temp = javaConnection.selectQuery(query);
         }
         else if(userStatus.equals(UserStatus.PROCTOR)){     //If the result set is null, the user might be Proctor.
-            query = "SELECT * FROM Proctor WHERE EID="+getUsername()+"AND Password="+getPassword();
+            query = "SELECT * FROM Proctor WHERE EID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
             temp = javaConnection.selectQuery(query);
         }
         return !(temp.equals(null)); // If the temp is still null, the user doesn't exist.
