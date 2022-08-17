@@ -132,31 +132,5 @@ public class LoginPage extends JFrame implements Views {
         }
         return proctor;
     }
-
-
-   public class LoginButtonActionListener implements ActionListener {
-        LoginPage parentComponent;
-
-        public LoginButtonActionListener(LoginPage parentComponent){
-            this.parentComponent = parentComponent;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            boolean isUser = parentComponent.checkUser();
-            parentComponent.Username.requestFocus();
-
-            if(isUser){
-                if(parentComponent.userStatus.equals(UserStatus.STUDENT))
-                    new StudentPage(parentComponent.createStudent());
-                else if(parentComponent.userStatus.equals(UserStatus.PROCTOR))
-                    new StudentPage(parentComponent.createStudent()); // This part here will be changed to proctor view when there is one created.
-            }
-            else{
-                JOptionPane.showMessageDialog(parentComponent,"Wrong credentials Please try again","Login error",JOptionPane.ERROR_MESSAGE);
-                parentComponent.clear();
-            }
-        }
-    }
 }
 
