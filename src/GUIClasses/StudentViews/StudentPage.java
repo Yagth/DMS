@@ -14,7 +14,7 @@ public class StudentPage extends JFrame {
 
         additionalForms();
         Dormatesinfo();
-        this.setTitle("Dormitary Management System - Student");
+        this.setTitle("Dormitory Management System - Student");
         this.setContentPane(MainPanel);
         this.setSize(900,400);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

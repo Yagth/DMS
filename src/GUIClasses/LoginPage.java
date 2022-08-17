@@ -1,6 +1,7 @@
 package GUIClasses;
 
 import BasicClasses.Others.JavaConnection;
+import BasicClasses.Persons.Proctor;
 import BasicClasses.Persons.Student;
 import GUIClasses.Interfaces.Views;
 import GUIClasses.StudentViews.StudentPage;
@@ -74,7 +75,7 @@ public class LoginPage extends JFrame implements Views {
     }
 
     public Student createStudent(){
-        Student student;
+        Student student = null;
         String query = "SELECT * FROM Student WHERE EID="+getUsername()+"AND Password="+getPassword();
         ResultSet temp = javaConnection.selectQuery(query);
         try {
@@ -84,11 +85,41 @@ public class LoginPage extends JFrame implements Views {
                         getUsername(),temp.getString("Gender"));
                 student.setDepartment(temp.getString("Department"));
                 student.setYear(temp.getInt("Year"));
-                student.set
+                student.setBuildingNo(temp.getString("BuildingNumber"));
+                student.setDormNo(temp.getString("RoomNumber"));
+                student.setEligibility(temp.getBoolean("isEligible"));
             }
-        }catch (SQLException ex){
 
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Couldn't login due to connection error.",
+                    "Login error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace(); // This part is only debugging purpose.
         }
+        return student;
+    }
+
+    public Proctor createProctor(){
+        Proctor proctor = null;
+        String query = "SELECT * FROM Proctor WHERE EID="+getUsername()+"AND Password="+getPassword();
+        ResultSet temp = javaConnection.selectQuery(query);
+        try {
+            while (temp.next()) {
+                proctor = new Proctor(temp.getString("Fname"),
+                        temp.getString("Lname"),
+                        getUsername(),temp.getString("Gender"));
+                proctor.setDepartment(temp.getString("Department"));
+                proctor.setYear(temp.getInt("Year"));
+                proctor.setBuildingNo(temp.getString("BuildingNumber"));
+                proctor.setDormNo(temp.getString("RoomNumber"));
+                proctor.setEligibility(temp.getBoolean("isEligible"));
+            }
+
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Couldn't login due to connection error.",
+                    "Login error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace(); // This part is only debugging purpose.
+        }
+        return proctor;
     }
 
 
