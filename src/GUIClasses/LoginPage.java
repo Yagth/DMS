@@ -91,7 +91,7 @@ public class LoginPage extends JFrame implements Views {
 
     public Student createStudent(){
         Student student = null;
-        String query = "SELECT * FROM Student WHERE EID="+getUsername()+"AND Password="+getPassword();
+        String query = "SELECT * FROM Student WHERE SID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
         ResultSet temp = javaConnection.selectQuery(query);
         try {
             while (temp.next()) {
@@ -116,7 +116,7 @@ public class LoginPage extends JFrame implements Views {
 
     public Proctor createProctor(){
         Proctor proctor = null;
-        String query = "SELECT * FROM Proctor WHERE EID="+getUsername()+"AND Password="+getPassword();
+        String query = "SELECT * FROM Proctor WHERE EID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
         ResultSet temp = javaConnection.selectQuery(query);
         try {
             while (temp.next()) {
