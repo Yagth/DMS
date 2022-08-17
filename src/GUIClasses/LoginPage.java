@@ -64,7 +64,6 @@ public class LoginPage extends JFrame implements Views {
         String query = "SELECT * FROM Student WHERE SID="+getUsername()+"AND Password="+getPassword();
         ResultSet temp;
 
-        JavaConnection javaConnection = new JavaConnection(url);
         temp = javaConnection.selectQuery(query);
 
         if(temp.equals(null)){     //If the result set is null, the user might be Proctor.
@@ -88,6 +87,7 @@ public class LoginPage extends JFrame implements Views {
                 student.setBuildingNo(temp.getString("BuildingNumber"));
                 student.setDormNo(temp.getString("RoomNumber"));
                 student.setEligibility(temp.getBoolean("isEligible"));
+                student.setPlaceOfOrigin(temp.getString("place"));
             }
 
         }catch (SQLException ex){
@@ -104,14 +104,9 @@ public class LoginPage extends JFrame implements Views {
         ResultSet temp = javaConnection.selectQuery(query);
         try {
             while (temp.next()) {
-                proctor = new Proctor(temp.getString("Fname"),
-                        temp.getString("Lname"),
-                        getUsername(),temp.getString("Gender"));
-                proctor.setDepartment(temp.getString("Department"));
-                proctor.setYear(temp.getInt("Year"));
+                proctor = new Proctor(temp.getString("Fname"),temp.getString("Lname")
+                        ,temp.getString("Gender"));
                 proctor.setBuildingNo(temp.getString("BuildingNumber"));
-                proctor.setDormNo(temp.getString("RoomNumber"));
-                proctor.setEligibility(temp.getBoolean("isEligible"));
             }
 
         }catch (SQLException ex){
