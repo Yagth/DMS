@@ -11,6 +11,9 @@ public class StudentPage extends JFrame {
     private JPanel MainPanel;
     JPanel WestBoarder = new JPanel(null);
     private JPanel Center;
+    private static final int WIDTH = 900;
+    private static final int HEIGHT = 400;
+
 
     public StudentPage(Student student){
         user = student;
@@ -18,7 +21,7 @@ public class StudentPage extends JFrame {
         Dormatesinfo();
         this.setTitle("Dormitory Management System - Student");
         this.setContentPane(MainPanel);
-        this.setSize(900,400);
+        this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
