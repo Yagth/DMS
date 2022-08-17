@@ -6,4 +6,8 @@ public enum SizeOfMajorClasses {
     private SizeOfMajorClasses(int size){
         this.size = size;
     }
+
+    public int getSize() {
+        return size;
+    }
 }
