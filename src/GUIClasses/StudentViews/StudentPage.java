@@ -124,6 +124,14 @@ public class StudentPage extends JFrame implements TableViews {
 
         Services.add(Service);
 
+        JMenu logout = new JMenu("Logout");
+        logout.setForeground(Color.white);
+        JMenuItem signOut = new JMenuItem("Logout");
+        signOut.setForeground(new Color(72,131,184));
+
+        logout.add(signOut);
+        Services.add(logout);
+
         this.setJMenuBar(Services);
         this.setVisible(true);
     }
