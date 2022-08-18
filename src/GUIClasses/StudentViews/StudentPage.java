@@ -52,7 +52,7 @@ public class StudentPage extends JFrame implements TableViews {
         String url = "jdbc:sqlserver://DESKTOP-AA4PR2S\\SQLEXPRESS;DatabaseName=DMS;" +
         "encrypt=true;trustServerCertificate=true;IntegratedSecurity=true;";
         String query = "SELECT Fname, Lname, PhoneNumber FROM Student as S, Student_Phonenumber as SP WHERE S.SID = SP.SID AND BuildingNumber=\'"
-                +user.getBuildingNo()+"\' AND RoomNumber=\'"+user.getDormNo()+"\'";
+                +user.getBuildingNo()+"\' AND RoomNumber=\'"+user.getDormNo()+"\' AND S.SID != \'"+user.getsId()+"\'";
         JavaConnection javaConnection = new JavaConnection(url);
         dormMates = javaConnection.selectQuery(query);
     }
