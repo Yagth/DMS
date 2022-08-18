@@ -22,10 +22,15 @@ public class LoginButtonActionListener implements ActionListener {
             System.out.println(isUser);
 
             if(isUser){
-                if(parentComponent.getUserStatus().equals(UserStatus.STUDENT))
+                if(parentComponent.getUserStatus().equals(UserStatus.STUDENT)){
                     new StudentPage(parentComponent.createStudent());
+                    parentComponent.setVisible(false);
+                }
                 else if(parentComponent.getUserStatus().equals(UserStatus.PROCTOR))
+                {
                     new StudentPage(parentComponent.createStudent()); // This part here will be changed to proctor view when there is one created.
+                    parentComponent.setVisible(false);
+                }
             }
             else{
                 JOptionPane.showMessageDialog(parentComponent,"Wrong credentials Please try again","Login error",JOptionPane.ERROR_MESSAGE);

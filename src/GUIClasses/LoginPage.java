@@ -45,6 +45,7 @@ public class LoginPage extends JFrame implements Views {
         this.setContentPane(MainPanel);
         this.setSize(WIDTH,HEIGHT);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
 
         LoginButton.addActionListener(new LoginButtonActionListener(this));

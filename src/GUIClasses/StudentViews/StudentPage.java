@@ -102,6 +102,7 @@ public class StudentPage extends JFrame implements TableViews {
         this.setContentPane(MainPanel);
         this.setSize(WIDTH.getSize(), HEIGHT.getSize());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
 
         JMenuBar Services = new JMenuBar();
         Services.setBackground(new Color(72,131,184));
