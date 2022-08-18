@@ -40,12 +40,13 @@ public class StudentPage extends JFrame implements TableViews {
         user = student;
         setUpGUi();
         setUpTable();
+        displayUserInfo();
         addDormMatesToView();
     }
 
     public StudentPage(){  //This constructor is only here for debugging purposes.
         setUpGUi();
-    }
+    } // This constructor is only for debugging purposes.
 
     public void loadDormMates(){
         String url = "jdbc:sqlserver://DESKTOP-AA4PR2S\\SQLEXPRESS;DatabaseName=DMS;" +
@@ -54,6 +55,13 @@ public class StudentPage extends JFrame implements TableViews {
                 +user.getBuildingNo()+"\' AND RoomNumber=\'"+user.getDormNo()+"\'";
         JavaConnection javaConnection = new JavaConnection(url);
         dormMates = javaConnection.selectQuery(query);
+    }
+
+    public void displayUserInfo(){
+        studentName.setText(user.getFullName());
+        studentID.setText(user.getsId());
+        studentBuildingNo.setText(String.valueOf(user.getBuildingNo()));
+        studentDormNo.setText(String.valueOf(user.getDormNo()));
     }
 
     public void addDormMatesToView(){
