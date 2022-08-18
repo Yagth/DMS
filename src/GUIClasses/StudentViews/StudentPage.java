@@ -102,6 +102,7 @@ public class StudentPage extends JFrame implements TableViews {
         this.setContentPane(MainPanel);
         this.setSize(WIDTH.getSize(), HEIGHT.getSize());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
 
         JMenuBar Services = new JMenuBar();
         Services.setBackground(new Color(72,131,184));
@@ -110,6 +111,7 @@ public class StudentPage extends JFrame implements TableViews {
 
         JMenuItem maintainanceReport = new JMenuItem("maintainanceReport");
         maintainanceReport.setForeground(new Color(72,131,184));
+
         JMenuItem StayRequest = new JMenuItem("Prolog Dormitary stay request");
         StayRequest.setForeground(new Color(72,131,184));
         JMenuItem RequestForDorm = new JMenuItem("Request for a dorm");
@@ -123,6 +125,14 @@ public class StudentPage extends JFrame implements TableViews {
         Service.add(SeeRequests);
 
         Services.add(Service);
+
+        JMenu logout = new JMenu("Logout");
+        logout.setForeground(Color.white);
+        JMenuItem signOut = new JMenuItem("Logout");
+        signOut.setForeground(new Color(72,131,184));
+
+        logout.add(signOut);
+        Services.add(logout);
 
         this.setJMenuBar(Services);
         this.setVisible(true);

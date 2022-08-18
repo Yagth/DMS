@@ -45,6 +45,7 @@ public class LoginPage extends JFrame implements Views {
         this.setContentPane(MainPanel);
         this.setSize(WIDTH,HEIGHT);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
 
         LoginButton.addActionListener(new LoginButtonActionListener(this));
@@ -78,6 +79,7 @@ public class LoginPage extends JFrame implements Views {
     public boolean checkUser(){
         String query;
         ResultSet temp = null;
+        boolean isUser = false;
         checkAndSetUserStatus();
         try{
             if (userStatus.equals(UserStatus.STUDENT)){
@@ -88,11 +90,16 @@ public class LoginPage extends JFrame implements Views {
                 query = "SELECT * FROM Proctor WHERE EID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
                 temp = javaConnection.selectQuery(query);
             }
+            if(temp.next()) isUser = true; //This checks whether there is a user that matches the credentials.
         }
         catch (NullPointerException ex){
             userStatus = null;
         }
-        return !(temp == null); // If the temp is still null, the user doesn't exist.
+        catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Sorry something went wrong", "Unknown error",JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace(); // This part here is only for debugging purpose.
+        }
+        return isUser; // If the temp is still null, the user doesn't exist.
     }
 
     public Student createStudent(){
