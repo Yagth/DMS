@@ -78,6 +78,7 @@ public class StudentPage extends JFrame implements TableViews {
         title.add("Name");
         title.add("Phone Number");
         dormMateTable.setModel(new DefaultTableModel(tableData,title));
+        dormMateTable.setDefaultEditor(Object.class, null); // This code here will disable the editing of the table.
     }
 
     @Override
