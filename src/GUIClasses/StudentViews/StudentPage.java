@@ -111,6 +111,7 @@ public class StudentPage extends JFrame implements TableViews {
 
         JMenuItem maintainanceReport = new JMenuItem("maintainanceReport");
         maintainanceReport.setForeground(new Color(72,131,184));
+
         JMenuItem StayRequest = new JMenuItem("Prolog Dormitary stay request");
         StayRequest.setForeground(new Color(72,131,184));
         JMenuItem RequestForDorm = new JMenuItem("Request for a dorm");
