@@ -28,7 +28,7 @@ public class LoginButtonActionListener implements ActionListener {
                 else if(parentComponent.getUserStatus().equals(UserStatus.PROCTOR))
                 {
                     new StudentPage(parentComponent.createStudent()); // This part here will be changed to proctor view when there is one created.
-                    parentComponent.setVisible(false);
+                    parentComponent.dispose();
                 }
                 JOptionPane.showMessageDialog(null,"Login successful","Logged in",JOptionPane.INFORMATION_MESSAGE);
             }
