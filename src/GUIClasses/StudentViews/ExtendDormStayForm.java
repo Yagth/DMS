@@ -1,6 +1,5 @@
 package GUIClasses.StudentViews;
 
-import BasicClasses.Enums.ConnectionParameters;
 import BasicClasses.Others.JavaConnection;
 import GUIClasses.ActionListeners.ExtendDormSubmitButtonListener;
 import GUIClasses.Interfaces.RequestViews;
@@ -32,7 +31,7 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
     }
     @Override
     public Integer updateDataBase() {
-        String url = ConnectionParameters.URL;
+        String url = JavaConnection.URL;
         Date date = new Date(Calendar.getInstance().getTimeInMillis());
         String requestType = this.getTitle();
         JavaConnection javaConnection = new JavaConnection(url);

@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class JavaConnection {
+
+    public static String URL = "jdbc:sqlserver://DMS-SERVER\\SQLEXPRESS;DatabaseName=DMS;" +
+                "encrypt=true;trustServerCertificate=true;IntegratedSecurity=true;";
     Connection connection;
     Statement statement;
     ResultSet resultSet;

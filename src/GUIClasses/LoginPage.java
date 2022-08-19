@@ -1,6 +1,5 @@
 package GUIClasses;
 
-import BasicClasses.Enums.ConnectionParameters;
 import BasicClasses.Enums.UserStatus;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
@@ -32,7 +31,7 @@ public class LoginPage extends JFrame implements Views {
 
     public LoginPage(){
         setUpGUi();
-        javaConnection = new JavaConnection(ConnectionParameters.URL);
+        javaConnection = new JavaConnection(JavaConnection.URL);
     }
 
     @Override

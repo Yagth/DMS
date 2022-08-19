@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import BasicClasses.Enums.ConnectionParameters;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
@@ -50,7 +49,7 @@ public class StudentPage extends JFrame implements TableViews {
     } // This constructor is only for debugging purposes.
 
     public void loadDormMates(){
-        String url = ConnectionParameters.URL;
+        String url = JavaConnection.URL;
         String query = "SELECT Fname, Lname, PhoneNumber FROM Student as S, Student_Phonenumber as SP WHERE S.SID = SP.SID AND BuildingNumber=\'"
                 +user.getBuildingNo()+"\' AND RoomNumber=\'"+user.getDormNo()+"\' AND S.SID != \'"+user.getsId()+"\'";
         JavaConnection javaConnection = new JavaConnection(url);

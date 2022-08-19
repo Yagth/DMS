@@ -1,6 +1,5 @@
 package GUIClasses.StudentViews;
 
-import BasicClasses.Enums.ConnectionParameters;
 import BasicClasses.Others.Cloth;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.ClothTakeOutRequest;
@@ -110,7 +109,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     }
 
     public Integer updateDataBase() {
-        String url = ConnectionParameters.URL;
+        String url = JavaConnection.URL;
         Date date = new Date(Calendar.getInstance().getTimeInMillis());
         String reportType = this.getTitle();
         JavaConnection javaConnection = new JavaConnection(url);
@@ -131,7 +130,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     }
     public Integer getLastClothRequestId(){
         int lastRequestId = 0;
-        String url = ConnectionParameters.URL;
+        String url = JavaConnection.URL;
         JavaConnection javaConnection = new JavaConnection(url);
         String query = "SELECT TOP 1 * FROM clothRequest ORDER BY requestId DESC, clothName DESC;";
         ResultSet resultSet = javaConnection.selectQuery(query);
