@@ -117,17 +117,19 @@ public class StudentPage extends JFrame implements TableViews {
         JMenu Service = new JMenu("Services");
         Service.setForeground(Color.white);
 
-        JMenuItem maintainanceReport = new JMenuItem("maintainanceReport");
-        maintainanceReport.setForeground(new Color(72,131,184));
-
-        JMenuItem StayRequest = new JMenuItem("Prolog Dormitary stay request");
+        JMenuItem maintainanceRequest = new JMenuItem("Maintainance request");
+        maintainanceRequest.setForeground(new Color(72,131,184));
+        JMenuItem clothTakeOutRequest = new JMenuItem("Cloth take out request");
+        maintainanceRequest.setForeground(new Color(72,131,184));
+        JMenuItem StayRequest = new JMenuItem("Extend Dormitory stay request");
         StayRequest.setForeground(new Color(72,131,184));
         JMenuItem RequestForDorm = new JMenuItem("Request for a dorm");
         RequestForDorm.setForeground(new Color(72,131,184));
         JMenuItem SeeRequests = new JMenuItem("See your requests");
         SeeRequests.setForeground(new Color(72,131,184));
 
-        Service.add(maintainanceReport);
+        Service.add(maintainanceRequest);
+        Service.add(clothTakeOutRequest);
         Service.add(StayRequest);
         Service.add(RequestForDorm);
         Service.add(SeeRequests);
