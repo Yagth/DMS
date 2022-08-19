@@ -1,5 +1,6 @@
 package GUIClasses.StudentViews;
 
+import BasicClasses.Enums.ConnectionParameters;
 import BasicClasses.Others.JavaConnection;
 import GUIClasses.ActionListeners.MaintenanceSubmitButtonListener;
 import GUIClasses.Interfaces.RequestViews;
@@ -70,8 +71,7 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
 
     @Override
     public Integer updateDataBase() {
-        String url = "jdbc:sqlserver://DESKTOP-AA4PR2S\\SQLEXPRESS;DatabaseName=DMS;" +
-                "encrypt=true;trustServerCertificate=true;IntegratedSecurity=true;";
+        String url = ConnectionParameters.URL;
         Date date = new Date(Calendar.getInstance().getTimeInMillis());
         String reportType = this.getTitle();
         JavaConnection javaConnection = new JavaConnection(url);

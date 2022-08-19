@@ -1,16 +1,13 @@
 package GUIClasses;
 
+import BasicClasses.Enums.ConnectionParameters;
 import BasicClasses.Enums.UserStatus;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Persons.Student;
 import GUIClasses.ActionListeners.LoginButtonActionListener;
 import GUIClasses.Interfaces.Views;
-import GUIClasses.StudentViews.StudentPage;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class LoginPage extends JFrame implements Views {
@@ -35,8 +32,7 @@ public class LoginPage extends JFrame implements Views {
 
     public LoginPage(){
         setUpGUi();
-        javaConnection = new JavaConnection("jdbc:sqlserver://DESKTOP-AA4PR2S\\SQLEXPRESS;" +
-                "DatabaseName=DMS;encrypt=true;trustServerCertificate=true;IntegratedSecurity=true;");
+        javaConnection = new JavaConnection(ConnectionParameters.URL);
     }
 
     @Override
