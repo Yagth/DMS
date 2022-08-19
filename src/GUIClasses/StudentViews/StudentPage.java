@@ -10,7 +10,7 @@ import java.util.Vector;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
-import GUIClasses.ActionListeners.StudentPageLogoutMenuListener;
+import GUIClasses.ActionListeners.StudentPageLogoutMenuItemListener;
 import GUIClasses.Interfaces.TableViews;
 
 public class StudentPage extends JFrame implements TableViews {
@@ -141,7 +141,7 @@ public class StudentPage extends JFrame implements TableViews {
         logout.setForeground(Color.white);
         JMenuItem signOut = new JMenuItem("Logout");
         signOut.setForeground(new Color(72,131,184));
-        signOut.addActionListener(new StudentPageLogoutMenuListener(this));
+        signOut.addActionListener(new StudentPageLogoutMenuItemListener(this));
 
         logout.add(signOut);
         Services.add(logout);

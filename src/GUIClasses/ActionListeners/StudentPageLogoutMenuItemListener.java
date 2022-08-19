@@ -7,10 +7,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StudentPageLogoutMenuListener implements ActionListener {
+public class StudentPageLogoutMenuItemListener implements ActionListener {
     private StudentPage parentComponent;
 
-    public StudentPageLogoutMenuListener(StudentPage parentComponent){
+    public StudentPageLogoutMenuItemListener(StudentPage parentComponent){
         this.parentComponent = parentComponent;
     }
     @Override
