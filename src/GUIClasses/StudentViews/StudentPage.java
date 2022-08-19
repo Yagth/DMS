@@ -10,6 +10,7 @@ import java.util.Vector;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
+import GUIClasses.ActionListeners.StudentPageLogoutMenuListener;
 import GUIClasses.Interfaces.TableViews;
 
 public class StudentPage extends JFrame implements TableViews {
@@ -120,7 +121,7 @@ public class StudentPage extends JFrame implements TableViews {
         JMenuItem maintainanceRequest = new JMenuItem("Maintainance request");
         maintainanceRequest.setForeground(new Color(72,131,184));
         JMenuItem clothTakeOutRequest = new JMenuItem("Cloth take out request");
-        maintainanceRequest.setForeground(new Color(72,131,184));
+        clothTakeOutRequest.setForeground(new Color(72,131,184));
         JMenuItem StayRequest = new JMenuItem("Extend Dormitory stay request");
         StayRequest.setForeground(new Color(72,131,184));
         JMenuItem RequestForDorm = new JMenuItem("Request for a dorm");
@@ -140,6 +141,7 @@ public class StudentPage extends JFrame implements TableViews {
         logout.setForeground(Color.white);
         JMenuItem signOut = new JMenuItem("Logout");
         signOut.setForeground(new Color(72,131,184));
+        signOut.addActionListener(new StudentPageLogoutMenuListener(this));
 
         logout.add(signOut);
         Services.add(logout);

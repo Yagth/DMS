@@ -23,7 +23,7 @@ public class LoginButtonActionListener implements ActionListener {
             if(isUser){
                 if(parentComponent.getUserStatus().equals(UserStatus.STUDENT)){
                     new StudentPage(parentComponent.createStudent());
-                    parentComponent.setVisible(false);
+                    parentComponent.dispose();
                 }
                 else if(parentComponent.getUserStatus().equals(UserStatus.PROCTOR))
                 {
