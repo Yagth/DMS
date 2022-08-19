@@ -30,6 +30,7 @@ public class LoginButtonActionListener implements ActionListener {
                     new StudentPage(parentComponent.createStudent()); // This part here will be changed to proctor view when there is one created.
                     parentComponent.setVisible(false);
                 }
+                JOptionPane.showMessageDialog(null,"Login successful","Logged in",JOptionPane.INFORMATION_MESSAGE);
             }
             else{
                 JOptionPane.showMessageDialog(parentComponent,"Wrong credentials Please try again","Login error",JOptionPane.ERROR_MESSAGE);
