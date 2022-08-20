@@ -109,7 +109,7 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
 
     @Override
     public Integer getCurrentClothRequestId() {
-        String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportType) reportId FROM Report where reportType=\'"+request.getRequestType()+"\');";
+        String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportType) reportId FROM Report where reportType=\'"+request.getRequestType()+"\';";
         System.out.println("Query: "+query);// For debugging purpose.
         ResultSet tmp = javaConnection.selectQuery(query);
         int requestId = 0;
