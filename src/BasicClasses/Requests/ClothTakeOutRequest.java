@@ -28,6 +28,7 @@ public class ClothTakeOutRequest extends Request {
     public void setRequestCount(Integer requestCount){
         this.requestCount = requestCount;
     }
+    public int getRequestCount(){return requestCount;}
 
     @Override
     public String toString(){

@@ -67,8 +67,8 @@ public class LoginPage extends JFrame implements Views {
     }
     public void checkAndSetUserStatus(){
         String tmp = getUsername().substring(0,3);
-        if(tmp.equals("UGR") || tmp.equals("PGR")) userStatus = UserStatus.STUDENT; // If the user is undergraduate(UGR) or is postgraduate(PGR).
-        else if(tmp.equals("EMP")) userStatus = UserStatus.PROCTOR;  //If the user is employee(EMP).
+        if(tmp.equalsIgnoreCase("UGR") || tmp.equalsIgnoreCase("PGR")) userStatus = UserStatus.STUDENT; // If the user is undergraduate(UGR) or is postgraduate(PGR).
+        else if(tmp.equalsIgnoreCase("EMP")) userStatus = UserStatus.PROCTOR;  //If the user is employee(EMP).
     }
 
     public boolean checkUser(){

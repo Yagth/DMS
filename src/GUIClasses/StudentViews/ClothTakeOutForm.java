@@ -14,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-import java.sql.Date;
 
 public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews {
     private JButton addButton;
@@ -37,7 +36,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     public final int HEIGHT = 300;
 
     public ClothTakeOutForm(Student student){
-        Integer lastRequestId = this.getLastClothRequestId();
+        Integer lastRequestId = this.getLastClothRequestCount();
         clothList = new ClothTakeOutRequest(student.getsId(),lastRequestId);
         tableData = new Vector<>();
         this.student = student;
@@ -117,11 +116,11 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         int tmp1,tmp2;
 
         for (Cloth c : clothList.getClothsList()) {
-            String query = "INSERT INTO ClothTakeOut(reportCount,ClothName,Amount)" +
-                            "VALUES(\'" +clothList.getRequestId()+"\',\'" + c.getClothName()+ "\',\'" +
+            String query = "INSERT INTO ClothTakeOut(requestCount,ClothName,Amount)" +
+                            "VALUES(\'" +clothList.getRequestCount()+"\',\'" + c.getClothName()+ "\',\'" +
                     c.getClothAmount()+"\');";
-            String query2 = "INSERT INTO StudentTakesClothOut(ReporterId,reportedDate)" +
-                    "VALUES(\'" +clothList.getRequesterId()+"\',\'"+ clothList.getRequestedDate()+ "\');";
+            String query2 = "INSERT INTO StudentTakesClothOut(ReporterId,clothRequestId,reportedDate)" +
+                    "VALUES(\'" +clothList.getRequesterId()+"\',\'"+ getCurrentClothRequestId()+"\',\'"+ clothList.getRequestedDate()+ "\');";
             if (javaConnection.isConnected()){
                 tmp1 = javaConnection.insertQuery(query);
                 tmp2 = javaConnection.insertQuery(query2);
@@ -137,20 +136,33 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         else
             JOptionPane.showMessageDialog(null, "Sorry couldn't send your request due to connection error", "Connection error", JOptionPane.ERROR_MESSAGE);
     }
-    public Integer getLastClothRequestId(){
-        int lastRequestId = 0;
+    public Integer getLastClothRequestCount(){
+        int lastRequestCount = 0;
         String url = JavaConnection.URL;
         JavaConnection javaConnection = new JavaConnection(url);
-        String query = "SELECT TOP 1 * FROM ClothTakeOut ORDER BY reportId DESC, clothName DESC;";
+        String query = "SELECT TOP 1 * FROM ClothTakeOut ORDER BY requestCount DESC, clothName DESC;";
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
             resultSet.next();
-            String tmp = resultSet.getString("reportId");
-            lastRequestId = Integer.parseInt(tmp);
-            return lastRequestId;
+            String tmp = resultSet.getString("requestCount");
+            lastRequestCount = Integer.parseInt(tmp);
+            return lastRequestCount;
         }catch(SQLException ex){
             return 0;
         }
+    }
+    public Integer getCurrentClothRequestId(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT ReportId FROM ClothTakeOut WHERE requestCount="+clothList.getRequestCount();
+        ResultSet tmp = javaConnection.selectQuery(query);
+        int requestId = 0;
+        try{
+            tmp.next();
+            requestId = tmp.getInt("ReportId");
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return requestId;
     }
     public boolean checkSimilarNameCloth(Cloth cloth){
         for(Cloth c: clothList.getClothsList()){
