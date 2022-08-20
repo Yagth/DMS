@@ -2,6 +2,7 @@ package GUIClasses.StudentViews;
 
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
+import BasicClasses.Requests.MaintenanceRequest;
 import GUIClasses.ActionListeners.MaintenanceSubmitButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 
@@ -58,25 +59,11 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
         }); //A custom action listener for the exit button.
 
     }
-    public int getBlockNumber(){
-        int tmp;
-        try{
-            tmp = Integer.parseInt(blockNumberTextField.getText());
-        }
-        catch (NumberFormatException ex){
-            tmp = 0;
-        }
-        return tmp ;
+    public String getBlockNumber(){
+        return blockNumberTextField.getText();
     }
-    public int getRoomNumber(){
-        int tmp;
-        try{
-            tmp = Integer.parseInt(roomNumberTextField.getText());
-        }
-        catch (NumberFormatException ex){
-            tmp = 0;
-        }
-        return tmp ;
+    public String getRoomNumber(){
+        return roomNumberTextField.getText();
     }
     public String getDescription(){
         return descriptionTextPane.getText();
@@ -86,13 +73,15 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
     @Override
     public Integer updateDataBase() {
         String url = JavaConnection.URL;
-        Date date = new Date(Calendar.getInstance().getTimeInMillis());
-        String reportType = this.getTitle();
+        MaintenanceRequest request = new MaintenanceRequest(student.getsId());
+        request.setDescription(getDescription());
+        request.setBuildingNo(String.valueOf(getBlockNumber()));
+        request.setRoomNO(String.valueOf(getBlockNumber()));
         JavaConnection javaConnection = new JavaConnection(url);
         Integer updateStatus = 0;
-        String query = "INSERT INTO request(reportedID,requestType,roomNO,blockNo,reportDate,description)" +
-                "VALUES(\'" +reporterId+"\',\'"+ reportType + "\',\'" + getRoomNumber()+ "\',\'" +
-                getBlockNumber()+"\',\'"+ date + "\',\'"+getDescription()+"\');";
+        String query = "INSERT INTO report(reportId,reporterId,reportType,description,roomNumber,buildingNumber)" +
+                "VALUES(\'"+request.getRequesterId() + "\',\'" + request.getRequestType()+ "\',\'" +request.getDescription()+"\',\'"+
+                request.getRoomNO()+"\',\'"+ request.getBuildingNo()+"\');";
         if (javaConnection.isConnected()) updateStatus = javaConnection.insertQuery(query);
         return updateStatus;
     }
