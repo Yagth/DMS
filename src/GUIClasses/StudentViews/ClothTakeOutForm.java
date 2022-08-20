@@ -128,10 +128,10 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         int tmp1,tmp2;
 
         for (Cloth c : clothList.getClothsList()) {
-            String query = "INSERT INTO ClothTakeOut(requestCount,ClothName,Amount)" +
+            String query = "INSERT INTO ClothTakeOut(reportCount,ClothName,Amount)" +
                             "VALUES(\'" +clothList.getRequestCount()+"\',\'" + c.getClothName()+ "\',\'" +
                     c.getClothAmount()+"\');";
-            String query2 = "INSERT INTO StudentTakesClothOut(ReporterId,clothRequestId,reportedDate)" +
+            String query2 = "INSERT INTO StudentTakesClothOut(ReporterId,ClothRequestId,reportedDate)" +
                     "VALUES(\'" +clothList.getRequesterId()+"\',\'"+ getCurrentClothRequestId()+"\',\'"+ clothList.getRequestedDate()+ "\');";
             if (javaConnection.isConnected()){
                 tmp1 = javaConnection.insertQuery(query);
@@ -152,11 +152,11 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         int lastRequestCount = 0;
         String url = JavaConnection.URL;
         JavaConnection javaConnection = new JavaConnection(url);
-        String query = "SELECT TOP 1 * FROM ClothTakeOut ORDER BY requestCount DESC, clothName DESC;";
+        String query = "SELECT TOP 1 * FROM ClothTakeOut ORDER BY reportCount DESC, clothName DESC;";
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
             resultSet.next();
-            String tmp = resultSet.getString("requestCount");
+            String tmp = resultSet.getString("reportCount");
             lastRequestCount = Integer.parseInt(tmp);
             return lastRequestCount;
         }catch(SQLException ex){
@@ -165,14 +165,14 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     }
     public Integer getCurrentClothRequestId(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        System.out.println(clothList.getRequestCount());//For debugging purposes.
+        System.out.println("RequestCount:"+clothList.getRequestCount());//For debugging purposes.
         String query = "SELECT ReportId FROM ClothTakeOut WHERE requestCount="+clothList.getRequestCount();
         ResultSet tmp = javaConnection.selectQuery(query);
         int requestId = 0;
         try{
             if(tmp.next()){
                 requestId = tmp.getInt("ReportId");
-                System.out.println(tmp.getInt("ReportId")); // For debugging purpose.
+                System.out.println("RequestId:"+tmp.getInt("ReportId")); // For debugging purpose.
             }
         } catch (SQLException ex){
             ex.printStackTrace();
