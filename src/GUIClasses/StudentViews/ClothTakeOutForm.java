@@ -2,6 +2,7 @@ package GUIClasses.StudentViews;
 
 import BasicClasses.Others.Cloth;
 import BasicClasses.Others.JavaConnection;
+import BasicClasses.Persons.Student;
 import BasicClasses.Requests.ClothTakeOutRequest;
 import GUIClasses.ActionListeners.ClothTakeOutAddButtonListener;
 import GUIClasses.ActionListeners.ClothTakeOutFinishButtonListener;
@@ -30,15 +31,16 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     private JLabel clothNameL;
     private JLabel clothAmountL;
     private ClothTakeOutRequest clothList;
-    Vector<Vector<Object>> tableData;
-    String reporterId = "yep it is"; // This part here is only for debugging. It will be removed when the project is complete.
+    private Vector<Vector<Object>> tableData;
+    private Student student;
     public final int WIDTH = 500;
     public final int HEIGHT = 300;
 
-    public ClothTakeOutForm(){
+    public ClothTakeOutForm(Student student){
         Integer lastRequestId = this.getLastClothRequestId();
-        clothList = new ClothTakeOutRequest(reporterId,lastRequestId);
+        clothList = new ClothTakeOutRequest(student.getsId(),lastRequestId);
         tableData = new Vector<>();
+        this.student = student;
         setUpGUi();
         setUpTable();
     }
@@ -114,11 +116,20 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         String reportType = this.getTitle();
         JavaConnection javaConnection = new JavaConnection(url);
         Integer updateStatus = 0;
+        int tmp1,tmp2;
+
         for (Cloth c : clothList.getClothsList()) {
-            String query = "INSERT INTO clothRequest(requestID,reporterID,ClothName,clothAmount,reportedDate)" +
-                            "VALUES(\'" +clothList.getRequestId()+"\',\'"+ reporterId + "\',\'" + c.getClothName()+ "\',\'" +
-                    c.getClothAmount()+"\',\'"+ date + "\');";
-            if (javaConnection.isConnected()) updateStatus = javaConnection.insertQuery(query);
+            String query = "INSERT INTO ClothTakeOut(ReportId,ReporterID,ClothName,Amount)" +
+                            "VALUES(\'" +clothList.getRequestId()+"\',\'"+ clothList.getRequesterId() + "\',\'" + c.getClothName()+ "\',\'" +
+                    c.getClothAmount()+"\');";
+            String query2 = "INSERT INTO StudentTakesClothOut(ReporterId,clothRequestId,reportedDate)" +
+                    "VALUES(\'" +student.getsId()+"\',\'"+ clothList.getRequestId() + "\',\'" + date+ "\');";
+            if (javaConnection.isConnected()){
+                tmp1 = javaConnection.insertQuery(query);
+                tmp2 = javaConnection.insertQuery(query2);
+                if(tmp1 == 1 & tmp2 == 1) updateStatus = 1;//Both queries are executed. JavaConnection returns 1 if successful and 0 otherwise.
+                else updateStatus = 0;
+            }
         }
         return updateStatus;
     }

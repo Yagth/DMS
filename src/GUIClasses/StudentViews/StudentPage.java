@@ -10,6 +10,7 @@ import java.util.Vector;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
+import GUIClasses.ActionListeners.StudentClothTakeOutMenuItemListener;
 import GUIClasses.ActionListeners.StudentPageLogoutMenuItemListener;
 import GUIClasses.Interfaces.TableViews;
 
@@ -69,6 +70,9 @@ public class StudentPage extends JFrame implements TableViews {
         addDataToTable(dormMates);
         refreshTable();
     }
+    public Student getUser(){
+        return user;
+    }
 
     @Override
     public void setUpTable(){
@@ -122,6 +126,7 @@ public class StudentPage extends JFrame implements TableViews {
         maintainanceRequest.setForeground(new Color(72,131,184));
         JMenuItem clothTakeOutRequest = new JMenuItem("Cloth take out request");
         clothTakeOutRequest.setForeground(new Color(72,131,184));
+        clothTakeOutRequest.addActionListener(new StudentClothTakeOutMenuItemListener(this));
         JMenuItem StayRequest = new JMenuItem("Extend Dormitory stay request");
         StayRequest.setForeground(new Color(72,131,184));
         JMenuItem RequestForDorm = new JMenuItem("Request for a dorm");

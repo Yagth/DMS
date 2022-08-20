@@ -13,8 +13,8 @@ public class StudentClothTakeOutMenuItemListener extends StudentPageMenutItemLis
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ClothTakeOutForm tmp =  new ClothTakeOutForm();
-        if(tmp.isDisplayable()) hideParentComponent();
-        else showParentComponent();
+        System.out.println("Clicked");
+        ClothTakeOutForm tmp =  new ClothTakeOutForm(parentComponent.getUser());
+        System.out.println("Clicked");
     }
 }

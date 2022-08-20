@@ -10,9 +10,11 @@ public class StudentExtendDormMenuItemListener extends StudentPageMenutItemListe
     public StudentExtendDormMenuItemListener(StudentPage parentComponent){
         super(parentComponent);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        new ExtendDormStayForm();
+        ExtendDormStayForm tmp = new ExtendDormStayForm();
+        if(tmp.isDisplayable()){
+            hideParentComponent();
+        }
     }
 }
