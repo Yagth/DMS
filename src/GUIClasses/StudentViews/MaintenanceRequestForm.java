@@ -28,8 +28,10 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
     private JLabel roomNoLabel;
     private JTextPane descriptionTextPane;
     private JScrollPane descriptionSP;
+    private  JavaConnection javaConnection;
     private Student student;
     private StudentPage parentComponent;
+    private MaintenanceRequest request;
     String reporterId = "yep it is"; // This part here is only for debugging. It will be removed when the project is complete.
     public final int WIDTH = 500;
     public final int HEIGHT = 230;
@@ -38,6 +40,8 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
     public MaintenanceRequestForm(Student student, StudentPage parentComponent){
         this.student = student;
         this.parentComponent = parentComponent;
+        javaConnection = new JavaConnection(JavaConnection.URL);
+        request = new MaintenanceRequest(student.getsId());
         setUpGUi();
     }
 
@@ -71,24 +75,22 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
         return descriptionTextPane.getText();
     }
 
-
     @Override
     public Integer updateDataBase() {
-        String url = JavaConnection.URL;
-        MaintenanceRequest request = new MaintenanceRequest(student.getsId());
         request.setDescription(getDescription());
         request.setBuildingNo(getBlockNumber());
         request.setRoomNO(getBlockNumber());
-        JavaConnection javaConnection = new JavaConnection(url);
         Integer updateStatus = 0;
         int tmp1 = 0,tmp2 = 0;
         String query = "INSERT INTO report(reportId,reporterId,reportType,description,roomNumber,buildingNumber)" +
                 "VALUES(\'"+request.getRequesterId() + "\',\'" + request.getRequestType()+ "\',\'" +request.getDescription()+"\',\'"+
                 request.getRoomNO()+"\',\'"+ request.getBuildingNo()+"\');";
-        if (javaConnection.isConnected()) tmp1 = javaConnection.insertQuery(query);
-        query = "INSERT INTO report(reportId,reporterId,reportType,description,roomNumber,buildingNumber)" +
-                "VALUES(\'"+request.getRequesterId() + "\',\'" + request.getRequestType()+ "\',\'" +request.getDescription()+"\',\'"+
-                request.getRoomNO()+"\',\'"+ request.getBuildingNo()+"\');";
+        if (javaConnection.isConnected()) tmp1 = javaConnection.insertQuery(query);//If query is successful the java connection returns 1.
+        query = "INSERT INTO StudentMakesReport(SID,reportId)" +
+                "VALUES(\'"+request.getRequesterId() + "\',\'" + getCurrentClothRequestId()+"\');";
+        if(javaConnection.isConnected()) tmp2 = javaConnection.insertQuery(query); //If query is successful the java connection returns 1.
+
+        if(tmp1==1 & tmp2==1) updateStatus = 1; //If both queries are successful.
         return updateStatus;
     }
 
@@ -107,8 +109,7 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
 
     @Override
     public Integer getCurrentClothRequestId() {
-        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportCount) reportId FROM ClothTakeOut where reportCount="+clothList.getRequestCount();
+        String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportType) reportId FROM Report where reportType="+request.getRequestType();
         ResultSet tmp = javaConnection.selectQuery(query);
         int requestId = 0;
         try{
