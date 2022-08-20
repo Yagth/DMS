@@ -86,10 +86,9 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
                 "VALUES(\'"+request.getRequesterId() + "\',\'" + request.getRequestType()+ "\',\'" +request.getDescription()+"\',\'"+
                 request.getRoomNO()+"\',\'"+ request.getBuildingNo()+"\');";
         if (javaConnection.isConnected()) tmp1 = javaConnection.insertQuery(query);//If query is successful the java connection returns 1.
-        query = "INSERT INTO StudentMakesReport(SID,reportId)" +
-                "VALUES(\'"+request.getRequesterId() + "\',\'" + getCurrentClothRequestId()+"\');";
+        query = "INSERT INTO StudentMakesReport(SID,reportId,reportedDate)" +
+                "VALUES(\'"+request.getRequesterId() + "\',\'" + getCurrentClothRequestId()+ "\',\'" +request.getRequestedDate()+"\');";
         if(javaConnection.isConnected()) tmp2 = javaConnection.insertQuery(query); //If query is successful the java connection returns 1.
-
         if(tmp1==1 & tmp2==1) updateStatus = 1; //If both queries are successful.
         return updateStatus;
     }

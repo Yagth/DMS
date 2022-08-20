@@ -58,15 +58,19 @@ public class RequestForDormitory extends JFrame implements RequestViews {
 
     @Override
     public Integer updateDataBase() {
-        String url = JavaConnection.URL;
-        Date date = new Date(Calendar.getInstance().getTimeInMillis());
-        String reportType = this.getTitle();
-        JavaConnection javaConnection = new JavaConnection(url);
+        setRequestAddress();
+        request.setDescription(getDescription());
         Integer updateStatus = 0;
-        String query = "INSERT INTO request(reportedID,requestType,roomNO,blockNo,reportDate,description)" +
-                "VALUES(\'" +reporterId+"\',\'"+ reportType + "\',\'" + getWoreda()+ "\',\'" +
-                getSubcity()+"\',\'"+ date + "\',\'"+getDescription()+"\');";
-        if (javaConnection.isConnected()) updateStatus = javaConnection.insertQuery(query);
+        int tmp1 = 0,tmp2 = 0;
+        String query = "INSERT INTO report(reporterId,reportType,description)" +
+                "VALUES(\'"+request.getRequesterId() + "\',\'" + request.getRequestType()+ "\',\'" +request.getDescription()+"\');";
+        if (javaConnection.isConnected()) tmp1 = javaConnection.insertQuery(query); //If query is successful the java connection returns 1.
+        query = "INSERT INTO StudentMakesReport(SID,reportId,reportedDate)" +
+                "VALUES(\'"+request.getRequesterId() + "\',\'" + getCurrentClothRequestId()+ "\',\'" +request.getRequestedDate()+"\');";
+        if(javaConnection.isConnected()) tmp2 = javaConnection.insertQuery(query); //If query is successful the java connection returns 1.
+
+        if(tmp1==1 & tmp2==1) updateStatus = 1; //If both queries are successful.
+
         return updateStatus;
 
     }
