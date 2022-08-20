@@ -18,6 +18,10 @@ public class StudentPage extends JFrame implements TableViews {
     ResultSet dormMates;
     private JPanel MainPanel;
     private JPanel topPanel;
+    private JLabel studentName;
+    private JLabel studentID;
+    private JLabel studentDormNo;
+    private JLabel studentBuildingNo;
     private JLabel titleL;
     private JLabel nameL;
     private JLabel IDL;
