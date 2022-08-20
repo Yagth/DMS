@@ -15,11 +15,13 @@ public class MaintenanceSubmitButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean hasEmptyField = (parentComponent.getBlockNumber().equals("")||parentComponent.getRoomNumber().equals("")||parentComponent.getDescription().equals(""));
-        if(hasEmptyField) JOptionPane.showMessageDialog(null, "Please make sure that all fields contain the appropriate information.","Empty field",JOptionPane.ERROR_MESSAGE);
+        if(hasEmptyField) JOptionPane.showMessageDialog(parentComponent, "Please make sure that all fields contain the appropriate information.","Empty field",JOptionPane.ERROR_MESSAGE);
         else{
             Integer updateStatus = parentComponent.updateDataBase();
             parentComponent.displayUpdateStatus(updateStatus);
             parentComponent.dispose();
+            parentComponent.showParentComponent();
         }
+
     }
 }
