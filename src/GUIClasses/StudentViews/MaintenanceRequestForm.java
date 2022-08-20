@@ -75,8 +75,8 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
         String url = JavaConnection.URL;
         MaintenanceRequest request = new MaintenanceRequest(student.getsId());
         request.setDescription(getDescription());
-        request.setBuildingNo(String.valueOf(getBlockNumber()));
-        request.setRoomNO(String.valueOf(getBlockNumber()));
+        request.setBuildingNo(getBlockNumber());
+        request.setRoomNO(getBlockNumber());
         JavaConnection javaConnection = new JavaConnection(url);
         Integer updateStatus = 0;
         String query = "INSERT INTO report(reportId,reporterId,reportType,description,roomNumber,buildingNumber)" +
