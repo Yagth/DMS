@@ -173,16 +173,12 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     }
     public Integer getCurrentClothRequestId(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        System.out.println("RequestCount:"+clothList.getRequestCount());//For debugging purposes.
         String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportCount) reportId FROM ClothTakeOut where reportCount="+clothList.getRequestCount();
         ResultSet tmp = javaConnection.selectQuery(query);
         int requestId = 0;
         try{
-            boolean hasNext = tmp.next();//For debugging purpose.
-            System.out.println("Has next: "+hasNext);
-            if(hasNext)
+            if(tmp.next())
                 requestId = tmp.getInt("ReportId");
-            System.out.println("RequestId:"+requestId); // For debugging purpose.
         } catch (SQLException ex){
             ex.printStackTrace();
         }
