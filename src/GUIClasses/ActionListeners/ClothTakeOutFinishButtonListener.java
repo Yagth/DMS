@@ -17,6 +17,7 @@ public class ClothTakeOutFinishButtonListener implements ActionListener {
             Integer updateStatus = parentComponent.updateDataBase();
             parentComponent.displayUpdateStatus(updateStatus);
             parentComponent.dispose();
+            parentComponent.showParentComponent();
         }
         else{
             JOptionPane.showMessageDialog(parentComponent,

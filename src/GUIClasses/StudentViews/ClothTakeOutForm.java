@@ -11,6 +11,8 @@ import GUIClasses.Interfaces.TableViews;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -32,14 +34,16 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     private ClothTakeOutRequest clothList;
     private Vector<Vector<Object>> tableData;
     private Student student;
+    private StudentPage parentComponent;
     public final int WIDTH = 500;
     public final int HEIGHT = 300;
 
-    public ClothTakeOutForm(Student student){
+    public ClothTakeOutForm(Student student,StudentPage parentComponent){
         Integer lastRequestId = this.getLastClothRequestCount();
         clothList = new ClothTakeOutRequest(student.getsId(),lastRequestId);
         tableData = new Vector<>();
         this.student = student;
+        this.parentComponent = parentComponent;
         setUpGUi();
         setUpTable();
     }
@@ -54,6 +58,15 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         this.setVisible(true);
         this.addButton.addActionListener(new ClothTakeOutAddButtonListener(this));
         this.finishButton.addActionListener(new ClothTakeOutFinishButtonListener(this));
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                e.getWindow().dispose();
+                parentComponent.setVisible(true);
+            }
+        });
     }
 
     @Override
@@ -172,5 +185,11 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
             return (c.getClothName().equalsIgnoreCase(cloth.getClothName()));
         }
         return false;
+    }
+    public StudentPage getParentComponent(){
+        return parentComponent;
+    }
+    public void showParentComponent(){
+        parentComponent.setVisible(true);
     }
 }
