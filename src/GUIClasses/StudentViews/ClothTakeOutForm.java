@@ -35,6 +35,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     private Vector<Vector<Object>> tableData;
     private Student student;
     private StudentPage parentComponent;
+    private JavaConnection javaConnection;
     private int clothCount;
     public final int WIDTH = 500;
     public final int HEIGHT = 300;
@@ -43,6 +44,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         Integer lastRequestId = this.getLastClothRequestCount();
         clothList = new ClothTakeOutRequest(student.getsId(),lastRequestId);
         tableData = new Vector<>();
+        javaConnection = new JavaConnection(JavaConnection.URL);
         this.student = student;
         this.parentComponent = parentComponent;
         clothCount = 0;
@@ -124,8 +126,6 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     }
 
     public Integer updateDataBase() {
-        String url = JavaConnection.URL;
-        JavaConnection javaConnection = new JavaConnection(url);
         Integer updateStatus = 0;
         int tmp1=0,tmp2=0;
 
@@ -158,8 +158,6 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     }
     public Integer getLastClothRequestCount(){
         int lastRequestCount = 0;
-        String url = JavaConnection.URL;
-        JavaConnection javaConnection = new JavaConnection(url);
         String query = "SELECT TOP 1 * FROM ClothTakeOut ORDER BY reportCount DESC, clothName DESC;";
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
@@ -172,7 +170,6 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         }
     }
     public Integer getCurrentClothRequestId(){
-        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportCount) reportId FROM ClothTakeOut where reportCount="+clothList.getRequestCount();
         ResultSet tmp = javaConnection.selectQuery(query);
         int requestId = 0;

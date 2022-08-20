@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 
 public class MaintenanceRequestForm extends JFrame implements RequestViews {
@@ -79,10 +81,14 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
         request.setRoomNO(getBlockNumber());
         JavaConnection javaConnection = new JavaConnection(url);
         Integer updateStatus = 0;
+        int tmp1 = 0,tmp2 = 0;
         String query = "INSERT INTO report(reportId,reporterId,reportType,description,roomNumber,buildingNumber)" +
                 "VALUES(\'"+request.getRequesterId() + "\',\'" + request.getRequestType()+ "\',\'" +request.getDescription()+"\',\'"+
                 request.getRoomNO()+"\',\'"+ request.getBuildingNo()+"\');";
-        if (javaConnection.isConnected()) updateStatus = javaConnection.insertQuery(query);
+        if (javaConnection.isConnected()) tmp1 = javaConnection.insertQuery(query);
+        query = "INSERT INTO report(reportId,reporterId,reportType,description,roomNumber,buildingNumber)" +
+                "VALUES(\'"+request.getRequesterId() + "\',\'" + request.getRequestType()+ "\',\'" +request.getDescription()+"\',\'"+
+                request.getRoomNO()+"\',\'"+ request.getBuildingNo()+"\');";
         return updateStatus;
     }
 
@@ -97,5 +103,20 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
     @Override
     public void showParentComponent() {
         parentComponent.setVisible(true);
+    }
+
+    @Override
+    public Integer getCurrentClothRequestId() {
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportCount) reportId FROM ClothTakeOut where reportCount="+clothList.getRequestCount();
+        ResultSet tmp = javaConnection.selectQuery(query);
+        int requestId = 0;
+        try{
+            if(tmp.next())
+                requestId = tmp.getInt("ReportId");
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return requestId;
     }
 }
