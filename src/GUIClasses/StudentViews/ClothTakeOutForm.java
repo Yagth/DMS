@@ -35,6 +35,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     private Vector<Vector<Object>> tableData;
     private Student student;
     private StudentPage parentComponent;
+    private int clothCount;
     public final int WIDTH = 500;
     public final int HEIGHT = 300;
 
@@ -44,6 +45,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         tableData = new Vector<>();
         this.student = student;
         this.parentComponent = parentComponent;
+        clothCount = 0;
         setUpGUi();
         setUpTable();
     }
@@ -128,6 +130,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         int tmp1,tmp2;
 
         for (Cloth c : clothList.getClothsList()) {
+            clothCount++;
             String query = "INSERT INTO ClothTakeOut(reportCount,ClothName,Amount)" +
                             "VALUES(\'" +clothList.getRequestCount()+"\',\'" + c.getClothName()+ "\',\'" +
                     c.getClothAmount()+"\');";
@@ -166,14 +169,13 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     public Integer getCurrentClothRequestId(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         System.out.println("RequestCount:"+clothList.getRequestCount());//For debugging purposes.
-        String query = "SELECT ReportId FROM ClothTakeOut WHERE reportCount="+clothList.getRequestCount();
+        String query = "SELECT TOP 1 ReportId FROM ClothTakeOut WHERE reportCount="+clothList.getRequestCount()+"ORDER BY ReportId DESC;";
         ResultSet tmp = javaConnection.selectQuery(query);
         int requestId = 0;
         try{
-            if(tmp.next()){
+            if(tmp.isLast())
                 requestId = tmp.getInt("ReportId");
-                System.out.println("RequestId:"+tmp.getInt("ReportId")); // For debugging purpose.
-            }
+            System.out.println("RequestId:"+requestId); // For debugging purpose.
         } catch (SQLException ex){
             ex.printStackTrace();
         }
