@@ -10,6 +10,7 @@ public abstract class Person {
         this.fName = fName;
         this.lName = lName;
         this.gender = gender;
+        this.placeOfOrigin = "";
     }
 
     public String getfName() {

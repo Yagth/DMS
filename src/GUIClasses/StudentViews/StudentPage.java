@@ -139,8 +139,10 @@ public class StudentPage extends JFrame implements TableViews {
         Service.add(maintainanceRequest);
         Service.add(clothTakeOutRequest);
         Service.add(StayRequest);
-        if()
-        Service.add(RequestForDorm);
+
+        if(user.getPlaceOfOrigin().equalsIgnoreCase("Addis Ababa"))
+            Service.add(RequestForDorm);
+
         Service.add(SeeRequests);
 
         Services.add(Service);
