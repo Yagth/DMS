@@ -2,6 +2,8 @@ package GUIClasses.StudentViews;
 
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
+import BasicClasses.Requests.Request;
+import BasicClasses.Requests.RequestForNewDorm;
 import GUIClasses.ActionListeners.RequestForDormitorySubmitButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 
@@ -27,15 +29,22 @@ public class RequestForDormitory extends JFrame implements RequestViews {
     private JButton submitButton;
     private Student student;
     private StudentPage parentComponent;
+    private JavaConnection javaConnection;
+    private RequestForNewDorm request;
     private int reporterId = 4556; //This part is in only for debugging purpose.
     private static final int WIDTH = 600;
     private static final int HEIGHT = 250;
 
 
     public RequestForDormitory(Student student,StudentPage parentComponent){
+        javaConnection = new JavaConnection(JavaConnection.URL);
+        request = new RequestForNewDorm(student.getPlaceOfOrigin(),student.getsId());
         this.student = student;
         this.parentComponent = parentComponent;
         setUpGUi();
+    }
+    public void setRequestAddress(){
+        request.setRequesterAddress(student.getPlaceOfOrigin(),getSubcity(),getWoreda());
     }
     public String getSubcity(){
         return this.subcityTF.getText();

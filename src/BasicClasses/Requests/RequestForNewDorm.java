@@ -1,5 +1,7 @@
 package BasicClasses.Requests;
 
+import GUIClasses.StudentViews.RequestForDormitory;
+
 public class RequestForNewDorm extends Request {
     private Address requesterAddress;
 
@@ -7,9 +9,15 @@ public class RequestForNewDorm extends Request {
         super("RequestForNewDorm",requesterId);
         requesterAddress = new Address(city,subcity,woreda);
     }
+    public RequestForNewDorm(String city,String requesterId){
+        this(city,null,null,requesterId);
+    }
 
     public Address getRequesterAddress() {
         return requesterAddress;
+    }
+    public void setRequesterAddress(String city,String subcity,String woreda){
+        this.requesterAddress = new Address(city,subcity,woreda);
     }
 
     @Override
