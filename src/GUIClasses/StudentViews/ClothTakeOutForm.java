@@ -127,22 +127,27 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         String url = JavaConnection.URL;
         JavaConnection javaConnection = new JavaConnection(url);
         Integer updateStatus = 0;
-        int tmp1,tmp2;
+        int tmp1=0,tmp2=0;
 
         for (Cloth c : clothList.getClothsList()) {
-            clothCount++;
             String query = "INSERT INTO ClothTakeOut(reportCount,ClothName,Amount)" +
                             "VALUES(\'" +clothList.getRequestCount()+"\',\'" + c.getClothName()+ "\',\'" +
                     c.getClothAmount()+"\');";
-            String query2 = "INSERT INTO StudentTakesClothOut(ReporterId,ClothRequestId,reportedDate)" +
-                    "VALUES(\'" +clothList.getRequesterId()+"\',\'"+ getCurrentClothRequestId()+"\',\'"+ clothList.getRequestedDate()+ "\');";
             if (javaConnection.isConnected()){
                 tmp1 = javaConnection.insertQuery(query);
-                tmp2 = javaConnection.insertQuery(query2);
-                if(tmp1 == 1 & tmp2 == 1) updateStatus = 1;//If Both queries are executed. JavaConnection returns 1 if successful and 0 otherwise.
-                else updateStatus = 0;
             }
         }
+        for(Cloth c: clothList.getClothsList()){
+            String query = "INSERT INTO StudentTakesClothOut(ReporterId,ClothRequestId,reportedDate)" +
+                    "VALUES(\'" +clothList.getRequesterId()+"\',\'"+ getCurrentClothRequestId()+"\',\'"+ clothList.getRequestedDate()+ "\');";
+            if(javaConnection.isConnected()){
+                tmp2 = javaConnection.insertQuery(query);
+            }
+        }
+        if(tmp1==1 & tmp2==1){
+            updateStatus = 1;
+        }
+        else updateStatus = 0;
         return updateStatus;
     }
     public void displayUpdateStatus(Integer updateStatus){
@@ -169,11 +174,13 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     public Integer getCurrentClothRequestId(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         System.out.println("RequestCount:"+clothList.getRequestCount());//For debugging purposes.
-        String query = "SELECT TOP 1 ReportId FROM ClothTakeOut WHERE reportCount="+clothList.getRequestCount()+"ORDER BY ReportId DESC;";
+        String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportCount) reportId FROM ClothTakeOut where reportCount="+clothList.getRequestCount();
         ResultSet tmp = javaConnection.selectQuery(query);
         int requestId = 0;
         try{
-            if(tmp.isLast())
+            boolean hasNext = tmp.next();//For debugging purpose.
+            System.out.println("Has next: "+hasNext);
+            if(hasNext)
                 requestId = tmp.getInt("ReportId");
             System.out.println("RequestId:"+requestId); // For debugging purpose.
         } catch (SQLException ex){
