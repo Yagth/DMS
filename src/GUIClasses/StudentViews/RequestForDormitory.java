@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 
 public class RequestForDormitory extends JFrame implements RequestViews {
@@ -72,7 +74,6 @@ public class RequestForDormitory extends JFrame implements RequestViews {
         if(tmp1==1 & tmp2==1) updateStatus = 1; //If both queries are successful.
 
         return updateStatus;
-
     }
 
     @Override
@@ -90,7 +91,16 @@ public class RequestForDormitory extends JFrame implements RequestViews {
 
     @Override
     public Integer getCurrentClothRequestId() {
-        return null;
+        String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportType) reportId FROM Report where reportType=\'"+request.getRequestType()+"\';";
+        ResultSet tmp = javaConnection.selectQuery(query);
+        int requestId = 0;
+        try{
+            if(tmp.next())
+                requestId = tmp.getInt("ReportId");
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return requestId;
     }
 
     @Override
