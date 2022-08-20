@@ -20,6 +20,7 @@ public class RequestForDormitorySubmitButtonListener implements ActionListener {
         else{
             parentComponent.displayUpdateStatus(updateStatus);
             parentComponent.dispose();
+            parentComponent.showParentComponent();
         }
     }
 }
