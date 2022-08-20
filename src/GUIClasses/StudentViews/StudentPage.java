@@ -140,8 +140,15 @@ public class StudentPage extends JFrame implements TableViews {
         Service.add(clothTakeOutRequest);
         Service.add(StayRequest);
 
-        if(user.getPlaceOfOrigin().equalsIgnoreCase("Addis Ababa"))
-            Service.add(RequestForDorm);
+        System.out.println("Place: "+user.getPlaceOfOrigin());
+
+        try{
+            if(user.getPlaceOfOrigin().equalsIgnoreCase("Addis Ababa"))
+                Service.add(RequestForDorm);
+        } catch (NullPointerException ex){
+            ex.printStackTrace();
+        }
+
 
         Service.add(SeeRequests);
 
