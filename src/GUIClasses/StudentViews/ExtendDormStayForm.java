@@ -2,6 +2,7 @@ package GUIClasses.StudentViews;
 
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
+import BasicClasses.Requests.ExtendDormStayRequest;
 import GUIClasses.ActionListeners.ExtendDormSubmitButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 
@@ -9,8 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.Date;
-import java.util.Calendar;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ExtendDormStayForm extends JFrame implements RequestViews {
     private JPanel mainPanel;
@@ -21,6 +22,8 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
     private JScrollPane descriptionSP;
     private Student student;
     private StudentPage parentComponent;
+    private JavaConnection javaConnection;
+    private ExtendDormStayRequest request;
     private int roomNo = 49; //This part is only for debugging.
     private int buildingNo = 40; //This part is only for debugging.
     private int reporterId = 4565; //This part is only for debugging.
@@ -28,6 +31,8 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
     private static final int HEIGHT = 250;
 
     public ExtendDormStayForm(Student student, StudentPage parentComponent){
+        javaConnection = new JavaConnection(JavaConnection.URL);
+        request = new ExtendDormStayRequest(student.getsId());
         this.student = student;
         this.parentComponent = parentComponent;
         setUpGUi();
@@ -38,14 +43,17 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
     }
     @Override
     public Integer updateDataBase() {
-        String url = JavaConnection.URL;
-        Date date = new Date(Calendar.getInstance().getTimeInMillis());
-        String requestType = this.getTitle();
-        JavaConnection javaConnection = new JavaConnection(url);
+        request.setDescription(getDescription());
         Integer updateStatus = 0;
-        String query = "INSERT INTO request(reportedID,requestType,roomNO,blockNo,reportDate,description)" +
-                "VALUES(\'"+reporterId+"\',\'"+requestType+"\',\'"+roomNo+"\',\'"+buildingNo+"\',\'"+date+"\',\'"+this.getDescription()+"\')";
-        if (javaConnection.isConnected()) updateStatus = javaConnection.insertQuery(query);
+        int tmp1 = 0,tmp2 = 0;
+        String query = "INSERT INTO report(reporterId,reportType,description)" +
+                "VALUES(\'"+request.getRequesterId() + "\',\'" + request.getRequestType()+ "\',\'" +request.getDescription() +"\');";
+        if (javaConnection.isConnected()) tmp1 = javaConnection.insertQuery(query);//If query is successful the java connection returns 1.
+        query = "INSERT INTO StudentMakesReport(SID,reportId)" +
+                "VALUES(\'"+request.getRequesterId() + "\',\'" + getCurrentClothRequestId()+"\');";
+        if (javaConnection.isConnected()) tmp2 = javaConnection.insertQuery(query);//If query is successful the java connection returns 1.
+
+        if(tmp1==1 & tmp2==1) updateStatus = 1; //If both queries are successful.
         return updateStatus;
     }
     @Override
@@ -63,7 +71,16 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
 
     @Override
     public Integer getCurrentClothRequestId() {
-        return null;
+        String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportType) reportId FROM Report where reportType=\'"+request.getRequestType()+"\';";
+        ResultSet tmp = javaConnection.selectQuery(query);
+        int requestId = 0;
+        try{
+            if(tmp.next())
+                requestId = tmp.getInt("ReportId");
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return requestId;
     }
 
     @Override
