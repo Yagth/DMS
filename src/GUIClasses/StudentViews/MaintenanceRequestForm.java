@@ -79,12 +79,13 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
     public Integer updateDataBase() {
         request.setDescription(getDescription());
         request.setBuildingNo(getBlockNumber());
-        request.setRoomNO(getBlockNumber());
+        request.setRoomNO(getRoomNumber());
         Integer updateStatus = 0;
         int tmp1 = 0,tmp2 = 0;
-        String query = "INSERT INTO report(reportId,reporterId,reportType,description,roomNumber,buildingNumber)" +
+        String query = "INSERT INTO report(reporterId,reportType,description,roomNumber,buildingNumber)" +
                 "VALUES(\'"+request.getRequesterId() + "\',\'" + request.getRequestType()+ "\',\'" +request.getDescription()+"\',\'"+
                 request.getRoomNO()+"\',\'"+ request.getBuildingNo()+"\');";
+        System.out.println("Query: "+query);// For debugging purpose.
         if (javaConnection.isConnected()) tmp1 = javaConnection.insertQuery(query);//If query is successful the java connection returns 1.
         query = "INSERT INTO StudentMakesReport(SID,reportId)" +
                 "VALUES(\'"+request.getRequesterId() + "\',\'" + getCurrentClothRequestId()+"\');";
