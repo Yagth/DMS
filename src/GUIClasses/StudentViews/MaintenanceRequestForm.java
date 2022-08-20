@@ -85,7 +85,6 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
         String query = "INSERT INTO report(reporterId,reportType,description,roomNumber,buildingNumber)" +
                 "VALUES(\'"+request.getRequesterId() + "\',\'" + request.getRequestType()+ "\',\'" +request.getDescription()+"\',\'"+
                 request.getRoomNO()+"\',\'"+ request.getBuildingNo()+"\');";
-        System.out.println("Query: "+query);// For debugging purpose.
         if (javaConnection.isConnected()) tmp1 = javaConnection.insertQuery(query);//If query is successful the java connection returns 1.
         query = "INSERT INTO StudentMakesReport(SID,reportId)" +
                 "VALUES(\'"+request.getRequesterId() + "\',\'" + getCurrentClothRequestId()+"\');";
@@ -110,7 +109,8 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
 
     @Override
     public Integer getCurrentClothRequestId() {
-        String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportType) reportId FROM Report where reportType="+request.getRequestType();
+        String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportType) reportId FROM Report where reportType=\'"+request.getRequestType()+"\');";
+        System.out.println("Query: "+query);// For debugging purpose.
         ResultSet tmp = javaConnection.selectQuery(query);
         int requestId = 0;
         try{
