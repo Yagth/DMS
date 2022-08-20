@@ -118,16 +118,18 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         Integer updateStatus = 0;
         int tmp1,tmp2;
 
+        clothList.setRequestedDate(date);
+
         for (Cloth c : clothList.getClothsList()) {
-            String query = "INSERT INTO ClothTakeOut(ReportId,ReporterID,ClothName,Amount)" +
-                            "VALUES(\'" +clothList.getRequestId()+"\',\'"+ clothList.getRequesterId() + "\',\'" + c.getClothName()+ "\',\'" +
+            String query = "INSERT INTO ClothTakeOut(ReportId,ClothName,Amount)" +
+                            "VALUES(\'" +clothList.getRequestId()+"\',\'" + c.getClothName()+ "\',\'" +
                     c.getClothAmount()+"\');";
             String query2 = "INSERT INTO StudentTakesClothOut(ReporterId,clothRequestId,reportedDate)" +
-                    "VALUES(\'" +student.getsId()+"\',\'"+ clothList.getRequestId() + "\',\'" + date+ "\');";
+                    "VALUES(\'" +clothList.getRequesterId()+"\',\'"+ clothList.getRequestId() + "\',\'" + clothList.getRequestedDate()+ "\');";
             if (javaConnection.isConnected()){
                 tmp1 = javaConnection.insertQuery(query);
                 tmp2 = javaConnection.insertQuery(query2);
-                if(tmp1 == 1 & tmp2 == 1) updateStatus = 1;//Both queries are executed. JavaConnection returns 1 if successful and 0 otherwise.
+                if(tmp1 == 1 & tmp2 == 1) updateStatus = 1;//If Both queries are executed. JavaConnection returns 1 if successful and 0 otherwise.
                 else updateStatus = 0;
             }
         }
