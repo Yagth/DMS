@@ -1,10 +1,13 @@
 package GUIClasses.StudentViews;
 
 import BasicClasses.Others.JavaConnection;
+import BasicClasses.Persons.Student;
 import GUIClasses.ActionListeners.RequestForDormitorySubmitButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -22,12 +25,16 @@ public class RequestForDormitory extends JFrame implements RequestViews {
     private JPanel mainPanel;
     private JPanel titlePanel;
     private JButton submitButton;
+    private Student student;
+    private StudentPage parentComponent;
     private int reporterId = 4556; //This part is in only for debugging purpose.
     private static final int WIDTH = 600;
     private static final int HEIGHT = 250;
 
 
-    public RequestForDormitory(){
+    public RequestForDormitory(Student student,StudentPage parentComponent){
+        this.student = student;
+        this.parentComponent = parentComponent;
         setUpGUi();
     }
     public String getSubcity(){
@@ -64,6 +71,11 @@ public class RequestForDormitory extends JFrame implements RequestViews {
     }
 
     @Override
+    public void showParentComponent() {
+        parentComponent.setVisible(true);
+    }
+
+    @Override
     public void setUpGUi() {
         this.setContentPane(mainPanel);
         this.setTitle("RequestForDormitory");
@@ -72,5 +84,14 @@ public class RequestForDormitory extends JFrame implements RequestViews {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setVisible(true);
         submitButton.addActionListener(new RequestForDormitorySubmitButtonListener(this));
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                e.getWindow().dispose();
+                parentComponent.setVisible(true);
+            }
+        }); //A custom action listener for the exit button.
     }
 }

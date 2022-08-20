@@ -13,6 +13,7 @@ public class StudentRequestForDormMenuItemListener extends StudentPageMenutItemL
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new RequestForDormitory();
+        new RequestForDormitory(parentComponent.getUser(),parentComponent);
+        hideParentComponent();
     }
 }

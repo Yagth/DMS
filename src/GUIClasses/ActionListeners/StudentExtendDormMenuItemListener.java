@@ -12,9 +12,7 @@ public class StudentExtendDormMenuItemListener extends StudentPageMenutItemListe
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        ExtendDormStayForm tmp = new ExtendDormStayForm();
-        if(tmp.isDisplayable()){
-            hideParentComponent();
-        }
+        new ExtendDormStayForm(parentComponent.getUser(),parentComponent);
+        hideParentComponent();
     }
 }

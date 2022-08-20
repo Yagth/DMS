@@ -20,6 +20,7 @@ public class ExtendDormSubmitButtonListener implements ActionListener {
             Integer updateStatus = parentComponent.updateDataBase();
             parentComponent.displayUpdateStatus(updateStatus);
             parentComponent.dispose();
+            parentComponent.showParentComponent();
         }
     }
 }

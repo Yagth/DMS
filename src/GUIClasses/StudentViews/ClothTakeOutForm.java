@@ -53,7 +53,6 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         this.setContentPane(mainPanel);
         this.setSize(WIDTH,HEIGHT);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
         this.addButton.addActionListener(new ClothTakeOutAddButtonListener(this));
@@ -66,7 +65,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
                 e.getWindow().dispose();
                 parentComponent.setVisible(true);
             }
-        });
+        }); //A custom action listener for the exit button.
     }
 
     @Override

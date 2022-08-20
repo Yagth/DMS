@@ -12,6 +12,7 @@ public class StudentMaintenanceMenuItemListener extends StudentPageMenutItemList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new MaintenanceRequestForm();
+        new MaintenanceRequestForm(parentComponent.getUser(),parentComponent);
+        hideParentComponent();
     }
 }
