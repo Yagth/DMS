@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners;
+package GUIClasses.ActionListeners.StudentPage;
 
 import GUIClasses.StudentViews.ClothTakeOutForm;
 import GUIClasses.StudentViews.StudentPage;
@@ -6,8 +6,8 @@ import GUIClasses.StudentViews.StudentPage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StudentClothTakeOutMenuItemListener extends StudentPageMenutItemListener implements ActionListener {
-    public StudentClothTakeOutMenuItemListener(StudentPage parentComponent){
+public class ClothTakeOutMenuItemListener extends MenutItemListener implements ActionListener {
+    public ClothTakeOutMenuItemListener(StudentPage parentComponent){
         super(parentComponent);
     }
 

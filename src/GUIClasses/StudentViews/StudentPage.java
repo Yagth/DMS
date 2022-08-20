@@ -10,7 +10,7 @@ import java.util.Vector;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
-import GUIClasses.ActionListeners.*;
+import GUIClasses.ActionListeners.StudentPage.*;
 import GUIClasses.Interfaces.TableViews;
 
 public class StudentPage extends JFrame implements TableViews {
@@ -123,16 +123,16 @@ public class StudentPage extends JFrame implements TableViews {
 
         JMenuItem maintainanceRequest = new JMenuItem("Maintainance request");
         maintainanceRequest.setForeground(new Color(72,131,184));
-        maintainanceRequest.addActionListener(new StudentMaintenanceMenuItemListener(this));
+        maintainanceRequest.addActionListener(new MaintenanceMenuItemListener(this));
         JMenuItem clothTakeOutRequest = new JMenuItem("Cloth take out request");
         clothTakeOutRequest.setForeground(new Color(72,131,184));
-        clothTakeOutRequest.addActionListener(new StudentClothTakeOutMenuItemListener(this));
+        clothTakeOutRequest.addActionListener(new ClothTakeOutMenuItemListener(this));
         JMenuItem StayRequest = new JMenuItem("Extend Dormitory stay request");
         StayRequest.setForeground(new Color(72,131,184));
-        StayRequest.addActionListener(new StudentExtendDormMenuItemListener(this));
+        StayRequest.addActionListener(new ExtendDormMenuItemListener(this));
         JMenuItem RequestForDorm = new JMenuItem("Request for a dorm");
         RequestForDorm.setForeground(new Color(72,131,184));
-        RequestForDorm.addActionListener(new StudentRequestForDormMenuItemListener(this));
+        RequestForDorm.addActionListener(new RequestForDormMenuItemListener(this));
         JMenuItem SeeRequests = new JMenuItem("See your requests");
         SeeRequests.setForeground(new Color(72,131,184));
 
@@ -148,7 +148,7 @@ public class StudentPage extends JFrame implements TableViews {
         logout.setForeground(Color.white);
         JMenuItem signOut = new JMenuItem("Logout");
         signOut.setForeground(new Color(72,131,184));
-        signOut.addActionListener(new StudentPageLogoutMenuItemListener(this));
+        signOut.addActionListener(new LogoutMenuItemListener(this));
 
         logout.add(signOut);
         Services.add(logout);

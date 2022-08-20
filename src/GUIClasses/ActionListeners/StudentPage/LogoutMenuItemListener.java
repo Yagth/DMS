@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners;
+package GUIClasses.ActionListeners.StudentPage;
 
 import GUIClasses.LoginPage;
 import GUIClasses.StudentViews.StudentPage;
@@ -7,10 +7,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StudentPageLogoutMenuItemListener implements ActionListener {
+public class LogoutMenuItemListener implements ActionListener {
     private StudentPage parentComponent;
 
-    public StudentPageLogoutMenuItemListener(StudentPage parentComponent){
+    public LogoutMenuItemListener(StudentPage parentComponent){
         this.parentComponent = parentComponent;
     }
     @Override

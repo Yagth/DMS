@@ -4,8 +4,8 @@ import BasicClasses.Others.Cloth;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
 import BasicClasses.Requests.ClothTakeOutRequest;
-import GUIClasses.ActionListeners.ClothTakeOutAddButtonListener;
-import GUIClasses.ActionListeners.ClothTakeOutFinishButtonListener;
+import GUIClasses.ActionListeners.ClothTakeOut.AddButtonListener;
+import GUIClasses.ActionListeners.ClothTakeOut.FinishButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 import GUIClasses.Interfaces.TableViews;
 
@@ -55,8 +55,8 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
-        this.addButton.addActionListener(new ClothTakeOutAddButtonListener(this));
-        this.finishButton.addActionListener(new ClothTakeOutFinishButtonListener(this));
+        this.addButton.addActionListener(new AddButtonListener(this));
+        this.finishButton.addActionListener(new FinishButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {
             @Override

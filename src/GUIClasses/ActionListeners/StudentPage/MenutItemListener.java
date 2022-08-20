@@ -1,10 +1,10 @@
-package GUIClasses.ActionListeners;
+package GUIClasses.ActionListeners.StudentPage;
 
 import GUIClasses.StudentViews.StudentPage;
 
-public abstract class StudentPageMenutItemListener {
+public abstract class MenutItemListener {
     protected StudentPage parentComponent;
-    StudentPageMenutItemListener(StudentPage parentComponent){
+    MenutItemListener(StudentPage parentComponent){
         this.parentComponent = parentComponent;
     }
     public void hideParentComponent(){

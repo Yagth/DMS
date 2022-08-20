@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners;
+package GUIClasses.ActionListeners.StudentPage;
 
 import GUIClasses.StudentViews.RequestForDormitory;
 import GUIClasses.StudentViews.StudentPage;
@@ -6,8 +6,8 @@ import GUIClasses.StudentViews.StudentPage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StudentRequestForDormMenuItemListener extends StudentPageMenutItemListener implements ActionListener {
-    public StudentRequestForDormMenuItemListener(StudentPage parentComponent){
+public class RequestForDormMenuItemListener extends MenutItemListener implements ActionListener {
+    public RequestForDormMenuItemListener(StudentPage parentComponent){
         super(parentComponent);
     }
 

@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners;
+package GUIClasses.ActionListeners.ClothTakeOut;
 
 import BasicClasses.Others.Cloth;
 import GUIClasses.StudentViews.ClothTakeOutForm;
@@ -7,9 +7,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ClothTakeOutAddButtonListener implements ActionListener {
+public class AddButtonListener implements ActionListener {
     private ClothTakeOutForm parentComponent;
-    public ClothTakeOutAddButtonListener(ClothTakeOutForm parentComponent){
+    public AddButtonListener(ClothTakeOutForm parentComponent){
         this.parentComponent = parentComponent;
     }
     @Override
