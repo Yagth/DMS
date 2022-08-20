@@ -112,20 +112,16 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
 
     public Integer updateDataBase() {
         String url = JavaConnection.URL;
-        Date date = new Date(Calendar.getInstance().getTimeInMillis());
-        String reportType = this.getTitle();
         JavaConnection javaConnection = new JavaConnection(url);
         Integer updateStatus = 0;
         int tmp1,tmp2;
 
-        clothList.setRequestedDate(date);
-
         for (Cloth c : clothList.getClothsList()) {
-            String query = "INSERT INTO ClothTakeOut(ReportId,ClothName,Amount)" +
+            String query = "INSERT INTO ClothTakeOut(reportCount,ClothName,Amount)" +
                             "VALUES(\'" +clothList.getRequestId()+"\',\'" + c.getClothName()+ "\',\'" +
                     c.getClothAmount()+"\');";
-            String query2 = "INSERT INTO StudentTakesClothOut(ReporterId,clothRequestId,reportedDate)" +
-                    "VALUES(\'" +clothList.getRequesterId()+"\',\'"+ clothList.getRequestId() + "\',\'" + clothList.getRequestedDate()+ "\');";
+            String query2 = "INSERT INTO StudentTakesClothOut(ReporterId,reportedDate)" +
+                    "VALUES(\'" +clothList.getRequesterId()+"\',\'"+ clothList.getRequestedDate()+ "\');";
             if (javaConnection.isConnected()){
                 tmp1 = javaConnection.insertQuery(query);
                 tmp2 = javaConnection.insertQuery(query2);
