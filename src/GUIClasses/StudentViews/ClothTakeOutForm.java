@@ -41,10 +41,10 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     public final int HEIGHT = 300;
 
     public ClothTakeOutForm(Student student,StudentPage parentComponent){
+        javaConnection = new JavaConnection(JavaConnection.URL);
         Integer lastRequestId = this.getLastClothRequestCount();
         clothList = new ClothTakeOutRequest(student.getsId(),lastRequestId);
         tableData = new Vector<>();
-        javaConnection = new JavaConnection(JavaConnection.URL);
         this.student = student;
         this.parentComponent = parentComponent;
         clothCount = 0;

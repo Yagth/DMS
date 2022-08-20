@@ -76,6 +76,11 @@ public class RequestForDormitory extends JFrame implements RequestViews {
     }
 
     @Override
+    public Integer getCurrentClothRequestId() {
+        return null;
+    }
+
+    @Override
     public void setUpGUi() {
         this.setContentPane(mainPanel);
         this.setTitle("RequestForDormitory");

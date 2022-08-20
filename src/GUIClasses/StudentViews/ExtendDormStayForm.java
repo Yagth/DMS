@@ -62,6 +62,11 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
     }
 
     @Override
+    public Integer getCurrentClothRequestId() {
+        return null;
+    }
+
+    @Override
     public void setUpGUi() {
         this.setTitle("Extend Dorm Stay Request");
         this.setContentPane(mainPanel);
