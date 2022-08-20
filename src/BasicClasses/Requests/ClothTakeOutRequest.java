@@ -11,9 +11,9 @@ public class ClothTakeOutRequest extends Request {
     private int requestId;
     public ClothTakeOutRequest(String requesterId,Integer requestCount){
         super("ClothTakeOutForm",requesterId);
+        requestCount++;
         setRequestCount(requestCount);
         cloths = new Vector<>();
-        requestCount++;
         this.requestId = requestCount;
     }
     public ClothTakeOutRequest(Cloth cloth, String requesterId,Integer requestCount){
