@@ -143,11 +143,11 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         int lastRequestId = 0;
         String url = JavaConnection.URL;
         JavaConnection javaConnection = new JavaConnection(url);
-        String query = "SELECT TOP 1 * FROM clothRequest ORDER BY requestId DESC, clothName DESC;";
+        String query = "SELECT TOP 1 * FROM ClothTakeOut ORDER BY reportId DESC, clothName DESC;";
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
             resultSet.next();
-            String tmp = resultSet.getString("requestId");
+            String tmp = resultSet.getString("reportId");
             lastRequestId = Integer.parseInt(tmp);
             return lastRequestId;
         }catch(SQLException ex){
