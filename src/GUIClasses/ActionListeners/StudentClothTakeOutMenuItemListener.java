@@ -1,6 +1,5 @@
 package GUIClasses.ActionListeners;
 
-import BasicClasses.Persons.Student;
 import GUIClasses.StudentViews.ClothTakeOutForm;
 import GUIClasses.StudentViews.StudentPage;
 
@@ -14,6 +13,8 @@ public class StudentClothTakeOutMenuItemListener extends StudentPageMenutItemLis
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new ClothTakeOutForm();
+        ClothTakeOutForm tmp =  new ClothTakeOutForm();
+        if(tmp.isDisplayable()) hideParentComponent();
+        else showParentComponent();
     }
 }

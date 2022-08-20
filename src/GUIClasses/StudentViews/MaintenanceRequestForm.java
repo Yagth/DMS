@@ -37,7 +37,7 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
         this.setContentPane(mainPanel);
         this.setSize(WIDTH, HEIGHT);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
         submitButton.addActionListener(new MaintenanceSubmitButtonListener(this));

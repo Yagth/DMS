@@ -55,7 +55,7 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
         this.setContentPane(mainPanel);
         this.setSize(new Dimension(WIDTH,HEIGHT));
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setVisible(true);
         submitButton.addActionListener(new ExtendDormSubmitButtonListener(this));
     }

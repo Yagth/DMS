@@ -48,7 +48,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         this.setContentPane(mainPanel);
         this.setSize(WIDTH,HEIGHT);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
         this.addButton.addActionListener(new ClothTakeOutAddButtonListener(this));
