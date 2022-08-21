@@ -54,6 +54,15 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
     public void showParentComponent(){
         this.getParentComponent().setVisible(true);
     }
+
+    public JTable getReportListTable() {
+        return reportListTable;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
     public void displayUserInfo(){
         studentName.setText(student.getFullName());
         studentID.setText(student.getsId());

@@ -11,6 +11,7 @@ public abstract class Request {
     private String requestType;
     private Date requestedDate;
     private Date handledDate;
+    private String location;
 
     public Request(String requestType,String requesterId){
         this.requestType = requestType;
@@ -75,5 +76,13 @@ public abstract class Request {
     public static Date getCurrentDate(){
         Date date = new Date(Calendar.getInstance().getTimeInMillis());
         return date;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

@@ -7,6 +7,9 @@ import java.util.Vector;
 public class ClothTakeOutRequest extends Request {
     private Vector<Cloth> cloths;
     private static int requestCount;
+    public ClothTakeOutRequest(String requesterId) {
+        super("ClothTakeOutForm", requesterId);
+    }
     public ClothTakeOutRequest(String requesterId,Integer requestCount){
         super("ClothTakeOutForm",requesterId);
         requestCount++;

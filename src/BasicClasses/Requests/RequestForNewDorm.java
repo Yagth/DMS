@@ -12,6 +12,9 @@ public class RequestForNewDorm extends Request {
     public RequestForNewDorm(String city,String requesterId){
         this(city,null,null,requesterId);
     }
+    public RequestForNewDorm(String requesterId){
+        super("RequestForNewDorm",requesterId);
+    }
 
     public Address getRequesterAddress() {
         return requesterAddress;
