@@ -80,6 +80,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         title.add("Cloth Name");
         title.add("Amount");
         clothTable.setModel(new DefaultTableModel(tableData,title));
+        clothTable.setDefaultEditor(Object.class,null);  //This part is here for disabling the editing of the table.
         clothTable.getColumn("No").setMaxWidth(50);
     }
 

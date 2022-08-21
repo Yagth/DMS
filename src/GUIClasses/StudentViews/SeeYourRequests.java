@@ -75,6 +75,7 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         title.add("Report Description");
 
         reportListTable.setModel(new DefaultTableModel(tableData,title));
+        reportListTable.setDefaultEditor(Object.class,null); //This part is here for disabling the editing of the table.
     }
 
     public void loadRequests(){
