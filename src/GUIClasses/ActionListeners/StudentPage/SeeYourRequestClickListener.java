@@ -56,7 +56,10 @@ public class SeeYourRequestClickListener implements MouseListener {
         int row = tmp.getSelectedRow();
         int selectedId = (Integer) tableModel.getValueAt(row,0);
         String selectedType = (String) tableModel.getValueAt(row,1);
-        if(selectedType.equals("ClothTakeOutForm"))
+
+        boolean isClothTakeOutRequest = selectedType.equals("ClothTakeOutForm");
+
+        if(isClothTakeOutRequest)
             query = "SELECT * FROM ClothStudent WHERE ReportId="+selectedId;
         else query = "SELECT * FROM AllReports WHERE ReportId="+selectedId;
 
@@ -65,7 +68,11 @@ public class SeeYourRequestClickListener implements MouseListener {
             while(resultSet.next()){
                 request = createSpecificRequest(resultSet.getString("ReportType"));
                 request.setRequestId(selectedId);
-                request.setDescription(resultSet.getString("Description"));
+                if(isClothTakeOutRequest)
+                    request.setDescription(resultSet.getString("Description")+resultSet.getInt("Amount"));
+                else
+                    request.setDescription(resultSet.getString("Description"));
+
                 request.setRequestedDate(resultSet.getDate("reportedDate"));
                 String location = resultSet.getString("BuildingNumber")+"-"+resultSet.getString("RoomNumber");
                 request.setLocation(location);
