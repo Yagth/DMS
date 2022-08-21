@@ -70,7 +70,7 @@ public class ReportDetailView extends JFrame implements Views {
             handledDate.setVisible(false);
         }
 
-        boolean hasNoLocation = request==null;
+        boolean hasNoLocation = request.getLocation()==null;
 
         if(hasNoLocation){
             locationL.setVisible(false);
@@ -83,7 +83,7 @@ public class ReportDetailView extends JFrame implements Views {
     }
 
     public boolean checkReportStatus(){
-        return !(request==null);
+        return !(request.getHandledDate()==null);
     }
     public SeeYourRequests getParentComponent(){
         return parentComponent;
