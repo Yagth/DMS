@@ -4,6 +4,7 @@ import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
 import GUIClasses.StudentViews.ReportDetailView;
 import GUIClasses.StudentViews.SeeYourRequests;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 public class SeeYourRequestClickListener implements MouseListener {
     SeeYourRequests parentComponent;
     JavaConnection javaConnection;
+    Request request = null;
     public SeeYourRequestClickListener(SeeYourRequests parentComponent){
         this.parentComponent = parentComponent;
         javaConnection =  new JavaConnection(JavaConnection.URL);
@@ -67,14 +69,21 @@ public class SeeYourRequestClickListener implements MouseListener {
                 request.setRequestId(selectedId);
                 request.setDescription(resultSet.getString("Description"));
                 request.setRequestedDate(resultSet.getDate("reportedDate"));
-                String location = resultSet.getString("BuildingNumber")+resultSet.getString("RoomNumber");
-                request.setLocation(location);
                 Date tmpDate = loadHandledDate(selectedId);
                 request.setHandledDate(tmpDate);
+                String location = resultSet.getString("BuildingNumber")+resultSet.getString("RoomNumber");
+                request.setLocation(location);
                 new ReportDetailView(request,parentComponent.getStudent().getsId());
                 parentComponent.setVisible(false);
             }
-        }catch (SQLException ex){
+        }
+        catch (SQLServerException ex){//Some tables don't have building and room number column which could through exception.
+            request.setLocation(null);
+            new ReportDetailView(request,parentComponent.getStudent().getsId());
+            parentComponent.setVisible(false);
+            ex.printStackTrace();//For debugging purpose only.
+        }
+        catch (SQLException ex){
             ex.printStackTrace(); // For debugging only.
             JOptionPane.showMessageDialog(parentComponent,"Sorry. Couldn't show details due to unknown error try again later.");
         }
