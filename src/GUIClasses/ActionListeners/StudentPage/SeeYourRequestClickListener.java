@@ -15,8 +15,10 @@ import java.sql.SQLException;
 
 public class SeeYourRequestClickListener implements MouseListener {
     SeeYourRequests parentComponent;
+    String reporterId;
     public SeeYourRequestClickListener(SeeYourRequests parentComponent){
         this.parentComponent = parentComponent;
+        reporterId = parentComponent.getStudent().getsId();
     }
     public Date loadHandledDate(int reportId){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
@@ -33,7 +35,6 @@ public class SeeYourRequestClickListener implements MouseListener {
     }
 
     public Request createSpecificRequest(String requestType){
-        String reporterId = parentComponent.getStudent().getsId();
         switch (requestType){
             case "Maintenance":
                 return new MaintenanceRequest(reporterId);
@@ -60,7 +61,7 @@ public class SeeYourRequestClickListener implements MouseListener {
         boolean isClothTakeOutRequest = selectedType.equals("ClothTakeOutForm");
 
         if(isClothTakeOutRequest)
-            query = "SELECT * FROM ClothStudent WHERE ReportId="+selectedId;
+            query = "SELECT * FROM ClothStudent WHERE ReporterId="+selectedId;
         else query = "SELECT * FROM AllReports WHERE ReportId="+selectedId;
 
         ResultSet resultSet = javaConnection.selectQuery(query);
@@ -79,7 +80,7 @@ public class SeeYourRequestClickListener implements MouseListener {
                 request.setLocation(location);
                 Date tmpDate = loadHandledDate(selectedId);
                 request.setHandledDate(tmpDate);
-                new ReportDetailView(parentComponent,request,parentComponent.getStudent().getsId());
+                new ReportDetailView(parentComponent,request,reporterId);
                 parentComponent.setVisible(false);
             }
         }
