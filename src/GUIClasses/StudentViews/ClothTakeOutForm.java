@@ -131,13 +131,13 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
 
         for (Cloth c : clothList.getClothsList()) { //Loop to update the ClothTakeOut table.
             String query = "INSERT INTO ClothTakeOut(reportCount,reportType,ClothName,Amount)" +
-                            "VALUES(\'" +clothList.getRequestCount()+"\',\'" +clothList.getRequestType()+"','"+ c.getClothName()+ "\',\'" +
-                    c.getClothAmount()+"\');";
+                            "VALUES('" +clothList.getRequestCount()+"','" +clothList.getRequestType()+"','"+ c.getClothName()+ "','" +
+                    c.getClothAmount()+"');";
             if (javaConnection.isConnected()) tmp1 = javaConnection.insertQuery(query);//If query is successful the java connection returns 1.
         }
         for(Cloth c: clothList.getClothsList()){//Loop to update the StudentTakesClothOut table.
             String query = "INSERT INTO StudentTakesClothOut(ReporterId,ClothRequestId,reportedDate)" +
-                    "VALUES(\'" +clothList.getRequesterId()+"','"+ getCurrentClothRequestId()+"','"+ clothList.getRequestedDate()+ "');";
+                    "VALUES('" +clothList.getRequesterId()+"','"+ getCurrentClothRequestId()+"','"+ clothList.getRequestedDate()+ "');";
             if(javaConnection.isConnected()) tmp2 = javaConnection.insertQuery(query);//If query is successful the java connection returns 1.
         }
         if(tmp1==1 & tmp2==1){//If both queries are successful.
