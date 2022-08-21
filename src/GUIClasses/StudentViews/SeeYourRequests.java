@@ -4,6 +4,7 @@ import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
 import GUIClasses.ActionListeners.SeeYourRequestBackButtonListener;
+import GUIClasses.ActionListeners.StudentPage.SeeYourRequestClickListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -85,6 +86,7 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
 
         reportListTable.setModel(new DefaultTableModel(tableData,title));
         reportListTable.setDefaultEditor(Object.class,null); //This part is here for disabling the editing of the table.
+        reportListTable.addMouseListener(new SeeYourRequestClickListener(this));
     }
 
     public void loadRequests(){
