@@ -33,7 +33,8 @@ public class ReportDetailView extends JFrame implements Views {
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
     private SeeYourRequests parentComponent;
-    public ReportDetailView(Request request,String reporterId){
+    public ReportDetailView(SeeYourRequests parentComponent,Request request,String reporterId){
+        this.parentComponent = parentComponent;
         this.request = getSpecificReport(request);
         this.reporterId = reporterId;
         setUpGUi();

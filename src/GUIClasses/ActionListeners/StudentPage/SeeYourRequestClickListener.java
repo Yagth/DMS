@@ -29,7 +29,7 @@ public class SeeYourRequestClickListener implements MouseListener {
         try{
             if(tmp.next())
                 return tmp.getDate("handledDate");
-            return null;
+            else return null;
         }catch (SQLException ex){
             ex.printStackTrace(); // For debugging only.
             return null;
@@ -60,9 +60,11 @@ public class SeeYourRequestClickListener implements MouseListener {
         int row = tmp.getSelectedRow();
         int selectedId = (Integer) tableModel.getValueAt(row,0);
         String selectedType = (String) tableModel.getValueAt(row,1);
+        System.out.println("Selected Type: "+selectedType); //For debugging purposes only.
         if(selectedType.equals("ClothTakeOutForm"))
-            query = "SELECT * FROM AllReports WHERE ReportId="+selectedId;
-        else query = "SELECT * FROM ClothTakeOutStudent WHERE ReportId="+selectedId;
+            query = "SELECT * FROM ClothTakeOutStudent WHERE ReportId="+selectedId;
+        else query = "SELECT * FROM AllReports WHERE ReportId="+selectedId;
+
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
             System.out.println("Query: "+query);//For debugging only.
@@ -76,12 +78,12 @@ public class SeeYourRequestClickListener implements MouseListener {
                 request.setHandledDate(tmpDate);
                 String location = resultSet.getString("BuildingNumber")+resultSet.getString("RoomNumber");
                 request.setLocation(location);
-                new ReportDetailView(request,parentComponent.getStudent().getsId());
+                new ReportDetailView(parentComponent,request,parentComponent.getStudent().getsId());
                 parentComponent.setVisible(false);
             }
         }
         catch (SQLServerException ex){//Some tables don't have building and room number column which could through exception.
-            new ReportDetailView(request,parentComponent.getStudent().getsId());
+            new ReportDetailView(parentComponent,request,parentComponent.getStudent().getsId());
             parentComponent.setVisible(false);
             ex.printStackTrace();//For debugging purpose only.
         }
