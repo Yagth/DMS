@@ -3,7 +3,7 @@ package GUIClasses.StudentViews;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
-import GUIClasses.Interfaces.RequestViews;
+import GUIClasses.ActionListeners.SeeYourRequestBackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -28,6 +28,7 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
     private JTable reportListTable;
     private JScrollPane reportListSP;
     private JLabel titleL;
+    private JButton backButton;
     private JavaConnection javaConnection;
     private Student student;
     private StudentPage parentComponent;
@@ -42,6 +43,10 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         setUpGUi();
         setUpTable();
     }
+    public StudentPage getParentComponent(){return parentComponent;}
+    public void showParentComponent(){
+        this.getParentComponent().setVisible(true);
+    }
     @Override
     public void setUpTable() {
         tableData = new Vector<>();
@@ -52,9 +57,6 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         title.add("Report Description");
 
         reportListTable.setModel(new DefaultTableModel(tableData,title));
-        reportListTable.getColumn("Report Id").setMaxWidth(20);
-        reportListTable.getColumn("Report Type").setMaxWidth(60);
-        reportListTable.getColumn("Report Date").setMaxWidth(60);
     }
 
     @Override
@@ -69,10 +71,12 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
 
     @Override
     public void setUpGUi() {
+        this.setTitle("Your Requests");
         this.setContentPane(mainPanel);
         this.setSize(WIDTH,HEIGHT);
         this.setVisible(true);
         this.setLocationRelativeTo(parentComponent);
+        backButton.addActionListener(new SeeYourRequestBackButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {
             @Override
