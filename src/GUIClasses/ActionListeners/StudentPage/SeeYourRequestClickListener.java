@@ -69,8 +69,8 @@ public class SeeYourRequestClickListener implements MouseListener {
                 request = createSpecificRequest(resultSet.getString("ReportType"));
                 request.setRequestId(selectedId);
                 if(isClothTakeOutRequest)
-                    request.setDescription("You took out "+resultSet.getInt("Amount")+
-                            " "+resultSet.getString("Description"));
+                    request.setDescription("You requested to take out "+resultSet.getInt("Amount")+
+                            " "+resultSet.getString("Description")+" on "+resultSet.getDate("reportedDate"));
                 else
                     request.setDescription(resultSet.getString("Description"));
 
