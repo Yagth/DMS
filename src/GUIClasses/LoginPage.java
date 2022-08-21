@@ -78,14 +78,18 @@ public class LoginPage extends JFrame implements Views {
         checkAndSetUserStatus();
         try{
             if (userStatus.equals(UserStatus.STUDENT)){
-                query = "SELECT * FROM Student WHERE SID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
+                query = "SELECT * FROM Student WHERE SID=\'"+getUsername()+"'";
                 temp = javaConnection.selectQuery(query);
             }
             else if(userStatus.equals(UserStatus.PROCTOR)){     //If the result set is null, the user might be Proctor.
-                query = "SELECT * FROM Proctor WHERE EID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
+                query = "SELECT * FROM Proctor WHERE EID=\'"+getUsername()+"'";
                 temp = javaConnection.selectQuery(query);
             }
-            if(temp.next()) isUser = true; //This checks whether there is a user that matches the credentials.
+            if(temp.next()){
+                String password = temp.getString("Password");
+                if(getPassword().equals(password))
+                    isUser = true; //This checks whether there is a user that matches the credentials.
+            }
         }
         catch (NullPointerException ex){
             userStatus = null;
