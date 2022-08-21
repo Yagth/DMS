@@ -54,6 +54,12 @@ public class DormitoryView extends JFrame implements Views {
 
         ImageIcon searchButtonIcon = new ImageIcon("Icons/SearchIcon.png");
         searchButton.setIcon(searchButtonIcon);
+        ImageIcon backButtonIcon = new ImageIcon("Icons/backIcon.png");
+        backButton.setIcon(backButtonIcon);
+        ImageIcon nextButtonIcon = new ImageIcon("Icons/nextIcon.png");
+        nextPageButton.setIcon(nextButtonIcon);
+        ImageIcon previousButtonIcon = new ImageIcon("Icons/previousIcon.png");
+        previousPageButton.setIcon(previousButtonIcon);
 
         JMenuBar menuBar = new JMenuBar();
 
