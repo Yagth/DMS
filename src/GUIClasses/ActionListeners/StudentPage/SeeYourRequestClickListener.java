@@ -4,11 +4,9 @@ import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
 import GUIClasses.StudentViews.ReportDetailView;
 import GUIClasses.StudentViews.SeeYourRequests;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Date;
@@ -51,7 +49,6 @@ public class SeeYourRequestClickListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        System.out.println("In action listener");//For debugging only.
         String query;
         Request request = null;
         JTable tmp = parentComponent.getReportListTable();
@@ -83,7 +80,6 @@ public class SeeYourRequestClickListener implements MouseListener {
             JOptionPane.showMessageDialog(parentComponent,"Sorry. Couldn't show details due to unknown error try again later.");
             parentComponent.dispose();
         }
-        System.out.println("Out of action listener");//For debugging only.
     }
 
     @Override
