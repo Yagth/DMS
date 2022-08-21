@@ -82,7 +82,7 @@ public class ReportDetailView extends JFrame implements Views {
     }
 
     public boolean checkReportStatus(){
-        return !(request.getHandledDate().equals(null));
+        return !(request==null);
     }
     public SeeYourRequests getParentComponent(){
         return parentComponent;
