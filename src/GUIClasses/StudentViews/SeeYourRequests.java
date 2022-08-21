@@ -79,7 +79,7 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
     }
 
     public void loadRequests(){
-        String query = "SELECT * FROM StudentReport WHERE reporterId='"+student.getsId()+"'";
+        String query = "SELECT * FROM StudentReport WHERE reporterId='"+student.getsId()+"' ORDER BY reportedDate DESC";
         reports = javaConnection.selectQuery(query);
         try{
             while(reports.next()){
