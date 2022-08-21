@@ -9,8 +9,11 @@ import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 public class SeeYourRequests extends JFrame implements Views, TableViews {
@@ -33,6 +36,7 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
     private Student student;
     private StudentPage parentComponent;
     private Vector<Vector<Object>> tableData;
+    ResultSet reports;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
@@ -42,10 +46,17 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         javaConnection = new JavaConnection(JavaConnection.URL);
         setUpGUi();
         setUpTable();
+        loadRequests();
     }
     public StudentPage getParentComponent(){return parentComponent;}
     public void showParentComponent(){
         this.getParentComponent().setVisible(true);
+    }
+    public void displayUserInfo(){
+        studentName.setText(student.getFullName());
+        studentID.setText(student.getsId());
+        studentBuildingNo.setText(String.valueOf(student.getBuildingNo()));
+        studentDormNo.setText(String.valueOf(student.getDormNo()));
     }
     @Override
     public void setUpTable() {
@@ -59,14 +70,39 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         reportListTable.setModel(new DefaultTableModel(tableData,title));
     }
 
+    public void loadRequests(){
+        String query = "SELECT * FROM StudentReport WHERE reporterId='"+student.getsId()+"'";
+        reports = javaConnection.selectQuery(query);
+        try{
+            while(reports.next()){
+                Vector<Object> tmp = new Vector<>();
+                tmp.add(reports.getInt("reportId"));
+                tmp.add(reports.getString("ReportType"));
+                tmp.add(reports.getString("ReportedDate"));
+                String temp = reports.getString("description");
+                temp = temp.substring(0,10)+"...";
+                tmp.add(temp);
+                addDataToTable(tmp);
+            }
+        }
+        catch (SQLException ex){
+            JOptionPane.showMessageDialog(this,"No reports Made so far",
+                    "Empty Report",JOptionPane.INFORMATION_MESSAGE);
+            parentComponent.dispose();
+            showParentComponent();
+        }
+    }
     @Override
     public void addDataToTable(Object object) {
-
+        Vector<Object> tmp = (Vector<Object>) object;
+        tableData.add(tmp);
+        refreshTable();
     }
 
     @Override
     public void refreshTable() {
-
+        DefaultTableModel tableModel = (DefaultTableModel) reportListTable.getModel();
+        tableModel.fireTableDataChanged();
     }
 
     @Override
@@ -86,5 +122,6 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+        displayUserInfo();
     }
 }
