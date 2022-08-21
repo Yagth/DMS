@@ -17,13 +17,12 @@ import java.sql.SQLException;
 
 public class SeeYourRequestClickListener implements MouseListener {
     SeeYourRequests parentComponent;
-    JavaConnection javaConnection;
     Request request = null;
     public SeeYourRequestClickListener(SeeYourRequests parentComponent){
         this.parentComponent = parentComponent;
-        javaConnection =  new JavaConnection(JavaConnection.URL);
     }
     public Date loadHandledDate(int reportId){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT handledDate FROM HandledReport WHERE reportId="+reportId;
         ResultSet tmp = javaConnection.selectQuery(query);
         try{
@@ -52,6 +51,7 @@ public class SeeYourRequestClickListener implements MouseListener {
     }
     @Override
     public void mouseClicked(MouseEvent e) {
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         System.out.println("In action listener");//For debugging only.
         String query;
         Request request = null;
@@ -67,14 +67,12 @@ public class SeeYourRequestClickListener implements MouseListener {
 
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
-            System.out.println("Query: "+query);//For debugging only.
             while(resultSet.next()){
                 request = createSpecificRequest(resultSet.getString("ReportType"));
                 request.setRequestId(selectedId);
                 request.setDescription(resultSet.getString("Description"));
                 request.setRequestedDate(resultSet.getDate("reportedDate"));
-                String location = resultSet.getString("BuildingNumber");
-                location+="-"+resultSet.getString("RoomNumber");
+                String location = resultSet.getString("BuildingNumber")+"-"+resultSet.getString("RoomNumber");
                 request.setLocation(location);
                 Date tmpDate = loadHandledDate(selectedId);
                 System.out.println(tmpDate);//For debugging only.
@@ -86,6 +84,7 @@ public class SeeYourRequestClickListener implements MouseListener {
         catch (SQLException ex){
             ex.printStackTrace(); // For debugging only.
             JOptionPane.showMessageDialog(parentComponent,"Sorry. Couldn't show details due to unknown error try again later.");
+            parentComponent.dispose();
         }
         System.out.println("Out of action listener");//For debugging only.
     }
