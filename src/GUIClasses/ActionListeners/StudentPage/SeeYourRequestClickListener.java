@@ -62,7 +62,7 @@ public class SeeYourRequestClickListener implements MouseListener {
         String selectedType = (String) tableModel.getValueAt(row,1);
         System.out.println("Selected Type: "+selectedType); //For debugging purposes only.
         if(selectedType.equals("ClothTakeOutForm"))
-            query = "SELECT * FROM ClothTakeOutStudent WHERE ReportId="+selectedId;
+            query = "SELECT * FROM ClothStudent WHERE ReportId="+selectedId;
         else query = "SELECT * FROM AllReports WHERE ReportId="+selectedId;
 
         ResultSet resultSet = javaConnection.selectQuery(query);
@@ -73,19 +73,15 @@ public class SeeYourRequestClickListener implements MouseListener {
                 request.setRequestId(selectedId);
                 request.setDescription(resultSet.getString("Description"));
                 request.setRequestedDate(resultSet.getDate("reportedDate"));
+                String location = resultSet.getString("BuildingNumber");
+                location+="-"+resultSet.getString("RoomNumber");
+                request.setLocation(location);
                 Date tmpDate = loadHandledDate(selectedId);
                 System.out.println(tmpDate);//For debugging only.
                 request.setHandledDate(tmpDate);
-                String location = resultSet.getString("BuildingNumber")+resultSet.getString("RoomNumber");
-                request.setLocation(location);
                 new ReportDetailView(parentComponent,request,parentComponent.getStudent().getsId());
                 parentComponent.setVisible(false);
             }
-        }
-        catch (SQLServerException ex){//Some tables don't have building and room number column which could through exception.
-            new ReportDetailView(parentComponent,request,parentComponent.getStudent().getsId());
-            parentComponent.setVisible(false);
-            ex.printStackTrace();//For debugging purpose only.
         }
         catch (SQLException ex){
             ex.printStackTrace(); // For debugging only.
