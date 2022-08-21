@@ -139,6 +139,7 @@
                 <constraints/>
                 <properties>
                   <editable value="false"/>
+                  <enabled value="true"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="200" height="100"/>
                   <preferredSize width="300" height="100"/>

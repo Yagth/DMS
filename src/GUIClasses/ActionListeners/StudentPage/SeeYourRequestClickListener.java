@@ -60,7 +60,6 @@ public class SeeYourRequestClickListener implements MouseListener {
         int row = tmp.getSelectedRow();
         int selectedId = (Integer) tableModel.getValueAt(row,0);
         String selectedType = (String) tableModel.getValueAt(row,1);
-        System.out.println("Selected Type: "+selectedType); //For debugging purposes only.
         if(selectedType.equals("ClothTakeOutForm"))
             query = "SELECT * FROM ClothStudent WHERE ReportId="+selectedId;
         else query = "SELECT * FROM AllReports WHERE ReportId="+selectedId;
@@ -75,7 +74,6 @@ public class SeeYourRequestClickListener implements MouseListener {
                 String location = resultSet.getString("BuildingNumber")+"-"+resultSet.getString("RoomNumber");
                 request.setLocation(location);
                 Date tmpDate = loadHandledDate(selectedId);
-                System.out.println(tmpDate);//For debugging only.
                 request.setHandledDate(tmpDate);
                 new ReportDetailView(parentComponent,request,parentComponent.getStudent().getsId());
                 parentComponent.setVisible(false);

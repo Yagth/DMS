@@ -35,25 +35,9 @@ public class ReportDetailView extends JFrame implements Views {
     private SeeYourRequests parentComponent;
     public ReportDetailView(SeeYourRequests parentComponent,Request request,String reporterId){
         this.parentComponent = parentComponent;
-        this.request = getSpecificReport(request);
+        this.request = request;
         this.reporterId = reporterId;
         setUpGUi();
-    }
-
-    public Request getSpecificReport(Request request){
-        switch (request.getRequestType()){
-            case "Maintenance":
-                return new MaintenanceRequest(reporterId);
-            case "ClothTakeOutForm" :
-                descriptionPane.setVisible(false);
-                descriptionLabel.setVisible(false);
-                return new ClothTakeOutRequest(reporterId);
-            case "ExtendDormStayRequest":
-                return new ExtendDormStayRequest(reporterId);
-            case "RequestForNewDorm":
-                return new RequestForNewDorm(reporterId);
-        }
-        return null;
     }
     public void displayRequest(){
         boolean isHandled = checkReportStatus();
