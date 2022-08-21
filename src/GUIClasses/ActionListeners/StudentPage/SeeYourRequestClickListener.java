@@ -17,7 +17,6 @@ import java.sql.SQLException;
 
 public class SeeYourRequestClickListener implements MouseListener {
     SeeYourRequests parentComponent;
-    Request request = null;
     public SeeYourRequestClickListener(SeeYourRequests parentComponent){
         this.parentComponent = parentComponent;
     }

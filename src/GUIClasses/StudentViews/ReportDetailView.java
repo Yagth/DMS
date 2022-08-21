@@ -80,8 +80,10 @@ public class ReportDetailView extends JFrame implements Views {
     public void setUpGUi() {
         this.setTitle("Request Detail");
         this.setContentPane(mainPanel);
-        this.setLocationRelativeTo(parentComponent);
         this.setSize(WIDTH,HEIGHT);
+        this.setLocationRelativeTo(parentComponent);
+        backButton.addActionListener(new ReportDetailViewBackButtonListener(this));
+        displayRequest();
         this.setVisible(true);
         this.addWindowListener(new WindowAdapter()
         {
@@ -92,7 +94,6 @@ public class ReportDetailView extends JFrame implements Views {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
-        backButton.addActionListener(new ReportDetailViewBackButtonListener(this));
-        displayRequest();
+
     }
 }
