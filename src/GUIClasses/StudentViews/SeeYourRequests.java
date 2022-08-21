@@ -86,8 +86,6 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
                 tmp.add(reports.getInt("reportId"));
                 tmp.add(reports.getString("ReportType"));
                 tmp.add(reports.getString("ReportedDate"));
-//                String temp = reports.getString("description");
-//                temp = temp.substring(0,temp.length()/5)+"...";
                 tmp.add(reports.getString("description"));
                 addDataToTable(tmp);
             }
