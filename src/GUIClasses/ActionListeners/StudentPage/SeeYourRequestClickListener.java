@@ -52,6 +52,7 @@ public class SeeYourRequestClickListener implements MouseListener {
     }
     @Override
     public void mouseClicked(MouseEvent e) {
+        System.out.println("In action listener");//For debugging only.
         String query;
         Request request = null;
         JTable tmp = parentComponent.getReportListTable();
@@ -60,16 +61,18 @@ public class SeeYourRequestClickListener implements MouseListener {
         int selectedId = (Integer) tableModel.getValueAt(row,0);
         String selectedType = (String) tableModel.getValueAt(row,1);
         if(selectedType.equals("ClothTakeOutForm"))
-            query = "SELECT * FROM AllReports WHERE ReportId='"+selectedId+"'";
-        else query = "SELECT * FROM ClothTakeOutStudent WHERE ReportId='"+selectedId+"'";
+            query = "SELECT * FROM AllReports WHERE ReportId="+selectedId;
+        else query = "SELECT * FROM ClothTakeOutStudent WHERE ReportId="+selectedId;
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
+            System.out.println("Query: "+query);//For debugging only.
             while(resultSet.next()){
                 request = createSpecificRequest(resultSet.getString("ReportType"));
                 request.setRequestId(selectedId);
                 request.setDescription(resultSet.getString("Description"));
                 request.setRequestedDate(resultSet.getDate("reportedDate"));
                 Date tmpDate = loadHandledDate(selectedId);
+                System.out.println(tmpDate);//For debugging only.
                 request.setHandledDate(tmpDate);
                 String location = resultSet.getString("BuildingNumber")+resultSet.getString("RoomNumber");
                 request.setLocation(location);
@@ -86,6 +89,7 @@ public class SeeYourRequestClickListener implements MouseListener {
             ex.printStackTrace(); // For debugging only.
             JOptionPane.showMessageDialog(parentComponent,"Sorry. Couldn't show details due to unknown error try again later.");
         }
+        System.out.println("Out of action listener");//For debugging only.
     }
 
     @Override
