@@ -47,6 +47,7 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         setUpGUi();
         setUpTable();
         loadRequests();
+        refreshTable();
         emptyReportDisplay();
     }
     public StudentPage getParentComponent(){return parentComponent;}
@@ -86,7 +87,7 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
                 tmp.add(reports.getString("ReportType"));
                 tmp.add(reports.getString("ReportedDate"));
                 String temp = reports.getString("description");
-                temp = temp.substring(0,10)+"...";
+                temp = temp.substring(0,temp.length()/5)+"...";
                 tmp.add(temp);
                 addDataToTable(tmp);
             }
@@ -103,7 +104,6 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
     public void addDataToTable(Object object) {
         Vector<Object> tmp = (Vector<Object>) object;
         tableData.add(tmp);
-        refreshTable();
     }
 
     @Override
