@@ -69,9 +69,9 @@ public class ReportDetailView extends JFrame implements Views {
             handledDate.setVisible(false);
         }
 
-        boolean hasLocation = request.getLocation().equals(null);
+        boolean hasNoLocation = request==null;
 
-        if(hasLocation){
+        if(hasNoLocation){
             locationL.setVisible(false);
             reportLocationL.setVisible(false);
         }
