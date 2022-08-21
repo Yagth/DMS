@@ -47,6 +47,7 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         setUpGUi();
         setUpTable();
         loadRequests();
+        emptyReportDisplay();
     }
     public StudentPage getParentComponent(){return parentComponent;}
     public void showParentComponent(){
@@ -57,6 +58,11 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         studentID.setText(student.getsId());
         studentBuildingNo.setText(String.valueOf(student.getBuildingNo()));
         studentDormNo.setText(String.valueOf(student.getDormNo()));
+    }
+    public void emptyReportDisplay(){
+        if(tableData.size() == 0)
+            JOptionPane.showMessageDialog(this,"No reports Made so far",
+                    "Empty Report",JOptionPane.INFORMATION_MESSAGE);
     }
     @Override
     public void setUpTable() {
@@ -90,6 +96,7 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
                     "Empty Report",JOptionPane.INFORMATION_MESSAGE);
             parentComponent.dispose();
             showParentComponent();
+            ex.printStackTrace(); // For debugging purposes.
         }
     }
     @Override
