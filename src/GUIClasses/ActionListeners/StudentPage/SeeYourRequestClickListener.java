@@ -2,6 +2,7 @@ package GUIClasses.ActionListeners.StudentPage;
 
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
+import GUIClasses.StudentViews.ReportDetailView;
 import GUIClasses.StudentViews.SeeYourRequests;
 
 import javax.swing.*;
@@ -50,7 +51,7 @@ public class SeeYourRequestClickListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         String query;
-        Request request;
+        Request request = null;
         JTable tmp = parentComponent.getReportListTable();
         DefaultTableModel tableModel = (DefaultTableModel) tmp.getModel();
         int row = tmp.getSelectedRow();
@@ -70,6 +71,8 @@ public class SeeYourRequestClickListener implements MouseListener {
                 request.setLocation(location);
                 Date tmpDate = loadHandledDate(selectedId);
                 request.setHandledDate(tmpDate);
+                new ReportDetailView(request,parentComponent.getStudent().getsId());
+                parentComponent.setVisible(false);
             }
         }catch (SQLException ex){
             ex.printStackTrace(); // For debugging only.
