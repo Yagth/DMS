@@ -56,7 +56,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         this.setTitle("Student cloth Take Out Form");
         this.setContentPane(mainPanel);
         this.setSize(WIDTH,HEIGHT);
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(parentComponent);
         this.setResizable(false);
         this.setVisible(true);
         this.addButton.addActionListener(new AddButtonListener(this));
