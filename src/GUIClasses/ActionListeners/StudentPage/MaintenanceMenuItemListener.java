@@ -5,7 +5,7 @@ import GUIClasses.StudentViews.StudentPage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MaintenanceMenuItemListener extends MenutItemListener implements ActionListener {
+public class MaintenanceMenuItemListener extends MenuItemListener implements ActionListener {
     public MaintenanceMenuItemListener(StudentPage parentComponent){
         super(parentComponent);
     }

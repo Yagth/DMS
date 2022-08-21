@@ -6,7 +6,7 @@ import GUIClasses.StudentViews.StudentPage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ExtendDormMenuItemListener extends MenutItemListener implements ActionListener {
+public class ExtendDormMenuItemListener extends MenuItemListener implements ActionListener {
     public ExtendDormMenuItemListener(StudentPage parentComponent){
         super(parentComponent);
     }

@@ -1,19 +1,19 @@
 package GUIClasses.ActionListeners.StudentPage;
 
-import GUIClasses.StudentViews.RequestForDormitory;
+import GUIClasses.StudentViews.SeeYourRequests;
 import GUIClasses.StudentViews.StudentPage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RequestForDormMenuItemListener extends MenuItemListener implements ActionListener {
-    public RequestForDormMenuItemListener(StudentPage parentComponent){
+public class SeeYourRequestListener extends MenuItemListener implements ActionListener {
+    public SeeYourRequestListener(StudentPage parentComponent){
         super(parentComponent);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new RequestForDormitory(parentComponent.getUser(),parentComponent);
+        new SeeYourRequests(parentComponent.getUser(),parentComponent);
         hideParentComponent();
     }
 }

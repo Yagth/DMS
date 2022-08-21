@@ -135,6 +135,7 @@ public class StudentPage extends JFrame implements TableViews {
         RequestForDorm.addActionListener(new RequestForDormMenuItemListener(this));
         JMenuItem SeeRequests = new JMenuItem("See your requests");
         SeeRequests.setForeground(new Color(72,131,184));
+        SeeRequests.addActionListener(new SeeYourRequestListener(this));
 
         Service.add(maintainanceRequest);
         Service.add(clothTakeOutRequest);

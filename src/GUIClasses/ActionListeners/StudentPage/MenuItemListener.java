@@ -2,9 +2,9 @@ package GUIClasses.ActionListeners.StudentPage;
 
 import GUIClasses.StudentViews.StudentPage;
 
-public abstract class MenutItemListener {
+public abstract class MenuItemListener {
     protected StudentPage parentComponent;
-    MenutItemListener(StudentPage parentComponent){
+    MenuItemListener(StudentPage parentComponent){
         this.parentComponent = parentComponent;
     }
     public void hideParentComponent(){
