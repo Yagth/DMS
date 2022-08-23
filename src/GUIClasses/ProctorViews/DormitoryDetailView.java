@@ -106,7 +106,6 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         studentList.setModel(new DefaultTableModel(tableData, titles));
         studentList.setDefaultEditor(Object.class, null);
         studentList.getColumn("Year").setMaxWidth(50);
-        studentList.getColumn("ID").setMaxWidth(100);
 
     }
 
