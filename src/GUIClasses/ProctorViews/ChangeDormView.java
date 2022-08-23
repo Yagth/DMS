@@ -30,7 +30,7 @@ public class ChangeDormView extends JFrame implements Views {
     }
     public ChangeDormView(){
         this(null,null);
-    }
+    }//For debugging only constructor.
 
     public String getSelectedCondition(){
         return (String) conditions.getSelectedItem();

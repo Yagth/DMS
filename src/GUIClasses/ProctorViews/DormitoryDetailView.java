@@ -40,7 +40,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
     }
     public DormitoryDetailView(){
         this(null,null,null);
-    }
+    }//For debugging only constructor.
     private Vector<Vector<Object>> loadStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         Vector<Vector<Object>> tmp =null;

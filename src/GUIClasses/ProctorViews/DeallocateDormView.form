@@ -61,7 +61,7 @@
               <text value="From building number"/>
             </properties>
           </component>
-          <component id="7a7ba" class="javax.swing.JFormattedTextField" binding="frombuildingNoTF">
+          <component id="7a7ba" class="javax.swing.JFormattedTextField" binding="fromBuildingNoTF">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="1" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
