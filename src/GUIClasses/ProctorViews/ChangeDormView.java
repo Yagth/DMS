@@ -16,4 +16,5 @@ public class ChangeDormView {
     private JLabel searchStudentL;
     private JButton backButton;
     private JButton changeButton;
+    private JLabel numberOfStudentsL;
 }
