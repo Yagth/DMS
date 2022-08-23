@@ -34,6 +34,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         this.parentComponent = parentComponent;
         this.dorm = dorm;
         this.proctor = proctor;
+        tableData = new Vector<>();
         setUpGUi();
     }
     public DormitoryDetailView(){
@@ -42,13 +43,16 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
     private Vector<Object> loadStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         Vector<Object> tmp =null;
+        System.out.println("In loadStudents");//For debugging only
         if(javaConnection.isConnected()){
+            System.out.println("In if condition");//For debugging only
             tmp = new Vector<>();
             String query = "SELECT SID, Fname,Lname,Year,isEligible FROM Student " +
-                    "WHERE BuildingNumber='"+buildingNoL.getText()+"' RoomNumber='"+roomNoL.getText()+"'";
+                    "WHERE BuildingNumber='"+buildingNoL.getText()+"' AND RoomNumber='"+roomNoL.getText()+"'";
             ResultSet resultSet = javaConnection.selectQuery(query);
             try{
                 while(resultSet.next()){
+                    System.out.println("in while loop");//For debugging only
                     Vector<Object> temp = new Vector<>();
                     temp.add(resultSet.getString("Fname")+resultSet.getString("Lname"));
                     temp.add(resultSet.getString("SID"));
@@ -56,6 +60,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
                     temp.add(resultSet.getBoolean("isEligible"));
                     tmp.add(temp);
                 }
+                System.out.println("finished while loop");//For debugging only
             } catch (SQLException ex){
                 String message = "Error encountered while reading students data from server.";
                 displayReadStatus(false,message);
@@ -64,8 +69,6 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         return tmp;
     }
     private void loadDormInfo(){
-        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        Vector<Object> tmp =null;
         buildingNoL.setText(dorm.getBuildingNo());
         roomNoL.setText(dorm.getRoomNO());
         bedNoL.setText(String.valueOf(dorm.getNoOfBeds()));
@@ -75,7 +78,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         keyHolderL.setText(dorm.getKeyHolderId());
     }
     public void displayReadStatus(boolean readStatus){
-        String message = "Couldn't read data from server due to connection error "
+        String message = "Couldn't read data from server due to connection error ";
         displayReadStatus(false,message);
     }
     public void displayReadStatus(boolean readStatus, String message){
@@ -100,12 +103,13 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
 
         studentList.setModel(new DefaultTableModel(tableData,titles));
         studentList.setDefaultEditor(Object.class,null);
-        studentList.getColumn("Year").setMaxWidth(20);
+        studentList.getColumn("Year").setMaxWidth(50);
+        studentList.getColumn("ID").setMaxWidth(100);
 
-        Vector<Object> tmp = loadStudents();
-        readStatus = !(tmp == null);
-        addDataToTable(tmp);
-        displayReadStatus(readStatus);
+        //Vector<Object> tmp = loadStudents();
+       // readStatus = !(tmp == null);
+        //addDataToTable(tmp);
+        //displayReadStatus(readStatus);
     }
 
     @Override
@@ -125,7 +129,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         boolean readStatus;
         this.setContentPane(mainPanel);
         this.setTitle("Detail Info of the dorm");
-        this.setSize(400,600);
+        this.setSize(600,700);
         this.setLocationRelativeTo(parentComponent);
         setUpTable();
         loadDormInfo();
