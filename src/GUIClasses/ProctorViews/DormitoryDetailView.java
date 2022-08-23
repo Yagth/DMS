@@ -40,9 +40,9 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
     public DormitoryDetailView(){
         this(null,null,null);
     }
-    private Vector<Object> loadStudents(){
+    private Vector<Vector<Object>> loadStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        Vector<Object> tmp =null;
+        Vector<Vector<Object>> tmp =null;
         System.out.println("In loadStudents");//For debugging only
         if(javaConnection.isConnected()){
             System.out.println("In if condition");//For debugging only
@@ -61,6 +61,9 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
                     tmp.add(temp);
                 }
                 System.out.println("finished while loop");//For debugging only
+                System.out.println("Is tmp empty: "+tmp.isEmpty());//For debugging only
+                System.out.println("Is tmp null: "+tmp==null);//For debugging only
+
             } catch (SQLException ex){
                 String message = "Error encountered while reading students data from server.";
                 displayReadStatus(false,message);
@@ -106,16 +109,16 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         studentList.getColumn("Year").setMaxWidth(50);
         studentList.getColumn("ID").setMaxWidth(100);
 
-        //Vector<Object> tmp = loadStudents();
-       // readStatus = !(tmp == null);
-        //addDataToTable(tmp);
-        //displayReadStatus(readStatus);
+        Vector<Vector<Object>> tmp = loadStudents();
+        readStatus = !(tmp == null);
+        addDataToTable(tmp);
+        displayReadStatus(readStatus);
     }
 
     @Override
     public void addDataToTable(Object object) {
-        Vector<Object> tmp = (Vector<Object>) object;
-        tableData.add(tmp);
+        Vector<Vector<Object>> tmp = ( Vector<Vector<Object>>) object;
+        tableData = tmp;
     }
 
     @Override
