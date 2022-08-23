@@ -7,7 +7,7 @@ public class Dormitory extends Room{
     private int noOfTables;
     private String keyHolderId;
 
-    Dormitory(String roomNo, String buildingNo){
+    public Dormitory(String roomNo, String buildingNo){
         super("DormitoryView",roomNo,buildingNo);
         keyHolderId="";
     }

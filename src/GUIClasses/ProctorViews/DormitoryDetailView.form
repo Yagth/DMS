@@ -40,7 +40,7 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="6183b" class="javax.swing.JLabel">
+          <component id="6183b" class="javax.swing.JLabel" binding="roomNoL">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -96,7 +96,7 @@
               <text value="Chairs"/>
             </properties>
           </component>
-          <component id="19820" class="javax.swing.JLabel" binding="chiarsNoL">
+          <component id="19820" class="javax.swing.JLabel" binding="chairsNoL">
             <constraints>
               <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
