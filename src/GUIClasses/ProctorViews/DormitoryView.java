@@ -28,11 +28,11 @@ public class DormitoryView extends JFrame implements Views {
     private JComboBox filterList;
     private JLabel BNOLabel;
     private JFormattedTextField seatchRoomNoTA;
-    private JTextField yearTA;
     private JLabel RNOLabel;
     private JLabel backLabel;
     private JLabel previousPageLabel;
     private JLabel nextPageLabel;
+    private JTextField yearTA;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
@@ -48,7 +48,6 @@ public class DormitoryView extends JFrame implements Views {
         this.setSize(WIDTH,HEIGHT);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
         filterList.addItem("Year of Students");
         filterList.addItem("Available space");
 
@@ -78,6 +77,6 @@ public class DormitoryView extends JFrame implements Views {
         menuBar.add(actions);
 
         this.setJMenuBar(menuBar);
-
+        this.setVisible(true);
     }
 }
