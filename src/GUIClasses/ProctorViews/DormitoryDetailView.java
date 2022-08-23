@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.Vector;
 
 public class DormitoryDetailView extends JFrame implements Views, TableViews {
@@ -30,11 +31,11 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
     private Proctor proctor;
     private Dormitory dorm;
     private Vector<Vector<Object>> tableData;
+    private boolean readStatus;
     public DormitoryDetailView(Dormitory dorm,Proctor proctor,DormitoryView parentComponent){
         this.parentComponent = parentComponent;
         this.dorm = dorm;
         this.proctor = proctor;
-        tableData = new Vector<>();
         setUpGUi();
     }
     public DormitoryDetailView(){
@@ -49,12 +50,14 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
             tmp = new Vector<>();
             String query = "SELECT SID, Fname,Lname,Year,isEligible FROM Student " +
                     "WHERE BuildingNumber='"+buildingNoL.getText()+"' AND RoomNumber='"+roomNoL.getText()+"'";
+            System.out.println("Query: "+query);
             ResultSet resultSet = javaConnection.selectQuery(query);
             try{
                 while(resultSet.next()){
                     System.out.println("in while loop");//For debugging only
                     Vector<Object> temp = new Vector<>();
                     temp.add(resultSet.getString("Fname")+resultSet.getString("Lname"));
+                    System.out.println("Fname: "+resultSet.getString("Fname"));//For debugging only.
                     temp.add(resultSet.getString("SID"));
                     temp.add(resultSet.getInt("Year"));
                     temp.add(resultSet.getBoolean("isEligible"));
@@ -99,27 +102,34 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
     @Override
     public void setUpTable() {
         Vector<String> titles = new Vector<>();
-        boolean readStatus;
         titles.add("Student name");
         titles.add("ID");
         titles.add("Year");
         titles.add("Eligibility");
 
-        studentList.setModel(new DefaultTableModel(tableData,titles));
-        studentList.setDefaultEditor(Object.class,null);
-        studentList.getColumn("Year").setMaxWidth(50);
-        studentList.getColumn("ID").setMaxWidth(100);
-
         Vector<Vector<Object>> tmp = loadStudents();
         readStatus = !(tmp == null);
         addDataToTable(tmp);
-        displayReadStatus(readStatus);
+
+        studentList.setModel(new DefaultTableModel(tableData, titles));
+        studentList.setDefaultEditor(Object.class, null);
+        studentList.getColumn("Year").setMaxWidth(50);
+        studentList.getColumn("ID").setMaxWidth(100);
+
     }
 
     @Override
     public void addDataToTable(Object object) {
         Vector<Vector<Object>> tmp = ( Vector<Vector<Object>>) object;
         tableData = tmp;
+        for (Vector<Object> c : tableData ){//For debugging only
+            for(Object o : c){
+                System.out.print(o);
+            }
+            System.out.println();
+        }
+        refreshTable();
+
     }
 
     @Override
@@ -136,6 +146,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         this.setLocationRelativeTo(parentComponent);
         loadDormInfo();
         setUpTable();
+        displayReadStatus(readStatus);
 
         this.setVisible(true);
     }
