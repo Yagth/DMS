@@ -10,7 +10,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.Vector;
 
 public class DormitoryDetailView extends JFrame implements Views, TableViews {
@@ -37,6 +36,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         this.dorm = dorm;
         this.proctor = proctor;
         setUpGUi();
+        displayReadStatus(readStatus);
     }
     public DormitoryDetailView(){
         this(null,null,null);
@@ -44,28 +44,20 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
     private Vector<Vector<Object>> loadStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         Vector<Vector<Object>> tmp =null;
-        System.out.println("In loadStudents");//For debugging only
         if(javaConnection.isConnected()){
-            System.out.println("In if condition");//For debugging only
             tmp = new Vector<>();
             String query = "SELECT SID, Fname,Lname,Year,isEligible FROM Student " +
                     "WHERE BuildingNumber='"+buildingNoL.getText()+"' AND RoomNumber='"+roomNoL.getText()+"'";
-            System.out.println("Query: "+query);
             ResultSet resultSet = javaConnection.selectQuery(query);
             try{
                 while(resultSet.next()){
-                    System.out.println("in while loop");//For debugging only
                     Vector<Object> temp = new Vector<>();
                     temp.add(resultSet.getString("Fname")+resultSet.getString("Lname"));
-                    System.out.println("Fname: "+resultSet.getString("Fname"));//For debugging only.
                     temp.add(resultSet.getString("SID"));
                     temp.add(resultSet.getInt("Year"));
                     temp.add(resultSet.getBoolean("isEligible"));
                     tmp.add(temp);
                 }
-                System.out.println("finished while loop");//For debugging only
-                System.out.println("Is tmp empty: "+tmp.isEmpty());//For debugging only
-                System.out.println("Is tmp null: "+tmp==null);//For debugging only
 
             } catch (SQLException ex){
                 String message = "Error encountered while reading students data from server.";
@@ -122,14 +114,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
     public void addDataToTable(Object object) {
         Vector<Vector<Object>> tmp = ( Vector<Vector<Object>>) object;
         tableData = tmp;
-        for (Vector<Object> c : tableData ){//For debugging only
-            for(Object o : c){
-                System.out.print(o);
-            }
-            System.out.println();
-        }
         refreshTable();
-
     }
 
     @Override
@@ -146,7 +131,6 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         this.setLocationRelativeTo(parentComponent);
         loadDormInfo();
         setUpTable();
-        displayReadStatus(readStatus);
 
         this.setVisible(true);
     }
