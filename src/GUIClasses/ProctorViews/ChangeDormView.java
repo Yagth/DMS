@@ -20,6 +20,7 @@ public class ChangeDormView extends JFrame implements Views {
     private JButton backButton;
     private JButton changeButton;
     private JLabel numberOfStudentsL;
+    private JFormattedTextField yearTF;
     private Proctor proctor;
     private DormitoryView parentComponent;
     public ChangeDormView(Proctor proctor, DormitoryView parentComponent){
@@ -66,5 +67,7 @@ public class ChangeDormView extends JFrame implements Views {
         this.setContentPane(mainPanel);
         this.setLocationRelativeTo(parentComponent);
         this.setVisible(true);
+        conditions.addItem("Change Batch of students");
+        conditions.addItem("Change single student");
     }
 }
