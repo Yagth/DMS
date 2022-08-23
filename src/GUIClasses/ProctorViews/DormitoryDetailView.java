@@ -82,7 +82,8 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
     }
     public void displayReadStatus(boolean readStatus){
         String message = "Couldn't read data from server due to connection error ";
-        displayReadStatus(false,message);
+        if(readStatus) displayReadStatus(true,message);
+        else displayReadStatus(false,message);
     }
     public void displayReadStatus(boolean readStatus, String message){
         if(readStatus)
@@ -129,13 +130,12 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
 
     @Override
     public void setUpGUi() {
-        boolean readStatus;
         this.setContentPane(mainPanel);
         this.setTitle("Detail Info of the dorm");
         this.setSize(600,700);
         this.setLocationRelativeTo(parentComponent);
-        setUpTable();
         loadDormInfo();
+        setUpTable();
 
         this.setVisible(true);
     }
