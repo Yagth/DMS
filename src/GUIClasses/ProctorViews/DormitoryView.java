@@ -1,6 +1,7 @@
 package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
+import BasicClasses.Persons.Proctor;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
@@ -27,19 +28,26 @@ public class DormitoryView extends JFrame implements Views {
     private JPanel dormListPanel;
     private JComboBox filterList;
     private JLabel BNOLabel;
-    private JFormattedTextField seatchRoomNoTA;
+    private JFormattedTextField searchRoomNoTA;
     private JLabel RNOLabel;
     private JLabel backLabel;
     private JLabel previousPageLabel;
     private JLabel nextPageLabel;
     private JTextField yearTA;
+    private ProctorPage parentComponent;
+    private Proctor proctor;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
-    public DormitoryView(){
+    public DormitoryView(Proctor proctor, ProctorPage parentComponent){
+        this.proctor = proctor;
+        this.parentComponent = parentComponent;
         setUpGUi();
     }
 
+    public void showParentComponent(){
+        parentComponent.setVisible(true);
+    }
 
     @Override
     public void setUpGUi() {
