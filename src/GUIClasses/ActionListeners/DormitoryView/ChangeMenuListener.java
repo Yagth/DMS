@@ -1,5 +1,6 @@
 package GUIClasses.ActionListeners.DormitoryView;
 
+import GUIClasses.ProctorViews.ChangeDormView;
 import GUIClasses.ProctorViews.DormitoryView;
 
 import java.awt.event.ActionEvent;
@@ -12,6 +13,6 @@ public class ChangeMenuListener extends MenuListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         hideParentComponent();
-        new ChangeMenuListener(parentComponent);
+        new ChangeDormView(parentComponent.getProctor(),parentComponent);
     }
 }
