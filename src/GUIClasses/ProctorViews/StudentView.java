@@ -25,6 +25,9 @@ public class StudentView extends JFrame implements Views, TableViews {
         this.parentComponent = parentComponent;
         this.proctor = proctor;
     }
+    public void showParentComponent(){
+        parentComponent.setVisible(true);
+    }
 
     @Override
     public void setUpTable() {

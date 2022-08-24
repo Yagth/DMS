@@ -3,7 +3,6 @@ package GUIClasses.ActionListeners.DormitoryView;
 import GUIClasses.ProctorViews.DormitoryView;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
 public class BackLabelListener extends LabelListener {
