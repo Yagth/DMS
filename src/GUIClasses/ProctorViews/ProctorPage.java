@@ -53,7 +53,6 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         this.proctor = proctor;
         setUpGUi();
         setUpTable();
-        refreshTable();
     }
     public ProctorPage(){
         this(null);
@@ -93,23 +92,27 @@ public class ProctorPage extends JFrame implements Views, TableViews {
     @Override
     public void setUpTable() {
         Vector<Object> titles = new Vector<>();
+        tableData = new Vector<>();
         titles.add("Report Number");
         titles.add("Report Type");
         titles.add("Reported Date");
         titles.add("Building Number");
         titles.add("Room Number");
 
+        ReportTable.setModel(new DefaultTableModel(tableData,titles));
+
         Vector<Vector<Object>> temp = loadReports();
         readStatus = !(temp == null);
         addDataToTable(temp);
-
-        ReportTable.setModel(new DefaultTableModel(tableData,titles));
+        refreshTable();
     }
 
     @Override
     public void addDataToTable(Object object) {
         Vector<Vector<Object>> temp = (Vector<Vector<Object>>) object;
-        tableData = temp;
+        for(int i = 0; i<temp.size();i++){
+                tableData.add(temp.get(i));
+        }
     }
 
     @Override
@@ -138,12 +141,18 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         JMenuItem seeStocks = new JMenuItem("See Stocks");
         seeStocks.setForeground(new Color(72,131,184));
 
+        Service.add(seeDormitories);
+        Service.add(seeStudents);
+        Service.add(seeStocks);
+
         JMenu logout = new JMenu("Logout");
         logout.setForeground(Color.white);
         JMenuItem signOut = new JMenuItem("Logout");
         signOut.setForeground(new Color(72,131,184));
 
         logout.add(signOut);
+
+        Services.add(Service);
         Services.add(logout);
 
         setJMenuBar(Services);
