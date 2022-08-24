@@ -3,6 +3,7 @@ package GUIClasses.ProctorViews;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
+import BasicClasses.Requests.Request;
 import GUIClasses.ActionListeners.StudentPage.ClothTakeOutMenuItemListener;
 import GUIClasses.ActionListeners.StudentPage.ExtendDormMenuItemListener;
 import GUIClasses.ActionListeners.StudentPage.LogoutMenuItemListener;
@@ -13,6 +14,7 @@ import GUIClasses.Interfaces.Views;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -68,14 +70,16 @@ public class ProctorPage extends JFrame implements Views, TableViews {
                     Vector<Object> tmp = new Vector<>();
                     String reportType = resultSet.getString("ReportType");
                     reporterId = resultSet.getString("ReporterId");
-
+                    Date reportedDate = resultSet.getDate("ReportedDate");
                     if(!(reportType.equals("ClothTakeOutForm") & resultSet.getString("ReporterId").equals(reporterId))){
-                        tmp.add(++count);
-                        tmp.add(reportType);
-                        tmp.add(resultSet.getString("ReportedDate"));
-                        tmp.add(resultSet.getString("BuildingNumber"));
-                        tmp.add(resultSet.getString("RoomNumber"));
-                        temp.add(tmp);
+                       if(reportedDate.equals(Request.getCurrentDate())){
+                           tmp.add(++count);
+                           tmp.add(reportType);
+                           tmp.add(reportedDate);
+                           tmp.add(resultSet.getString("BuildingNumber"));
+                           tmp.add(resultSet.getString("RoomNumber"));
+                           temp.add(tmp);
+                       }
                     }
                 }
             } catch (SQLException ex){

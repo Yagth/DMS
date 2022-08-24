@@ -4,5 +4,5 @@ import BasicClasses.Rooms.Dormitory;
 import GUIClasses.LoginPage;
 
 public class Test {
-    public static void main(String[] args) {new ProctorPage();}
+    public static void main(String[] args) {new LoginPage();}
 }
