@@ -1,6 +1,7 @@
 package GUIClasses.ProctorViews;
 
 import BasicClasses.Persons.Proctor;
+import GUIClasses.ActionListeners.DeallocateBackButtonListener;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
@@ -26,6 +27,9 @@ public class DeallocateDormView extends JFrame implements Views {
         this(null,null);
     }//For debugging only constructor.
 
+    public void showParentComponent(){
+        parentComponent.setVisible(true);
+    }
     public String getSelectedCondition(){
         return (String) conditions.getSelectedItem();
     }
@@ -43,6 +47,7 @@ public class DeallocateDormView extends JFrame implements Views {
         this.setTitle("Deallocate Dorm");
         this.setSize(500,300);
         this.setLocationRelativeTo(parentComponent);
+        backButton.addActionListener(new DeallocateBackButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {
             @Override
