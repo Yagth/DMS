@@ -50,6 +50,10 @@ public class DormitoryView extends JFrame implements Views {
         parentComponent.setVisible(true);
     }
 
+    public JLabel getBackLabel() {
+        return backLabel;
+    }
+
     @Override
     public void setUpGUi() {
         this.setTitle("DormitoryView");

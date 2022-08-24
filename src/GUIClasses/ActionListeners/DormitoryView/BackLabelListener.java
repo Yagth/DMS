@@ -2,6 +2,7 @@ package GUIClasses.ActionListeners.DormitoryView;
 
 import GUIClasses.ProctorViews.DormitoryView;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
@@ -28,11 +29,11 @@ public class BackLabelListener extends LabelListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        parentComponent.getBackLabel().setBackground(Color.CYAN);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        parentComponent.getBackLabel().setBackground(null);
     }
 }
