@@ -2,6 +2,7 @@ package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Persons.Proctor;
+import GUIClasses.ActionListeners.DormitoryView.BackLabelListener;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
@@ -58,6 +59,7 @@ public class DormitoryView extends JFrame implements Views {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         filterList.addItem("Year of Students");
         filterList.addItem("Available space");
+        backLabel.addMouseListener(new BackLabelListener(this));
 
         ImageIcon searchButtonIcon = new ImageIcon("Icons/SearchIcon.png");
         searchButton.setIcon(searchButtonIcon);

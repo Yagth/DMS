@@ -1,0 +1,38 @@
+package GUIClasses.ActionListeners.DormitoryView;
+
+import GUIClasses.ProctorViews.DormitoryView;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+
+public class BackLabelListener extends LabelListener {
+    public BackLabelListener(DormitoryView parentComponent){
+        super(parentComponent);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        parentComponent.dispose();
+        parentComponent.showParentComponent();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+}
