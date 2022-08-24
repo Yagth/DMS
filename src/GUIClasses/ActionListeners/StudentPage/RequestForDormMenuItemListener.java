@@ -13,7 +13,7 @@ public class RequestForDormMenuItemListener extends MenuItemListener implements 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new RequestForDormitory(parentComponent.getUser(),parentComponent);
+        new RequestForDormitory(parentComponent.getStudent(),parentComponent);
         hideParentComponent();
     }
 }

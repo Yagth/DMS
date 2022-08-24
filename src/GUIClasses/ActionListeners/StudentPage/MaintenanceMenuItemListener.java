@@ -12,7 +12,7 @@ public class MaintenanceMenuItemListener extends MenuItemListener implements Act
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new MaintenanceRequestForm(parentComponent.getUser(),parentComponent);
+        new MaintenanceRequestForm(parentComponent.getStudent(),parentComponent);
         hideParentComponent();
     }
 }

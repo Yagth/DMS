@@ -99,7 +99,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="5284e" class="javax.swing.JTable" binding="studentListTabel">
+              <component id="5284e" class="javax.swing.JTable" binding="studentListTable">
                 <constraints/>
                 <properties/>
               </component>

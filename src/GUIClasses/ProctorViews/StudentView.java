@@ -10,7 +10,7 @@ public class StudentView {
     private JComboBox filterCondition;
     private JButton filterButton;
     private JPanel studentListPanel;
-    private JTable studentListTabel;
+    private JTable studentListTable;
     private JPanel buttonPanel;
     private JButton nextButton;
     private JButton prevButton;

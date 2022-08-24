@@ -13,7 +13,7 @@ public class SeeYourRequestListener extends MenuItemListener implements ActionLi
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new SeeYourRequests(parentComponent.getUser(),parentComponent);
+        new SeeYourRequests(parentComponent.getStudent(),parentComponent);
         hideParentComponent();
     }
 }

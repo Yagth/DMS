@@ -12,7 +12,7 @@ public class ExtendDormMenuItemListener extends MenuItemListener implements Acti
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        new ExtendDormStayForm(parentComponent.getUser(),parentComponent);
+        new ExtendDormStayForm(parentComponent.getStudent(),parentComponent);
         hideParentComponent();
     }
 }

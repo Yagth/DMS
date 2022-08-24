@@ -13,7 +13,7 @@ public class ClothTakeOutMenuItemListener extends MenuItemListener implements Ac
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new ClothTakeOutForm(parentComponent.getUser(),parentComponent);
+        new ClothTakeOutForm(parentComponent.getStudent(),parentComponent);
         hideParentComponent();
     }
 }

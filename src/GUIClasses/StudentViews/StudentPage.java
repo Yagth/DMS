@@ -14,7 +14,7 @@ import GUIClasses.ActionListeners.StudentPage.*;
 import GUIClasses.Interfaces.TableViews;
 
 public class StudentPage extends JFrame implements TableViews {
-    Student user;
+    Student student;
     ResultSet dormMates;
     private JPanel MainPanel;
     private JPanel topPanel;
@@ -38,7 +38,7 @@ public class StudentPage extends JFrame implements TableViews {
 
 
     public StudentPage(Student student){
-        user = student;
+        this.student = student;
         setUpGUi();
         setUpTable();
         displayUserInfo();
@@ -52,16 +52,16 @@ public class StudentPage extends JFrame implements TableViews {
     public void loadDormMates(){
         String url = JavaConnection.URL;
         String query = "SELECT Fname, Lname, PhoneNumber FROM Student as S, Student_Phonenumber as SP WHERE S.SID = SP.SID AND BuildingNumber=\'"
-                +user.getBuildingNo()+"\' AND RoomNumber=\'"+user.getDormNo()+"\' AND S.SID != \'"+user.getsId()+"\'";
+                + student.getBuildingNo()+"\' AND RoomNumber=\'"+ student.getDormNo()+"\' AND S.SID != \'"+ student.getsId()+"\'";
         JavaConnection javaConnection = new JavaConnection(url);
         dormMates = javaConnection.selectQuery(query);
     }
 
     public void displayUserInfo(){
-        studentName.setText(user.getFullName());
-        studentID.setText(user.getsId());
-        studentBuildingNo.setText(String.valueOf(user.getBuildingNo()));
-        studentDormNo.setText(String.valueOf(user.getDormNo()));
+        studentName.setText(student.getFullName());
+        studentID.setText(student.getsId());
+        studentBuildingNo.setText(String.valueOf(student.getBuildingNo()));
+        studentDormNo.setText(String.valueOf(student.getDormNo()));
     }
 
     public void addDormMatesToView(){
@@ -69,8 +69,8 @@ public class StudentPage extends JFrame implements TableViews {
         addDataToTable(dormMates);
         refreshTable();
     }
-    public Student getUser(){
-        return user;
+    public Student getStudent(){
+        return student;
     }
 
     @Override
@@ -142,7 +142,7 @@ public class StudentPage extends JFrame implements TableViews {
         Service.add(StayRequest);
 
         try{
-            if(user.getPlaceOfOrigin().equalsIgnoreCase("Addis Ababa"))
+            if(student.getPlaceOfOrigin().equalsIgnoreCase("Addis Ababa"))
                 Service.add(RequestForDorm);
         } catch (NullPointerException ex){
             ex.printStackTrace();
