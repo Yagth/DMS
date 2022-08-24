@@ -76,8 +76,9 @@ public class ProctorPage extends JFrame implements Views, TableViews {
                     String reportType = resultSet.getString("ReportType");
                     reporterId = resultSet.getString("ReporterId");
                     Date reportedDate = resultSet.getDate("ReportedDate");
+                    Date currentDate = Request.getCurrentDate();
                     if(!(reportType.equals("ClothTakeOutForm") & resultSet.getString("ReporterId").equals(reporterId))){
-                       if(reportedDate.equals(Request.getCurrentDate())){
+                       if((reportedDate.toString()).equals((currentDate).toString())){
                            tmp.add(++count);
                            tmp.add(reportType);
                            tmp.add(reportedDate);
@@ -105,6 +106,7 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         titles.add("Room Number");
 
         ReportTable.setModel(new DefaultTableModel(tableData,titles));
+        ReportTable.setDefaultEditor(Object.class,null);
 
         Vector<Vector<Object>> temp = loadReports();
         readStatus = !(temp == null);
