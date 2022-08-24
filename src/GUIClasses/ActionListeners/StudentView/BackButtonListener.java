@@ -1,11 +1,12 @@
 package GUIClasses.ActionListeners.StudentView;
 
 import GUIClasses.ProctorViews.ProctorPage;
+import GUIClasses.ProctorViews.StudentView;
 
 import java.awt.event.ActionEvent;
 
 public class BackButtonListener extends ButtonListener{
-    public BackButtonListener(ProctorPage parentComponent){
+    public BackButtonListener(StudentView parentComponent){
         super(parentComponent);
     }
 
