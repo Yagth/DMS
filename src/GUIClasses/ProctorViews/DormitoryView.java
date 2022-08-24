@@ -6,6 +6,8 @@ import GUIClasses.ActionListeners.DormitoryView.BackLabelListener;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class DormitoryView extends JFrame implements Views {
     private JFormattedTextField searchBuildingNoTA;
@@ -60,7 +62,16 @@ public class DormitoryView extends JFrame implements Views {
         this.setContentPane(mainPanel);
         this.setSize(WIDTH,HEIGHT);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                e.getWindow().dispose();
+                parentComponent.setVisible(true);
+            }
+        }); //A custom action listener for the exit button.
+
         filterList.addItem("Year of Students");
         filterList.addItem("Available space");
         backLabel.addMouseListener(new BackLabelListener(this));

@@ -1,10 +1,13 @@
 package GUIClasses.ProctorViews;
 
+import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Persons.Proctor;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class StudentView extends JFrame implements Views, TableViews {
     private JPanel mainPanel;
@@ -21,9 +24,13 @@ public class StudentView extends JFrame implements Views, TableViews {
     private JButton backButton;
     private ProctorPage parentComponent;
     private Proctor proctor;
+    private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
+    private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
+
     public StudentView(ProctorPage parentComponent,Proctor proctor){
         this.parentComponent = parentComponent;
         this.proctor = proctor;
+        setUpGUi();
     }
     public void showParentComponent(){
         parentComponent.setVisible(true);
@@ -46,6 +53,18 @@ public class StudentView extends JFrame implements Views, TableViews {
 
     @Override
     public void setUpGUi() {
-
+        setTitle("Students View");
+        setContentPane(mainPanel);
+        setLocationRelativeTo(parentComponent);
+        setSize(WIDTH,HEIGHT);
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                e.getWindow().dispose();
+                parentComponent.setVisible(true);
+            }
+        }); //A custom action listener for the exit button.
     }
 }
