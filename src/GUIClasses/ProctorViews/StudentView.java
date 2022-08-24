@@ -2,6 +2,7 @@ package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Persons.Proctor;
+import GUIClasses.ActionListeners.StudentView.BackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -55,8 +56,9 @@ public class StudentView extends JFrame implements Views, TableViews {
     public void setUpGUi() {
         setTitle("Students View");
         setContentPane(mainPanel);
-        setLocationRelativeTo(parentComponent);
+        setLocationRelativeTo(null);
         setSize(WIDTH,HEIGHT);
+        backButton.addActionListener(new BackButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {
             @Override
