@@ -56,8 +56,8 @@ public class StudentView extends JFrame implements Views, TableViews {
     public void setUpGUi() {
         setTitle("Students View");
         setContentPane(mainPanel);
-        setLocationRelativeTo(null);
         setSize(WIDTH,HEIGHT);
+        setLocationRelativeTo(null);
         backButton.addActionListener(new BackButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {
@@ -68,6 +68,16 @@ public class StudentView extends JFrame implements Views, TableViews {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+
+        ImageIcon searchButtonIcon = new ImageIcon("Icons/SearchIcon.png");
+        searchButton.setIcon(searchButtonIcon);
+        ImageIcon filterButtonIcon = new ImageIcon("Icons/FilterIcon.png");
+        filterButton.setIcon(filterButtonIcon);
+
+        filterCondition.addItem("Year of students");
+        filterCondition.addItem("Block");
+        filterCondition.addItem("Eligibility");
+
         this.setVisible(true);
     }
 }

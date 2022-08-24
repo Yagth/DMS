@@ -4,11 +4,11 @@ import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Requests.Request;
+import GUIClasses.ActionListeners.ProctorPage.LogoutMenuItemListener;
 import GUIClasses.ActionListeners.ProctorPage.SeeDormMenuListener;
 import GUIClasses.ActionListeners.ProctorPage.SeeStudentMenuListener;
 import GUIClasses.ActionListeners.StudentPage.ClothTakeOutMenuItemListener;
 import GUIClasses.ActionListeners.StudentPage.ExtendDormMenuItemListener;
-import GUIClasses.ActionListeners.StudentPage.LogoutMenuItemListener;
 import GUIClasses.ActionListeners.StudentPage.MaintenanceMenuItemListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
@@ -156,6 +156,7 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         logout.setForeground(Color.white);
         JMenuItem signOut = new JMenuItem("Logout");
         signOut.setForeground(new Color(72,131,184));
+        signOut.addActionListener(new LogoutMenuItemListener(this));
 
         logout.add(signOut);
 
