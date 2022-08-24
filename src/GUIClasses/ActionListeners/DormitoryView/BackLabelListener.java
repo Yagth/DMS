@@ -29,7 +29,7 @@ public class BackLabelListener extends LabelListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        parentComponent.getBackLabel().setBackground(Color.CYAN);
+        parentComponent.getBackLabel().setBackground(Color.LIGHT_GRAY);
     }
 
     @Override
