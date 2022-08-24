@@ -22,10 +22,6 @@ public class ProctorPage extends JFrame implements Views, TableViews {
     private JPanel TopPanel;
     private JPanel CentralPanel;
     private JPanel BottomPanel;
-    private JButton StockButton;
-    private JButton DormButton;
-    private JButton StudentButton;
-    private JButton ReportButton;
     private JButton PrevButton;
     private JButton NextButton;
     private JPanel SchedulePanel;

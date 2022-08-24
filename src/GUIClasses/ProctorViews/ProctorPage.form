@@ -15,45 +15,7 @@
           <background color="-12024904"/>
         </properties>
         <border type="none"/>
-        <children>
-          <component id="79105" class="javax.swing.JButton" binding="StockButton">
-            <constraints/>
-            <properties>
-              <background color="-1546"/>
-              <borderPainted value="false"/>
-              <focusable value="false"/>
-              <label value="Stock"/>
-              <text value="Stock"/>
-            </properties>
-          </component>
-          <component id="1749d" class="javax.swing.JButton" binding="DormButton">
-            <constraints/>
-            <properties>
-              <background color="-1546"/>
-              <focusable value="false"/>
-              <label value="Dorm"/>
-              <text value="Dorm"/>
-            </properties>
-          </component>
-          <component id="1e98b" class="javax.swing.JButton" binding="StudentButton">
-            <constraints/>
-            <properties>
-              <background color="-1546"/>
-              <focusable value="false"/>
-              <label value="Student"/>
-              <text value="Student"/>
-            </properties>
-          </component>
-          <component id="23304" class="javax.swing.JButton" binding="ReportButton">
-            <constraints/>
-            <properties>
-              <background color="-1546"/>
-              <focusable value="false"/>
-              <label value="Report"/>
-              <text value="Report"/>
-            </properties>
-          </component>
-        </children>
+        <children/>
       </grid>
       <grid id="d5199" binding="CentralPanel" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
