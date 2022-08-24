@@ -66,5 +66,6 @@ public class StudentView extends JFrame implements Views, TableViews {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+        this.setVisible(true);
     }
 }

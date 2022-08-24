@@ -12,6 +12,7 @@ public class SeeStudentMenuListener extends MenuItemListener{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        hideParentComponent();
         new StudentView(parentComponent,parentComponent.getProctor());
     }
 }
