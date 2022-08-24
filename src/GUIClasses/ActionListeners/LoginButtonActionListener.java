@@ -2,6 +2,7 @@ package GUIClasses.ActionListeners;
 
 import BasicClasses.Enums.UserStatus;
 import GUIClasses.LoginPage;
+import GUIClasses.ProctorViews.ProctorPage;
 import GUIClasses.StudentViews.StudentPage;
 
 import javax.swing.*;
@@ -27,7 +28,7 @@ public class LoginButtonActionListener implements ActionListener {
                 }
                 else if(parentComponent.getUserStatus().equals(UserStatus.PROCTOR))
                 {
-                    new StudentPage(parentComponent.createStudent()); // This part here will be changed to proctor view when there is one created.
+                    new ProctorPage(parentComponent.createProctor());
                     parentComponent.dispose();
                 }
                 JOptionPane.showMessageDialog(null,"Login successful","Logged in",JOptionPane.INFORMATION_MESSAGE);
