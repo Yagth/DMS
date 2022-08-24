@@ -1,6 +1,7 @@
 package GUIClasses.ProctorViews;
 
 import BasicClasses.Persons.Proctor;
+import GUIClasses.ActionListeners.ChangeBackButtonListener;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
@@ -68,6 +69,7 @@ public class ChangeDormView extends JFrame implements Views {
         this.setSize(500,300);
         this.setContentPane(mainPanel);
         this.setLocationRelativeTo(parentComponent);
+        backButton.addActionListener(new ChangeBackButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {
             @Override
