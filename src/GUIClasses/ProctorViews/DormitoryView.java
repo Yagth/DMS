@@ -56,6 +56,10 @@ public class DormitoryView extends JFrame implements Views {
         return backLabel;
     }
 
+    public Proctor getProctor() {
+        return proctor;
+    }
+
     @Override
     public void setUpGUi() {
         this.setTitle("DormitoryView");

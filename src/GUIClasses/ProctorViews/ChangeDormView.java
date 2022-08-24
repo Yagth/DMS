@@ -4,6 +4,8 @@ import BasicClasses.Persons.Proctor;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ChangeDormView extends JFrame implements Views {
     private JPanel mainPanel;
@@ -66,6 +68,16 @@ public class ChangeDormView extends JFrame implements Views {
         this.setSize(500,300);
         this.setContentPane(mainPanel);
         this.setLocationRelativeTo(parentComponent);
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                e.getWindow().dispose();
+                parentComponent.setVisible(true);
+            }
+        }); //A custom action listener for the exit button.
+
         this.setVisible(true);
         conditions.addItem("Change Batch of students");
         conditions.addItem("Change single student");
