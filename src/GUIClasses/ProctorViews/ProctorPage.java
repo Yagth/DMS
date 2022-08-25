@@ -5,6 +5,7 @@ import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Requests.Request;
 import GUIClasses.ActionListeners.ProctorPage.LogoutMenuItemListener;
+import GUIClasses.ActionListeners.ProctorPage.ReportMenuItemListener;
 import GUIClasses.ActionListeners.ProctorPage.SeeDormMenuListener;
 import GUIClasses.ActionListeners.ProctorPage.SeeStudentMenuListener;
 import GUIClasses.ActionListeners.StudentPage.ClothTakeOutMenuItemListener;
@@ -147,11 +148,15 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         JMenuItem seeStudents = new JMenuItem("See Students");
         seeStudents.setForeground(new Color(72,131,184));
         seeStudents.addActionListener(new SeeStudentMenuListener(this));
+        JMenuItem seeReports = new JMenuItem("All Reports");
+        seeReports.setForeground(new Color(72,131,184));
+        seeReports.addActionListener(new ReportMenuItemListener(this));
         JMenuItem seeStocks = new JMenuItem("See Stocks");
         seeStocks.setForeground(new Color(72,131,184));
 
         Service.add(seeDormitories);
         Service.add(seeStudents);
+        Service.add(seeReports);
         Service.add(seeStocks);
 
         JMenu logout = new JMenu("Logout");
