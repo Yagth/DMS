@@ -101,7 +101,7 @@ public class DormitoryView extends JFrame implements Views {
         JMenuItem allocate = new JMenuItem("Allocate Dorms");
         JMenuItem deallocate = new JMenuItem("Deallocate all dorms");
         deallocate.addActionListener(new DeallocateMenuListener(this));
-        JMenuItem change = new JMenuItem("Change");
+        JMenuItem change = new JMenuItem("Change Dorm");
         change.addActionListener(new ChangeMenuListener(this));
 
         actions.add(allocate);
