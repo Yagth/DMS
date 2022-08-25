@@ -65,7 +65,7 @@
               <component id="789c" class="javax.swing.JTextPane" binding="descriptionPane">
                 <constraints/>
                 <properties>
-                  <preferredSize width="250" height="300"/>
+                  <preferredSize width="250" height="200"/>
                 </properties>
               </component>
             </children>
