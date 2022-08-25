@@ -1,6 +1,5 @@
 package GUIClasses.ProctorViews;
 
-import BasicClasses.Rooms.Dormitory;
 import GUIClasses.LoginPage;
 
 public class Test {
