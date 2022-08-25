@@ -59,8 +59,8 @@ public class DeallocateDormView extends JFrame implements Views {
         }); //A custom action listener for the exit button.
 
         this.setVisible(true);
-        conditions.addItem("Change Batch of students");
-        conditions.addItem("Change single student");
+        conditions.addItem("deallocate Batch of students");
+        conditions.addItem("deallocate non eligible");
 
     }
 }
