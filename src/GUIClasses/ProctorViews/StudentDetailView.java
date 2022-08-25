@@ -7,7 +7,8 @@ import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.View;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Vector;
 
 public class StudentDetailView extends JFrame implements Views, TableViews {
@@ -93,6 +94,15 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
         this.setContentPane(mainPanel);
         this.setSize(WIDTH,HEIGHT);
         this.setLocationRelativeTo(null);
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                e.getWindow().dispose();
+                parentComponent.setVisible(true);
+            }
+        }); //A custom action listener for the exit button.
         setUpTable();
         this.setVisible(true);
     }

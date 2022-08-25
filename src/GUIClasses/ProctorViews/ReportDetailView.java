@@ -5,6 +5,8 @@ import BasicClasses.Requests.Request;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ReportDetailView extends JFrame implements Views {
     private JPanel mainPanel;
@@ -38,6 +40,15 @@ public class ReportDetailView extends JFrame implements Views {
         this.setContentPane(mainPanel);
         this.setSize(WIDTH,HEIGHT);
         this.setLocationRelativeTo(null);
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                e.getWindow().dispose();
+                parentComponent.setVisible(true);
+            }
+        }); //A custom action listener for the exit button.
         this.setVisible(true);
 
         //Add action listener to the handle button.
