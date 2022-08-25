@@ -29,6 +29,7 @@ public class ReportsView extends JFrame implements Views, TableViews {
         this.parentComponent = parentComponent;
         this.proctorId = proctorId;
         setUpGUi();
+        displayReadStatus(readStatus);
     }
 
     public void loadReports(){
@@ -72,7 +73,6 @@ public class ReportsView extends JFrame implements Views, TableViews {
 
         loadReports();
         readStatus = !(tableData == null);//If the read is not successful the table data will be null.
-        displayReadStatus(readStatus);
         reportList.setModel(new DefaultTableModel(tableData,titles));
         refreshTable();
     }
