@@ -18,6 +18,7 @@ public class JavaConnection {
             connection = DriverManager.getConnection(url);
             statement = connection.createStatement();
         }catch (SQLException ex){
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(null,"Couldn't Connect to server","Connection error",JOptionPane.ERROR_MESSAGE);
             connection = null;
             statement = null;
@@ -30,6 +31,7 @@ public class JavaConnection {
         try{
             statement.executeQuery(query);
         }catch (SQLException ex){
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(null,"Couldn't Execute the query","Connection error",JOptionPane.ERROR);
             resultSet = null;
         }
