@@ -18,7 +18,7 @@ public class JavaConnection {
             connection = DriverManager.getConnection(url);
             statement = connection.createStatement();
         }catch (SQLException ex){
-            ex.printStackTrace();
+            ex.printStackTrace();//For debugging purposes
             JOptionPane.showMessageDialog(null,"Couldn't Connect to server","Connection error",JOptionPane.ERROR_MESSAGE);
             connection = null;
             statement = null;
@@ -31,7 +31,7 @@ public class JavaConnection {
         try{
             statement.executeQuery(query);
         }catch (SQLException ex){
-            ex.printStackTrace();
+            ex.printStackTrace();//For debugging purposes
             JOptionPane.showMessageDialog(null,"Couldn't Execute the query","Connection error",JOptionPane.ERROR);
             resultSet = null;
         }
@@ -42,7 +42,7 @@ public class JavaConnection {
             statement.execute(query);
             return 1;
         }catch (SQLException ex){
-            ex.printStackTrace();
+            ex.printStackTrace();//For debugging purposes
             return 0;
         }
     }
@@ -52,7 +52,7 @@ public class JavaConnection {
         try{
             tmpResultSet = statement.executeQuery(query);
         }catch (SQLException ex){
-            ex.printStackTrace();
+            ex.printStackTrace();//For debugging purposes
             return null;
         }
         return tmpResultSet;
