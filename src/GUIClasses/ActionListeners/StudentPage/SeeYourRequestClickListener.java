@@ -62,7 +62,7 @@ public class SeeYourRequestClickListener implements MouseListener {
 
         if(isClothTakeOutRequest)
             query = "SELECT * FROM ClothStudent WHERE ReportId="+selectedId;
-        else query = "SELECT * FROM AllReports WHERE ReportId="+selectedId;
+        else query = "SELECT * FROM AllReports WHERE ReportId="+selectedId+"ReportType='"+selectedType+"'";
 
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
