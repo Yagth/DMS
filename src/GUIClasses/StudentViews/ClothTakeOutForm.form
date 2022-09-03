@@ -24,6 +24,8 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
+              <background color="-12024904"/>
+              <foreground color="-1"/>
               <text value="Add"/>
               <toolTipText value="Add another cloth"/>
             </properties>
@@ -40,6 +42,8 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
+              <background color="-12024904"/>
+              <foreground color="-1"/>
               <text value="Finish"/>
               <toolTipText value="submit the list to the proctors"/>
             </properties>
@@ -91,7 +95,9 @@
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="15" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="3" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-12024904"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="f47d" class="javax.swing.JTextField" binding="clothAmountTF">
