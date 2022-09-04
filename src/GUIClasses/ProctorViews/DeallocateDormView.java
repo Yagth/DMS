@@ -28,6 +28,10 @@ public class DeallocateDormView extends JFrame implements Views {
         setUpGUi();
     }
 
+    public DeallocateDormView(){
+        this(null,null);
+    }//For debugging only constructor.
+
     public int getYear(){
         try{
             return Integer.parseInt(yearTF.getText());
@@ -36,10 +40,10 @@ public class DeallocateDormView extends JFrame implements Views {
             return 0;
         }
     }
-    public DeallocateDormView(){
-        this(null,null);
-    }//For debugging only constructor.
 
+    public JFormattedTextField getYearTF(){
+        return yearTF;
+    }
     public void showParentComponent(){
         parentComponent.setVisible(true);
     }
