@@ -21,7 +21,6 @@ public class DeallocateBatchItemListener implements ItemListener {
         else if(selectedCondition.equals("deallocate non eligible")){
             parentComponent.getNumberOfStudentsL().setText("");
             parentComponent.adjustVisisblity(false);
-            parentComponent.
             parentComponent.revalidate();
             parentComponent.setNumberOfStudentsL();
         }
