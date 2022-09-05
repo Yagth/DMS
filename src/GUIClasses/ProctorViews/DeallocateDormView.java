@@ -4,6 +4,7 @@ import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import GUIClasses.ActionListeners.DeallocateBackButtonListener;
 import GUIClasses.ActionListeners.ProctorPage.Deallocate.DeallocateBatchItemListener;
+import GUIClasses.ActionListeners.ProctorPage.Deallocate.DeallocateButtonListener;
 import GUIClasses.ActionListeners.ProctorPage.Deallocate.YearTFListener;
 import GUIClasses.Interfaces.Views;
 
@@ -83,6 +84,7 @@ public class DeallocateDormView extends JFrame implements Views {
         this.setLocationRelativeTo(parentComponent);
         yearTF.setText("");
         yearTF.addActionListener(new YearTFListener(this));
+        deallocateButton.addActionListener(new DeallocateButtonListener(this));
         backButton.addActionListener(new DeallocateBackButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {
