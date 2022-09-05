@@ -64,6 +64,9 @@ public class DeallocateButtonListener implements ActionListener {
             deallocate(query2);
             updateStatus&=updateStatus;
             displayUpdateStatus(updateStatus);
+
+            parentComponent.makeParentComponentVisible();
+            parentComponent.dispose();
         }
     }
     private boolean deallocate(String query){

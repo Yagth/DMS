@@ -133,4 +133,7 @@ public class DeallocateDormView extends JFrame implements Views {
     public Proctor getProctor(){
         return proctor;
     }
+    public void makeParentComponentVisible(){
+        parentComponent.setVisible(true);
+    }
 }
