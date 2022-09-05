@@ -37,7 +37,7 @@ public class DeallocateButtonListener implements ActionListener {
                             "FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"' ) WHERE BuildingNumber='"+buildingNumber+"';" +
                             "UPDATE Stock SET TotalMatressBase+=(SELECT COUNT(SID) " +
                             "FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"') WHERE BuildingNumber='"+buildingNumber+"'";
-                    int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure you want to deallocate these students?",
+                    int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure these students has returned their equipments?",
                             "confirm",JOptionPane.YES_NO_OPTION);
                     if(choice == 0) updateStatus = deallocate(query);
                     deallocate(query2);
