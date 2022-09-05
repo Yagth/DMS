@@ -29,11 +29,13 @@ public class DeallocateButtonListener implements ActionListener {
                 else{
                     int yearInt = Integer.parseInt(year);
                     boolean updateStatus = false;
-                    query = "DELETE FROM STUDENT WHERE year="+yearInt;
-                    query2 = "UPDATE Stock AS S SET TotalPillow+=(SELECT COUNT(SID) FROM STUDENT WHERE year="+yearInt+"), " +
-                            "SET TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE year="+yearInt+") , " +
-                            "SET TotalMatressBase+=(SELECT COUNT(SID) FROM STUDENT WHERE year="+yearInt+") " +
-                            "WHERE BuildingNumber='"+buildingNumber+"'";
+                    query = "DELETE FROM STUDENT WHERE year="+yearInt+"WHERE BuildingNumber='\"+buildingNumber+\"';";
+                    query2 = "UPDATE Stock SET TotalPillow+=(SELECT COUNT(SID) " +
+                            "FROM STUDENT WHERE year="+yearInt+" WHERE BuildingNumber='"+buildingNumber+"') WHERE BuildingNumber='"+buildingNumber+"';" +
+                            "SET TotalMatress+=(SELECT COUNT(SID) " +
+                            "FROM STUDENT WHERE year="+yearInt+"WHERE BuildingNumber='"+buildingNumber+"' ) WHERE BuildingNumber='"+buildingNumber+"';" +
+                            "SET TotalMatressBase+=(SELECT COUNT(SID) " +
+                            "FROM STUDENT WHERE year="+yearInt+" WHERE BuildingNumber='"+buildingNumber+"') WHERE BuildingNumber='"+buildingNumber+"'";
                     int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure you want to deallocate these students?",
                             "confirm",JOptionPane.YES_NO_OPTION);
                     if(choice == 0) updateStatus = deallocate(query);
