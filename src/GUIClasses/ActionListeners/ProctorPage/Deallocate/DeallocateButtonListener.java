@@ -37,10 +37,16 @@ public class DeallocateButtonListener implements ActionListener {
                             " WHERE BuildingNumber='"+buildingNumber+"';";
                     int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure these students has returned their equipments?",
                             "confirm",JOptionPane.YES_NO_OPTION);
-                    if(choice == 0) updateStatus = deallocate(query);
-                    deallocate(query2);
-                    updateStatus&=updateStatus;
-                    displayUpdateStatus(updateStatus);
+                    if(!(parentComponent.getNumberOfStudentsL().getText().equals("0"))){ // If there are students satisfying the condition.
+                        if(choice==0) updateStatus = deallocate(query) & deallocate(query2);
+                        displayUpdateStatus(updateStatus);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(parentComponent,"Zero students deallocated");
+                    }
+
+                    parentComponent.makeParentComponentVisible();
+                    parentComponent.dispose();
                 }
             }
             else{
@@ -61,9 +67,11 @@ public class DeallocateButtonListener implements ActionListener {
                     "confirm",JOptionPane.YES_NO_OPTION);
             if(!(parentComponent.getNumberOfStudentsL().getText().equals("0"))){ // If there are students satisfying the condition.
                 if(choice==0) updateStatus = deallocate(query) & deallocate(query2);
+                displayUpdateStatus(updateStatus);
             }
-            displayUpdateStatus(updateStatus);
-
+            else{
+                JOptionPane.showMessageDialog(parentComponent,"Zero students deallocated");
+            }
             parentComponent.makeParentComponentVisible();
             parentComponent.dispose();
         }
