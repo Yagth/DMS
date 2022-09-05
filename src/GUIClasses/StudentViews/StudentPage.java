@@ -16,7 +16,7 @@ import GUIClasses.Interfaces.TableViews;
 public class StudentPage extends JFrame implements TableViews {
     Student student;
     ResultSet dormMates;
-    private JPanel MainPanel;
+    private JPanel mainPanel;
     private JPanel topPanel;
     private JLabel studentName;
     private JLabel studentID;
@@ -111,7 +111,7 @@ public class StudentPage extends JFrame implements TableViews {
     @Override
     public void setUpGUi() {
         this.setTitle("My Dormitory");
-        this.setContentPane(MainPanel);
+        this.setContentPane(mainPanel);
         this.setSize(WIDTH.getSize(), HEIGHT.getSize());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);

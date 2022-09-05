@@ -32,6 +32,7 @@ public class LoginButtonActionListener implements ActionListener {
                     parentComponent.dispose();
                 }
                 JOptionPane.showMessageDialog(null,"Login successful","Logged in",JOptionPane.INFORMATION_MESSAGE);
+
             }
             else{
                 JOptionPane.showMessageDialog(parentComponent,"Wrong credentials Please try again","Login error",JOptionPane.ERROR_MESSAGE);
