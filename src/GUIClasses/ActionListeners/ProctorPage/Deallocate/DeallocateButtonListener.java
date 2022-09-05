@@ -60,9 +60,9 @@ public class DeallocateButtonListener implements ActionListener {
                     "UPDATE Stock SET TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0)WHERE BuildingNumber='"+buildingNumber+"';" ;
             int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure you want to deallocate these students?",
                     "confirm",JOptionPane.YES_NO_OPTION);
-            if(choice == 0) updateStatus = deallocate(query);
-            deallocate(query2);
-            updateStatus&=updateStatus;
+            if(!(parentComponent.getNumberOfStudentsL().getText().equals("0"))){ // If there are students satisfying the condition.
+                if(choice==0) updateStatus = deallocate(query) & deallocate(query2);
+            }
             displayUpdateStatus(updateStatus);
 
             parentComponent.makeParentComponentVisible();
