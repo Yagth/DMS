@@ -16,10 +16,12 @@ public class DeallocateBatchItemListener implements ItemListener {
     public void itemStateChanged(ItemEvent e) {
         String selectedCondition = parentComponent.getSelectedCondition();
         if(selectedCondition.equals("deallocate Batch of students")){
+            parentComponent.getNumberOfStudentsL().setText("");
             parentComponent.setYearTFVisibility(true);
             parentComponent.revalidate();
         }
         else if(selectedCondition.equals("deallocate non eligible")){
+            parentComponent.getNumberOfStudentsL().setText("");
             parentComponent.setYearTFVisibility(false);
             parentComponent.revalidate();
             parentComponent.setNumberOfStudentsL();

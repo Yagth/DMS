@@ -96,7 +96,9 @@ public class DeallocateDormView extends JFrame implements Views {
         this.setVisible(true);
         conditions.addItem("deallocate Batch of students");
         conditions.addItem("deallocate non eligible");
+        conditions.setSelectedIndex(1);
         conditions.addItemListener(new DeallocateBatchItemListener(this));
+        setNumberOfStudentsL();
     }
 
     public JLabel getNumberOfStudentsL(){
