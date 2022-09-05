@@ -29,14 +29,12 @@ public class DeallocateButtonListener implements ActionListener {
                 else{
                     int yearInt = Integer.parseInt(year);
                     boolean updateStatus = false;
-                    query2 ="UPDATE STUDENT SET RoomNumber=null WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"';"+
-                            "UPDATE STUDENT SET BuildingNumber=null WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"';";
-                    query = "UPDATE Stock SET TotalPillow+=(SELECT COUNT(SID) " +
-                            "FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"') WHERE BuildingNumber='"+buildingNumber+"';" +
-                            "UPDATE Stock SET TotalMatress+=(SELECT COUNT(SID) " +
-                            "FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"' ) WHERE BuildingNumber='"+buildingNumber+"';" +
-                            "UPDATE Stock SET TotalMatressBase+=(SELECT COUNT(SID) " +
-                            "FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"') WHERE BuildingNumber='"+buildingNumber+"'";
+                    query2 ="UPDATE STUDENT SET RoomNumber=null, BuildingNumber=null WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"';";
+                    query = "UPDATE Stock SET" +
+                                " TotalPillow+=(SELECT COUNT(SID) FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"')," +
+                                " TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"' ),"+
+                                " TotalMatressBase+=(SELECT COUNT(SID) FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"')"+
+                            " WHERE BuildingNumber='"+buildingNumber+"';";
                     int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure these students has returned their equipments?",
                             "confirm",JOptionPane.YES_NO_OPTION);
                     if(choice == 0) updateStatus = deallocate(query);
@@ -53,11 +51,12 @@ public class DeallocateButtonListener implements ActionListener {
             buildingNumber = String.valueOf(parentComponent.getProctor().getBuildingNo());
             String query = null, query2 = null;
             boolean updateStatus = false;
-            query2 = "UPDATE STUDENT SET BuildingNumber=null WHERE isEligible="+0+";"+
-                    "UPDATE STUDENT SET RoomNumber=null WHERE isEligible="+0;
-            query = "UPDATE Stock SET TotalPillow+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0) WHERE BuildingNumber='"+buildingNumber+"';" +
-                    "UPDATE Stock SET TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0)WHERE BuildingNumber='"+buildingNumber+"';" +
-                    "UPDATE Stock SET TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0)WHERE BuildingNumber='"+buildingNumber+"';" ;
+            query2 = "UPDATE STUDENT SET BuildingNumber=null, RoomNumber=null WHERE isEligible="+0+";";
+            query = "UPDATE Stock SET" +
+                        " TotalPillow+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0), " +
+                        " TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0), " +
+                        " TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0) " +
+                    " WHERE BuildingNumber='"+buildingNumber+"';";
             int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure you want to deallocate these students?",
                     "confirm",JOptionPane.YES_NO_OPTION);
             if(!(parentComponent.getNumberOfStudentsL().getText().equals("0"))){ // If there are students satisfying the condition.
