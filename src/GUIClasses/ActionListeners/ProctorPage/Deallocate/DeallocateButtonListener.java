@@ -29,8 +29,8 @@ public class DeallocateButtonListener implements ActionListener {
                 else{
                     int yearInt = Integer.parseInt(year);
                     boolean updateStatus = false;
-                    query2 = "UPDATE STUDENT SET BuildingNumber=null WHERE year="+yearInt+"AND BuildingNumber='"+buildingNumber+"';"+
-                            "UPDATE STUDENT SET RoomNumber=null WHERE year="+yearInt+"AND BuildingNumber='"+buildingNumber+"';";
+                    query2 ="UPDATE STUDENT SET RoomNumber=null WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"';"+
+                            "UPDATE STUDENT SET BuildingNumber=null WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"';";
                     query = "UPDATE Stock SET TotalPillow+=(SELECT COUNT(SID) " +
                             "FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"') WHERE BuildingNumber='"+buildingNumber+"';" +
                             "UPDATE Stock SET TotalMatress+=(SELECT COUNT(SID) " +
