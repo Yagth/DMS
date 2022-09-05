@@ -29,14 +29,14 @@ public class DeallocateButtonListener implements ActionListener {
                 else{
                     int yearInt = Integer.parseInt(year);
                     boolean updateStatus = false;
-                    query2 = "UPDATE STUDENT SET BuildingNumber=null WHERE year="+yearInt+"WHERE BuildingNumber='"+buildingNumber+"';"+
-                            "UPDATE STUDENT SET RoomNumber=null WHERE year="+yearInt+"WHERE BuildingNumber='"+buildingNumber+"';";
+                    query2 = "UPDATE STUDENT SET BuildingNumber=null WHERE year="+yearInt+"AND BuildingNumber='"+buildingNumber+"';"+
+                            "UPDATE STUDENT SET RoomNumber=null WHERE year="+yearInt+"AND BuildingNumber='"+buildingNumber+"';";
                     query = "UPDATE Stock SET TotalPillow+=(SELECT COUNT(SID) " +
-                            "FROM STUDENT WHERE year="+yearInt+" WHERE BuildingNumber='"+buildingNumber+"') WHERE BuildingNumber='"+buildingNumber+"';" +
+                            "FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"') WHERE BuildingNumber='"+buildingNumber+"';" +
                             "SET TotalMatress+=(SELECT COUNT(SID) " +
-                            "FROM STUDENT WHERE year="+yearInt+"WHERE BuildingNumber='"+buildingNumber+"' ) WHERE BuildingNumber='"+buildingNumber+"';" +
+                            "FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"' ) WHERE BuildingNumber='"+buildingNumber+"';" +
                             "SET TotalMatressBase+=(SELECT COUNT(SID) " +
-                            "FROM STUDENT WHERE year="+yearInt+" WHERE BuildingNumber='"+buildingNumber+"') WHERE BuildingNumber='"+buildingNumber+"'";
+                            "FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"') WHERE BuildingNumber='"+buildingNumber+"'";
                     int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure you want to deallocate these students?",
                             "confirm",JOptionPane.YES_NO_OPTION);
                     if(choice == 0) updateStatus = deallocate(query);
