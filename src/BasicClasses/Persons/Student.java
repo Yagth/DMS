@@ -51,9 +51,17 @@ public class Student extends Person{
         this.eligibility = eligibility;
     }
     public void setBuildingNo(String buildingNo) {
-        this.buildingNo = Integer.parseInt(buildingNo);
+        try{
+            this.buildingNo = Integer.parseInt(buildingNo);
+        } catch (NumberFormatException ex) {
+            //DO nothing here to keep the variable null.
+        }
     }
     public void setDormNo(String dormNo) {
-        this.dormNo = Integer.parseInt(dormNo);
+        try{
+            this.dormNo = Integer.parseInt(dormNo);
+        } catch (NumberFormatException ex) {
+            //DO nothing here to keep the variable null.
+        }
     }
 }
