@@ -116,6 +116,10 @@ public class LoginPage extends JFrame implements Views {
                 student.setDormNo(temp.getString("RoomNumber"));
                 student.setEligibility(temp.getBoolean("isEligible"));
                 student.setPlaceOfOrigin(temp.getString("place"));
+
+                boolean noDorm = student.getBuildingNo() == 0 & student.getBuildingNo() == 0;
+                if(noDorm)
+                    JOptionPane.showMessageDialog(null,"You don't have dormitory yet.");
             }
 
         }catch (SQLException ex){
