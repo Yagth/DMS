@@ -79,6 +79,7 @@ public class DeallocateDormView extends JFrame implements Views {
         this.setTitle("Deallocate Dorm");
         this.setSize(530,300);
         this.setLocationRelativeTo(parentComponent);
+        yearTF.setText("");
         backButton.addActionListener(new DeallocateBackButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {
