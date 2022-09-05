@@ -117,12 +117,12 @@ public class DeallocateDormView extends JFrame implements Views {
     public void setNumberOfStudentsL(){
         String condition = getSelectedCondition();
         if(condition.equals("deallocate Batch of students")){
-            String query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT WHERE Year="+getYear();
+            String query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT WHERE Year="+getYear()+" AND RoomNumber!=null AND BuildingNumber!=null";
             numberOfStudentsL.setText(String.valueOf(getNoOfStudent(query)));
             numberOfStudentsL.setVisible(true);
         }
         else if(condition.equals("deallocate non eligible")){
-            String query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT WHERE isEligible="+0;
+            String query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT WHERE isEligible="+0+" AND RoomNumber!=null AND BuildingNumber!=null";
             numberOfStudentsL.setText(String.valueOf(getNoOfStudent(query)));
             numberOfStudentsL.setVisible(true);
         }
