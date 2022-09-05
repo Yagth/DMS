@@ -10,7 +10,7 @@ import java.util.Vector;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
-import GUIClasses.ActionListeners.StudentPage.*;
+import GUIClasses.ActionListeners.StudentView.StudentPage.*;
 import GUIClasses.Interfaces.TableViews;
 
 public class StudentPage extends JFrame implements TableViews {

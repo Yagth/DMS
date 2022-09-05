@@ -1,8 +1,7 @@
-package GUIClasses.ActionListeners.ProctorPage;
+package GUIClasses.ActionListeners.ProctorView.ProctorPage;
 
 import GUIClasses.ProctorViews.ProctorPage;
 import GUIClasses.ProctorViews.StudentView;
-import GUIClasses.StudentViews.StudentPage;
 
 import java.awt.event.ActionEvent;
 

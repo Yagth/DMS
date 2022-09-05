@@ -1,8 +1,7 @@
-package GUIClasses.ActionListeners.DormitoryView;
+package GUIClasses.ActionListeners.ProctorView.DormitoryView;
 
 import GUIClasses.ProctorViews.DormitoryView;
 
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 public abstract class LabelListener implements MouseListener {

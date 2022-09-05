@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners.ProctorPage;
+package GUIClasses.ActionListeners.ProctorView.ProctorPage;
 
 import GUIClasses.ProctorViews.DormitoryView;
 import GUIClasses.ProctorViews.ProctorPage;

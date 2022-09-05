@@ -2,10 +2,9 @@ package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Persons.Proctor;
-import GUIClasses.ActionListeners.ChangeBackButtonListener;
-import GUIClasses.ActionListeners.DormitoryView.BackLabelListener;
-import GUIClasses.ActionListeners.DormitoryView.ChangeMenuListener;
-import GUIClasses.ActionListeners.DormitoryView.DeallocateMenuListener;
+import GUIClasses.ActionListeners.ProctorView.DormitoryView.BackLabelListener;
+import GUIClasses.ActionListeners.ProctorView.DormitoryView.ChangeMenuListener;
+import GUIClasses.ActionListeners.ProctorView.DormitoryView.DeallocateMenuListener;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;

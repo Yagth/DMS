@@ -4,7 +4,7 @@ import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
 import GUIClasses.ActionListeners.SeeYourRequestBackButtonListener;
-import GUIClasses.ActionListeners.StudentPage.SeeYourRequestClickListener;
+import GUIClasses.ActionListeners.StudentView.StudentPage.SeeYourRequestClickListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 

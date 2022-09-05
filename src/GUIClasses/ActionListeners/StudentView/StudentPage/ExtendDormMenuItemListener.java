@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners.StudentPage;
+package GUIClasses.ActionListeners.StudentView.StudentPage;
 
 import GUIClasses.StudentViews.ExtendDormStayForm;
 import GUIClasses.StudentViews.StudentPage;

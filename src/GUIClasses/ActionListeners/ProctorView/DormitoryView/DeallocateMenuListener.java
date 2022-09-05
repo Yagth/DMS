@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners.DormitoryView;
+package GUIClasses.ActionListeners.ProctorView.DormitoryView;
 
 import GUIClasses.ProctorViews.DeallocateDormView;
 import GUIClasses.ProctorViews.DormitoryView;

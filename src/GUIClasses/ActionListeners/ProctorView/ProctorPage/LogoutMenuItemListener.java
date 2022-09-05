@@ -1,12 +1,10 @@
-package GUIClasses.ActionListeners.ProctorPage;
+package GUIClasses.ActionListeners.ProctorView.ProctorPage;
 
 import GUIClasses.LoginPage;
 import GUIClasses.ProctorViews.ProctorPage;
-import GUIClasses.StudentViews.StudentPage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class LogoutMenuItemListener extends MenuItemListener {
 

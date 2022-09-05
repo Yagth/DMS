@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners.DormitoryView;
+package GUIClasses.ActionListeners.ProctorView.DormitoryView;
 
 import GUIClasses.ProctorViews.ChangeDormView;
 import GUIClasses.ProctorViews.DormitoryView;

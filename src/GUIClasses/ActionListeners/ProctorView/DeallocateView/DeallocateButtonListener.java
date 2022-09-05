@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners.ProctorPage.Deallocate;
+package GUIClasses.ActionListeners.ProctorView.DeallocateView;
 
 import BasicClasses.Others.JavaConnection;
 import GUIClasses.ProctorViews.DeallocateDormView;
@@ -6,7 +6,6 @@ import GUIClasses.ProctorViews.DeallocateDormView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 
 public class DeallocateButtonListener implements ActionListener {
     private DeallocateDormView parentComponent;

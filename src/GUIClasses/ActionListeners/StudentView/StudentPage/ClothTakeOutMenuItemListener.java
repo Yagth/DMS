@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners.StudentPage;
+package GUIClasses.ActionListeners.StudentView.StudentPage;
 
 import GUIClasses.StudentViews.ClothTakeOutForm;
 import GUIClasses.StudentViews.StudentPage;

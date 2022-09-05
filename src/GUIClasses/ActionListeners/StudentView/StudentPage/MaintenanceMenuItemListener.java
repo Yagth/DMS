@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners.StudentPage;
+package GUIClasses.ActionListeners.StudentView.StudentPage;
 
 import GUIClasses.StudentViews.MaintenanceRequestForm;
 import GUIClasses.StudentViews.StudentPage;

@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners.ProctorPage.Deallocate;
+package GUIClasses.ActionListeners.ProctorView.DeallocateView;
 
 import GUIClasses.ProctorViews.DeallocateDormView;
 
