@@ -78,7 +78,7 @@ public class DeallocateDormView extends JFrame implements Views {
     public void setUpGUi() {
         this.setContentPane(mainPanel);
         this.setTitle("Deallocate Dorm");
-        this.setSize(530,300);
+        this.setSize(650,300);
         this.setLocationRelativeTo(parentComponent);
         yearTF.setText("");
         yearTF.addActionListener(new YearTFListener(this));
