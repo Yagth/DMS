@@ -46,6 +46,15 @@ public class JavaConnection {
             return 0;
         }
     }
+    public boolean updateQuery(String query){
+        try{
+            statement.execute(query);
+            return true;
+        }catch (SQLException ex){
+            ex.printStackTrace();//For debugging purposes
+            return false;
+        }
+    }
 
     public ResultSet selectQuery(String query){
         ResultSet tmpResultSet;

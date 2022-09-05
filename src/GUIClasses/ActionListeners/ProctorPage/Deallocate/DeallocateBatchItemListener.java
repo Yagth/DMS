@@ -2,8 +2,6 @@ package GUIClasses.ActionListeners.ProctorPage.Deallocate;
 
 import GUIClasses.ProctorViews.DeallocateDormView;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -17,12 +15,13 @@ public class DeallocateBatchItemListener implements ItemListener {
         String selectedCondition = parentComponent.getSelectedCondition();
         if(selectedCondition.equals("deallocate Batch of students")){
             parentComponent.getNumberOfStudentsL().setText("");
-            parentComponent.setYearTFVisibility(true);
+            parentComponent.adjustVisisblity(true);
             parentComponent.revalidate();
         }
         else if(selectedCondition.equals("deallocate non eligible")){
             parentComponent.getNumberOfStudentsL().setText("");
-            parentComponent.setYearTFVisibility(false);
+            parentComponent.adjustVisisblity(false);
+            parentComponent.
             parentComponent.revalidate();
             parentComponent.setNumberOfStudentsL();
         }

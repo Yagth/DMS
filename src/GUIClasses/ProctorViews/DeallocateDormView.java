@@ -21,6 +21,7 @@ public class DeallocateDormView extends JFrame implements Views {
     private JButton deallocateButton;
     private JLabel numberOfStudentsL;
     private JFormattedTextField yearTF;
+    private JLabel fromBuildingNoL;
     private Proctor proctor;
     private DormitoryView parentComponent;
     public DeallocateDormView(DormitoryView parentComponent, Proctor proctor){
@@ -99,13 +100,16 @@ public class DeallocateDormView extends JFrame implements Views {
         conditions.setSelectedIndex(1);
         conditions.addItemListener(new DeallocateBatchItemListener(this));
         setNumberOfStudentsL();
+        adjustVisisblity(false);
     }
 
     public JLabel getNumberOfStudentsL(){
         return numberOfStudentsL;
     }
-    public void setYearTFVisibility(boolean visibility){
+    public void adjustVisisblity(boolean visibility){
         yearTF.setVisible(visibility);
+        fromBuildingNoTF.setVisible(visibility);
+        fromBuildingNoL.setVisible(visibility);
     }
 
     public void setNumberOfStudentsL(){
@@ -120,5 +124,11 @@ public class DeallocateDormView extends JFrame implements Views {
             numberOfStudentsL.setText(String.valueOf(getNoOfStudent(query)));
             numberOfStudentsL.setVisible(true);
         }
+    }
+    public String getFromBuildingNumber(){
+        return fromBuildingNoTF.getText();
+    }
+    public Proctor getProctor(){
+        return proctor;
     }
 }
