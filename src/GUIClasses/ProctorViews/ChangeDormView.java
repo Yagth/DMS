@@ -39,9 +39,6 @@ public class ChangeDormView extends JFrame implements Views {
         this.parentComponent = parentComponent;
         setUpGUi();
     }
-    public ChangeDormView(){
-        this(null,null);
-    }//For debugging only constructor.
     public void showParentComponent(){
         parentComponent.setVisible(true);
     }
