@@ -36,7 +36,7 @@ public class ChangeButtonListener implements ActionListener {
         Student student = parentComponent.getStudent();
         String query ="";
 
-        if(toBuildingNo == null){
+        if(toBuildingNo.equals("")){
             JOptionPane.showMessageDialog(parentComponent,"Destination building is empty",
                     "Empty message",JOptionPane.ERROR_MESSAGE);
             return;
@@ -74,7 +74,7 @@ public class ChangeButtonListener implements ActionListener {
 
         if(condition.equals("Change single student")){
 
-            if(toRoomNo == null){
+            if(toRoomNo.equals("")){
                 JOptionPane.showMessageDialog(parentComponent,"Destination dorm number is empty",
                         "Empty message",JOptionPane.ERROR_MESSAGE);
                 return;
@@ -108,7 +108,7 @@ public class ChangeButtonListener implements ActionListener {
                 updateStatus = javaConnection.updateQuery(query);
         }
         else {
-            if(fromBuildingNo == null){
+            if(fromBuildingNo.equals("")){
                 JOptionPane.showMessageDialog(parentComponent,"From building is empty",
                         "Empty message",JOptionPane.ERROR_MESSAGE);
                 return;
