@@ -76,7 +76,7 @@ public class ChangeDormView extends JFrame implements Views {
     }
     public boolean setStudentIfFound(){
         String SID = getSid();
-        String query = "SELECT Fname FROM STUDENT WHERE SID='"+SID+"'";
+        String query = "SELECT * FROM STUDENT WHERE SID='"+SID+"'";
         String fname = null;
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet = null;
