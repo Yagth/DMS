@@ -30,14 +30,13 @@ public class ChangeButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus = false;
         String condition = parentComponent.getSelectedCondition();
-        String fromBuildingNo = parentComponent.getBuildingNo();
         String toBuildingNo = parentComponent.getDestinationBuildingNo();
         String toRoomNo = parentComponent.getDestinationRoomNo();
         Student student = parentComponent.getStudent();
         String query ="";
         try{
             query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
-                    "WHERE BuildingNumber='"+fromBuildingNo+"' AND RoomNumber='"+student.getDormNo()+"'";
+                    "WHERE BuildingNumber='"+student.getBuildingNo()+"' AND RoomNumber='"+student.getDormNo()+"'";
         } catch (NullPointerException ex){
             ex.printStackTrace();//For debugging only.
             JOptionPane.showMessageDialog(parentComponent,"Make sure you enter the student id"
@@ -48,9 +47,12 @@ public class ChangeButtonListener implements ActionListener {
         int numberOfStudents = 0;
         if(javaConnection.isConnected()){
             ResultSet rs = javaConnection.selectQuery(query);
+            System.out.println("Query:"+query);//Remove after debugging.
             try{
                 while(rs.next()){
                     numberOfStudents = rs.getInt("numberOfStudents");
+                    System.out.println("Inside while Loop");//Remove after debugging.
+                    System.out.println("Number of students form loop: "+numberOfStudents);//Remove after debugging.
                 }
             } catch (SQLException ex){
                 ex.printStackTrace(); //For debugging only.
@@ -75,6 +77,8 @@ public class ChangeButtonListener implements ActionListener {
                 }catch (SQLException ex){
                     ex.printStackTrace(); //For debugging only.
                 }
+                System.out.println("Max capacity:"+maxCapacity);//remove after debugging.
+                System.out.println("Number of Student: "+numberOfStudents);
             }
             if(numberOfStudents>=maxCapacity){
                 JOptionPane.showMessageDialog(parentComponent,"There is not enough space in the dorm aborting change.",
