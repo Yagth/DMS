@@ -13,9 +13,8 @@ public class ConditionItemChangedListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
         String condition = parentComponent.getSelectedCondition();
-        String query;
-        if(condition.equals("Change Batch of students")){
-
-        }
+        if(condition.equals("Change single student"))
+            parentComponent.updateViewOnCondition(true);
+        else parentComponent.updateViewOnCondition(false);
     }
 }

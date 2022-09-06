@@ -76,20 +76,20 @@ public class ChangeDormView extends JFrame implements Views {
         }
         return numberOfStudents;
     }
-    public void updateViewOnCondition(boolean visibility){
+    public void updateViewOnCondition(boolean singleStudent){
         /*
         This method will set the invisible components to visible and
         vice versa by checking the selected condition in the comboBox.
          */
-        numberOfStudentsL.setVisible(!visibility);
-        noOfStudentsL.setVisible(!visibility);
-        yearTF.setVisible(!visibility);
-        searchStudentL.setVisible(visibility);
-        searchTF.setVisible(visibility);
-        fromRoomNoTF.setVisible(visibility);
-        fromRoomNumberL.setVisible(visibility);
-        toRoomNoTF.setVisible(visibility);
-        toRoomNoL.setVisible(visibility);
+        numberOfStudentsL.setVisible(!singleStudent);
+        noOfStudentsL.setVisible(!singleStudent);
+        yearTF.setVisible(!singleStudent);
+        searchStudentL.setVisible(singleStudent);
+        searchTF.setVisible(singleStudent);
+        fromRoomNoTF.setVisible(singleStudent);
+        fromRoomNumberL.setVisible(singleStudent);
+        toRoomNoTF.setVisible(singleStudent);
+        toRoomNoL.setVisible(singleStudent);
     }
 
     public void setNumberOfStudentsL(int noOfStudent){
