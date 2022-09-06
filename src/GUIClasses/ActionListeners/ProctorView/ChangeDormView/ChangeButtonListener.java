@@ -31,10 +31,22 @@ public class ChangeButtonListener implements ActionListener {
         boolean updateStatus = false;
         String condition = parentComponent.getSelectedCondition();
         String fromBuildingNo = parentComponent.getBuildingNo();
-        String fromDormNo = String.valueOf(parentComponent.getStudent().getDormNo());
         String toBuildingNo = parentComponent.getDestinationBuildingNo();
         String toRoomNo = parentComponent.getDestinationRoomNo();
-        String query;
+        Student student = parentComponent.getStudent();
+        String query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
+                "WHERE BuildingNumber='"+fromBuildingNo+"' RoomNumber='"+student.getDormNo()+"'";
+        int numberOfStudents = 0;
+        if(javaConnection.isConnected()){
+            ResultSet rs = javaConnection.selectQuery(query);
+            try{
+                while(rs.next()){
+                    numberOfStudents = rs.getInt("numberOfStudents");
+                }
+            } catch (SQLException ex){
+                ex.printStackTrace(); //For debugging only.
+            }
+        }
         int choice = JOptionPane.showConfirmDialog(parentComponent,
                 "Are you sure you want to change the students?","Confirm Change",
                 JOptionPane.YES_NO_OPTION);
@@ -42,9 +54,28 @@ public class ChangeButtonListener implements ActionListener {
         if(choice == 1) return; //If the choice is no, none of the changing process will be done.
 
         if(condition.equals("Change single student")){
+            int maxCapacity = 0;
+            query = "SELECT maxCapacity FROM DORM WHERE RoomNumber='"+toRoomNo+
+                    "' AND BuildingNumber='"+toBuildingNo+"'";
+            if(javaConnection.isConnected()){
+                ResultSet rs = javaConnection.selectQuery(query);
+                try{
+                    while(rs.next()){
+                        maxCapacity = rs.getInt("maxCapacity");
+                    }
+                }catch (SQLException ex){
+                    ex.printStackTrace(); //For debugging only.
+                }
+            }
+            if(numberOfStudents>=maxCapacity){
+                JOptionPane.showMessageDialog(parentComponent,"There is not enough space in the dorm aborting change.",
+                        "Not enough space",JOptionPane.ERROR_MESSAGE);
+                return; //Aborts the change if not enough space by returning from action performed method.
+            }
+
             query = "UPDATE STUDENT SET BuildingNumber='"+toBuildingNo+"', " +
                     "RoomNumber='"+toRoomNo+"' " +
-                    "WHERE BuildingNumber='"+fromBuildingNo+"' AND RoomNumber='"+fromDormNo+"';";
+                    "WHERE SID ='"+student.getsId()+"';";
             if(javaConnection.isConnected())
                 updateStatus = javaConnection.updateQuery(query);
         }
