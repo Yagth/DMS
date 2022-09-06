@@ -77,24 +77,35 @@ public class ChangeDormView extends JFrame implements Views {
         }
         return numberOfStudents;
     }
-    public boolean studentIsFound(){
+    public boolean setStudentIfFound(){
         String SID = getSid();
         String query = "SELECT Fname FROM STUDENT WHERE SID='"+SID+"'";
         String fname = null;
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet = null;
+        boolean studentIsFound = false;
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
         }
         try{
             while(resultSet.next()){
                 fname = resultSet.getString("Fname");
+                studentIsFound = !(fname == null);
+                if(studentIsFound){
+                    student = new Student(fname,resultSet.getString("Lname"),
+                            SID,resultSet.getString("Gender"));
+                    student.setDormNo(resultSet.getString("RoomNumber"));
+                    student.setBuildingNo(resultSet.getString("BuildingNumber"));
+                }
             }
         } catch (SQLException ex){
-            return false;
+            ex.printStackTrace();//For debugging only.
         }
-        return !(fname == null); //Returns true if the student is found.
+        return  studentIsFound; //Returns true if the student is found.
 
+    }
+    public Student getStudent(){
+        return student;
     }
     public void updateViewOnCondition(boolean singleStudent){
         /*

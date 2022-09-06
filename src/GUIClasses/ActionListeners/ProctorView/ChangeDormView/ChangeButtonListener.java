@@ -31,7 +31,7 @@ public class ChangeButtonListener implements ActionListener {
         boolean updateStatus = false;
         String condition = parentComponent.getSelectedCondition();
         String fromBuildingNo = parentComponent.getBuildingNo();
-        String fromDormNo = parentComponent.getDormNo();
+        String fromDormNo = String.valueOf(parentComponent.getStudent().getDormNo());
         String toBuildingNo = parentComponent.getDestinationBuildingNo();
         String toRoomNo = parentComponent.getDestinationRoomNo();
         String query;
