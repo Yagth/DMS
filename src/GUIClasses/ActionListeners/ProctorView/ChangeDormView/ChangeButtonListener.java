@@ -34,8 +34,14 @@ public class ChangeButtonListener implements ActionListener {
         String toBuildingNo = parentComponent.getDestinationBuildingNo();
         String toRoomNo = parentComponent.getDestinationRoomNo();
         Student student = parentComponent.getStudent();
-        String query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
-                "WHERE BuildingNumber='"+fromBuildingNo+"' AND RoomNumber='"+student.getDormNo()+"'";
+        String query ="";
+        try{
+            query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
+                    "WHERE BuildingNumber='"+fromBuildingNo+"' AND RoomNumber='"+student.getDormNo()+"'";
+        } catch (NullPointerException ex){
+            JOptionPane.showMessageDialog(parentComponent,"Make sure you hit enter after inserting student id");
+        }
+
         int numberOfStudents = 0;
         if(javaConnection.isConnected()){
             ResultSet rs = javaConnection.selectQuery(query);
