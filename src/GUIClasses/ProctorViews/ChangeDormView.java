@@ -4,6 +4,7 @@ import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Persons.Student;
 import GUIClasses.ActionListeners.ChangeBackButtonListener;
+import GUIClasses.ActionListeners.ProctorView.ChangeDormView.ChangeButtonListener;
 import GUIClasses.ActionListeners.ProctorView.ChangeDormView.ConditionItemChangedListener;
 import GUIClasses.ActionListeners.ProctorView.ChangeDormView.SearchTFListener;
 import GUIClasses.ActionListeners.ProctorView.ChangeDormView.YearTFListener;
@@ -146,7 +147,7 @@ public class ChangeDormView extends JFrame implements Views {
         conditions.addItemListener(new ConditionItemChangedListener(this));
         searchTF.addActionListener(new SearchTFListener(this));
         yearTF.addActionListener(new YearTFListener(this));
-        changeButton.addActionListener(new ChangeBackButtonListener(this));
+        changeButton.addActionListener(new ChangeButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {
             @Override

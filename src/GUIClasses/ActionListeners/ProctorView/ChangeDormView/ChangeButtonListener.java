@@ -35,7 +35,6 @@ public class ChangeButtonListener implements ActionListener {
         String toBuildingNo = parentComponent.getDestinationBuildingNo();
         String toRoomNo = parentComponent.getDestinationRoomNo();
         String query;
-        ResultSet resultSet = null;
         int choice = JOptionPane.showConfirmDialog(parentComponent,
                 "Are you sure you want to change the students?","Confirm Change",
                 JOptionPane.YES_NO_OPTION);
