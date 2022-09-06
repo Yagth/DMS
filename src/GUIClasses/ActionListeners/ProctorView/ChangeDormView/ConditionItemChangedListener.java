@@ -13,8 +13,16 @@ public class ConditionItemChangedListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
         String condition = parentComponent.getSelectedCondition();
+        String buildingNo = parentComponent.getBuildingNo();
+        String roomNo = parentComponent.getDormNo();
+        int year = parentComponent.getYear();
+
         if(condition.equals("Change single student"))
             parentComponent.updateViewOnCondition(true);
-        else parentComponent.updateViewOnCondition(false);
+        else {
+            String query = "SELECT COUNT(SID) FROM STUDENT WHERE BuildingNumber='"+buildingNo+"' AND RoomNumber='"+roomNo+"' AND year="+year;
+            parentComponent.updateViewOnCondition(false);
+            parentComponent.setNumberOfStudentsL(parentComponent.getNoOfStudent(query));
+        }
     }
 }

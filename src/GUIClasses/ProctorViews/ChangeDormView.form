@@ -121,6 +121,7 @@
           </grid>
         </constraints>
         <properties>
+          <text value="Enter student Id here"/>
           <visible value="false"/>
         </properties>
       </component>

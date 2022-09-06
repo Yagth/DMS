@@ -96,6 +96,14 @@ public class ChangeDormView extends JFrame implements Views {
         numberOfStudentsL.setText(String.valueOf(noOfStudent));
     }
 
+    public int getYear(){
+        try{
+           return Integer.parseInt(yearTF.getText());
+        } catch (NumberFormatException ex){
+            return 0;
+        }
+    }
+
     @Override
     public void setUpGUi() {
         this.setTitle("Change Dormitory");
@@ -114,6 +122,7 @@ public class ChangeDormView extends JFrame implements Views {
         }); //A custom action listener for the exit button.
 
         this.setVisible(true);
+        yearTF.setText("");
         conditions.addItem("Change Batch of students");
         conditions.addItem("Change single student");
     }
