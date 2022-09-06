@@ -9,6 +9,7 @@ import GUIClasses.ActionListeners.ProctorView.ChangeDormView.ConditionItemChange
 import GUIClasses.ActionListeners.ProctorView.ChangeDormView.SearchTFListener;
 import GUIClasses.ActionListeners.ProctorView.ChangeDormView.YearTFListener;
 import GUIClasses.Interfaces.Views;
+import jdk.swing.interop.SwingInterOpUtils;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -84,20 +85,22 @@ public class ChangeDormView extends JFrame implements Views {
         boolean studentIsFound = false;
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
-        }
-        try{
-            while(resultSet.next()){
-                fname = resultSet.getString("Fname");
-                studentIsFound = !(fname == null);
-                if(studentIsFound){
-                    student = new Student(fname,resultSet.getString("Lname"),
-                            SID,resultSet.getString("Gender"));
-                    student.setDormNo(resultSet.getString("RoomNumber"));
-                    student.setBuildingNo(resultSet.getString("BuildingNumber"));
+            try{
+                while(resultSet.next()){
+                    fname = resultSet.getString("Fname");
+                    studentIsFound = !(fname == null);
+                    System.out.println("Student is found: "+studentIsFound); //Remove after debugging.
+                    if(studentIsFound){
+                        student = new Student(fname,resultSet.getString("Lname"),
+                                SID,resultSet.getString("Gender"));
+                        student.setDormNo(resultSet.getString("RoomNumber"));
+                        student.setBuildingNo(resultSet.getString("BuildingNumber"));
+                    }
                 }
+            } catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+                System.out.println("Inside the getStudent catch block");
             }
-        } catch (SQLException ex){
-            ex.printStackTrace();//For debugging only.
         }
         return  studentIsFound; //Returns true if the student is found.
 

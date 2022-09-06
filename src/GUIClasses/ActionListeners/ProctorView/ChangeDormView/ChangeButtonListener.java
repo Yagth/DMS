@@ -35,7 +35,7 @@ public class ChangeButtonListener implements ActionListener {
         String toRoomNo = parentComponent.getDestinationRoomNo();
         Student student = parentComponent.getStudent();
         String query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
-                "WHERE BuildingNumber='"+fromBuildingNo+"' RoomNumber='"+student.getDormNo()+"'";
+                "WHERE BuildingNumber='"+fromBuildingNo+"' AND RoomNumber='"+student.getDormNo()+"'";
         int numberOfStudents = 0;
         if(javaConnection.isConnected()){
             ResultSet rs = javaConnection.selectQuery(query);

@@ -15,14 +15,14 @@ public class ConditionItemChangedListener implements ItemListener {
         String condition = parentComponent.getSelectedCondition();
         String buildingNo = parentComponent.getBuildingNo();
         String roomNo = "";
-        try{
-            roomNo = String.valueOf(parentComponent.getStudent().getDormNo());
-        } catch (NullPointerException ex){
-            ex.printStackTrace(); // For debugging purpose only.
-        }
         int year = parentComponent.getYear();
 
         if(condition.equals("Change single student")){
+            try{
+                roomNo = String.valueOf(parentComponent.getStudent().getDormNo());
+            } catch (NullPointerException ex){
+                ex.printStackTrace(); // For debugging purpose only.
+            }
             parentComponent.updateViewOnCondition(true);
             parentComponent.pack();
             parentComponent.revalidate();
