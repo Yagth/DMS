@@ -112,5 +112,6 @@ public class ChangeDormView extends JFrame implements Views {
         conditions.addItem("Change Batch of students");
         conditions.addItem("Change single student");
         conditions.setSelectedIndex(1);
+        updateViewOnCondition(true);
     }
 }
