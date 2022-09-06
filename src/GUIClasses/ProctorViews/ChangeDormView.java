@@ -140,6 +140,10 @@ public class ChangeDormView extends JFrame implements Views {
         return searchTF.getText();
     }
 
+    public void makeParentVisible(){
+        parentComponent.setVisible(true);
+    }
+
     @Override
     public void setUpGUi() {
         this.setTitle("Change Dormitory");

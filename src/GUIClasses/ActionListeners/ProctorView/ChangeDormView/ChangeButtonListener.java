@@ -89,6 +89,8 @@ public class ChangeButtonListener implements ActionListener {
             }
         }
         displayUpdateStatus(updateStatus);
+        parentComponent.dispose();
+        parentComponent.makeParentVisible();
     }
 
     public boolean changeStudents(String fromBuildingNo, String toBuildingNO){
