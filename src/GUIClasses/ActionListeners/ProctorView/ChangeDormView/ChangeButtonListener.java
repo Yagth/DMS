@@ -40,6 +40,7 @@ public class ChangeButtonListener implements ActionListener {
                     "WHERE BuildingNumber='"+fromBuildingNo+"' AND RoomNumber='"+student.getDormNo()+"'";
         } catch (NullPointerException ex){
             JOptionPane.showMessageDialog(parentComponent,"Make sure you hit enter after inserting student id");
+            return;//To exit the action performed method since it can't continue without dormNo.
         }
 
         int numberOfStudents = 0;
