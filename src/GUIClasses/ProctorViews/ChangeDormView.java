@@ -108,6 +108,7 @@ public class ChangeDormView extends JFrame implements Views {
     public Student getStudent(){
         return student;
     }
+    public void setStudent(Student student){this.student = student;}
     public void updateViewOnCondition(boolean singleStudent){
         /*
         This method will set the invisible components to visible and

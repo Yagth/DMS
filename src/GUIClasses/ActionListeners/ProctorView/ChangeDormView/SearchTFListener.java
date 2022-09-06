@@ -15,7 +15,7 @@ public class SearchTFListener implements FocusListener {
 
     @Override
     public void focusGained(FocusEvent e) {
-
+        parentComponent.setStudent(null);
     }
 
     @Override
