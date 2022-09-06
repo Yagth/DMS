@@ -5,6 +5,7 @@ import BasicClasses.Persons.Student;
 import BasicClasses.Rooms.Dormitory;
 import GUIClasses.ProctorViews.ChangeDormView;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.DomainLoadStoreParameter;
@@ -27,6 +28,7 @@ public class ChangeButtonListener implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        boolean updateStatus = false;
         String condition = parentComponent.getSelectedCondition();
         String fromBuildingNo = parentComponent.getBuildingNo();
         String fromDormNo = parentComponent.getDormNo();
@@ -34,10 +36,18 @@ public class ChangeButtonListener implements ActionListener {
         String toRoomNo = parentComponent.getDestinationRoomNo();
         String query;
         ResultSet resultSet = null;
+        int choice = JOptionPane.showConfirmDialog(parentComponent,
+                "Are you sure you want to change the students?","Confirm Change",
+                JOptionPane.YES_NO_OPTION);
+
+        if(choice == 1) return; //If the choice is no, none of the changing process will be done.
+
         if(condition.equals("Change single student")){
             query = "UPDATE STUDENT SET BuildingNumber='"+toBuildingNo+"', " +
                     "RoomNumber='"+toRoomNo+"' " +
                     "WHERE BuildingNumber='"+fromBuildingNo+"' AND RoomNumber='"+fromDormNo+"';";
+            if(javaConnection.isConnected())
+                updateStatus = javaConnection.updateQuery(query);
         }
         else {
             if(javaConnection.isConnected()){
@@ -45,10 +55,10 @@ public class ChangeButtonListener implements ActionListener {
                 sortDormOnAvailableSpace();
                 sortDormOnBuildingNo();
                 groupStudents(fromBuildingNo);
-                changeStudents(fromBuildingNo,toBuildingNo);
+                updateStatus = changeStudents(fromBuildingNo,toBuildingNo);
             }
-
         }
+        displayUpdateStatus(updateStatus);
     }
 
     public boolean changeStudents(String fromBuildingNo, String toBuildingNO){
@@ -194,5 +204,12 @@ public class ChangeButtonListener implements ActionListener {
             totalSpace += dormitory.getMaxCapacity() - dormitory.getNoOfStudents();
         }
         return totalSpace;
+    }
+
+    public void displayUpdateStatus(boolean updateStatus){
+        if(updateStatus)
+            JOptionPane.showMessageDialog(parentComponent,"Change Successful.");
+        else
+            JOptionPane.showMessageDialog(parentComponent,"Couldn't change all students due to space limitation.");
     }
 }
