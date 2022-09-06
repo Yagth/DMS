@@ -8,11 +8,9 @@ import GUIClasses.ProctorViews.ChangeDormView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.DomainLoadStoreParameter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.TreeSet;
 
 public class ChangeButtonListener implements ActionListener {
@@ -35,10 +33,15 @@ public class ChangeButtonListener implements ActionListener {
         String toRoomNo = parentComponent.getDestinationRoomNo();
         Student student = parentComponent.getStudent();
         String query ="";
-        System.out.println("RoomNumber: "+toRoomNo+"_");//Remove after debugging.
 
         if(toBuildingNo.equals("")){
             JOptionPane.showMessageDialog(parentComponent,"Destination building is empty",
+                    "Empty message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if(toRoomNo.equals("")){
+            JOptionPane.showMessageDialog(parentComponent,"Destination dorm number is empty",
                     "Empty message",JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -72,11 +75,7 @@ public class ChangeButtonListener implements ActionListener {
         if(choice == 1) return; //If the choice is no, none of the changing process will be done.
 
         if(condition.equals("Change single student")){
-            if(toRoomNo.equals(" ")){
-                JOptionPane.showMessageDialog(parentComponent,"Destination dorm number is empty",
-                        "Empty message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+            System.out.println("Inside change single student block");//Remove after debugging.
 
             int maxCapacity = 0;
             query = "SELECT maxCapacity FROM DORM WHERE RoomNumber='"+toRoomNo+
@@ -275,6 +274,7 @@ public class ChangeButtonListener implements ActionListener {
         if(updateStatus)
             JOptionPane.showMessageDialog(parentComponent,"Change Successful.");
         else
-            JOptionPane.showMessageDialog(parentComponent,"Couldn't change all students due to space limitation.");
+            JOptionPane.showMessageDialog(parentComponent,"Couldn't change all students due to some problem. " +
+                    "Make sure there is available space and also the destination exits.");
     }
 }
