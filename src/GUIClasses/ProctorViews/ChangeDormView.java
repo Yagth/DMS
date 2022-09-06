@@ -152,7 +152,7 @@ public class ChangeDormView extends JFrame implements Views {
         this.setLocationRelativeTo(parentComponent);
         backButton.addActionListener(new ChangeBackButtonListener(this));
         conditions.addItemListener(new ConditionItemChangedListener(this));
-        searchTF.addActionListener(new SearchTFListener(this));
+        searchTF.addFocusListener(new SearchTFListener(this));
         yearTF.addActionListener(new YearTFListener(this));
         changeButton.addActionListener(new ChangeButtonListener(this));
         this.addWindowListener(new WindowAdapter()
