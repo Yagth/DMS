@@ -35,6 +35,7 @@ public class ChangeButtonListener implements ActionListener {
         String toRoomNo = parentComponent.getDestinationRoomNo();
         Student student = parentComponent.getStudent();
         String query ="";
+        System.out.println("RoomNumber: "+toRoomNo+"_");//Remove after debugging.
 
         if(toBuildingNo.equals("")){
             JOptionPane.showMessageDialog(parentComponent,"Destination building is empty",
@@ -59,8 +60,6 @@ public class ChangeButtonListener implements ActionListener {
             try{
                 while(rs.next()){
                     numberOfStudents = rs.getInt("numberOfStudents");
-                    System.out.println("Inside while Loop");//Remove after debugging.
-                    System.out.println("Number of students form loop: "+numberOfStudents);//Remove after debugging.
                 }
             } catch (SQLException ex){
                 ex.printStackTrace(); //For debugging only.
@@ -73,8 +72,7 @@ public class ChangeButtonListener implements ActionListener {
         if(choice == 1) return; //If the choice is no, none of the changing process will be done.
 
         if(condition.equals("Change single student")){
-
-            if(toRoomNo.equals("")){
+            if(toRoomNo.equals(" ")){
                 JOptionPane.showMessageDialog(parentComponent,"Destination dorm number is empty",
                         "Empty message",JOptionPane.ERROR_MESSAGE);
                 return;
@@ -93,7 +91,7 @@ public class ChangeButtonListener implements ActionListener {
                     ex.printStackTrace(); //For debugging only.
                 }
                 System.out.println("Max capacity:"+maxCapacity);//remove after debugging.
-                System.out.println("Number of Student: "+numberOfStudents);
+                System.out.println("Number of Student: "+numberOfStudents);//Remove after debugging.
             }
             if(numberOfStudents>=maxCapacity){
                 JOptionPane.showMessageDialog(parentComponent,"There is not enough space in the dorm aborting change.",

@@ -168,8 +168,13 @@ public class ChangeDormView extends JFrame implements Views {
 
         this.setVisible(true);
         yearTF.setText("");
+        fromBuildingNoTF.setText("");
+        toBuildingNoTF.setText("");
+        toRoomNoTF.setText("");
+
         conditions.addItem("Change Batch of students");
         conditions.addItem("Change single student");
+
         this.pack();
     }
 
