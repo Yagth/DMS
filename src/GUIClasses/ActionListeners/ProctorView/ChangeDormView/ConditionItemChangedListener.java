@@ -17,12 +17,15 @@ public class ConditionItemChangedListener implements ItemListener {
         String roomNo = parentComponent.getDormNo();
         int year = parentComponent.getYear();
 
-        if(condition.equals("Change single student"))
+        if(condition.equals("Change single student")){
             parentComponent.updateViewOnCondition(true);
+            parentComponent.revalidate();
+        }
         else {
             String query = "SELECT COUNT(SID) FROM STUDENT WHERE BuildingNumber='"+buildingNo+"' AND RoomNumber='"+roomNo+"' AND year="+year;
             parentComponent.updateViewOnCondition(false);
             parentComponent.setNumberOfStudentsL(parentComponent.getNoOfStudent(query));
+            parentComponent.revalidate();
         }
     }
 }
