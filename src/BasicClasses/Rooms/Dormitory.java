@@ -5,11 +5,16 @@ public class Dormitory extends Room{
     private int noOfBeds;
     private int noOfChairs;
     private int noOfTables;
+    private int maxCapacity;
     private String keyHolderId;
 
     public Dormitory(String roomNo, String buildingNo){
-        super("DormitoryView",roomNo,buildingNo);
+        super("Dormitory",roomNo,buildingNo);
         keyHolderId="";
+    }
+    public Dormitory(String roomNo, String buildingNo,int maxCapacity){
+        this(roomNo,buildingNo);
+        this.maxCapacity = maxCapacity;
     }
 
     public int getNoOfLockers() {
@@ -50,5 +55,9 @@ public class Dormitory extends Room{
 
     public void setKeyHolderId(String keyHolderId) {
         this.keyHolderId = keyHolderId;
+    }
+
+    public int getMaxCapacity() {
+        return maxCapacity;
     }
 }
