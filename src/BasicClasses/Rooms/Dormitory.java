@@ -6,6 +6,7 @@ public class Dormitory extends Room{
     private int noOfChairs;
     private int noOfTables;
     private int maxCapacity;
+    private int noOfStudents;
     private String keyHolderId;
 
     public Dormitory(String roomNo, String buildingNo){
@@ -59,5 +60,13 @@ public class Dormitory extends Room{
 
     public int getMaxCapacity() {
         return maxCapacity;
+    }
+
+    public void setNoOfStudents(int noOfStudents) {
+        this.noOfStudents = noOfStudents;
+    }
+
+    public int getNoOfStudents() {
+        return noOfStudents;
     }
 }
