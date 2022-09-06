@@ -2,6 +2,7 @@ package GUIClasses.ProctorViews;
 
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
+import BasicClasses.Persons.Student;
 import GUIClasses.ActionListeners.ChangeBackButtonListener;
 import GUIClasses.ActionListeners.ProctorView.ChangeDormView.ConditionItemChangedListener;
 import GUIClasses.ActionListeners.ProctorView.ChangeDormView.SearchTFListener;
@@ -18,11 +19,9 @@ public class ChangeDormView extends JFrame implements Views {
     private JPanel mainPanel;
     private JComboBox conditions;
     private JFormattedTextField fromBuildingNoTF;
-    private JFormattedTextField fromRoomNoTF;
     private JFormattedTextField searchTF;
     private JFormattedTextField toBuildingNoTF;
     private JFormattedTextField toRoomNoTF;
-    private JLabel fromRoomNumberL;
     private JLabel toRoomNoL;
     private JLabel conditionsL;
     private JLabel searchStudentL;
@@ -33,6 +32,7 @@ public class ChangeDormView extends JFrame implements Views {
     private JLabel noOfStudentsL;
     private JLabel fromBuildingNoL;
     private Proctor proctor;
+    private Student student; //Only for the single student change;
     private DormitoryView parentComponent;
     public ChangeDormView(Proctor proctor, DormitoryView parentComponent){
         this.proctor = proctor;
@@ -50,9 +50,6 @@ public class ChangeDormView extends JFrame implements Views {
         return (String) conditions.getSelectedItem();
     }
 
-    public String getDormNo(){
-        return fromRoomNoTF.getText();
-    }
     public String getBuildingNo(){
         return fromBuildingNoTF.getText();
     }
@@ -80,7 +77,7 @@ public class ChangeDormView extends JFrame implements Views {
         }
         return numberOfStudents;
     }
-    public boolean getStudent(){
+    public boolean studentIsFound(){
         String SID = getSid();
         String query = "SELECT Fname FROM STUDENT WHERE SID='"+SID+"'";
         String fname = null;
@@ -111,8 +108,6 @@ public class ChangeDormView extends JFrame implements Views {
         fromBuildingNoL.setVisible(!singleStudent);
         searchStudentL.setVisible(singleStudent);
         searchTF.setVisible(singleStudent);
-        fromRoomNoTF.setVisible(singleStudent);
-        fromRoomNumberL.setVisible(singleStudent);
         toRoomNoTF.setVisible(singleStudent);
         toRoomNoL.setVisible(singleStudent);
     }

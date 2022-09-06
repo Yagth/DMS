@@ -51,16 +51,6 @@
         </constraints>
         <properties/>
       </component>
-      <component id="53290" class="javax.swing.JFormattedTextField" binding="fromRoomNoTF">
-        <constraints>
-          <grid row="2" column="3" row-span="1" col-span="10" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="1" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <visible value="false"/>
-        </properties>
-      </component>
       <component id="e5bc3" class="javax.swing.JLabel" binding="fromRoomNumberL">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -121,7 +111,8 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Enter student Id here"/>
+          <text value=""/>
+          <toolTipText value="Enter student Id here and hit enter."/>
           <visible value="false"/>
         </properties>
       </component>

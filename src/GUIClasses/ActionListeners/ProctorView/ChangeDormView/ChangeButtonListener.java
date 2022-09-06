@@ -122,8 +122,9 @@ public class ChangeButtonListener implements ActionListener {
                         resultSet.getString("Fname"),resultSet.getString("Lname"),
                         resultSet.getString("SID"),resultSet.getString("Gender"));
                 st.setBuildingNo(resultSet.getString("BuildingNumber"));
-                st.setDormNo(resultSet.getString("RoomNumber"));
-                dormNumbers.add(resultSet.getString("RoomNumber"));
+                String dormNo = resultSet.getString("RoomNumber");
+                st.setDormNo(dormNo);
+                dormNumbers.add(dormNo);
                 tmp.add(st);
             }
         } catch (SQLException ex){

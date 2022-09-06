@@ -22,7 +22,7 @@ public class ConditionItemChangedListener implements ItemListener {
             parentComponent.revalidate();
         }
         else {
-            String query = "SELECT COUNT(SID) FROM STUDENT WHERE BuildingNumber='"+buildingNo+"' AND RoomNumber='"+roomNo+"' AND year="+year;
+            String query = "SELECT COUNT(SID) AS noOfStudents FROM STUDENT WHERE BuildingNumber='"+buildingNo+"' AND RoomNumber='"+roomNo+"' AND year="+year;
             parentComponent.updateViewOnCondition(false);
             parentComponent.setNumberOfStudentsL(parentComponent.getNoOfStudent(query));
             parentComponent.revalidate();

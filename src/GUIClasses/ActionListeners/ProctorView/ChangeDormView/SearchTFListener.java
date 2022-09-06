@@ -11,7 +11,7 @@ public class SearchTFListener implements ActionListener {
     public SearchTFListener(ChangeDormView parentComponent){this.parentComponent = parentComponent;}
     @Override
     public void actionPerformed(ActionEvent e) {
-        boolean studentFound = parentComponent.getStudent();
+        boolean studentFound = parentComponent.studentIsFound();
         if(!studentFound){
             JOptionPane.showMessageDialog(parentComponent,"Couldn't find the student with this id");
         }
