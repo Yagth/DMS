@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MaintenanceRequestForm extends JFrame implements RequestViews {
-    private JPanel mainPanel;
+    private JPanel MainPanel;
     private JPanel innerPanel;
     private JLabel locationLabel;
     private JTextField blockNumberTextField;
@@ -46,7 +46,7 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
     @Override
     public void setUpGUi() {
         this.setTitle("Maintenance Request");
-        this.setContentPane(mainPanel);
+        this.setContentPane(MainPanel);
         this.setSize(WIDTH, HEIGHT);
         this.setLocationRelativeTo(null);
         this.setResizable(false);

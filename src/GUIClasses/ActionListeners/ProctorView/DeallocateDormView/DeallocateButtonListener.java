@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners.ProctorView.DeallocateView;
+package GUIClasses.ActionListeners.ProctorView.DeallocateDormView;
 
 import BasicClasses.Others.JavaConnection;
 import GUIClasses.ProctorViews.DeallocateDormView;

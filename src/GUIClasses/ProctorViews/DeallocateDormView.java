@@ -2,10 +2,10 @@ package GUIClasses.ProctorViews;
 
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
-import GUIClasses.ActionListeners.ProctorView.DeallocateView.DeallocateBackButtonListener;
-import GUIClasses.ActionListeners.ProctorView.DeallocateView.DeallocateBatchItemListener;
-import GUIClasses.ActionListeners.ProctorView.DeallocateView.DeallocateButtonListener;
-import GUIClasses.ActionListeners.ProctorView.DeallocateView.YearTFListener;
+import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.DeallocateBackButtonListener;
+import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.DeallocateBatchItemListener;
+import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.DeallocateButtonListener;
+import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.YearTFListener;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
