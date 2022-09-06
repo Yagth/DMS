@@ -84,11 +84,16 @@ public class ChangeDormView extends JFrame implements Views {
         numberOfStudentsL.setVisible(!visibility);
         noOfStudentsL.setVisible(!visibility);
         yearTF.setVisible(!visibility);
+        searchStudentL.setVisible(visibility);
+        searchTF.setVisible(visibility);
         fromRoomNoTF.setVisible(visibility);
         fromRoomNumberL.setVisible(visibility);
         toRoomNoTF.setVisible(visibility);
         toRoomNoL.setVisible(visibility);
+    }
 
+    public void setNumberOfStudentsL(int noOfStudent){
+        numberOfStudentsL.setText(String.valueOf(noOfStudent));
     }
 
     @Override
@@ -111,7 +116,5 @@ public class ChangeDormView extends JFrame implements Views {
         this.setVisible(true);
         conditions.addItem("Change Batch of students");
         conditions.addItem("Change single student");
-        conditions.setSelectedIndex(1);
-        updateViewOnCondition(true);
     }
 }
