@@ -164,6 +164,7 @@ public class ChangeDormView extends JFrame implements Views {
         yearTF.setText("");
         conditions.addItem("Change Batch of students");
         conditions.addItem("Change single student");
+        this.pack();
     }
 
     public Proctor getProctor() {
