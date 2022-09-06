@@ -35,6 +35,13 @@ public class ChangeButtonListener implements ActionListener {
         String toRoomNo = parentComponent.getDestinationRoomNo();
         Student student = parentComponent.getStudent();
         String query ="";
+
+        if(toBuildingNo == null){
+            JOptionPane.showMessageDialog(parentComponent,"Destination building is empty",
+                    "Empty message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try{
             query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
                     "WHERE BuildingNumber='"+student.getBuildingNo()+"' AND RoomNumber='"+student.getDormNo()+"'";
@@ -66,6 +73,13 @@ public class ChangeButtonListener implements ActionListener {
         if(choice == 1) return; //If the choice is no, none of the changing process will be done.
 
         if(condition.equals("Change single student")){
+
+            if(toRoomNo == null){
+                JOptionPane.showMessageDialog(parentComponent,"Destination dorm number is empty",
+                        "Empty message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             int maxCapacity = 0;
             query = "SELECT maxCapacity FROM DORM WHERE RoomNumber='"+toRoomNo+
                     "' AND BuildingNumber='"+toBuildingNo+"'";
@@ -94,6 +108,12 @@ public class ChangeButtonListener implements ActionListener {
                 updateStatus = javaConnection.updateQuery(query);
         }
         else {
+            if(fromBuildingNo == null){
+                JOptionPane.showMessageDialog(parentComponent,"From building is empty",
+                        "Empty message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             if(javaConnection.isConnected()){
                 loadAvailableDorms();
                 sortDormOnAvailableSpace();
