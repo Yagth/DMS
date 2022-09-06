@@ -3,6 +3,7 @@ package GUIClasses.ProctorViews;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import GUIClasses.ActionListeners.ChangeBackButtonListener;
+import GUIClasses.ActionListeners.ProctorView.ChangeDormView.ConditionItemChangedListener;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
@@ -28,6 +29,7 @@ public class ChangeDormView extends JFrame implements Views {
     private JLabel numberOfStudentsL;
     private JFormattedTextField yearTF;
     private JLabel noOfStudentsL;
+    private JLabel fromBuildingNoL;
     private Proctor proctor;
     private DormitoryView parentComponent;
     public ChangeDormView(Proctor proctor, DormitoryView parentComponent){
@@ -76,14 +78,35 @@ public class ChangeDormView extends JFrame implements Views {
         }
         return numberOfStudents;
     }
+    public boolean getStudent(){
+        String SID = getSid();
+        String query = "SELECT Fname FROM STUDENT WHERE SID='"+SID+"'";
+        String fname = null;
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        ResultSet resultSet = null;
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+        }
+        try{
+            while(resultSet.next()){
+                fname = resultSet.getString("Fname");
+            }
+        } catch (SQLException ex){
+            return false;
+        }
+        return !(fname == null); //Returns true if the student is found.
+
+    }
     public void updateViewOnCondition(boolean singleStudent){
         /*
         This method will set the invisible components to visible and
-        vice versa by checking the selected condition in the comboBox.
+        vice versa according to the selected condition in the comboBox.
          */
         numberOfStudentsL.setVisible(!singleStudent);
         noOfStudentsL.setVisible(!singleStudent);
         yearTF.setVisible(!singleStudent);
+        fromBuildingNoTF.setVisible(!singleStudent);
+        fromBuildingNoL.setVisible(!singleStudent);
         searchStudentL.setVisible(singleStudent);
         searchTF.setVisible(singleStudent);
         fromRoomNoTF.setVisible(singleStudent);
@@ -104,6 +127,10 @@ public class ChangeDormView extends JFrame implements Views {
         }
     }
 
+    public String getSid(){
+        return searchTF.getText();
+    }
+
     @Override
     public void setUpGUi() {
         this.setTitle("Change Dormitory");
@@ -111,6 +138,7 @@ public class ChangeDormView extends JFrame implements Views {
         this.setContentPane(mainPanel);
         this.setLocationRelativeTo(parentComponent);
         backButton.addActionListener(new ChangeBackButtonListener(this));
+        conditions.addItemListener(new ConditionItemChangedListener(this));
         this.addWindowListener(new WindowAdapter()
         {
             @Override
