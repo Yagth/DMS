@@ -30,6 +30,7 @@ public class ChangeButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus = false;
         String condition = parentComponent.getSelectedCondition();
+        String fromBuildingNo = parentComponent.getBuildingNo();
         String toBuildingNo = parentComponent.getDestinationBuildingNo();
         String toRoomNo = parentComponent.getDestinationRoomNo();
         Student student = parentComponent.getStudent();
