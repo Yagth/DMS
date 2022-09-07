@@ -134,7 +134,7 @@ public class ChangeButtonListener implements ActionListener {
     }
 
     public boolean changeStudents(String fromBuildingNo, String toBuildingNO){
-        String query = "SELECT COUNT(SID) AS TotalStudents FROM STUDENTS" +
+        String query = "SELECT COUNT(SID) AS TotalStudents FROM STUDENT" +
                 "WHERE BuildingNo='"+fromBuildingNo+"' AND year="+parentComponent.getYear();
         ResultSet resultSet = javaConnection.selectQuery(query);
         int totalStudents = 0;
