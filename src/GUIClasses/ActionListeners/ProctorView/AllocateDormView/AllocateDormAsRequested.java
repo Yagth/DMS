@@ -210,7 +210,7 @@ public class AllocateDormAsRequested implements ActionListener {
 
     public void displayUpdateStatus(boolean updateStatus){
         if(updateStatus)
-            JOptionPane.showMessageDialog(parentComponent,"Change Successful.");
+            JOptionPane.showMessageDialog(parentComponent,"Allocation Successful.");
         else{
             if(remainingStudents == 0)
                 JOptionPane.showMessageDialog(parentComponent,"No students left to allocate.");
