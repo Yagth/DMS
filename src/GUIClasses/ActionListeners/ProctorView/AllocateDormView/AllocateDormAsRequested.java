@@ -9,22 +9,19 @@ import GUIClasses.ProctorViews.DormitoryView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 
-public class AllocateDormToAllStudent implements ActionListener {
+public class AllocateDormAsRequested implements ActionListener {
     private DormitoryView parentComponent;
     private ArrayList<Dormitory> availableDorms;
     private HashMap<String, Student> students;
     private ArrayList<Integer> requests;
     private ArrayList<String> reporterIds;
     private int remainingStudents; //The remaining students after the allocation.
-    public AllocateDormToAllStudent(DormitoryView parentComponent){
+    public AllocateDormAsRequested(DormitoryView parentComponent){
         this.parentComponent = parentComponent;
         availableDorms = new ArrayList<>();
         students = new HashMap<>();
@@ -40,8 +37,11 @@ public class AllocateDormToAllStudent implements ActionListener {
         sortDormOnAvailableSpace();
         sortDormOnBuildingNo();
         updateStatus = allocateStudents();
-
+        updateRequestStatus();
         displayUpdateStatus(updateStatus);
+
+        parentComponent.dispose();
+        parentComponent.showParentComponent();
 
     }
 
