@@ -218,7 +218,7 @@ public class ChangeButtonListener implements ActionListener {
     public void loadAvailableDorms(){
         String fromBuildingNo = parentComponent.getDestinationBuildingNo();
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT * FROM AvailableDorm WHERE BuildingNumber='"+fromBuildingNo+"'";
+        String query = "SELECT * FROM AvailableDorm";
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
             while(resultSet.next()){
@@ -286,7 +286,6 @@ public class ChangeButtonListener implements ActionListener {
         for(Dormitory dormitory: availableDorms){
             totalSpace += dormitory.getMaxCapacity() - dormitory.getNoOfStudents();
         }
-        System.out.println("Total space from the getTotalAvailableSpace method:"+totalSpace);//Remove after debugging..
         return totalSpace;
     }
 
@@ -294,7 +293,7 @@ public class ChangeButtonListener implements ActionListener {
         if(updateStatus)
             JOptionPane.showMessageDialog(parentComponent,"Change Successful.");
         else
-            JOptionPane.showMessageDialog(parentComponent,"Couldn't change all students due to some problem. " +
+            JOptionPane.showMessageDialog(parentComponent,"Couldn't change all students due to some problem.\n " +
                     "Make sure there is available space and also the destination exits.");
     }
 }

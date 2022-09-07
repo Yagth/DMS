@@ -149,6 +149,23 @@
           <visible value="false"/>
         </properties>
       </component>
+      <component id="21725" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Available Space"/>
+          <toolTipText value="space left in the destination building"/>
+        </properties>
+      </component>
+      <component id="2099" class="javax.swing.JLabel" binding="availableSpaceL">
+        <constraints>
+          <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

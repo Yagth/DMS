@@ -33,6 +33,7 @@ public class ChangeDormView extends JFrame implements Views {
     private JFormattedTextField yearTF;
     private JLabel noOfStudentsL;
     private JLabel fromBuildingNoL;
+    private JLabel availableSpaceL;
     private Proctor proctor;
     private Student student; //Only for the single student change;
     private DormitoryView parentComponent;
@@ -140,6 +141,10 @@ public class ChangeDormView extends JFrame implements Views {
         } catch (NumberFormatException ex){
             return 0;
         }
+    }
+
+    public void setAvailableSpaceLText(int availableSpace) {
+        availableSpaceL.setText(String.valueOf(availableSpace));
     }
 
     public String getSid(){
