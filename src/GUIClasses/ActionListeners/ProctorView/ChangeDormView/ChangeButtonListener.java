@@ -265,14 +265,16 @@ public class ChangeButtonListener implements ActionListener {
                     The following code will sort the dorms by giving priority to the
                     dorms that are found in the proctor's building.
                     */
+                    System.out.println("IsFoundInProctorsBuilding");
                     tmp = availableDorms.get(j);
                     availableDorms.set(j,availableDorms.get(0));
                     availableDorms.set(0,tmp);
                 }
             }
-            System.out.println("--Is found in proctor building--");
-            displayAvailableDorms();
         }
+        System.out.println("--Is found in proctor building--");//Remove after debugging.
+        displayAvailableDorms();//Remove after debugging.
+
         for(int i = 0; i<availableDorms.size(); i++){
             for(int j = 0; j<availableDorms.size(); j++){
                 boolean isFoundInDestinationBuilding = availableDorms.get(j).getBuildingNo()
