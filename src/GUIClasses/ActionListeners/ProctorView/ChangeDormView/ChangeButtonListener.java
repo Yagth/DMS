@@ -270,6 +270,8 @@ public class ChangeButtonListener implements ActionListener {
                     availableDorms.set(0,tmp);
                 }
             }
+            System.out.println("--Is found in proctor building--");
+            displayAvailableDorms();
         }
         for(int i = 0; i<availableDorms.size(); i++){
             for(int j = 0; j<availableDorms.size(); j++){
