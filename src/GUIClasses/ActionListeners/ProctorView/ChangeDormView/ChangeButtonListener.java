@@ -189,7 +189,8 @@ public class ChangeButtonListener implements ActionListener {
         in the same dorm.
         */
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT * FROM STUDENT WHERE BuildingNumber='"+fromBuildingNo+"' ORDER BY(RoomNumber)";
+        String query = "SELECT * FROM STUDENT WHERE BuildingNumber='"+fromBuildingNo+
+                "' AND Year="+parentComponent.getYear()+" ORDER BY(RoomNumber)";
         ResultSet resultSet = javaConnection.selectQuery(query);
         ArrayList<Student> tmp = new ArrayList<>();
         TreeSet<String> dormNumbers = new TreeSet<>();
