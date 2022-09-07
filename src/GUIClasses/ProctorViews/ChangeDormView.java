@@ -123,6 +123,11 @@ public class ChangeDormView extends JFrame implements Views {
         searchTF.setVisible(singleStudent);
         toRoomNoTF.setVisible(singleStudent);
         toRoomNoL.setVisible(singleStudent);
+
+        yearTF.setText("");
+        fromBuildingNoTF.setText("");
+        toBuildingNoTF.setText("");
+        toRoomNoTF.setText("");
     }
 
     public void setNumberOfStudentsL(int noOfStudent){
@@ -167,10 +172,6 @@ public class ChangeDormView extends JFrame implements Views {
         }); //A custom action listener for the exit button.
 
         this.setVisible(true);
-        yearTF.setText("");
-        fromBuildingNoTF.setText("");
-        toBuildingNoTF.setText("");
-        toRoomNoTF.setText("");
 
         conditions.addItem("Change Batch of students");
         conditions.addItem("Change single student");
