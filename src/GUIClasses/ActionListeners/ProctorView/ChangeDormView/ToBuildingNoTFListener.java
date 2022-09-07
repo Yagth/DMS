@@ -16,11 +16,10 @@ public class ToBuildingNoTFListener implements FocusListener {
 
     public ToBuildingNoTFListener(ChangeDormView parentComponent){
         this.parentComponent = parentComponent;
-        availableDorms = new ArrayList<>();
     }
     @Override
     public void focusGained(FocusEvent e) {
-        availableDorms = null;
+        availableDorms = new ArrayList<>();
     }
 
     @Override

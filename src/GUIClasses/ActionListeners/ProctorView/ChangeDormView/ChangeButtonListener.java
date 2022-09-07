@@ -143,7 +143,7 @@ public class ChangeButtonListener implements ActionListener {
                 " WHERE BuildingNumber='"+fromBuildingNo+"' AND year="+parentComponent.getYear();
         ResultSet resultSet = javaConnection.selectQuery(query);
         int totalStudents = 0;
-        int totalSpace = getTotalAvailableSpace();
+        int totalSpace = getAvailableSpaceOnBuilding();
         try{
             while(resultSet.next()){
                 totalStudents = resultSet.getInt("TotalStudents");
@@ -242,7 +242,6 @@ public class ChangeButtonListener implements ActionListener {
                 String query2 = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
                         "WHERE BuildingNumber='"+buildingNumber+"' AND RoomNumber='"+roomNo+"'";
                 ResultSet rs = javaConnection1.selectQuery(query2);
-                System.out.println("Query to select Number of Students: "+query2);//Remove after debugging.
 
                 while(rs.next()){
                     tmp.setNoOfStudents(rs.getInt("numberOfStudents"));
@@ -250,7 +249,6 @@ public class ChangeButtonListener implements ActionListener {
 
                 availableDorms.add(tmp);
             }
-            System.out.println("available dorms size: "+availableDorms.size());//Remove after debugging.
         } catch (SQLException ex){
             ex.printStackTrace();
             //Leave the implementation of this block.
@@ -307,10 +305,13 @@ public class ChangeButtonListener implements ActionListener {
         }
     }
 
-    public int getTotalAvailableSpace(){
+    public int getAvailableSpaceOnBuilding(){
         int totalSpace = 0;
         for(Dormitory dormitory: availableDorms){
-            totalSpace += dormitory.getMaxCapacity() - dormitory.getNoOfStudents();
+            boolean isInDestinationBuilding =
+                    dormitory.getBuildingNo().equals(parentComponent.getDestinationBuildingNo());
+            if(isInDestinationBuilding)
+                totalSpace += dormitory.getMaxCapacity() - dormitory.getNoOfStudents();
         }
         return totalSpace;
     }
