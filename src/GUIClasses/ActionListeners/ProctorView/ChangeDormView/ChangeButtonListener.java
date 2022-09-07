@@ -149,21 +149,26 @@ public class ChangeButtonListener implements ActionListener {
 
         for(int i = 0; i<availableDorms.size();i++){
             Dormitory tmp = availableDorms.get(i);
-            for(int j = 0; j<groupOfStudents.get(i).size();j++){
-                Student st = groupOfStudents.get(i).get(j);
-                if(tmp.getNoOfStudents()<tmp.getMaxCapacity()){
-                    st.setBuildingNo(toBuildingNO);
-                    st.setDormNo(tmp.getRoomNO());
-                    tmp.setNoOfStudents(tmp.getNoOfStudents()+1); //Increment number of student in every addition.
-                }
-                else{
-                    try{
-                        groupOfStudents.get(i+1).add(st); //Adds the student to the next group of students.
-                    } catch (IndexOutOfBoundsException ex){
-                        ex.printStackTrace();//For debugging only.
+            try{
+                for(int j = 0; j<groupOfStudents.get(i).size();j++){
+                    Student st = groupOfStudents.get(i).get(j);
+                    if(tmp.getNoOfStudents()<tmp.getMaxCapacity()){
+                        st.setBuildingNo(toBuildingNO);
+                        st.setDormNo(tmp.getRoomNO());
+                        tmp.setNoOfStudents(tmp.getNoOfStudents()+1); //Increment number of student in every addition.
+                    }
+                    else{
+                        try{
+                            groupOfStudents.get(i+1).add(st); //Adds the student to the next group of students.
+                        } catch (IndexOutOfBoundsException ex){
+                            ex.printStackTrace();//For debugging only.
+                        }
                     }
                 }
+            } catch (IndexOutOfBoundsException ex){
+                //No need to implement this method.
             }
+
         }
         boolean updateStatus = false;
         for(ArrayList<Student> students: groupOfStudents){
