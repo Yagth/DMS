@@ -184,7 +184,7 @@ public class ChangeButtonListener implements ActionListener {
         This method groups students that are
         in the same dorm.
         */
-        String query = "SELECT * FROM STUDENT WHERE BuildingNumber='"+fromBuildingNo+"' ORDER BY(BuildingNumber, RoomNumber)";
+        String query = "SELECT * FROM STUDENT WHERE BuildingNumber='"+fromBuildingNo+"' ORDER BY(RoomNumber)";
         ResultSet resultSet = javaConnection.selectQuery(query);
         ArrayList<Student> tmp = new ArrayList<>();
         TreeSet<String> dormNumbers = new TreeSet<>();
