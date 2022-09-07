@@ -216,7 +216,6 @@ public class ChangeButtonListener implements ActionListener {
         }
     }
     public void loadAvailableDorms(){
-        String fromBuildingNo = parentComponent.getDestinationBuildingNo();
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT * FROM AvailableDorm";
         ResultSet resultSet = javaConnection.selectQuery(query);
@@ -255,6 +254,21 @@ public class ChangeButtonListener implements ActionListener {
                     /*
                     The following code will sort the dorms by giving priority to the
                     dorms that are found in the proctor's building.
+                    */
+                    tmp = availableDorms.get(j);
+                    availableDorms.set(j,availableDorms.get(0));
+                    availableDorms.set(0,tmp);
+                }
+            }
+        }
+        for(int i = 0; i<availableDorms.size(); i++){
+            for(int j = 0; j<availableDorms.size(); j++){
+                boolean isFoundInDestinationBuilding = availableDorms.get(j).getBuildingNo()
+                        .equals(parentComponent.getDestinationBuildingNo());
+                if(isFoundInDestinationBuilding){
+                    /*
+                    The following code will sort the dorms by giving priority to the
+                    dorms that are found in the destination building.
                     */
                     tmp = availableDorms.get(j);
                     availableDorms.set(j,availableDorms.get(0));
