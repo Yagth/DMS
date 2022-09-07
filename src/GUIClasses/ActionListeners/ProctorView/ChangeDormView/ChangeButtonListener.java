@@ -32,6 +32,7 @@ public class ChangeButtonListener implements ActionListener {
         String toBuildingNo = parentComponent.getDestinationBuildingNo();
         String toRoomNo = parentComponent.getDestinationRoomNo();
         Student student = parentComponent.getStudent();
+        int numberOfStudents = 0;
         String query ="";
 
         if(toBuildingNo.equals("")){
@@ -39,29 +40,30 @@ public class ChangeButtonListener implements ActionListener {
                     "Empty message",JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        try{
-            query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
-                    "WHERE BuildingNumber='"+student.getBuildingNo()+"' AND RoomNumber='"+student.getDormNo()+"'";
-        } catch (NullPointerException ex){
-            ex.printStackTrace();//For debugging only.
-            JOptionPane.showMessageDialog(parentComponent,"Make sure you enter the student id"
-                    ,"Invalid input",JOptionPane.ERROR_MESSAGE);
-            return;//To exit the action performed method since it can't continue without dormNo.
-        }
-
-        int numberOfStudents = 0;
-        if(javaConnection.isConnected()){
-            ResultSet rs = javaConnection.selectQuery(query);
-            System.out.println("Query:"+query);//Remove after debugging.
+        if(condition.equals("Change single student")){
             try{
-                while(rs.next()){
-                    numberOfStudents = rs.getInt("numberOfStudents");
+                query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
+                        "WHERE BuildingNumber='"+student.getBuildingNo()+"' AND RoomNumber='"+student.getDormNo()+"'";
+            } catch (NullPointerException ex){
+                ex.printStackTrace();//For debugging only.
+                JOptionPane.showMessageDialog(parentComponent,"Make sure you enter the student id"
+                        ,"Invalid input",JOptionPane.ERROR_MESSAGE);
+                return;//To exit the action performed method since it can't continue without dormNo.
+            }
+
+            if(javaConnection.isConnected()){
+                ResultSet rs = javaConnection.selectQuery(query);
+                System.out.println("Query:"+query);//Remove after debugging.
+                try{
+                    while(rs.next()){
+                        numberOfStudents = rs.getInt("numberOfStudents");
+                    }
+                } catch (SQLException ex){
+                    ex.printStackTrace(); //For debugging only.
                 }
-            } catch (SQLException ex){
-                ex.printStackTrace(); //For debugging only.
             }
         }
+
         int choice = JOptionPane.showConfirmDialog(parentComponent,
                 "Are you sure you want to change the students?","Confirm Change",
                 JOptionPane.YES_NO_OPTION);
