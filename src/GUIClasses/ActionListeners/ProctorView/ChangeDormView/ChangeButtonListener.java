@@ -92,6 +92,14 @@ public class ChangeButtonListener implements ActionListener {
                 System.out.println("Max capacity:"+maxCapacity);//remove after debugging.
                 System.out.println("Number of Student: "+numberOfStudents);//Remove after debugging.
             }
+
+            if(maxCapacity == 0){
+                JOptionPane.showMessageDialog(parentComponent,"Couldn't locate the dorm. Check the dorm and building number.",
+                        "Dorm doesn't exist",JOptionPane.ERROR_MESSAGE);
+                return; //Aborts the change if not enough space by returning from action performed method.
+
+            }
+
             if(numberOfStudents>=maxCapacity){
                 JOptionPane.showMessageDialog(parentComponent,"There is not enough space in the dorm aborting change.",
                         "Not enough space",JOptionPane.ERROR_MESSAGE);
