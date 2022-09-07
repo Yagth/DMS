@@ -10,7 +10,7 @@ public class YearTFListener implements ActionListener {
     public YearTFListener(ChangeDormView parentComponent){this.parentComponent = parentComponent;}
     @Override
     public void actionPerformed(ActionEvent e) {
-        String query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENTS WHERE year="+parentComponent.getYear();
+        String query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT WHERE year="+parentComponent.getYear();
         int noOfStudents = parentComponent.getNoOfStudent(query);
         parentComponent.setNumberOfStudentsL(noOfStudents);
     }
