@@ -52,9 +52,6 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         setUpGUi();
         setUpTable();
     }
-    public ProctorPage(){
-        this(null);
-    }//For debugging purposes.
     public Proctor getProctor(){
         return proctor;
     }

@@ -32,8 +32,8 @@ public class AllocateDormAsRequested implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus = false;
         loadAvailableDorms();
-        loadStudents();
         loadReporterAndReportId();
+        loadStudents();
         sortDormOnAvailableSpace();
         sortDormOnBuildingNo();
         updateStatus = allocateStudents();
@@ -64,7 +64,6 @@ public class AllocateDormAsRequested implements ActionListener {
                 while(rs.next()){
                     tmp.setNoOfStudents(rs.getInt("numberOfStudents"));
                 }
-
                 availableDorms.add(tmp);
             }
         } catch (SQLException ex){
@@ -77,14 +76,17 @@ public class AllocateDormAsRequested implements ActionListener {
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT ReportId, ReporterId FROM dormRequests ORDER BY ReportedDate ASC";//Gives priority to the reported date.
         ResultSet resultSet;
+        System.out.println("Inside load reporter id");//For debugging only.
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
             try{
+                System.out.println("Inside load if reporter id");//For debugging only.
                 while(resultSet.next()){
+                    System.out.println("Inside load while reporter id");//For debugging only.
                     reporterIds.add(resultSet.getString("ReporterId"));
                     requests.add(resultSet.getInt("ReportId"));
-
                 }
+
             } catch (SQLException ex){
                 ex.printStackTrace();//For debugging only.
             }
@@ -94,13 +96,15 @@ public class AllocateDormAsRequested implements ActionListener {
     public void loadStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet;
-        String query = "";
         if(javaConnection.isConnected()){
+            System.out.println("Size of reportId: "+reporterIds.size());
             for(String SID: reporterIds){
                 Student tmp;
-                query = "SELECT * FROM Student WHERE SID='"+SID+"'";
+                String query = "SELECT * FROM Student WHERE SID='"+SID+"'";
                 resultSet = javaConnection.selectQuery(query);
                 try{
+                    System.out.println("Inside the loop loadStudents.");//For debugging only.
+                    resultSet.next();
                     tmp = new Student(
                             resultSet.getString("Fname"),
                             resultSet.getString("Lname"),
@@ -166,6 +170,7 @@ public class AllocateDormAsRequested implements ActionListener {
         int totalSpace = getAvailableSpaces();
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "";
+        System.out.println(students);//Remove after debugging.
         for(int i = 0; i<reporterIds.size(); i++){
             Dormitory tmpDorm = availableDorms.get(i);
             String SID = reporterIds.get(i);
@@ -193,7 +198,8 @@ public class AllocateDormAsRequested implements ActionListener {
         for(int i = 0; i< size; i++){
             String query = "INSERT INTO ProctorHandlesReport(EID,ReportId,handledDate) " +
                     "VALUES('"+parentComponent.getProctor().getpId()+"', "+
-                    requests.get(i)+", handledDate='"+ Request.getCurrentDate()+"')";
+                    requests.get(i)+", '"+ Request.getCurrentDate()+"')";
+            System.out.println("Query: "+query);
             if(javaConnection.isConnected()){
                 javaConnection.insertQuery(query);
             }

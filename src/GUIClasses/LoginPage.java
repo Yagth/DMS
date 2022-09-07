@@ -139,6 +139,7 @@ public class LoginPage extends JFrame implements Views {
                 proctor = new Proctor(temp.getString("Fname"),temp.getString("Lname")
                         ,temp.getString("Gender"));
                 proctor.setBuildingNo(temp.getString("BuildingNumber"));
+                proctor.setpId(getUsername());
             }
 
         }catch (SQLException ex){

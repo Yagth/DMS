@@ -11,6 +11,8 @@ public class SeeDormMenuListener extends MenuItemListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("Proctor from seeDormMenuListener: "+parentComponent.getProctor().getFullName());//For debugging purpose.
+        System.out.println("Proctor Id: "+parentComponent.getProctor().getpId());//For debugging only.
         new DormitoryView(parentComponent.getProctor(),parentComponent);
         hideParentComponent();
     }

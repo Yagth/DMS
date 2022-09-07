@@ -64,4 +64,8 @@ public class Student extends Person{
             //DO nothing here to keep the variable null.
         }
     }
+    @Override
+    public String toString(){
+        return this.getFullName();
+    }
 }
