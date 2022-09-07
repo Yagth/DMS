@@ -14,21 +14,27 @@ public class ToBuildingNoTFListener implements FocusListener {
     private ChangeDormView parentComponent;
     private ArrayList<Dormitory> availableDorms;
 
-    public ToBuildingNoTFListener(ChangeDormView parentComponent){this.parentComponent = parentComponent;}
+    public ToBuildingNoTFListener(ChangeDormView parentComponent){
+        this.parentComponent = parentComponent;
+        availableDorms = new ArrayList<>();
+    }
     @Override
     public void focusGained(FocusEvent e) {
-
+        availableDorms = null;
     }
 
     @Override
     public void focusLost(FocusEvent e) {
+        loadAvailableDorms();
+        int availableDorms = getTotalAvailableSpace();
+        parentComponent.setAvailableSpaceLText(availableDorms);
 
     }
 
     public void loadAvailableDorms(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String toBuildingNo = parentComponent.getDestinationBuildingNo();
-        String query = "SELECT * FROM AvailableDorm";
+        String query = "SELECT * FROM AvailableDorm WHERE BuildingNumber='"+toBuildingNo+"'";
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
             while(resultSet.next()){

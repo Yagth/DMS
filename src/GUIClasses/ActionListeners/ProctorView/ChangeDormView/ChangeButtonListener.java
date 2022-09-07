@@ -161,7 +161,7 @@ public class ChangeButtonListener implements ActionListener {
                         try{
                             groupOfStudents.get(i+1).add(st); //Adds the student to the next group of students.
                         } catch (IndexOutOfBoundsException ex){
-                            ex.printStackTrace();//For debugging only.
+                            //No need to implement this method.
                         }
                     }
                 }
