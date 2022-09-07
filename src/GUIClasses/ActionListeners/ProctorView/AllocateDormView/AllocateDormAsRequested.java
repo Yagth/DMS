@@ -80,9 +80,11 @@ public class AllocateDormAsRequested implements ActionListener {
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
             try{
-                while(resultSet.next())
+                while(resultSet.next()){
                     reporterIds.add(resultSet.getString("ReporterId"));
                     requests.add(resultSet.getInt("ReportId"));
+
+                }
             } catch (SQLException ex){
                 ex.printStackTrace();//For debugging only.
             }
