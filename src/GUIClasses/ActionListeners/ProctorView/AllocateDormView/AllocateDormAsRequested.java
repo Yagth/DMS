@@ -76,13 +76,10 @@ public class AllocateDormAsRequested implements ActionListener {
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT ReportId, ReporterId FROM dormRequests ORDER BY ReportedDate ASC";//Gives priority to the reported date.
         ResultSet resultSet;
-        System.out.println("Inside load reporter id");//For debugging only.
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
             try{
-                System.out.println("Inside load if reporter id");//For debugging only.
                 while(resultSet.next()){
-                    System.out.println("Inside load while reporter id");//For debugging only.
                     reporterIds.add(resultSet.getString("ReporterId"));
                     requests.add(resultSet.getInt("ReportId"));
                 }
@@ -103,7 +100,6 @@ public class AllocateDormAsRequested implements ActionListener {
                 String query = "SELECT * FROM Student WHERE SID='"+SID+"'";
                 resultSet = javaConnection.selectQuery(query);
                 try{
-                    System.out.println("Inside the loop loadStudents.");//For debugging only.
                     resultSet.next();
                     tmp = new Student(
                             resultSet.getString("Fname"),
@@ -129,7 +125,6 @@ public class AllocateDormAsRequested implements ActionListener {
                     The following code will sort the dorms by giving priority to the
                     dorms that are found in the proctor's building.
                     */
-                    System.out.println("IsFoundInProctorsBuilding");
                     tmp = availableDorms.get(j);
                     availableDorms.set(j,availableDorms.get(0));
                     availableDorms.set(0,tmp);
@@ -185,8 +180,11 @@ public class AllocateDormAsRequested implements ActionListener {
                         "' WHERE SID='"+student.getsId()+"'";
                 updateStatus = javaConnection.updateQuery(query);
             }
+            System.out.println("Update status before checking for full: "+updateStatus);//For debugging only.
             updateStatus &= (totalSpace >= reporterIds.size());
+            System.out.println("Update status after checking for full: "+updateStatus);//For debugging only.
             remainingStudents = reporterIds.size()-totalSpace;
+            if(remainingStudents<0) remainingStudents = 0;
         }
         return updateStatus;
     }
@@ -194,13 +192,12 @@ public class AllocateDormAsRequested implements ActionListener {
     public void updateRequestStatus(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         int size = requests.size()-remainingStudents; //To prevent setting the status of the unhandled reports.
-
+        System.out.println("Remaining students: "+remainingStudents);//For debugging only.
         for(int i = 0; i< size; i++){
             try{
                 String query = "INSERT INTO ProctorHandlesReport(EID,ReportId,handledDate) " +
                         "VALUES('"+parentComponent.getProctor().getpId()+"', "+
                         requests.get(i)+", '"+ Request.getCurrentDate()+"')";
-                System.out.println("Query: "+query);
                 if(javaConnection.isConnected()){
                     javaConnection.insertQuery(query);
                 }
@@ -214,8 +211,13 @@ public class AllocateDormAsRequested implements ActionListener {
     public void displayUpdateStatus(boolean updateStatus){
         if(updateStatus)
             JOptionPane.showMessageDialog(parentComponent,"Change Successful.");
-        else
-            JOptionPane.showMessageDialog(parentComponent,"Couldn't allocate "+ remainingStudents+" students due to some problem.\n " +
-                    "Make sure there is available space and also the destination exits.");
+        else{
+            if(remainingStudents == 0)
+                JOptionPane.showMessageDialog(parentComponent,"Couldn't allocate students due to some problem.\n " +
+                        "Make sure there is available space and also the destination exits.");
+            else
+                JOptionPane.showMessageDialog(parentComponent,"Couldn't allocate "+ remainingStudents+" students due to some problem.\n " +
+                        "Make sure there is available space and also the destination exits.");
+        }
     }
 }

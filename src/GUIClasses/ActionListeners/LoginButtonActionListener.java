@@ -19,7 +19,6 @@ public class LoginButtonActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             boolean  isUser = parentComponent.checkUser();
-            System.out.println(isUser);
 
             if(isUser){
                 if(parentComponent.getUserStatus().equals(UserStatus.STUDENT)){
