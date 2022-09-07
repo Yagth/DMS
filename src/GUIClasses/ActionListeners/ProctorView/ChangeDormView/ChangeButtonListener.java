@@ -157,6 +157,7 @@ public class ChangeButtonListener implements ActionListener {
                 if(tmp.getNoOfStudents()<tmp.getMaxCapacity()){
                     st.setBuildingNo(toBuildingNO);
                     st.setDormNo(tmp.getRoomNO());
+                    System.out.println("RoomNumber from change students: "+tmp.getRoomNO());//Remove after debugging.
                     tmp.setNoOfStudents(tmp.getNoOfStudents()+1); //Increment number of student in every addition.
                 }
                 else{
@@ -201,6 +202,8 @@ public class ChangeButtonListener implements ActionListener {
                 String dormNo = resultSet.getString("RoomNumber");
                 st.setDormNo(dormNo);
                 dormNumbers.add(dormNo);
+                System.out.println("BuildingNumber: "+st.getBuildingNo());//Remove after debugging.
+                System.out.println("RoomNumber: "+st.getDormNo());//Remove after debugging.
                 tmp.add(st);
             }
         } catch (SQLException ex){
@@ -226,7 +229,7 @@ public class ChangeButtonListener implements ActionListener {
                 String roomNo = resultSet.getString("roomNumber");
                 String buildingNumber = resultSet.getString("buildingNumber");
                 int maxCapacity = resultSet.getInt("maxCapacity");
-                Dormitory tmp = new Dormitory(buildingNumber,roomNo,maxCapacity);
+                Dormitory tmp = new Dormitory(roomNo,buildingNumber,maxCapacity);
 
                 String query2 = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
                         "WHERE BuildingNumber='"+buildingNumber+"' AND RoomNumber='"+roomNo+"'";
