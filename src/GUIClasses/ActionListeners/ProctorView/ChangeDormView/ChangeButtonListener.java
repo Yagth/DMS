@@ -260,10 +260,14 @@ public class ChangeButtonListener implements ActionListener {
         for(int i = 0; i<availableDorms.size(); i++){
             for(int j = 0; j<availableDorms.size(); j++){
                 Dormitory tmp;
-                if(availableDorms.get(j).getNoOfStudents() > availableDorms.get(j+1).getNoOfStudents()){
-                    tmp = availableDorms.get(j+1);
-                    availableDorms.set(j+1,availableDorms.get(j));
-                    availableDorms.set(j,tmp);
+                try{
+                    if(availableDorms.get(j).getNoOfStudents() > availableDorms.get(j+1).getNoOfStudents()){
+                        tmp = availableDorms.get(j+1);
+                        availableDorms.set(j+1,availableDorms.get(j));
+                        availableDorms.set(j,tmp);
+                    }
+                } catch (IndexOutOfBoundsException ex){
+                    ex.printStackTrace();//For debugging only.
                 }
             }
         }
