@@ -164,6 +164,7 @@ public class ChangeDormView extends JFrame implements Views {
         yearTF.addFocusListener(new YearTFListener(this));
         changeButton.addActionListener(new ChangeButtonListener(this));
         toBuildingNoTF.addFocusListener(new ToBuildingNoTFListener(this));
+        fromBuildingNoTF.addFocusListener(new FromBuildingNoTFListener(this));
         this.addWindowListener(new WindowAdapter()
         {
             @Override
