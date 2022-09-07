@@ -94,7 +94,6 @@ public class AllocateDormAsRequested implements ActionListener {
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet;
         if(javaConnection.isConnected()){
-            System.out.println("Size of reportId: "+reporterIds.size());
             for(String SID: reporterIds){
                 Student tmp;
                 String query = "SELECT * FROM Student WHERE SID='"+SID+"'";
@@ -165,7 +164,6 @@ public class AllocateDormAsRequested implements ActionListener {
         int totalSpace = getAvailableSpaces();
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "";
-        System.out.println(students);//Remove after debugging.
         for(int i = 0; i<reporterIds.size(); i++){
             Dormitory tmpDorm = availableDorms.get(i);
             String SID = reporterIds.get(i);
@@ -180,9 +178,7 @@ public class AllocateDormAsRequested implements ActionListener {
                         "' WHERE SID='"+student.getsId()+"'";
                 updateStatus = javaConnection.updateQuery(query);
             }
-            System.out.println("Update status before checking for full: "+updateStatus);//For debugging only.
             updateStatus &= (totalSpace >= reporterIds.size());
-            System.out.println("Update status after checking for full: "+updateStatus);//For debugging only.
             remainingStudents = reporterIds.size()-totalSpace;
             if(remainingStudents<0) remainingStudents = 0;
         }
@@ -192,7 +188,6 @@ public class AllocateDormAsRequested implements ActionListener {
     public void updateRequestStatus(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         int size = requests.size()-remainingStudents; //To prevent setting the status of the unhandled reports.
-        System.out.println("Remaining students: "+remainingStudents);//For debugging only.
         for(int i = 0; i< size; i++){
             try{
                 String query = "INSERT INTO ProctorHandlesReport(EID,ReportId,handledDate) " +
