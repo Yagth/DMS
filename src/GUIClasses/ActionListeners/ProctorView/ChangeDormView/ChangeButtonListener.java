@@ -117,8 +117,15 @@ public class ChangeButtonListener implements ActionListener {
 
             if(javaConnection.isConnected()){
                 loadAvailableDorms();
+
                 sortDormOnAvailableSpace();
+                System.out.println("--Available dorms after sort on space--");
+                displayAvailableDorms();
+
                 sortDormOnBuildingNo();
+                System.out.println("--Available dorms after sort on buildingNumber--");
+                displayAvailableDorms();
+
                 groupStudents(fromBuildingNo);
                 updateStatus = changeStudents(fromBuildingNo,toBuildingNo);
             }
@@ -314,5 +321,13 @@ public class ChangeButtonListener implements ActionListener {
         else
             JOptionPane.showMessageDialog(parentComponent,"Couldn't change all students due to some problem.\n " +
                     "Make sure there is available space and also the destination exits.");
+    }
+
+    //The following method is only for debugging.
+    private void displayAvailableDorms(){
+        for(Dormitory dorm: availableDorms){
+            System.out.println("BuildingNumber: "+dorm.getBuildingNo());
+            System.out.println("Available Space: "+(dorm.getMaxCapacity()-dorm.getNoOfStudents()));
+        }
     }
 }
