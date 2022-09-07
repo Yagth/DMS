@@ -275,7 +275,7 @@ public class ChangeButtonListener implements ActionListener {
                         availableDorms.set(j,tmp);
                     }
                 } catch (IndexOutOfBoundsException ex){
-                    ex.printStackTrace();//For debugging only.
+                    //No need to implement this block.
                 }
             }
         }
