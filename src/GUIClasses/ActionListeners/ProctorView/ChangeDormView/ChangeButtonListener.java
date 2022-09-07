@@ -272,8 +272,6 @@ public class ChangeButtonListener implements ActionListener {
                 }
             }
         }
-        System.out.println("--Is found in proctor building--");//Remove after debugging.
-        displayAvailableDorms();//Remove after debugging.
 
         for(int i = 0; i<availableDorms.size(); i++){
             for(int j = 0; j<availableDorms.size(); j++){
