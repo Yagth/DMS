@@ -53,7 +53,6 @@ public class ChangeButtonListener implements ActionListener {
 
             if(javaConnection.isConnected()){
                 ResultSet rs = javaConnection.selectQuery(query);
-                System.out.println("Query:"+query);//Remove after debugging.
                 try{
                     while(rs.next()){
                         numberOfStudents = rs.getInt("numberOfStudents");
@@ -76,8 +75,6 @@ public class ChangeButtonListener implements ActionListener {
                         "Empty message",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            System.out.println("Inside change single student block");//Remove after debugging.
-
             int maxCapacity = 0;
             query = "SELECT maxCapacity FROM DORM WHERE RoomNumber='"+toRoomNo+
                     "' AND BuildingNumber='"+toBuildingNo+"'";
@@ -90,8 +87,6 @@ public class ChangeButtonListener implements ActionListener {
                 }catch (SQLException ex){
                     ex.printStackTrace(); //For debugging only.
                 }
-                System.out.println("Max capacity:"+maxCapacity);//remove after debugging.
-                System.out.println("Number of Student: "+numberOfStudents);//Remove after debugging.
             }
 
             if(maxCapacity == 0){
@@ -131,6 +126,8 @@ public class ChangeButtonListener implements ActionListener {
         displayUpdateStatus(updateStatus);
         parentComponent.dispose();
         parentComponent.makeParentVisible();
+        availableDorms.clear();
+        groupOfStudents.clear();
     }
 
     public boolean changeStudents(String fromBuildingNo, String toBuildingNO){
@@ -157,7 +154,6 @@ public class ChangeButtonListener implements ActionListener {
                 if(tmp.getNoOfStudents()<tmp.getMaxCapacity()){
                     st.setBuildingNo(toBuildingNO);
                     st.setDormNo(tmp.getRoomNO());
-                    System.out.println("RoomNumber from change students: "+tmp.getRoomNO());//Remove after debugging.
                     tmp.setNoOfStudents(tmp.getNoOfStudents()+1); //Increment number of student in every addition.
                 }
                 else{
@@ -203,8 +199,6 @@ public class ChangeButtonListener implements ActionListener {
                 String dormNo = resultSet.getString("RoomNumber");
                 st.setDormNo(dormNo);
                 dormNumbers.add(dormNo);
-                System.out.println("BuildingNumber: "+st.getBuildingNo());//Remove after debugging.
-                System.out.println("RoomNumber: "+st.getDormNo());//Remove after debugging.
                 tmp.add(st);
             }
         } catch (SQLException ex){
@@ -222,11 +216,13 @@ public class ChangeButtonListener implements ActionListener {
         }
     }
     public void loadAvailableDorms(){
+        String fromBuildingNo = parentComponent.getDestinationBuildingNo();
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT * FROM AvailableDorm";
+        String query = "SELECT * FROM AvailableDorm WHERE BuildingNumber='"+fromBuildingNo+"'";
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
             while(resultSet.next()){
+                JavaConnection javaConnection1 = new JavaConnection(JavaConnection.URL);
                 String roomNo = resultSet.getString("roomNumber");
                 String buildingNumber = resultSet.getString("buildingNumber");
                 int maxCapacity = resultSet.getInt("maxCapacity");
@@ -234,7 +230,8 @@ public class ChangeButtonListener implements ActionListener {
 
                 String query2 = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
                         "WHERE BuildingNumber='"+buildingNumber+"' AND RoomNumber='"+roomNo+"'";
-                ResultSet rs = javaConnection.selectQuery(query2);
+                ResultSet rs = javaConnection1.selectQuery(query2);
+                System.out.println("Query to select Number of Students: "+query2);//Remove after debugging.
 
                 while(rs.next()){
                     tmp.setNoOfStudents(rs.getInt("numberOfStudents"));
