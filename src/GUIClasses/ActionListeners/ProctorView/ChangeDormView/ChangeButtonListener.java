@@ -173,8 +173,8 @@ public class ChangeButtonListener implements ActionListener {
             for(Student student: students){
                 query = "UPDATE STUDENT SET BuildingNumber='"+student.getBuildingNo()+
                         "', RoomNumber='"+student.getDormNo()+
-                        " WHERE SID='"+student.getsId()+"';";
-                System.out.println("Query"+query);//Remove after debugging.
+                        "' WHERE SID='"+student.getsId()+"';";
+                System.out.println("Query: "+query);//Remove after debugging.
                 updateStatus = javaConnection.updateQuery(query);
             }
         }
