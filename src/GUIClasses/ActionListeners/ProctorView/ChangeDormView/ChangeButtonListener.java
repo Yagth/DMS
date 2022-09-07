@@ -17,15 +17,15 @@ public class ChangeButtonListener implements ActionListener {
     private ChangeDormView parentComponent;
     private ArrayList<Dormitory> availableDorms;
     private ArrayList<ArrayList<Student>> groupOfStudents; //Collection of students that are in the same dorm.
-    private JavaConnection javaConnection;
+
     public ChangeButtonListener(ChangeDormView parentComponent){
         this.parentComponent = parentComponent;
         availableDorms = new ArrayList<>();
         groupOfStudents = new ArrayList<>();
-        javaConnection = new JavaConnection(JavaConnection.URL);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         boolean updateStatus = false;
         String condition = parentComponent.getSelectedCondition();
         String fromBuildingNo = parentComponent.getBuildingNo();
@@ -134,6 +134,7 @@ public class ChangeButtonListener implements ActionListener {
     }
 
     public boolean changeStudents(String fromBuildingNo, String toBuildingNO){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT COUNT(SID) AS TotalStudents FROM STUDENT" +
                 " WHERE BuildingNumber='"+fromBuildingNo+"' AND year="+parentComponent.getYear();
         ResultSet resultSet = javaConnection.selectQuery(query);
@@ -173,6 +174,7 @@ public class ChangeButtonListener implements ActionListener {
                 query = "UPDATE STUDENT SET BuildingNumber='"+student.getBuildingNo()+
                         "', RoomNumber='"+student.getDormNo()+
                         " WHERE SID='"+student.getsId()+"';";
+                System.out.println("Query"+query);//Remove after debugging.
                 updateStatus = javaConnection.updateQuery(query);
             }
         }
@@ -185,6 +187,7 @@ public class ChangeButtonListener implements ActionListener {
         This method groups students that are
         in the same dorm.
         */
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT * FROM STUDENT WHERE BuildingNumber='"+fromBuildingNo+"' ORDER BY(RoomNumber)";
         ResultSet resultSet = javaConnection.selectQuery(query);
         ArrayList<Student> tmp = new ArrayList<>();
@@ -215,6 +218,7 @@ public class ChangeButtonListener implements ActionListener {
         }
     }
     public void loadAvailableDorms(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT * FROM AvailableDorm";
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
