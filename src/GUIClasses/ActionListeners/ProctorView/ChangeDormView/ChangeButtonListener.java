@@ -212,9 +212,7 @@ public class ChangeButtonListener implements ActionListener {
         }
     }
     public void loadAvailableDorms(){
-        String query = "SELECT BuildingNumber, RoomNumber, maxCapacity FROM DORM AS D WHERE (SELECT COUNT(BuildingNumber, RoomNumber) " +
-                "FROM STUDENT AS S WHERE D.BuildingNumber=S.BuildingNumber AND " +
-                "D.RoomNumber=S.RoomNumber)< maxCapacity;";
+        String query = "SELECT * FROM AvailableDorm";
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
             while(resultSet.next()){
