@@ -213,8 +213,7 @@ public class AllocateDormAsRequested implements ActionListener {
             JOptionPane.showMessageDialog(parentComponent,"Change Successful.");
         else{
             if(remainingStudents == 0)
-                JOptionPane.showMessageDialog(parentComponent,"Couldn't allocate students due to some problem.\n " +
-                        "Make sure there is available space and also the destination exits.");
+                JOptionPane.showMessageDialog(parentComponent,"No students left to allocate.");
             else
                 JOptionPane.showMessageDialog(parentComponent,"Couldn't allocate "+ remainingStudents+" students due to some problem.\n " +
                         "Make sure there is available space and also the destination exits.");
