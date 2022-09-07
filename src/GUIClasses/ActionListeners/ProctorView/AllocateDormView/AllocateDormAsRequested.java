@@ -196,13 +196,18 @@ public class AllocateDormAsRequested implements ActionListener {
         int size = requests.size()-remainingStudents; //To prevent setting the status of the unhandled reports.
 
         for(int i = 0; i< size; i++){
-            String query = "INSERT INTO ProctorHandlesReport(EID,ReportId,handledDate) " +
-                    "VALUES('"+parentComponent.getProctor().getpId()+"', "+
-                    requests.get(i)+", '"+ Request.getCurrentDate()+"')";
-            System.out.println("Query: "+query);
-            if(javaConnection.isConnected()){
-                javaConnection.insertQuery(query);
+            try{
+                String query = "INSERT INTO ProctorHandlesReport(EID,ReportId,handledDate) " +
+                        "VALUES('"+parentComponent.getProctor().getpId()+"', "+
+                        requests.get(i)+", '"+ Request.getCurrentDate()+"')";
+                System.out.println("Query: "+query);
+                if(javaConnection.isConnected()){
+                    javaConnection.insertQuery(query);
+                }
+            }catch (IndexOutOfBoundsException ex){
+                //No need to implement this code.
             }
+
         }
     }
 
