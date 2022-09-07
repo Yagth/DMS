@@ -149,7 +149,7 @@ public class ChangeButtonListener implements ActionListener {
         System.out.println("Total Students: "+totalStudents);//For debugging only.
         System.out.println("Total space: "+totalSpace);//For debugging only.
 
-        for(int i = 0; i<totalSpace;i++){
+        for(int i = 0; i<availableDorms.size();i++){
             Dormitory tmp = availableDorms.get(i);
             for(int j = 0; j<groupOfStudents.get(i).size();j++){
                 Student st = groupOfStudents.get(i).get(j);
@@ -176,7 +176,8 @@ public class ChangeButtonListener implements ActionListener {
                 updateStatus = javaConnection.updateQuery(query);
             }
         }
-        return updateStatus;// Returns false if all students are not changed.
+        boolean allStudentsChanged = totalSpace>=totalStudents;
+        return updateStatus & allStudentsChanged;// Returns false if all students are not changed.
     }
 
     public void groupStudents(String fromBuildingNo){
@@ -233,7 +234,9 @@ public class ChangeButtonListener implements ActionListener {
 
                 availableDorms.add(tmp);
             }
+            System.out.println("available dorms size: "+availableDorms.size());//Remove after debugging.
         } catch (SQLException ex){
+            ex.printStackTrace();
             //Leave the implementation of this block.
         }
     }
@@ -278,6 +281,7 @@ public class ChangeButtonListener implements ActionListener {
         for(Dormitory dormitory: availableDorms){
             totalSpace += dormitory.getMaxCapacity() - dormitory.getNoOfStudents();
         }
+        System.out.println("Total space from the getTotalAvailableSpace method:"+totalSpace);//Remove after debugging..
         return totalSpace;
     }
 
