@@ -1,6 +1,5 @@
 package GUIClasses.ActionListeners;
 
-import GUIClasses.ActionListeners.DormitoryView.ChangeMenuListener;
 import GUIClasses.ProctorViews.ChangeDormView;
 
 import java.awt.event.ActionEvent;

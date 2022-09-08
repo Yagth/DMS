@@ -4,13 +4,10 @@ import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Requests.Request;
-import GUIClasses.ActionListeners.ProctorPage.LogoutMenuItemListener;
-import GUIClasses.ActionListeners.ProctorPage.ReportMenuItemListener;
-import GUIClasses.ActionListeners.ProctorPage.SeeDormMenuListener;
-import GUIClasses.ActionListeners.ProctorPage.SeeStudentMenuListener;
-import GUIClasses.ActionListeners.StudentPage.ClothTakeOutMenuItemListener;
-import GUIClasses.ActionListeners.StudentPage.ExtendDormMenuItemListener;
-import GUIClasses.ActionListeners.StudentPage.MaintenanceMenuItemListener;
+import GUIClasses.ActionListeners.ProctorView.ProctorPage.LogoutMenuItemListener;
+import GUIClasses.ActionListeners.ProctorView.ProctorPage.ReportMenuItemListener;
+import GUIClasses.ActionListeners.ProctorView.ProctorPage.SeeDormMenuListener;
+import GUIClasses.ActionListeners.ProctorView.ProctorPage.SeeStudentMenuListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -55,9 +52,6 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         setUpGUi();
         setUpTable();
     }
-    public ProctorPage(){
-        this(null);
-    }//For debugging purposes.
     public Proctor getProctor(){
         return proctor;
     }
