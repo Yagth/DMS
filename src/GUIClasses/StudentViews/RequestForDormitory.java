@@ -2,7 +2,6 @@ package GUIClasses.StudentViews;
 
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
-import BasicClasses.Requests.Request;
 import BasicClasses.Requests.RequestForNewDorm;
 import GUIClasses.ActionListeners.RequestForDormitorySubmitButtonListener;
 import GUIClasses.Interfaces.RequestViews;
@@ -10,10 +9,8 @@ import GUIClasses.Interfaces.RequestViews;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 public class RequestForDormitory extends JFrame implements RequestViews {
     private JLabel titleLabel;

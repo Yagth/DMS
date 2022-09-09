@@ -2,10 +2,10 @@ package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Persons.Proctor;
-import GUIClasses.ActionListeners.ChangeBackButtonListener;
-import GUIClasses.ActionListeners.DormitoryView.BackLabelListener;
-import GUIClasses.ActionListeners.DormitoryView.ChangeMenuListener;
-import GUIClasses.ActionListeners.DormitoryView.DeallocateMenuListener;
+import GUIClasses.ActionListeners.ProctorView.AllocateDormView.AllocateDormAsRequested;
+import GUIClasses.ActionListeners.ProctorView.DormitoryView.BackLabelListener;
+import GUIClasses.ActionListeners.ProctorView.DormitoryView.ChangeMenuListener;
+import GUIClasses.ActionListeners.ProctorView.DormitoryView.DeallocateMenuListener;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
@@ -99,6 +99,7 @@ public class DormitoryView extends JFrame implements Views {
         JMenu actions = new JMenu("Actions");
 
         JMenuItem allocate = new JMenuItem("Allocate Dorms");
+        allocate.addActionListener(new AllocateDormAsRequested(this));
         JMenuItem deallocate = new JMenuItem("Deallocate all dorms");
         deallocate.addActionListener(new DeallocateMenuListener(this));
         JMenuItem change = new JMenuItem("Change Dorm");
