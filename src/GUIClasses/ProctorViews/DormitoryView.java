@@ -77,7 +77,7 @@ public class DormitoryView extends JFrame implements Views, TableViews {
         int year = 0;
         try{
             year = Integer.parseInt(yearTA.getText());
-        } catch (InputMismatchException ex){
+        } catch (NumberFormatException ex){
             ex.printStackTrace();//For debugging only.
             JOptionPane.showMessageDialog(this,"Please enter the correct year",
                     "Invalid input",JOptionPane.ERROR_MESSAGE);
@@ -207,6 +207,7 @@ public class DormitoryView extends JFrame implements Views, TableViews {
         filterButton.setIcon(filterButtonIcon);
 
         searchButton.addActionListener(new SearchButtonListener(this));
+        filterButton.addActionListener(new FilterButtonListener(this));
         searchBuildingNoTA.addFocusListener(new FocusListenerForTF(this));
         searchRoomNoTA.addFocusListener(new FocusListenerForTF(this));
 
