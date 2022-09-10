@@ -48,7 +48,6 @@ public class DormitoryView extends JFrame implements Views, TableViews {
     private Proctor proctor;
     private Vector<Vector<Object>> tableData;
     private ArrayList<Dormitory> dorms;
-    private boolean updateStatus = false;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
@@ -90,11 +89,17 @@ public class DormitoryView extends JFrame implements Views, TableViews {
                     tmp.setNoOfStudents(resultSet.getInt("NumberOfStudent"));
                     dorms.add(tmp);
                 }
-                updateStatus = true;
             }catch (SQLException ex){
-                updateStatus = false;
+                ex.printStackTrace();//For debugging purpose.
             }
         }
+        else displayUpdateStatus(false);
+    }
+
+    public void displayUpdateStatus(boolean updateStatus){
+        if(!updateStatus)
+            JOptionPane.showMessageDialog(parentComponent,"Couldn't dorms due to some error",
+                    "Connection error",JOptionPane.ERROR_MESSAGE);
     }
 
     @Override
