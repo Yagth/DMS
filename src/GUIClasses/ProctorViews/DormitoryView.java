@@ -16,6 +16,7 @@ import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Vector;
 
 public class DormitoryView extends JFrame implements Views, TableViews {
@@ -66,6 +67,22 @@ public class DormitoryView extends JFrame implements Views, TableViews {
 
     public Proctor getProctor() {
         return proctor;
+    }
+
+    public String getSelectedCondition(){
+       return (String) filterList.getSelectedItem();
+    }
+
+    public int getYear(){
+        int year = 0;
+        try{
+            year = Integer.parseInt(yearTA.getText());
+        } catch (InputMismatchException ex){
+            ex.printStackTrace();//For debugging only.
+            JOptionPane.showMessageDialog(this,"Please enter the correct year",
+                    "Invalid input",JOptionPane.ERROR_MESSAGE);
+        }
+        return year;
     }
 
     public void changeTableData(ArrayList<Dormitory> dorms){

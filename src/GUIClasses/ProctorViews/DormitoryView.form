@@ -100,6 +100,7 @@
               </grid>
             </constraints>
             <properties>
+              <toolTipText value="Enter the year"/>
               <visible value="false"/>
             </properties>
           </component>
