@@ -43,6 +43,7 @@ public class DormitoryView extends JFrame implements Views, TableViews {
     private JTextField yearTA;
     private JTable dormListTable;
     private JPanel dormLIstPanel;
+    private JLabel yearL;
     private ProctorPage parentComponent;
     private Proctor proctor;
     private Vector<Vector<Object>> tableData;
