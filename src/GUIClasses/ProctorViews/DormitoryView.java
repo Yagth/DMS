@@ -22,16 +22,10 @@ public class DormitoryView extends JFrame implements Views {
     private JLabel totalSpaceNo;
     private JLabel emptyDormNoLabel;
     private JPanel totalDormInfoPanel;
-    private JLabel dormLocation;
-    private JLabel noStudentsLabel;
-    private JPanel listOfDormPanel;
     private JLabel numberOfDorm;
     private JPanel buttonPanel;
     private JLabel searchDormLabel;
     private JLabel filterLabel;
-    private JPanel dormLocationPanel;
-    private JPanel numberOfStudentsPanel;
-    private JPanel dormListPanel;
     private JComboBox filterList;
     private JLabel BNOLabel;
     private JFormattedTextField searchRoomNoTA;
@@ -40,6 +34,8 @@ public class DormitoryView extends JFrame implements Views {
     private JLabel previousPageLabel;
     private JLabel nextPageLabel;
     private JTextField yearTA;
+    private JTable dormListTable;
+    private JPanel dormLIstPanel;
     private ProctorPage parentComponent;
     private Proctor proctor;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
