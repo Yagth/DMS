@@ -23,6 +23,8 @@ public class SearchButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         loadSearchedDorm();
         parentComponent.changeTableData(dorms);
+        if(dorms.size() == 0)
+            JOptionPane.showMessageDialog(parentComponent,"No dorms found with this address");
         dorms.clear();
     }
     public void loadSearchedDorm(){
