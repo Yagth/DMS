@@ -16,5 +16,6 @@ public class FilterConditionItemListener implements ItemListener {
         String condition = parentComponent.getSelectedCondition();
         if(condition.equals("Year of Students")) parentComponent.setYearTAVisibility(true);
         else parentComponent.setYearTAVisibility(false);
+        parentComponent.revalidate();
     }
 }
