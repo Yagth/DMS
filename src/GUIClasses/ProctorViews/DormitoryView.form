@@ -143,6 +143,7 @@
             <properties>
               <font name="Lucida Fax" size="12" style="1"/>
               <text value="year"/>
+              <visible value="false"/>
             </properties>
           </component>
           <component id="edf34" class="javax.swing.JTextField" binding="yearTA">
@@ -153,7 +154,7 @@
             </constraints>
             <properties>
               <toolTipText value="Enter the year"/>
-              <visible value="true"/>
+              <visible value="false"/>
             </properties>
           </component>
         </children>
