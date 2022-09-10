@@ -40,9 +40,6 @@ public class AllocateDormAsRequested implements ActionListener {
         updateRequestStatus();
         displayUpdateStatus(updateStatus);
 
-        parentComponent.dispose();
-        parentComponent.showParentComponent();
-
     }
 
     public void loadAvailableDorms(){
