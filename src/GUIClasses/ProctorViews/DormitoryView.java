@@ -89,8 +89,8 @@ public class DormitoryView extends JFrame implements Views, TableViews {
             Dormitory tmp;
             try{
                 while(resultSet.next()){
-                    tmp = new Dormitory(resultSet.getString("BuildingNumber"),
-                                        resultSet.getString("RoomNumber"),
+                    tmp = new Dormitory(resultSet.getString("RoomNumber"),
+                                        resultSet.getString("BuildingNumber"),
                                         resultSet.getInt("maxCapacity")
                     );
                     tmp.setNoOfStudents(resultSet.getInt("NumberOfStudent"));
