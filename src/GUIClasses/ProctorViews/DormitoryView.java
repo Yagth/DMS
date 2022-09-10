@@ -73,6 +73,10 @@ public class DormitoryView extends JFrame implements Views, TableViews {
        return (String) filterList.getSelectedItem();
     }
 
+    public void setYearTAVisibility(boolean visibility){
+        yearTA.setVisible(visibility);
+    }
+
     public int getYear(){
         int year = 0;
         try{
