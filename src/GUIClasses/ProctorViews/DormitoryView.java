@@ -206,6 +206,7 @@ public class DormitoryView extends JFrame implements Views, TableViews {
 
         menuBar.add(actions);
         setUpTable();
+        loadDorms();
         addDataToTable(null);
         this.setJMenuBar(menuBar);
         this.setVisible(true);
@@ -225,7 +226,6 @@ public class DormitoryView extends JFrame implements Views, TableViews {
 
     @Override
     public void addDataToTable(Object object) {
-        loadDorms();
         for(Dormitory dorm: dorms){
             Vector<Object> tmp = new Vector<>();
             tmp.add(dorm.getBuildingNo());
