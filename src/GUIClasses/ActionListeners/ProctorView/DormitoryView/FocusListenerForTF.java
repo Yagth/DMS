@@ -12,20 +12,23 @@ public class FocusListenerForTF implements FocusListener {
     private String roomNo;
     public FocusListenerForTF(DormitoryView parentComponent){
         this.parentComponent = parentComponent;
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
         buildingNo = parentComponent.getBuildingNo();
         roomNo = parentComponent.getRoomNo();
     }
 
     @Override
-    public void focusGained(FocusEvent e) {
-
-    }
-
-    @Override
     public void focusLost(FocusEvent e) {
-        if(buildingNo.equals("")&roomNo.equals("")){
+        if(buildingNo.equals("") && roomNo.equals("")){
+            parentComponent.clearDorms();
             parentComponent.loadDorms();
             parentComponent.addDataToTable(null);
+        }else{
+            buildingNo = parentComponent.getBuildingNo();
+            roomNo = parentComponent.getRoomNo();
         }
     }
 }
