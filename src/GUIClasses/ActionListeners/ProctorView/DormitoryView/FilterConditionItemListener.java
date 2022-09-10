@@ -12,9 +12,12 @@ public class FilterConditionItemListener implements ItemListener {
     }
     @Override
     public void itemStateChanged(ItemEvent e) {
+        parentComponent.setYearTAText("");
         String condition = parentComponent.getSelectedCondition();
+
         if(condition.equals("Year of Students")) parentComponent.setYearVisibility(true);
         else parentComponent.setYearVisibility(false);
+
         parentComponent.revalidate();
     }
 }

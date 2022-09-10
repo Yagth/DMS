@@ -42,6 +42,7 @@ public class FilterButtonListener implements ActionListener {
                             resultSet.getString("BuildingNumber"),
                             resultSet.getInt("maxCapacity")
                     );
+                    tmp.setNoOfStudents(resultSet.getInt("NumberOfStudents"));
                     dorms.add(tmp);
                 }
             } catch (SQLException ex){
