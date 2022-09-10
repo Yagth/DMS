@@ -35,12 +35,10 @@ public class ProctorPage extends JFrame implements Views, TableViews {
     private JPanel ScheduleHeadline;
     private JLabel ScheduleHeadLineText;
     private JPanel ScheduleBodyPanel;
-    private JTextField BlockNumberText;
-    private JTextField DateText;
-    private JTextField OtherProctorText;
     private JLabel BlockNumberLabel;
-    private JLabel DateLabel;
-    private JLabel OtherProctorLabel;
+    private JLabel blockNumberL;
+    private JLabel toDateL;
+    private JLabel fromDateL;
     private Vector<Vector<Object>> tableData;
     private Proctor proctor;
     private boolean readStatus;
@@ -130,6 +128,7 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WIDTH,HEIGHT);
         setLocationRelativeTo(null);
+        setBackground(new Color(255,255,255));
 
         JMenuBar Services = new JMenuBar();
         Services.setBackground(new Color(72,131,184));
