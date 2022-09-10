@@ -194,6 +194,7 @@ public class DormitoryView extends JFrame implements Views, TableViews {
 
         filterList.addItem("Year of Students");
         filterList.addItem("Available space");
+        filterList.setSelectedIndex(1);
         filterList.addItemListener(new FilterConditionItemListener(this));
         backLabel.addMouseListener(new BackLabelListener(this));
         totalSpaceNo.setText(String.valueOf(totalAvailableSpace()));
