@@ -111,7 +111,7 @@
               <focusable value="false"/>
               <horizontalAlignment value="10"/>
               <text value=""/>
-              <toolTipText value="search"/>
+              <toolTipText value="search dorm"/>
             </properties>
           </component>
           <component id="33194" class="javax.swing.JButton" binding="filterButton">
@@ -214,11 +214,12 @@
         <children>
           <component id="8d4a9" class="javax.swing.JLabel" binding="totalNoLabel">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font size="11" style="1"/>
               <text value="Total Space :"/>
+              <toolTipText value="available space on these building"/>
             </properties>
           </component>
           <hspacer id="4d9c0">
@@ -236,11 +237,12 @@
           </component>
           <component id="efaf6" class="javax.swing.JLabel" binding="emptyDormNoLabel">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font size="11" style="1"/>
               <text value="Empty dorms :"/>
+              <toolTipText value="empty dorms on this building"/>
             </properties>
           </component>
           <component id="3ee25" class="javax.swing.JLabel" binding="numberOfDorm">

@@ -70,6 +70,11 @@ public class DormitoryView extends JFrame implements Views, TableViews {
         return proctor;
     }
 
+    public void changeTableData(ArrayList<Dormitory> dorms){
+        this.dorms = dorms;
+        addDataToTable(null);
+        refreshTable();
+    }
     public void loadDorms(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT D.BuildingNumber,D.RoomNumber, maxCapacity, COUNT(SID) AS NumberOfStudent " +
@@ -102,6 +107,50 @@ public class DormitoryView extends JFrame implements Views, TableViews {
                     "Connection error",JOptionPane.ERROR_MESSAGE);
     }
 
+    public int totalAvailableSpace(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT (maxCapacity-NumberOfStudents) AS AvailableSpace FROM AvailableDorm WHERE BuildingNumber='"+proctor.getBuildingNo()+"'";
+        ResultSet resultSet;
+        int totalSpace = 0;
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    totalSpace+=resultSet.getInt("AvailableSpace");
+                }
+            } catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+        }
+        return totalSpace;
+    }
+
+    public int emptyDorms(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT COUNT(RoomNumber) AS EmptyDorm FROM AvailableDorm WHERE NumberOfStudents=0 AND BuildingNumber='"+proctor.getBuildingNo()+"'";
+        ResultSet resultSet;
+        int emptyDorm = 0;
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    emptyDorm+=resultSet.getInt("EmptyDorm");
+                }
+            } catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+        }
+        return emptyDorm;
+    }
+
+    public String getBuildingNo(){
+        return searchBuildingNoTA.getText();
+    }
+
+    public String getRoomNo(){
+        return searchRoomNoTA.getText();
+    }
+
     @Override
     public void setUpGUi() {
         this.setTitle("DormitoryView");
@@ -121,6 +170,9 @@ public class DormitoryView extends JFrame implements Views, TableViews {
         filterList.addItem("Year of Students");
         filterList.addItem("Available space");
         backLabel.addMouseListener(new BackLabelListener(this));
+        totalSpaceNo.setText(String.valueOf(totalAvailableSpace()));
+        numberOfDorm.setText(String.valueOf(emptyDorms()));
+
 
         ImageIcon searchButtonIcon = new ImageIcon("Icons/SearchIcon.png");
         searchButton.setIcon(searchButtonIcon);
