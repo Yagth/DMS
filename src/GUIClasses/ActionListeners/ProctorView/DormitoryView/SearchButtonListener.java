@@ -23,6 +23,7 @@ public class SearchButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         loadSearchedDorm();
         parentComponent.changeTableData(dorms);
+        dorms.clear();
     }
     public void loadSearchedDorm(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
