@@ -5,10 +5,7 @@ import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Rooms.Dormitory;
 import GUIClasses.ActionListeners.ProctorView.AllocateDormView.AllocateDormAsRequested;
-import GUIClasses.ActionListeners.ProctorView.DormitoryView.BackLabelListener;
-import GUIClasses.ActionListeners.ProctorView.DormitoryView.ChangeMenuListener;
-import GUIClasses.ActionListeners.ProctorView.DormitoryView.DeallocateMenuListener;
-import GUIClasses.ActionListeners.ProctorView.DormitoryView.SearchButtonListener;
+import GUIClasses.ActionListeners.ProctorView.DormitoryView.*;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -153,6 +150,11 @@ public class DormitoryView extends JFrame implements Views, TableViews {
         return searchRoomNoTA.getText();
     }
 
+    public void clearDorms(){
+        dorms.clear();
+        tableData.clear();
+    }
+
     @Override
     public void setUpGUi() {
         this.setTitle("DormitoryView");
@@ -188,6 +190,8 @@ public class DormitoryView extends JFrame implements Views, TableViews {
         filterButton.setIcon(filterButtonIcon);
 
         searchButton.addActionListener(new SearchButtonListener(this));
+        searchBuildingNoTA.addFocusListener(new FocusListenerForTF(this));
+        searchRoomNoTA.addFocusListener(new FocusListenerForTF(this));
 
         JMenuBar menuBar = new JMenuBar();
 
