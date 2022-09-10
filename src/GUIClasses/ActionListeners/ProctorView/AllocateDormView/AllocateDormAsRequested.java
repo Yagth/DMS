@@ -39,7 +39,6 @@ public class AllocateDormAsRequested implements ActionListener {
         updateStatus = allocateStudents();
         updateRequestStatus();
         displayUpdateStatus(updateStatus);
-
     }
 
     public void loadAvailableDorms(){
