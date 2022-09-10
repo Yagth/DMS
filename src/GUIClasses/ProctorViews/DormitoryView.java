@@ -87,7 +87,7 @@ public class DormitoryView extends JFrame implements Views, TableViews {
             year = Integer.parseInt(yearTA.getText());
         } catch (NumberFormatException ex){
             ex.printStackTrace();//For debugging only.
-            JOptionPane.showMessageDialog(this,"Please enter the correct year",
+            JOptionPane.showMessageDialog(this,"Please enter a valid year",
                     "Invalid input",JOptionPane.ERROR_MESSAGE);
         }
         return year;

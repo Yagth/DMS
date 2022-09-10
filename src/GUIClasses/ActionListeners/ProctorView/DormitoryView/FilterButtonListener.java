@@ -63,9 +63,10 @@ public class FilterButtonListener implements ActionListener {
 
         } else {
             query = "SELECT DISTINCT A.BuildingNumber, A.RoomNumber, maxCapacity, NumberOfStudents " +
-                    "FROM AvailableDorm AS A JOIN Student AS S ON A.BuildingNumber = S.BuildingNumber " +
+                    "FROM AvailableDorm AS A LEFT JOIN Student AS S ON A.BuildingNumber = S.BuildingNumber " +
                     "AND A.RoomNumber = S.RoomNumber ORDER BY NumberOfStudents ASC";
         }
+        System.out.println("Query: "+query);//For debugging only.
         return query;
     }
 }
