@@ -1,6 +1,5 @@
 package GUIClasses.ActionListeners.ProctorView.DormitoryView;
 
-import BasicClasses.Rooms.Dormitory;
 import GUIClasses.ProctorViews.DormitoryView;
 
 import java.awt.event.ItemEvent;
@@ -14,8 +13,8 @@ public class FilterConditionItemListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
         String condition = parentComponent.getSelectedCondition();
-        if(condition.equals("Year of Students")) parentComponent.setYearTAVisibility(true);
-        else parentComponent.setYearTAVisibility(false);
+        if(condition.equals("Year of Students")) parentComponent.setYearVisibility(true);
+        else parentComponent.setYearVisibility(false);
         parentComponent.revalidate();
     }
 }

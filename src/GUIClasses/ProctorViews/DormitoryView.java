@@ -16,7 +16,6 @@ import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Vector;
 
 public class DormitoryView extends JFrame implements Views, TableViews {
@@ -74,8 +73,9 @@ public class DormitoryView extends JFrame implements Views, TableViews {
        return (String) filterList.getSelectedItem();
     }
 
-    public void setYearTAVisibility(boolean visibility){
+    public void setYearVisibility(boolean visibility){
         yearTA.setVisible(visibility);
+        yearL.setVisible(visibility);
     }
 
     public int getYear(){
