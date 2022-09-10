@@ -1,18 +1,26 @@
 package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
+import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
+import BasicClasses.Rooms.Dormitory;
 import GUIClasses.ActionListeners.ProctorView.AllocateDormView.AllocateDormAsRequested;
 import GUIClasses.ActionListeners.ProctorView.DormitoryView.BackLabelListener;
 import GUIClasses.ActionListeners.ProctorView.DormitoryView.ChangeMenuListener;
 import GUIClasses.ActionListeners.ProctorView.DormitoryView.DeallocateMenuListener;
+import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
 
-public class DormitoryView extends JFrame implements Views {
+public class DormitoryView extends JFrame implements Views, TableViews {
     private JFormattedTextField searchBuildingNoTA;
     private JButton searchButton;
     private JButton filterButton;
@@ -38,12 +46,16 @@ public class DormitoryView extends JFrame implements Views {
     private JPanel dormLIstPanel;
     private ProctorPage parentComponent;
     private Proctor proctor;
+    private Vector<Vector<Object>> tableData;
+    private ArrayList<Dormitory> dorms;
+    private boolean updateStatus = false;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
     public DormitoryView(Proctor proctor, ProctorPage parentComponent){
         this.proctor = proctor;
         this.parentComponent = parentComponent;
+        dorms = new ArrayList<>();
         setUpGUi();
     }
 
@@ -57,6 +69,32 @@ public class DormitoryView extends JFrame implements Views {
 
     public Proctor getProctor() {
         return proctor;
+    }
+
+    public void loadDorms(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT D.BuildingNumber,D.RoomNumber, maxCapacity, COUNT(SID) AS NumberOfStudent " +
+                        "FROM Dorm AS D LEFT JOIN Student AS S ON D.BuildingNumber = S.BuildingNumber " +
+                        "AND D.RoomNumber = S.RoomNumber GROUP BY D.BuildingNumber,D.RoomNumber,maxCapacity";
+        ResultSet resultSet;
+
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            Dormitory tmp;
+            try{
+                while(resultSet.next()){
+                    tmp = new Dormitory(resultSet.getString("BuildingNumber"),
+                                        resultSet.getString("RoomNumber"),
+                                        resultSet.getInt("maxCapacity")
+                    );
+                    tmp.setNoOfStudents(resultSet.getInt("NumberOfStudent"));
+                    dorms.add(tmp);
+                }
+                updateStatus = true;
+            }catch (SQLException ex){
+                updateStatus = false;
+            }
+        }
     }
 
     @Override
@@ -106,8 +144,40 @@ public class DormitoryView extends JFrame implements Views {
         actions.add(change);
 
         menuBar.add(actions);
-
+        setUpTable();
+        addDataToTable(null);
         this.setJMenuBar(menuBar);
         this.setVisible(true);
+    }
+
+    @Override
+    public void setUpTable() {
+        Vector<String> titles = new Vector<>();
+        tableData = new Vector<>();
+        titles.add("Building Number");
+        titles.add("Room Number");
+        titles.add("Number of students");
+
+        dormListTable.setModel(new DefaultTableModel(tableData,titles));
+        dormListTable.setDefaultEditor(Object.class,null);//To make all rows non-editable.
+    }
+
+    @Override
+    public void addDataToTable(Object object) {
+        loadDorms();
+        for(Dormitory dorm: dorms){
+            Vector<Object> tmp = new Vector<>();
+            tmp.add(dorm.getBuildingNo());
+            tmp.add(dorm.getRoomNO());
+            tmp.add(dorm.getNoOfStudents());
+            tableData.add(tmp);
+        }
+        refreshTable();
+    }
+
+    @Override
+    public void refreshTable() {
+        DefaultTableModel tableModel = (DefaultTableModel) dormListTable.getModel();
+        tableModel.fireTableDataChanged();
     }
 }
