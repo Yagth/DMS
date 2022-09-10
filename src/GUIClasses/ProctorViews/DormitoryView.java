@@ -8,6 +8,7 @@ import GUIClasses.ActionListeners.ProctorView.AllocateDormView.AllocateDormAsReq
 import GUIClasses.ActionListeners.ProctorView.DormitoryView.BackLabelListener;
 import GUIClasses.ActionListeners.ProctorView.DormitoryView.ChangeMenuListener;
 import GUIClasses.ActionListeners.ProctorView.DormitoryView.DeallocateMenuListener;
+import GUIClasses.ActionListeners.ProctorView.DormitoryView.SearchButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -184,6 +185,8 @@ public class DormitoryView extends JFrame implements Views, TableViews {
         previousPageLabel.setIcon(previousButtonIcon);
         ImageIcon filterButtonIcon = new ImageIcon("Icons/FilterIcon.png");
         filterButton.setIcon(filterButtonIcon);
+
+        searchButton.addActionListener(new SearchButtonListener(this));
 
         JMenuBar menuBar = new JMenuBar();
 
