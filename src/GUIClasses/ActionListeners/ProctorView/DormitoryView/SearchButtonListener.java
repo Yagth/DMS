@@ -54,7 +54,7 @@ public class SearchButtonListener implements ActionListener {
                                 resultSet.getString("RoomNumber"),
                                 resultSet.getInt("maxCapacity")
                         );
-                        tmp.setNoOfStudents(resultSet.getInt("NumberOfStudent"));
+                        tmp.setNoOfStudents(resultSet.getInt("NumberOfStudents"));
                         dorms.add(tmp);
                     }
                 } catch (SQLException ex){
