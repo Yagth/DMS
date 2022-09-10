@@ -21,6 +21,8 @@ public class FilterButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String query = checkCondition();
+        if(query.equals(""))
+            return;
         loadDorms(query);
         parentComponent.changeTableData(dorms);
         if(dorms.size() == 0)
@@ -52,6 +54,8 @@ public class FilterButtonListener implements ActionListener {
         String condition = parentComponent.getSelectedCondition();
         String query;
         if(condition.equals("Year of Students")){
+            int year = parentComponent.getYear();
+            if(year == 0) return "";
             query = "SELECT DISTINCT A.BuildingNumber, A.RoomNumber, maxCapacity, NumberOfStudents " +
                     "FROM AvailableDorm AS A JOIN Student AS S ON A.BuildingNumber = S.BuildingNumber " +
                     "AND A.RoomNumber = S.RoomNumber AND year = "+parentComponent.getYear();
