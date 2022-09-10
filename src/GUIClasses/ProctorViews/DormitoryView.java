@@ -73,6 +73,7 @@ public class DormitoryView extends JFrame implements Views, TableViews {
 
     public void changeTableData(ArrayList<Dormitory> dorms){
         this.dorms = dorms;
+        tableData.clear();
         addDataToTable(null);
         refreshTable();
     }
