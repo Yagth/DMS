@@ -6,10 +6,8 @@ import GUIClasses.ProctorViews.DormitoryDetailView;
 import GUIClasses.ProctorViews.DormitoryView;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.RectangularShape;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

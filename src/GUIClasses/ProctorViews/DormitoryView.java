@@ -261,6 +261,7 @@ public class DormitoryView extends JFrame implements Views, TableViews {
 
         dormListTable.setModel(new DefaultTableModel(tableData,titles));
         dormListTable.setDefaultEditor(Object.class,null);//To make all rows non-editable.
+        dormListTable.addMouseListener(new DormListClickListener(this));
     }
 
     @Override
