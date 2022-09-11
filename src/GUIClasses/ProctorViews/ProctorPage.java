@@ -88,6 +88,38 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         }
         return temp;
     }
+
+    public void loadSchedule(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT TOP 1 * FROM ProctorSchedule WHERE PID='"+getProctor().getpId()+"' ORDER BY FromDate ASC,ToDate ASC";
+        Date fromDate = null, toDate = null;
+        String buildingNumber;
+        ResultSet resultSet;
+
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    fromDate = resultSet.getDate("FromDate");
+                    toDate = resultSet.getDate("ToDate");
+                    buildingNumber = resultSet.getString("BuildingNumber");
+                }
+            } catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+            if(toDateIsValid(toDate)){
+                System.out.println("Is before");
+            }
+
+        }
+    }
+
+    public boolean toDateIsValid(Date date){
+        Date tmp = Request.getCurrentDate();//For debugging only.
+        System.out.println("Current date: "+tmp);//For debugging only.
+        System.out.println("Date: "+date);//For debugging only.
+        return date.toInstant().isAfter(Request.getCurrentDate().toInstant());
+    }
     @Override
     public void setUpTable() {
         Vector<Object> titles = new Vector<>();
@@ -164,6 +196,9 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         Services.add(logout);
 
         setJMenuBar(Services);
+
+        loadSchedule();
+
         setVisible(true);
     }
 }
