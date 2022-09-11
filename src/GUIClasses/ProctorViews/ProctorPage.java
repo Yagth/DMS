@@ -89,11 +89,17 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         return temp;
     }
 
+    public void setScheduleLabels(Date fromDate, Date toDate, String buildingNumber){
+        this.fromDateL.setText(fromDate.toString());
+        this.toDateL.setText(toDate.toString());
+        this.blockNumberL.setText(buildingNumber);
+    }
+
     public void loadSchedule(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT TOP 1 * FROM ProctorSchedule WHERE PID='"+getProctor().getpId()+"' ORDER BY FromDate ASC,ToDate ASC";
         Date fromDate = null, toDate = null;
-        String buildingNumber;
+        String buildingNumber = "";
         ResultSet resultSet;
 
         if(javaConnection.isConnected()){
@@ -108,7 +114,7 @@ public class ProctorPage extends JFrame implements Views, TableViews {
                 ex.printStackTrace();//For debugging only.
             }
             if(toDateIsValid(toDate)){
-                System.out.println("Is before");
+                setScheduleLabels(fromDate,toDate,buildingNumber);
             }
 
         }
@@ -160,7 +166,8 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WIDTH,HEIGHT);
         setLocationRelativeTo(null);
-        setBackground(new Color(232,255,255));
+        this.getContentPane().setBackground(new Color(232,255,255));
+
 
         JMenuBar Services = new JMenuBar();
         Services.setBackground(new Color(72,131,184));
