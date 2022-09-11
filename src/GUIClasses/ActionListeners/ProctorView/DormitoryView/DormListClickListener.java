@@ -20,8 +20,8 @@ public class DormListClickListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         Dormitory dorm = getClickedDorm();
         dorm = updateDormData(dorm);
-        new DormitoryDetailView(dorm,parentComponent.getProctor(),parentComponent);
         parentComponent.setVisible(false);
+        new DormitoryDetailView(dorm,parentComponent.getProctor(),parentComponent);
     }
 
     public Dormitory getClickedDorm(){
