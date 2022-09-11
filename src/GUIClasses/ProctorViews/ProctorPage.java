@@ -118,7 +118,7 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         Date tmp = Request.getCurrentDate();//For debugging only.
         System.out.println("Current date: "+tmp);//For debugging only.
         System.out.println("Date: "+date);//For debugging only.
-        return date.toInstant().isAfter(Request.getCurrentDate().toInstant());
+        return date.after(Request.getCurrentDate());
     }
     @Override
     public void setUpTable() {
