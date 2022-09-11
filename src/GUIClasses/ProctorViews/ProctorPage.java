@@ -127,6 +127,10 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         System.out.println("Date: "+date);//For debugging only.
         return date.after(Request.getCurrentDate());
     }
+
+    public JTable getReportTable(){
+        return ReportTable;
+    }
     @Override
     public void setUpTable() {
         Vector<Object> titles = new Vector<>();

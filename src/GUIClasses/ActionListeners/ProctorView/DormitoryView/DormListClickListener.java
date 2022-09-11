@@ -43,10 +43,10 @@ public class DormListClickListener implements MouseListener {
                 while(resultSet.next()){
                     dormitory.setKeyHolderId(resultSet.getString("KeyHolder"));
                     dormitory.setNoOfLockers(resultSet.getInt("Lockers"));
-                    dormitory.setNoOfTables(resultSet.getInt("Study Table"));
+                    dormitory.setNoOfTables(resultSet.getInt("StudyTable"));
                     dormitory.setNoOfChairs(resultSet.getInt("chair"));
                     dormitory.setNoOfBeds(resultSet.getInt("BedNumber"));
-                    dormitory.setDormType(resultSet.getString("dorm Type"));
+                    dormitory.setDormType(resultSet.getString("dormType"));
                 }
             } catch (SQLException ex){
                 ex.printStackTrace();//For debugging only.
