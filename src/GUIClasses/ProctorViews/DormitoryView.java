@@ -72,6 +72,13 @@ public class DormitoryView extends JFrame implements Views, TableViews {
     public String getSelectedCondition(){
        return (String) filterList.getSelectedItem();
     }
+    public Dormitory getDormAt(int index){
+        return dorms.get(index);
+    }
+
+    public JTable getTable(){
+        return dormListTable;
+    }
 
     public void setYearTAText(String text){
         yearTA.setText(text);

@@ -8,6 +8,7 @@ public class Dormitory extends Room{
     private int maxCapacity;
     private int noOfStudents;
     private String keyHolderId;
+    private String dormType;
 
     public Dormitory(String roomNo, String buildingNo){
         super("Dormitory",roomNo,buildingNo);
@@ -68,5 +69,13 @@ public class Dormitory extends Room{
 
     public int getNoOfStudents() {
         return noOfStudents;
+    }
+
+    public String getDormType() {
+        return dormType;
+    }
+
+    public void setDormType(String dormType) {
+        this.dormType = dormType;
     }
 }
