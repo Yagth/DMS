@@ -13,10 +13,10 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SeeYourRequestClickListener implements MouseListener {
+public class RequestDetailClickListener implements MouseListener {
     SeeYourRequests parentComponent;
     String reporterId;
-    public SeeYourRequestClickListener(SeeYourRequests parentComponent){
+    public RequestDetailClickListener(SeeYourRequests parentComponent){
         this.parentComponent = parentComponent;
         reporterId = parentComponent.getStudent().getsId();
     }
