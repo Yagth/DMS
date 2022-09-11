@@ -27,6 +27,7 @@ public class DormListClickListener implements MouseListener {
     public Dormitory getClickedDorm(){
         JTable table = parentComponent.getTable();
         int clickedRow = table.getSelectedRow();
+        System.out.println("Clicked row: "+clickedRow);//For debugging only.
         Dormitory tmp = parentComponent.getDormAt(clickedRow);
         return tmp;
     }
@@ -34,7 +35,7 @@ public class DormListClickListener implements MouseListener {
     public Dormitory updateDormData(Dormitory dormitory){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT * FROM Dorm WHERE BuildingNumber='"
-                        +dormitory.getBuildingNo()+"' RoomNumber='"+dormitory.getRoomNO()+"'";
+                        +dormitory.getBuildingNo()+"' AND RoomNumber='"+dormitory.getRoomNO()+"'";
         ResultSet resultSet;
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
