@@ -59,18 +59,19 @@ public class ProctorPage extends JFrame implements Views, TableViews {
             temp = new Vector<>();
             String query = "SELECT * FROM AllReports ORDER BY ReportedDate DESC";
             ResultSet resultSet = javaConnection.selectQuery(query);
-            int count = 0;
             try{
                 String reporterId;
                 while(resultSet.next()){
                     Vector<Object> tmp = new Vector<>();
                     String reportType = resultSet.getString("ReportType");
+                    int reportId = resultSet.getInt("ReportId");
                     reporterId = resultSet.getString("ReporterId");
                     Date reportedDate = resultSet.getDate("ReportedDate");
                     Date currentDate = Request.getCurrentDate();
+
                     if(!(reportType.equals("ClothTakeOutForm") & resultSet.getString("ReporterId").equals(reporterId))){
                        if((reportedDate.toString()).equals((currentDate).toString())){
-                           tmp.add(++count);
+                           tmp.add(reportId);
                            tmp.add(reportType);
                            tmp.add(reportedDate);
                            tmp.add(resultSet.getString("BuildingNumber"));
@@ -143,6 +144,7 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         ReportTable.addMouseListener(new ReportDetailClickListener(this));
 
         Vector<Vector<Object>> temp = loadReports();
+        System.out.println("Temp Size: "+temp.size());//For debugging only.
         readStatus = !(temp == null);
         addDataToTable(temp);
         refreshTable();
