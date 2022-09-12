@@ -5,6 +5,7 @@ import BasicClasses.Requests.Request;
 import GUIClasses.ReportDetailView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -44,12 +45,15 @@ public class HandleButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Date currentDate = Request.getCurrentDate();
         Request tmpRequest = parentComponent.getRequest();
-        int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure you handled this request?");
+        int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure you handled this request?",
+                "Confirm Message", JOptionPane.YES_NO_OPTION);
         if(choice == 1) return;
         tmpRequest.setHandledDate(currentDate);
         int tmp = updateDataBase(tmpRequest);
         boolean updateStatus = (tmp == 1);
 
         displayUpdateStatus(updateStatus);
+        parentComponent.dispose();
+        parentComponent.showParentComponent();
     }
 }
