@@ -1,6 +1,7 @@
 package GUIClasses.ActionListeners.ProctorView;
 
 import BasicClasses.Others.JavaConnection;
+import BasicClasses.Requests.ClothTakeOutRequest;
 import BasicClasses.Requests.Request;
 import GUIClasses.ReportDetailView;
 
@@ -9,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class HandleButtonListener implements ActionListener {
     ReportDetailView parentComponent;
@@ -27,13 +29,21 @@ public class HandleButtonListener implements ActionListener {
             System.out.println("Query: "+query);//For debugging only.
             return javaConnection.insertQuery(query);
         } else{
-            query = "INSERT INTO ProctorApprovesClothTakeOut(handledDate,EID,clothReportId,clothCountId) " +
-                    "VALUES('"+request.getHandledDate()+
-                    "' ,'"+parentComponent.getHandlerId()+
-                    "', "+request.getRequestId()+
-                    ", "+parentComponent.getClothRequestId()+")";
+            ArrayList<ClothTakeOutRequest> tmpClothRequest = parentComponent.getClothRequests();
+            int updateStatus = 0;
+            for(ClothTakeOutRequest clothTakeOutRequest: tmpClothRequest){
+                if(clothTakeOutRequest.getRequestCount() == parentComponent.getClothRequestId()){
+                    query = "INSERT INTO ProctorApprovesClothTakeOut(handledDate,EID,clothReportId,clothCountId) " +
+                            "VALUES('"+request.getHandledDate()+
+                            "' ,'"+parentComponent.getHandlerId()+
+                            "', "+request.getRequestId()+
+                            ", "+parentComponent.getClothRequestId()+")";
+                    updateStatus = javaConnection.insertQuery(query);
+                }
+            }
+
             System.out.println("Query: "+query);//For debugging only.
-            return javaConnection.insertQuery(query);
+            return updateStatus;
         }
     }
 
@@ -54,6 +64,8 @@ public class HandleButtonListener implements ActionListener {
 
         displayUpdateStatus(updateStatus);
         parentComponent.dispose();
+        parentComponent.refreshParentTable();
         parentComponent.showParentComponent();
+
     }
 }
