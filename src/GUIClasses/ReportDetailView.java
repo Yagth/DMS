@@ -38,6 +38,7 @@ public class ReportDetailView extends JFrame implements Views {
     private Request request;
     private JLabel reporterIdL;
     private JLabel Reporter;
+    private String handlerId;
     private JButton handleButton;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
@@ -49,6 +50,15 @@ public class ReportDetailView extends JFrame implements Views {
         nameOfReporter = reporterName;
         setUpGUi();
     }
+
+    public void setHandlerId(String handlerId) {
+        this.handlerId = handlerId;
+    }
+
+    public String getHandlerId() {
+        return handlerId;
+    }
+
     public void displayRequest(){
         ArrayList<ClothTakeOutRequest> clothRequests = getClothReport();
         boolean isHandled = checkReportStatus();
