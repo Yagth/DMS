@@ -5,10 +5,7 @@ import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Requests.Request;
 import GUIClasses.ActionListeners.ProctorView.DormitoryView.DormListClickListener;
-import GUIClasses.ActionListeners.ProctorView.ProctorPage.LogoutMenuItemListener;
-import GUIClasses.ActionListeners.ProctorView.ProctorPage.ReportMenuItemListener;
-import GUIClasses.ActionListeners.ProctorView.ProctorPage.SeeDormMenuListener;
-import GUIClasses.ActionListeners.ProctorView.ProctorPage.SeeStudentMenuListener;
+import GUIClasses.ActionListeners.ProctorView.ProctorPage.*;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -143,6 +140,7 @@ public class ProctorPage extends JFrame implements Views, TableViews {
 
         ReportTable.setModel(new DefaultTableModel(tableData,titles));
         ReportTable.setDefaultEditor(Object.class,null);
+        ReportTable.addMouseListener(new ReportDetailClickListener(this));
 
         Vector<Vector<Object>> temp = loadReports();
         readStatus = !(temp == null);
