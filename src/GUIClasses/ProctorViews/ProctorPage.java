@@ -67,7 +67,6 @@ public class ProctorPage extends JFrame implements Views, TableViews {
                     Date currentDate = Request.getCurrentDate();
 
                     if((reportedDate.toString()).equals((currentDate).toString())){
-                        //Code removed from the below if condition don't know why "& resultSet.getString("ReporterId").equals(reporterId)"
                         Vector<Object> tmp = new Vector<>();
                         tmp.add(reportId);
                         tmp.add(reportType);
