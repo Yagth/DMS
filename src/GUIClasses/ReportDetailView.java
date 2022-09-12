@@ -89,6 +89,10 @@ public class ReportDetailView extends JFrame implements Views {
 
     }
 
+    public Request getRequest() {
+        return request;
+    }
+
     public ArrayList<ClothTakeOutRequest> getClothReport(){
         ArrayList<ClothTakeOutRequest> clothReportList = new ArrayList<>();
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
