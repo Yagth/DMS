@@ -32,6 +32,7 @@ public class ReportDetailClickListener implements MouseListener {
 
         String query = "SELECT * FROM AllReports WHERE ReportId="+reportId+" AND ReportType='"+reportType+"'";
 
+        System.out.println("Query: "+query);//For debugging purpose.
         System.out.println("ReportType from GetReport: "+reportType);//For debugging purpose.
 
         if(javaConnection.isConnected()){
