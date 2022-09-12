@@ -6,6 +6,7 @@ import BasicClasses.Requests.*;
 import GUIClasses.ActionListeners.ProctorView.HandleButtonListener;
 import GUIClasses.ActionListeners.ReportDetailViewBackButtonListener;
 import GUIClasses.Interfaces.Views;
+import GUIClasses.ProctorViews.ProctorPage;
 import GUIClasses.StudentViews.SeeYourRequests;
 
 import javax.swing.*;
@@ -42,6 +43,7 @@ public class ReportDetailView extends JFrame implements Views {
     private String handlerId;
     private int clothRequestId;
     private JButton handleButton;
+    private ArrayList<ClothTakeOutRequest> clothRequests;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
@@ -62,7 +64,7 @@ public class ReportDetailView extends JFrame implements Views {
     }
 
     public void displayRequest(){
-        ArrayList<ClothTakeOutRequest> clothRequests = getClothReport();
+        clothRequests = getClothReport();
         boolean isHandled = checkReportStatus();
         reportTypeL.setText(request.getRequestType());
         reportedDateL.setText(String.valueOf(request.getRequestedDate()));
@@ -103,6 +105,10 @@ public class ReportDetailView extends JFrame implements Views {
 
     public Request getRequest() {
         return request;
+    }
+
+    public ArrayList<ClothTakeOutRequest> getClothRequests() {
+        return clothRequests;
     }
 
     public int getClothRequestId() {
@@ -165,6 +171,16 @@ public class ReportDetailView extends JFrame implements Views {
             return true;
         }
     }
+
+    public void refreshParentTable(){
+        try{
+            ProctorPage parentComponent = (ProctorPage) this.parentComponent;
+            parentComponent.refreshTable();
+        }catch (ClassCastException ex){
+            ex.printStackTrace();//For debugging only.
+        }
+
+    }
     @Override
     public void setUpGUi() {
         this.setTitle("Request Detail");
@@ -191,6 +207,5 @@ public class ReportDetailView extends JFrame implements Views {
         reporterNameL.setVisible(isInProctorView);
         handleButton.setVisible(isInProctorView);
         if(isInProctorView) handleButton.addActionListener(new HandleButtonListener(this));
-
     }
 }
