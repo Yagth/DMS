@@ -2,7 +2,7 @@ package GUIClasses.ActionListeners.StudentView.StudentPage;
 
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
-import GUIClasses.StudentViews.ReportDetailView;
+import GUIClasses.ReportDetailView;
 import GUIClasses.StudentViews.SeeYourRequests;
 
 import javax.swing.*;

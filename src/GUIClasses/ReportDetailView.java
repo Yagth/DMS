@@ -1,9 +1,10 @@
-package GUIClasses.StudentViews;
+package GUIClasses;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Requests.*;
 import GUIClasses.ActionListeners.ReportDetailViewBackButtonListener;
 import GUIClasses.Interfaces.Views;
+import GUIClasses.StudentViews.SeeYourRequests;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -32,7 +33,7 @@ public class ReportDetailView extends JFrame implements Views {
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
-    private SeeYourRequests parentComponent;
+    private JFrame parentComponent;
     public ReportDetailView(SeeYourRequests parentComponent,Request request,String reporterId){
         this.parentComponent = parentComponent;
         this.request = request;
@@ -69,7 +70,7 @@ public class ReportDetailView extends JFrame implements Views {
     public boolean checkReportStatus(){
         return !(request.getHandledDate()==null);
     }
-    public SeeYourRequests getParentComponent(){
+    public JFrame getParentComponent(){
         return parentComponent;
     }
 

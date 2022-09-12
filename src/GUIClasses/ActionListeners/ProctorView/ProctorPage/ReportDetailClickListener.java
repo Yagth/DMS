@@ -32,40 +32,44 @@ public class ReportDetailClickListener implements MouseListener {
 
         String query = "SELECT * FROM AllReports WHERE ReportId="+reportId+" AND ReportType='"+reportType+"'";
 
+        System.out.println("ReportType from GetReport: "+reportType);//For debugging purpose.
 
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
             try{
                 while(resultSet.next()){
-                    switch (reportType){
-                        case "ClothTakeOutForm":
-                            request = new ClothTakeOutRequest(resultSet.getString("ReporterId"));
-                            request.setRequestedDate(resultSet.getDate("ReportedDate"));
-                            request.setHandledDate(resultSet.getDate("HandledDate"));
-                            request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
-                            request.setDescription(resultSet.getString("Description"));
-                            return request;
-                        case "ExtendDormStayRequest":
-                            request = new ExtendDormStayRequest(resultSet.getString("ReporterId"));
-                            request.setRequestedDate(resultSet.getDate("ReportedDate"));
-                            request.setHandledDate(resultSet.getDate("HandledDate"));
-                            request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
-                            request.setDescription(resultSet.getString("Description"));
-                            return request;
-                        case "Maintenance":
-                            request = new MaintenanceRequest(resultSet.getString("ReporterId"));
-                            request.setRequestedDate(resultSet.getDate("ReportedDate"));
-                            request.setHandledDate(resultSet.getDate("HandledDate"));
-                            request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
-                            request.setDescription(resultSet.getString("Description"));
-                            return request;
-                        case "RequestForNewDorm":
-                            request = new RequestForNewDorm(resultSet.getString("ReporterId"));
-                            request.setRequestedDate(resultSet.getDate("ReportedDate"));
-                            request.setHandledDate(resultSet.getDate("HandledDate"));
-                            request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
-                            request.setDescription(resultSet.getString("Description"));
-                            return request;
+
+                    if(reportType.equals("ClothTakeOutForm")){
+                        request = new ClothTakeOutRequest(resultSet.getString("ReporterId"));
+                        request.setRequestedDate(resultSet.getDate("ReportedDate"));
+                        request.setHandledDate(resultSet.getDate("HandledDate"));
+                        request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
+                        request.setDescription(resultSet.getString("Description"));
+                        return request;
+                    }
+                    else if(reportType.equals("ExtendDormStayRequest")){
+                        request = new ExtendDormStayRequest(resultSet.getString("ReporterId"));
+                        request.setRequestedDate(resultSet.getDate("ReportedDate"));
+                        request.setHandledDate(resultSet.getDate("HandledDate"));
+                        request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
+                        request.setDescription(resultSet.getString("Description"));
+                        return request;
+                    }
+                    else if(reportType.equals("Maintenance")){
+                        request = new MaintenanceRequest(resultSet.getString("ReporterId"));
+                        request.setRequestedDate(resultSet.getDate("ReportedDate"));
+                        request.setHandledDate(resultSet.getDate("HandledDate"));
+                        request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
+                        request.setDescription(resultSet.getString("Description"));
+                        return request;
+                    }
+                    else{
+                        request = new RequestForNewDorm(resultSet.getString("ReporterId"));
+                        request.setRequestedDate(resultSet.getDate("ReportedDate"));
+                        request.setHandledDate(resultSet.getDate("HandledDate"));
+                        request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
+                        request.setDescription(resultSet.getString("Description"));
+                        return request;
                     }
                 }
             } catch (SQLException ex){
@@ -77,6 +81,7 @@ public class ReportDetailClickListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         Request tmp = getRequest();
+        System.out.println("ReportType: "+tmp.getRequestType());//For debugging only.
         new ReportDetailView(parentComponent,tmp,parentComponent.getProctor().getpId());
         parentComponent.setVisible(false);
     }
