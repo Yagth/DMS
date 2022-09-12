@@ -100,10 +100,9 @@ public class ReportDetailView extends JFrame implements Views {
         int count = 0;
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
-            System.out.println("Query: "+query);//For debugging only.
             try{
                 while(resultSet.next()){
-                    resultSet.getInt("ReportCount");
+                    count = resultSet.getInt("ReportCount");
                 }
             } catch (SQLException ex){
                 ex.printStackTrace();//For debugging only.
