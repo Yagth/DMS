@@ -1,22 +1,18 @@
 package GUIClasses;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
-import BasicClasses.Others.Cloth;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
 import GUIClasses.ActionListeners.ReportDetailViewBackButtonListener;
 import GUIClasses.Interfaces.Views;
-import GUIClasses.ProctorViews.ProctorPage;
 import GUIClasses.StudentViews.SeeYourRequests;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class ReportDetailView extends JFrame implements Views {
     private JPanel mainPanel;
@@ -42,6 +38,7 @@ public class ReportDetailView extends JFrame implements Views {
     private Request request;
     private JLabel reporterIdL;
     private JLabel Reporter;
+    private JButton handleButton;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
@@ -57,16 +54,17 @@ public class ReportDetailView extends JFrame implements Views {
         boolean isHandled = checkReportStatus();
         reportTypeL.setText(request.getRequestType());
         reportedDateL.setText(String.valueOf(request.getRequestedDate()));
+        Reporter.setText(request.getRequesterId());
+        reporterName.setText(nameOfReporter);
 
         if(request.getRequestType().equals("ClothTakeOutForm")){
-            String description = "";
+            String description = "\n\t";
             for(ClothTakeOutRequest tmp : clothRequests){
-                description += tmp.getDescription()+"\n";
+                description += tmp.getDescription()+"\n\t";
                 System.out.println("ClothName: "+tmp.getDescription());//For debugging purpose.
             }
+            description = nameOfReporter+" "+"requested to take the following cloths "+description;
             descriptionPane.setText(description);
-            Reporter.setText(request.getRequesterId());
-            reporterName.setText(nameOfReporter);
         } else{
             descriptionPane.setText(request.getDescription());
         }
@@ -116,9 +114,7 @@ public class ReportDetailView extends JFrame implements Views {
             try{
                 while(resultSet.next()){
                     String reporterId = resultSet.getString("ReporterId");
-                    String description = resultSet.getString("Description");
-                    System.out.println("Description: "+description);//For debugging only.
-
+                    String description = resultSet.getString("ClothName");
                     ClothTakeOutRequest tmp = new ClothTakeOutRequest(reporterId,count);
                     tmp.setDescription(description);
                     System.out.println("Query1: "+query);//For debugging only.
@@ -173,6 +169,7 @@ public class ReportDetailView extends JFrame implements Views {
         Reporter.setVisible(isInProctorView);
         reporterName.setVisible(isInProctorView);
         reporterNameL.setVisible(isInProctorView);
+        handleButton.setVisible(isInProctorView);
 
     }
 }
