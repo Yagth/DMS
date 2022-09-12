@@ -36,9 +36,9 @@ public class ReportDetailView extends JFrame implements Views {
     private JButton backButton;
     private JLabel handledDate;
     private JLabel reportHandledDate;
-    private String reporterId;
     private JLabel reporterNameL;
     private JLabel reporterName;
+    private String nameOfReporter;
     private Request request;
     private JLabel reporterIdL;
     private JLabel Reporter;
@@ -46,10 +46,10 @@ public class ReportDetailView extends JFrame implements Views {
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
     private JFrame parentComponent;
-    public ReportDetailView(JFrame parentComponent,Request request,String reporterId){
+    public ReportDetailView(JFrame parentComponent,Request request,String reporterName){
         this.parentComponent = parentComponent;
         this.request = request;
-        this.reporterId = reporterId;
+        nameOfReporter = reporterName;
         setUpGUi();
     }
     public void displayRequest(){
@@ -64,6 +64,8 @@ public class ReportDetailView extends JFrame implements Views {
                 description += tmp.getDescription()+"\n";
             }
             descriptionPane.setText(description);
+            Reporter.setText(request.getRequesterId());
+            reporterName.setText(nameOfReporter);
         } else{
             descriptionPane.setText(request.getDescription());
         }

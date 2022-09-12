@@ -81,7 +81,22 @@ public class ReportDetailClickListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         Request tmp = getRequest();
-        new ReportDetailView(parentComponent,tmp,parentComponent.getProctor().getpId());
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT Fname,Lname FROM STUDENT WHERE SID='"+tmp.getRequesterId()+"'";
+        ResultSet resultSet;
+        String reporterName="";
+
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    reporterName = resultSet.getString("Fname")+resultSet.getString("Lname");
+                }
+            }catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+        }
+        new ReportDetailView(parentComponent,tmp,reporterName);
         parentComponent.setVisible(false);
     }
 
