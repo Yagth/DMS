@@ -24,15 +24,14 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
     private StudentPage parentComponent;
     private JavaConnection javaConnection;
     private ExtendDormStayRequest request;
-    private int roomNo = 49; //This part is only for debugging.
-    private int buildingNo = 40; //This part is only for debugging.
-    private int reporterId = 4565; //This part is only for debugging.
     private static final int WIDTH = 550;
     private static final int HEIGHT = 250;
 
     public ExtendDormStayForm(Student student, StudentPage parentComponent){
         javaConnection = new JavaConnection(JavaConnection.URL);
         request = new ExtendDormStayRequest(student.getsId());
+        request.setRoomNumber(String.valueOf(student.getDormNo()));
+        request.setBuildingNumber(String.valueOf(student.getBuildingNo()));
         this.student = student;
         this.parentComponent = parentComponent;
         setUpGUi();
@@ -46,8 +45,8 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
         request.setDescription(getDescription());
         Integer updateStatus = 0;
         int tmp1 = 0,tmp2 = 0;
-        String query = "INSERT INTO report(reporterId,reportType,description)" +
-                "VALUES(\'"+request.getRequesterId() + "\',\'" + request.getRequestType()+ "\',\'" +request.getDescription() +"\');";
+        String query = "INSERT INTO report(reporterId,reportType,description,roomNumber,buildingNumber)" +
+                "VALUES(\'"+request.getRequesterId() + "\',\'" + request.getRequestType()+ "\',\'" +request.getDescription() +"\', '"+request.getRoomNumber()+"', '"+request.getBuildingNumber()+"' );";
         if (javaConnection.isConnected()) tmp1 = javaConnection.insertQuery(query);//If query is successful the java connection returns 1.
         query = "INSERT INTO StudentMakesReport(SID,reportId,reportedDate)" +
                 "VALUES(\'"+request.getRequesterId() + "\',\'" + getCurrentClothRequestId()+ "\',\'"+request.getRequestedDate()+"\');";
