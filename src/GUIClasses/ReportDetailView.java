@@ -113,7 +113,8 @@ public class ReportDetailView extends JFrame implements Views {
             try{
                 while(resultSet.next()){
                     String reporterId = resultSet.getString("ReporterId");
-                    String description = resultSet.getString("ClothName")+"--"+resultSet.getInt("Amount");
+                    String description = resultSet.getString("ClothName");
+                    description = String.format("%20s",description)+resultSet.getInt("Amount");
                     ClothTakeOutRequest tmp = new ClothTakeOutRequest(reporterId,count);
                     tmp.setDescription(description);
                     clothReportList.add(tmp);
