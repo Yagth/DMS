@@ -57,7 +57,7 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         Vector<Vector<Object>> temp = null;
         if(javaConnection.isConnected()){
             temp = new Vector<>();
-            String query = "SELECT * FROM AllReports ORDER BY ReportedDate DESC";
+            String query = "SELECT * FROM AllReports WHERE HandledDate IS NULL ORDER BY ReportedDate DESC";
             ResultSet resultSet = javaConnection.selectQuery(query);
             try{
                 while(resultSet.next()){
