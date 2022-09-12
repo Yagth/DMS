@@ -15,20 +15,30 @@ public class HandleButtonListener implements ActionListener {
         this.parentComponent = parentComponent;
     }
 
-    public boolean updateDataBase(Request request){
+    public int updateDataBase(Request request){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "";
         if(!(request.getRequestType().equals("ClothTakeOutForm"))){
-            query = "UPDATE ProctorHandlesReport SET handledDate="+request.getHandledDate()+" , EID='"++"' WHERE reportId="+request.getRequestId()+" AND ReportType != 'ClothTakeOutForm'";
-            return javaConnection.updateQuery(query);
+            query = "INSERT INTO ProctorHandlesReport(handledDate,EID,ReportId) " +
+                    "VALUES(handledDate="+request.getHandledDate()+
+                    " ,EID='"+parentComponent.getHandlerId()+
+                    "', ReportId="+request.getRequestId()+")";
+            System.out.println("Query: "+query);//For debugging only.
+            return javaConnection.insertQuery(query);
         } else{
-            query = "UPDATE AllReport SET handledDate="+request.getHandledDate()+" WHERE reportId="+request.getRequestId()+" AND ReportType = 'ClothTakeOutForm'";
-            return javaConnection.updateQuery(query);
+            query = "INSERT INTO ProctorApprovesClothTakeOut(handledDate,EID,clothReportId,clothCountId) " +
+                    "VALUES('"+request.getHandledDate()+
+                    "' ,'"+parentComponent.getHandlerId()+
+                    "', "+request.getRequestId()+
+                    ", "+parentComponent.getClothRequestId()+")";
+            System.out.println("Query: "+query);//For debugging only.
+            return javaConnection.insertQuery(query);
         }
     }
 
     public void displayUpdateStatus(boolean updateStatus){
         if(!updateStatus) JOptionPane.showMessageDialog(parentComponent,"Couldn't handle report due to connection error");
+        else JOptionPane.showMessageDialog(parentComponent,"Handle successfully completed");
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -37,7 +47,9 @@ public class HandleButtonListener implements ActionListener {
         int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure you handled this request?");
         if(choice == 1) return;
         tmpRequest.setHandledDate(currentDate);
-        boolean updateStatus = updateDataBase(tmpRequest);
+        int tmp = updateDataBase(tmpRequest);
+        boolean updateStatus = (tmp == 1);
+
         displayUpdateStatus(updateStatus);
     }
 }
