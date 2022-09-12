@@ -52,7 +52,7 @@ public class RequestForDormitory extends JFrame implements RequestViews {
         return this.woredaTF.getText();
     }
     public String getDescription(){
-        return this.descriptionPane.getText();
+        return JavaConnection.stripCotation(this.descriptionPane.getText());
     }
 
     @Override
