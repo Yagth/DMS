@@ -61,7 +61,6 @@ public class ReportDetailView extends JFrame implements Views {
             String description = "\n\t";
             for(ClothTakeOutRequest tmp : clothRequests){
                 description += tmp.getDescription()+"\n\t";
-                System.out.println("ClothName: "+tmp.getDescription());//For debugging purpose.
             }
             description = nameOfReporter+" "+"requested to take the following cloths "+description;
             descriptionPane.setText(description);
@@ -114,10 +113,9 @@ public class ReportDetailView extends JFrame implements Views {
             try{
                 while(resultSet.next()){
                     String reporterId = resultSet.getString("ReporterId");
-                    String description = resultSet.getString("ClothName");
+                    String description = resultSet.getString("ClothName")+"--"+resultSet.getInt("Amount");
                     ClothTakeOutRequest tmp = new ClothTakeOutRequest(reporterId,count);
                     tmp.setDescription(description);
-                    System.out.println("Query1: "+query);//For debugging only.
                     clothReportList.add(tmp);
                 }
             } catch (SQLException ex){

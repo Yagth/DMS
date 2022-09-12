@@ -71,7 +71,7 @@ public class RequestDetailClickListener implements MouseListener {
                 request.setRequestId(selectedId);
                 if(isClothTakeOutRequest)
                     request.setDescription("You requested to take out "+resultSet.getInt("Amount")+
-                            " "+resultSet.getString("Description")+" on "+resultSet.getDate("reportedDate"));
+                            " "+resultSet.getString("ClothName")+" on "+resultSet.getDate("reportedDate"));
                 else
                     request.setDescription(resultSet.getString("Description"));
 
