@@ -63,6 +63,10 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         return student;
     }
 
+    public Vector<Vector<Object>> getTableData() {
+        return tableData;
+    }
+
     public void displayUserInfo(){
         studentName.setText(student.getFullName());
         studentID.setText(student.getsId());

@@ -4,6 +4,7 @@ import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
 import GUIClasses.ProctorViews.ProctorPage;
 import GUIClasses.ReportDetailView;
+import GUIClasses.StudentViews.SeeYourRequests;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
 public class ReportDetailClickListener implements MouseListener {
     private ProctorPage parentComponent;
@@ -31,10 +33,7 @@ public class ReportDetailClickListener implements MouseListener {
         Request request;
 
         String query = "SELECT * FROM AllReports WHERE ReportId="+reportId+" AND ReportType='"+reportType+"'";
-
-        System.out.println("Query: "+query);//For debugging purpose.
-        System.out.println("ReportType from GetReport: "+reportType);//For debugging purpose.
-
+        
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
             try{
@@ -82,7 +81,6 @@ public class ReportDetailClickListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         Request tmp = getRequest();
-        System.out.println("ReportType: "+tmp.getRequestType());//For debugging only.
         new ReportDetailView(parentComponent,tmp,parentComponent.getProctor().getpId());
         parentComponent.setVisible(false);
     }

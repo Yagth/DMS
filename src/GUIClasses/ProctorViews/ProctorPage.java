@@ -125,6 +125,11 @@ public class ProctorPage extends JFrame implements Views, TableViews {
     public JTable getReportTable(){
         return ReportTable;
     }
+
+    public Vector<Vector<Object>> getTableData() {
+        return tableData;
+    }
+
     @Override
     public void setUpTable() {
         Vector<Object> titles = new Vector<>();
