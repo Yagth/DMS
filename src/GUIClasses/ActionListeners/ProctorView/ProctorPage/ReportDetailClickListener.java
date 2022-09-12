@@ -3,7 +3,7 @@ package GUIClasses.ActionListeners.ProctorView.ProctorPage;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
 import GUIClasses.ProctorViews.ProctorPage;
-import GUIClasses.ProctorViews.ReportDetailView;
+import GUIClasses.ReportDetailView;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
