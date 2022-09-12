@@ -45,6 +45,7 @@ public class ReportDetailClickListener implements MouseListener {
                         request.setHandledDate(resultSet.getDate("HandledDate"));
                         request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
                         request.setDescription(resultSet.getString("Description"));
+                        request.setRequestId(resultSet.getInt("ReportId"));
                         return request;
                     }
                     else if(reportType.equals("ExtendDormStayRequest")){
@@ -53,6 +54,7 @@ public class ReportDetailClickListener implements MouseListener {
                         request.setHandledDate(resultSet.getDate("HandledDate"));
                         request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
                         request.setDescription(resultSet.getString("Description"));
+                        request.setRequestId(resultSet.getInt("ReportId"));
                         return request;
                     }
                     else if(reportType.equals("Maintenance")){
@@ -61,6 +63,7 @@ public class ReportDetailClickListener implements MouseListener {
                         request.setHandledDate(resultSet.getDate("HandledDate"));
                         request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
                         request.setDescription(resultSet.getString("Description"));
+                        request.setRequestId(resultSet.getInt("ReportId"));
                         return request;
                     }
                     else{
@@ -69,6 +72,7 @@ public class ReportDetailClickListener implements MouseListener {
                         request.setHandledDate(resultSet.getDate("HandledDate"));
                         request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
                         request.setDescription(resultSet.getString("Description"));
+                        request.setRequestId(resultSet.getInt("ReportId"));
                         return request;
                     }
                 }
@@ -90,7 +94,7 @@ public class ReportDetailClickListener implements MouseListener {
             resultSet = javaConnection.selectQuery(query);
             try{
                 while(resultSet.next()){
-                    reporterName = resultSet.getString("Fname")+resultSet.getString("Lname");
+                    reporterName = resultSet.getString("Fname")+" "+resultSet.getString("Lname");
                 }
             }catch (SQLException ex){
                 ex.printStackTrace();//For debugging only.

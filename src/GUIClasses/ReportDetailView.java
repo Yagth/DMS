@@ -62,6 +62,7 @@ public class ReportDetailView extends JFrame implements Views {
             String description = "";
             for(ClothTakeOutRequest tmp : clothRequests){
                 description += tmp.getDescription()+"\n";
+                System.out.println("ClothName: "+tmp.getDescription());//For debugging purpose.
             }
             descriptionPane.setText(description);
             Reporter.setText(request.getRequesterId());
@@ -99,6 +100,7 @@ public class ReportDetailView extends JFrame implements Views {
         int count = 0;
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
+            System.out.println("Query: "+query);//For debugging only.
             try{
                 while(resultSet.next()){
                     resultSet.getInt("ReportCount");
@@ -116,9 +118,11 @@ public class ReportDetailView extends JFrame implements Views {
                 while(resultSet.next()){
                     String reporterId = resultSet.getString("ReporterId");
                     String description = resultSet.getString("Description");
+                    System.out.println("Description: "+description);//For debugging only.
 
                     ClothTakeOutRequest tmp = new ClothTakeOutRequest(reporterId,count);
                     tmp.setDescription(description);
+                    System.out.println("Query1: "+query);//For debugging only.
                     clothReportList.add(tmp);
                 }
             } catch (SQLException ex){
@@ -143,7 +147,6 @@ public class ReportDetailView extends JFrame implements Views {
             SeeYourRequests parentComponent = (SeeYourRequests) this.parentComponent;
             return false;
         } catch (ClassCastException ex){
-            ex.printStackTrace();//For debugging only.
             return true;
         }
     }
