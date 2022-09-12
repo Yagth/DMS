@@ -30,9 +30,10 @@ public class ReportDetailView extends JFrame implements Views {
         setUpGUi();
     }
     public void displayReportInfo(){
-        /* This method will display all the neccessary report infos in the
+        /* This method will display all the necessary report info's in the
         labels and the description pane from the request method.
          */
+
     }
     @Override
     public void setUpGUi() {
