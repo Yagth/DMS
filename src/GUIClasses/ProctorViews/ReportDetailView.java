@@ -20,7 +20,7 @@ public class ReportDetailView extends JFrame implements Views {
     private JLabel dormNoL;
     private Request request;
     private String proctorId;
-    private JFrame parentComponent;
+    private ReportsView parentComponent;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
     public ReportDetailView(JFrame parentComponent,Request request, String proctorId){
