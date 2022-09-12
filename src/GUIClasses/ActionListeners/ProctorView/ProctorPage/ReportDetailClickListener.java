@@ -40,12 +40,14 @@ public class ReportDetailClickListener implements MouseListener {
                 while(resultSet.next()){
 
                     if(reportType.equals("ClothTakeOutForm")){
+                        int tempId = resultSet.getInt("ReportId");
                         request = new ClothTakeOutRequest(resultSet.getString("ReporterId"));
                         request.setRequestedDate(resultSet.getDate("ReportedDate"));
                         request.setHandledDate(resultSet.getDate("HandledDate"));
-                        request.setLocation(resultSet.getString("BuildingNumber")+" "+resultSet.getString("RoomNumber"));
+                        request.setLocation(resultSet.getString("BuildingNumber")+"-"+resultSet.getString("RoomNumber"));
                         request.setDescription(resultSet.getString("Description"));
-                        request.setRequestId(resultSet.getInt("ReportId"));
+                        request.setRequestId(tempId);
+                        System.out.println("Temp ID: "+tempId);//For debugging only.
                         return request;
                     }
                     else if(reportType.equals("ExtendDormStayRequest")){

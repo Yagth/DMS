@@ -145,7 +145,6 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         ReportTable.addMouseListener(new ReportDetailClickListener(this));
 
         Vector<Vector<Object>> temp = loadReports();
-        System.out.println("Temp Size: "+temp.size());//For debugging only.
         readStatus = !(temp == null);
         addDataToTable(temp);
         refreshTable();
