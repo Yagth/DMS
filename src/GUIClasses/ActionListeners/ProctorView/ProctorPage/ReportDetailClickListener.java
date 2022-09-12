@@ -102,7 +102,8 @@ public class ReportDetailClickListener implements MouseListener {
                 ex.printStackTrace();//For debugging only.
             }
         }
-        new ReportDetailView(parentComponent,tmp,reporterName);
+        ReportDetailView reportDetailView = new ReportDetailView(parentComponent,tmp,reporterName);
+        reportDetailView.setHandlerId(parentComponent.getProctor().getpId());
         parentComponent.setVisible(false);
     }
 

@@ -19,7 +19,7 @@ public class HandleButtonListener implements ActionListener {
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "";
         if(!(request.getRequestType().equals("ClothTakeOutForm"))){
-            query = "UPDATE AllReport SET handledDate="+request.getHandledDate()+" WHERE reportId="+request.getRequestId()+" AND ReportType != 'ClothTakeOutForm'";
+            query = "UPDATE ProctorHandlesReport SET handledDate="+request.getHandledDate()+" , EID='"++"' WHERE reportId="+request.getRequestId()+" AND ReportType != 'ClothTakeOutForm'";
             return javaConnection.updateQuery(query);
         } else{
             query = "UPDATE AllReport SET handledDate="+request.getHandledDate()+" WHERE reportId="+request.getRequestId()+" AND ReportType = 'ClothTakeOutForm'";
