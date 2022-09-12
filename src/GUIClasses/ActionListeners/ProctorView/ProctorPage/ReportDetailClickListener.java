@@ -78,6 +78,7 @@ public class ReportDetailClickListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         Request tmp = getRequest();
         new ReportDetailView(parentComponent,tmp,parentComponent.getProctor().getpId());
+        parentComponent.setVisible(false);
     }
 
     @Override
