@@ -3,6 +3,7 @@ package GUIClasses.ActionListeners.ProctorView.ProctorPage;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
 import GUIClasses.ProctorViews.ProctorPage;
+import GUIClasses.ProctorViews.ReportDetailView;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -75,7 +76,8 @@ public class ReportDetailClickListener implements MouseListener {
     }
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        Request tmp = getRequest();
+        new ReportDetailView(parentComponent,tmp,parentComponent.getProctor().getpId());
     }
 
     @Override
