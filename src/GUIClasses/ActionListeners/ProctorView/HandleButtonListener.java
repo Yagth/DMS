@@ -32,6 +32,8 @@ public class HandleButtonListener implements ActionListener {
             ArrayList<ClothTakeOutRequest> tmpClothRequest = parentComponent.getClothRequests();
             int updateStatus = 0;
             for(ClothTakeOutRequest clothTakeOutRequest: tmpClothRequest){
+                System.out.println("Request count: "+clothTakeOutRequest.getRequestCount());//For debugging only.
+                System.out.println("Request Count form the parentComponent: "+parentComponent.getClothRequestId());//For debugging only.
                 if(clothTakeOutRequest.getRequestCount() == parentComponent.getClothRequestId()){
                     query = "INSERT INTO ProctorApprovesClothTakeOut(handledDate,EID,clothReportId,clothCountId) " +
                             "VALUES('"+request.getHandledDate()+
