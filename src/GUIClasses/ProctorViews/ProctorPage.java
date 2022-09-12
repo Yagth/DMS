@@ -60,24 +60,21 @@ public class ProctorPage extends JFrame implements Views, TableViews {
             String query = "SELECT * FROM AllReports ORDER BY ReportedDate DESC";
             ResultSet resultSet = javaConnection.selectQuery(query);
             try{
-                String reporterId;
                 while(resultSet.next()){
-                    Vector<Object> tmp = new Vector<>();
                     String reportType = resultSet.getString("ReportType");
                     int reportId = resultSet.getInt("ReportId");
-                    reporterId = resultSet.getString("ReporterId");
                     Date reportedDate = resultSet.getDate("ReportedDate");
                     Date currentDate = Request.getCurrentDate();
 
-                    if(!(reportType.equals("ClothTakeOutForm") & resultSet.getString("ReporterId").equals(reporterId))){
-                       if((reportedDate.toString()).equals((currentDate).toString())){
-                           tmp.add(reportId);
-                           tmp.add(reportType);
-                           tmp.add(reportedDate);
-                           tmp.add(resultSet.getString("BuildingNumber"));
-                           tmp.add(resultSet.getString("RoomNumber"));
-                           temp.add(tmp);
-                       }
+                    if((reportedDate.toString()).equals((currentDate).toString())){
+                        //Code removed from the below if condition don't know why "& resultSet.getString("ReporterId").equals(reporterId)"
+                        Vector<Object> tmp = new Vector<>();
+                        tmp.add(reportId);
+                        tmp.add(reportType);
+                        tmp.add(reportedDate);
+                        tmp.add(resultSet.getString("BuildingNumber"));
+                        tmp.add(resultSet.getString("RoomNumber"));
+                        temp.add(tmp);
                     }
                 }
             } catch (SQLException ex){
