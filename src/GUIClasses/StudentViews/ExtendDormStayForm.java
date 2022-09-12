@@ -39,7 +39,7 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
     }
 
     public String getDescription(){
-        return descriptionPane.getText();
+        return JavaConnection.stripCotation(descriptionPane.getText());
     }
     @Override
     public Integer updateDataBase() {

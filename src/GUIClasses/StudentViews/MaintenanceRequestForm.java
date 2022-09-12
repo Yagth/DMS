@@ -70,7 +70,7 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
         return roomNumberTextField.getText();
     }
     public String getDescription(){
-        return descriptionTextPane.getText();
+        return JavaConnection.stripCotation(descriptionTextPane.getText());
     }
 
     @Override

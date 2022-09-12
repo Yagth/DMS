@@ -25,20 +25,19 @@ public class JavaConnection {
             resultSet = null;
         }
     }
-    public String stripCotation(String query){
-        while(query.contains("'")){
-            int indexOfCot = query.indexOf("'");
-            String tmp = query.substring(0,indexOfCot);
-            query = query.substring(indexOfCot+1);
-            query = tmp + query;
+    public static String stripCotation(String text){
+        while(text.contains("'")){
+            int indexOfCot = text.indexOf("'");
+            String tmp = text.substring(0,indexOfCot);
+            text = text.substring(indexOfCot+1);
+            text = tmp + text;
         }
-        return query;
+        return text;
     }
 
 
     public JavaConnection(String url, String query){
         this(url);
-        query = stripCotation(query);
         try{
             statement.executeQuery(query);
         }catch (SQLException ex){
@@ -49,7 +48,6 @@ public class JavaConnection {
     }
 
     public int insertQuery(String query){
-        query = stripCotation(query);
         try{
             statement.execute(query);
             return 1;
@@ -60,7 +58,6 @@ public class JavaConnection {
         }
     }
     public boolean updateQuery(String query){
-        query = stripCotation(query);
         try{
             statement.execute(query);
             return true;
@@ -72,7 +69,6 @@ public class JavaConnection {
     }
 
     public ResultSet selectQuery(String query){
-        query = stripCotation(query);
         ResultSet tmpResultSet;
         try{
             tmpResultSet = statement.executeQuery(query);
