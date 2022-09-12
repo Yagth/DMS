@@ -1,14 +1,22 @@
 package GUIClasses;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
+import BasicClasses.Others.Cloth;
+import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
 import GUIClasses.ActionListeners.ReportDetailViewBackButtonListener;
 import GUIClasses.Interfaces.Views;
+import GUIClasses.ProctorViews.ProctorPage;
 import GUIClasses.StudentViews.SeeYourRequests;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class ReportDetailView extends JFrame implements Views {
     private JPanel mainPanel;
@@ -28,8 +36,12 @@ public class ReportDetailView extends JFrame implements Views {
     private JButton backButton;
     private JLabel handledDate;
     private JLabel reportHandledDate;
-    private Request request;
     private String reporterId;
+    private JLabel reporterNameL;
+    private JLabel reporterName;
+    private Request request;
+    private JLabel reporterIdL;
+    private JLabel Reporter;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
@@ -41,15 +53,25 @@ public class ReportDetailView extends JFrame implements Views {
         setUpGUi();
     }
     public void displayRequest(){
+        ArrayList<ClothTakeOutRequest> clothRequests = getClothReport();
         boolean isHandled = checkReportStatus();
         reportTypeL.setText(request.getRequestType());
         reportedDateL.setText(String.valueOf(request.getRequestedDate()));
-        descriptionPane.setText(request.getDescription());
+
+        if(request.getRequestType().equals("ClothTakeOutForm")){
+            String description = "";
+            for(ClothTakeOutRequest tmp : clothRequests){
+                description += tmp.getDescription()+"\n";
+            }
+            descriptionPane.setText(description);
+        } else{
+            descriptionPane.setText(request.getDescription());
+        }
+
         if(isHandled){
             reportStatusL.setText("Handled");
             reportHandledDate.setText(String.valueOf(request.getHandledDate()));
-        }
-        else{
+        } else{
             reportStatusL.setText("On Queue");
             reportHandledDate.setVisible(false);
             handledDate.setVisible(false);
@@ -67,6 +89,43 @@ public class ReportDetailView extends JFrame implements Views {
 
     }
 
+    public ArrayList<ClothTakeOutRequest> getClothReport(){
+        ArrayList<ClothTakeOutRequest> clothReportList = new ArrayList<>();
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT ReportCount FROM ClothStudent WHERE ReportId="+request.getRequestId();
+        ResultSet resultSet;
+        int count = 0;
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    resultSet.getInt("ReportCount");
+                }
+            } catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+        }
+        javaConnection = new JavaConnection(JavaConnection.URL);
+        query = "SELECT * FROM ClothStudent WHERE ReportCount="+count;
+
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    String reporterId = resultSet.getString("ReporterId");
+                    String description = resultSet.getString("Description");
+
+                    ClothTakeOutRequest tmp = new ClothTakeOutRequest(reporterId,count);
+                    tmp.setDescription(description);
+                    clothReportList.add(tmp);
+                }
+            } catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+        }
+        return  clothReportList;
+    }
+
     public boolean checkReportStatus(){
         return !(request.getHandledDate()==null);
     }
@@ -76,6 +135,15 @@ public class ReportDetailView extends JFrame implements Views {
 
     public void showParentComponent(){
         parentComponent.setVisible(true);
+    }
+    public boolean isInProctorView(){
+        try{
+            SeeYourRequests parentComponent = (SeeYourRequests) this.parentComponent;
+            return false;
+        } catch (ClassCastException ex){
+            ex.printStackTrace();//For debugging only.
+            return true;
+        }
     }
     @Override
     public void setUpGUi() {
@@ -95,6 +163,12 @@ public class ReportDetailView extends JFrame implements Views {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+
+        boolean isInProctorView = isInProctorView();
+        reporterIdL.setVisible(isInProctorView);
+        Reporter.setVisible(isInProctorView);
+        reporterName.setVisible(isInProctorView);
+        reporterNameL.setVisible(isInProctorView);
 
     }
 }
