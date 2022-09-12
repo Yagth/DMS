@@ -3,6 +3,7 @@ package GUIClasses;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
+import GUIClasses.ActionListeners.ProctorView.HandleButtonListener;
 import GUIClasses.ActionListeners.ReportDetailViewBackButtonListener;
 import GUIClasses.Interfaces.Views;
 import GUIClasses.StudentViews.SeeYourRequests;
@@ -39,6 +40,7 @@ public class ReportDetailView extends JFrame implements Views {
     private JLabel reporterIdL;
     private JLabel Reporter;
     private String handlerId;
+    private int clothRequestId;
     private JButton handleButton;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
@@ -103,6 +105,10 @@ public class ReportDetailView extends JFrame implements Views {
         return request;
     }
 
+    public int getClothRequestId() {
+        return clothRequestId;
+    }
+
     public ArrayList<ClothTakeOutRequest> getClothReport(){
         ArrayList<ClothTakeOutRequest> clothReportList = new ArrayList<>();
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
@@ -115,6 +121,7 @@ public class ReportDetailView extends JFrame implements Views {
                 while(resultSet.next()){
                     count = resultSet.getInt("ReportCount");
                 }
+                clothRequestId = count;
             } catch (SQLException ex){
                 ex.printStackTrace();//For debugging only.
             }
@@ -183,6 +190,7 @@ public class ReportDetailView extends JFrame implements Views {
         reporterName.setVisible(isInProctorView);
         reporterNameL.setVisible(isInProctorView);
         handleButton.setVisible(isInProctorView);
+        if(isInProctorView) handleButton.addActionListener(new HandleButtonListener(this));
 
     }
 }
