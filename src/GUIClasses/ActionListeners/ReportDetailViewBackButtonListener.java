@@ -1,9 +1,7 @@
 package GUIClasses.ActionListeners;
 
-import GUIClasses.StudentViews.ReportDetailView;
-import GUIClasses.StudentViews.SeeYourRequests;
+import GUIClasses.ReportDetailView;
 
-import javax.accessibility.Accessible;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
