@@ -7,6 +7,7 @@ import GUIClasses.ActionListeners.ProctorView.HandleButtonListener;
 import GUIClasses.ActionListeners.StudentView.ReportDetailViewBackButtonListener;
 import GUIClasses.Interfaces.Views;
 import GUIClasses.ProctorViews.ProctorPage;
+import GUIClasses.ProctorViews.ReportsView;
 import GUIClasses.StudentViews.SeeYourRequests;
 
 import javax.swing.*;
@@ -181,10 +182,13 @@ public class ReportDetailView extends JFrame implements Views {
             ProctorPage parentComponent = (ProctorPage) this.parentComponent;
             Vector<Vector<Object>> tmpTableData = parentComponent.loadReports();
             parentComponent.refreshTable(tmpTableData);
+
         }catch (ClassCastException ex){
             ex.printStackTrace();//For debugging only.
+            ReportsView parentComponent = (ReportsView) this.parentComponent;
+            Vector<Vector<Object>> tmpTableData = parentComponent.loadReports();
+            parentComponent.refreshTable(tmpTableData);
         }
-
     }
     @Override
     public void setUpGUi() {

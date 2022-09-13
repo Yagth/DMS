@@ -44,6 +44,11 @@ public class ReportsView extends JFrame implements Views, TableViews {
     public String getProctorId(){
         return proctorId;
     }
+
+    public void refreshParentTable(){
+        Vector<Vector<Object>> tmp = parentComponent.loadReports();
+        parentComponent.refreshTable(tmp);
+    }
     public Vector<Vector<Object>> loadReports(){
         /* This method will load all unhandled reports (handled date is null)
         from the dataBase and add them to the table data.
