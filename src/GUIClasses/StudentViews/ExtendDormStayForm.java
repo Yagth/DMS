@@ -3,7 +3,7 @@ package GUIClasses.StudentViews;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
 import BasicClasses.Requests.ExtendDormStayRequest;
-import GUIClasses.ActionListeners.ExtendDormSubmitButtonListener;
+import GUIClasses.ActionListeners.StudentView.ExtendDormSubmitButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 
 import javax.swing.*;

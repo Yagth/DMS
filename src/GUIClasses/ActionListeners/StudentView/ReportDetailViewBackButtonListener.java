@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners;
+package GUIClasses.ActionListeners.StudentView;
 
 import GUIClasses.ReportDetailView;
 

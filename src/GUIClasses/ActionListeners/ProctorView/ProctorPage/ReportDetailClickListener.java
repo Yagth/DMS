@@ -3,6 +3,7 @@ package GUIClasses.ActionListeners.ProctorView.ProctorPage;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
 import GUIClasses.ProctorViews.ProctorPage;
+import GUIClasses.ProctorViews.ReportsView;
 import GUIClasses.ReportDetailView;
 import GUIClasses.StudentViews.SeeYourRequests;
 
@@ -16,16 +17,25 @@ import java.util.Vector;
 
 public class ReportDetailClickListener implements MouseListener {
     private ProctorPage parentComponent;
+    private ReportsView reportsViewParentComponent;
 
     public ReportDetailClickListener(JFrame parentComponent){
-        this.parentComponent = (ProctorPage) parentComponent;
+
+        try{
+            this.parentComponent = (ProctorPage) parentComponent;
+        }catch (ClassCastException ex){
+            this.reportsViewParentComponent = (ReportsView) parentComponent;
+        }
     }
 
     public Request getRequest(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet;
+        JTable table;
 
-        JTable table = parentComponent.getReportTable();
+        if(parentComponent == null) table = reportsViewParentComponent.getReportTable();
+        else table = parentComponent.getReportTable();
+
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         int clickedRow = table.getSelectedRow();
         int reportId = (int) tableModel.getValueAt(clickedRow,0);
@@ -96,15 +106,22 @@ public class ReportDetailClickListener implements MouseListener {
             resultSet = javaConnection.selectQuery(query);
             try{
                 while(resultSet.next()){
-                    reporterName = resultSet.getString("Fname")+" "+resultSet.getString("Lname");
+                    reporterName = resultSet.getString("Fname")+" "
+                            +resultSet.getString("Lname");
                 }
             }catch (SQLException ex){
                 ex.printStackTrace();//For debugging only.
             }
         }
-        ReportDetailView reportDetailView = new ReportDetailView(parentComponent,tmp,reporterName);
-        reportDetailView.setHandlerId(parentComponent.getProctor().getpId());
-        parentComponent.setVisible(false);
+        if(parentComponent == null) {
+            ReportDetailView reportDetailView = new ReportDetailView(reportsViewParentComponent,tmp,reporterName);
+            reportDetailView.setHandlerId(reportsViewParentComponent.getProctorId());
+            reportsViewParentComponent.setVisible(false);
+        } else{
+            ReportDetailView reportDetailView = new ReportDetailView(parentComponent,tmp,reporterName);
+            reportDetailView.setHandlerId(parentComponent.getProctor().getpId());
+            parentComponent.setVisible(false);
+        }
     }
 
     @Override

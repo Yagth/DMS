@@ -3,7 +3,7 @@ package GUIClasses.StudentViews;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
 import BasicClasses.Requests.MaintenanceRequest;
-import GUIClasses.ActionListeners.MaintenanceSubmitButtonListener;
+import GUIClasses.ActionListeners.StudentView.MaintenanceSubmitButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 
 import javax.swing.*;

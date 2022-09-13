@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners;
+package GUIClasses.ActionListeners.ProctorView;
 
 import GUIClasses.ProctorViews.ChangeDormView;
 
