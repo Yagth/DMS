@@ -21,16 +21,16 @@ public class HandleButtonListener implements ActionListener {
     public int updateDataBase(Request request){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "";
-        if(!(request.getRequestType().equals("ClothTakeOutForm") && request.getRequestType().equals("RequestForNewDorm"))){
+        if(!(request.getRequestType().equals("ClothTakeOutForm") || request.getRequestType().equals("RequestForNewDorm"))){
             query = "INSERT INTO ProctorHandlesReport(handledDate,EID,ReportId) " +
                     "VALUES('"+request.getHandledDate()+
                     "' ,'"+parentComponent.getHandlerId()+
                     "', "+request.getRequestId()+")";
-            System.out.println("Query: "+query);//For debugging only.
+            System.out.println("Query in first if: "+query);//For debugging only.
             return javaConnection.insertQuery(query);
         } else if(request.getRequestType().equals("RequestForNewDorm")) {
             query = "SELECT TOP 1 * FROM AvailableDorm ORDER BY NumberOfStudents ASC";
-            System.out.println("Query: "+query);//For debugging only.
+            System.out.println("Query in second if: "+query);//For debugging only.
             ResultSet resultSet = javaConnection.selectQuery(query);
             try{
                 String buildingNumber = null;
@@ -47,8 +47,7 @@ public class HandleButtonListener implements ActionListener {
             } catch (SQLException ex){
                 return 0;
             }
-        }
-        else{
+        } else{
             Vector<Vector<Object>> tmpClothRequest = parentComponent.getClothRequests();
             int updateStatus = 0;
             for(Vector<Object> clothTakeOutRequest: tmpClothRequest){
