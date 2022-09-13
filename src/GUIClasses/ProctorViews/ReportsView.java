@@ -136,7 +136,10 @@ public class ReportsView extends JFrame implements Views, TableViews {
 
     @Override
     public void addDataToTable(Object object) {
-        // No need to implement this method.
+        Vector<Vector<Object>> temp = (Vector<Vector<Object>>) object;
+        for(int i = 0; i<temp.size();i++){
+            tableData.add(temp.get(i));
+        }
     }
 
     @Override

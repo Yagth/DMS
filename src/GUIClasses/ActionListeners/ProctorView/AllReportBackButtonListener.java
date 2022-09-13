@@ -1,6 +1,5 @@
 package GUIClasses.ActionListeners.ProctorView;
 
-import GUIClasses.ProctorViews.ProctorPage;
 import GUIClasses.ProctorViews.ReportsView;
 
 import java.awt.event.ActionEvent;
