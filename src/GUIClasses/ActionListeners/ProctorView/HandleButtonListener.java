@@ -40,11 +40,8 @@ public class HandleButtonListener implements ActionListener {
                             "', "+clothTakeOutRequest.get(0)+
                             ", "+parentComponent.getClothRequestId()+")";
                     updateStatus = javaConnection.insertQuery(query);
-                    System.out.println("Query: "+query);//For debugging only.
                 }
             }
-
-            System.out.println("Query: "+query);//For debugging only.
             return updateStatus;
         }
     }
