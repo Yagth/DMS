@@ -26,7 +26,7 @@ public class HandleButtonListener implements ActionListener {
             query = "INSERT INTO ProctorHandlesReport(handledDate,EID,ReportId) " +
                     "VALUES('"+request.getHandledDate()+
                     "' ,'"+parentComponent.getHandlerId()+
-                    "', ReportId="+request.getRequestId()+")";
+                    "', "+request.getRequestId()+")";
             System.out.println("Query: "+query);//For debugging only.
             return javaConnection.insertQuery(query);
         } else{
