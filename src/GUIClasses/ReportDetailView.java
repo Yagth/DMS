@@ -4,7 +4,7 @@ import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
 import GUIClasses.ActionListeners.ProctorView.HandleButtonListener;
-import GUIClasses.ActionListeners.ReportDetailViewBackButtonListener;
+import GUIClasses.ActionListeners.StudentView.ReportDetailViewBackButtonListener;
 import GUIClasses.Interfaces.Views;
 import GUIClasses.ProctorViews.ProctorPage;
 import GUIClasses.StudentViews.SeeYourRequests;
@@ -14,7 +14,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Vector;
 
 public class ReportDetailView extends JFrame implements Views {

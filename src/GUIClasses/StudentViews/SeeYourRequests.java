@@ -3,7 +3,7 @@ package GUIClasses.StudentViews;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
-import GUIClasses.ActionListeners.SeeYourRequestBackButtonListener;
+import GUIClasses.ActionListeners.StudentView.SeeYourRequestBackButtonListener;
 import GUIClasses.ActionListeners.StudentView.StudentPage.RequestDetailClickListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;

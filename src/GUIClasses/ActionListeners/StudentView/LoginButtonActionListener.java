@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners;
+package GUIClasses.ActionListeners.StudentView;
 
 import BasicClasses.Enums.UserStatus;
 import GUIClasses.LoginPage;
