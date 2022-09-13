@@ -15,6 +15,7 @@ import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class ReportDetailView extends JFrame implements Views {
     private JPanel mainPanel;
@@ -43,7 +44,7 @@ public class ReportDetailView extends JFrame implements Views {
     private String handlerId;
     private int clothRequestId;
     private JButton handleButton;
-    private ArrayList<ClothTakeOutRequest> clothRequests;
+    private Vector<Vector<Object>> clothRequests;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
@@ -73,8 +74,8 @@ public class ReportDetailView extends JFrame implements Views {
 
         if(request.getRequestType().equals("ClothTakeOutForm")){
             String description = "\n\t";
-            for(ClothTakeOutRequest tmp : clothRequests){
-                description += tmp.getDescription()+"\n\t";
+            for(Vector<Object> tmp : clothRequests){
+                description += tmp.get(3)+"\n\t";
             }
             description = nameOfReporter+" "+"requested to take the following cloths "+description;
             descriptionPane.setText(description);
@@ -107,7 +108,7 @@ public class ReportDetailView extends JFrame implements Views {
         return request;
     }
 
-    public ArrayList<ClothTakeOutRequest> getClothRequests() {
+    public Vector<Vector<Object>> getClothRequests() {
         return clothRequests;
     }
 
@@ -115,8 +116,8 @@ public class ReportDetailView extends JFrame implements Views {
         return clothRequestId;
     }
 
-    public ArrayList<ClothTakeOutRequest> getClothReport(){
-        ArrayList<ClothTakeOutRequest> clothReportList = new ArrayList<>();
+    public Vector<Vector<Object>> getClothReport(){
+        Vector<Vector<Object>> clothReportList = new Vector<>();
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT ReportCount FROM ClothStudent WHERE ReportId="+request.getRequestId();
         ResultSet resultSet;
@@ -139,11 +140,14 @@ public class ReportDetailView extends JFrame implements Views {
             resultSet = javaConnection.selectQuery(query);
             try{
                 while(resultSet.next()){
+                    Vector<Object> tmp = new Vector<>();
                     String reporterId = resultSet.getString("ReporterId");
                     String description = resultSet.getString("ClothName");
                     description = String.format("%-20s",description)+resultSet.getInt("Amount");
-                    ClothTakeOutRequest tmp = new ClothTakeOutRequest(reporterId);
-                    tmp.setDescription(description);
+                    tmp.add(request.getRequestId());
+                    tmp.add(count);
+                    tmp.add(reporterId);
+                    tmp.add(description);
                     clothReportList.add(tmp);
                 }
             } catch (SQLException ex){
