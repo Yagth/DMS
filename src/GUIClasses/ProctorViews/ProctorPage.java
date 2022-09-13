@@ -150,6 +150,7 @@ public class ProctorPage extends JFrame implements Views, TableViews {
     }
 
     public void refreshTable(Vector<Vector<Object>> tableData){
+        this.tableData.clear();
         readStatus = !(tableData == null);
         addDataToTable(tableData);
         refreshTable();

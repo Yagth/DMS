@@ -143,8 +143,9 @@ public class ReportDetailView extends JFrame implements Views {
                     Vector<Object> tmp = new Vector<>();
                     String reporterId = resultSet.getString("ReporterId");
                     String description = resultSet.getString("ClothName");
+                    int reportId = resultSet.getInt("ReportId");
                     description = String.format("%-20s",description)+resultSet.getInt("Amount");
-                    tmp.add(request.getRequestId());
+                    tmp.add(reportId);
                     tmp.add(count);
                     tmp.add(reporterId);
                     tmp.add(description);
