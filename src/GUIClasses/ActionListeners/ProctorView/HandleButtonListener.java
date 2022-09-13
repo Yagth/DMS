@@ -42,7 +42,12 @@ public class HandleButtonListener implements ActionListener {
                 query = "UPDATE Student SET BuildingNumber='"+buildingNumber+"', RoomNumber='"+roomNumber+
                         "' WHERE SID='"+request.getRequesterId()+"'";
                 System.out.println("Query: "+query);//For debugging only.
-                if(javaConnection.updateQuery(query)) return 1;
+                boolean updateStatus = javaConnection.updateQuery(query);
+                query = "INSERT INTO ProctorHandlesReport(handledDate,EID,ReportId) " +
+                        "VALUES('"+request.getHandledDate()+
+                        "' ,'"+parentComponent.getHandlerId()+
+                        "', "+request.getRequestId()+")";
+                if(javaConnection.insertQuery(query) == 1 && updateStatus) return 1;
                 else return 0;
             } catch (SQLException ex){
                 return 0;
