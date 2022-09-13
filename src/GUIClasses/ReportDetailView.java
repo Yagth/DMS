@@ -184,7 +184,7 @@ public class ReportDetailView extends JFrame implements Views {
             parentComponent.refreshTable(tmpTableData);
 
         }catch (ClassCastException ex){
-            ex.printStackTrace();//For debugging only.
+            System.out.println("ReportsView");//For debugging only.
             ReportsView parentComponent = (ReportsView) this.parentComponent;
             Vector<Vector<Object>> tmpTableData = parentComponent.loadReports();
             parentComponent.refreshTable(tmpTableData);
