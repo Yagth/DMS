@@ -33,15 +33,14 @@ public class HandleButtonListener implements ActionListener {
             Vector<Vector<Object>> tmpClothRequest = parentComponent.getClothRequests();
             int updateStatus = 0;
             for(Vector<Object> clothTakeOutRequest: tmpClothRequest){
-                System.out.println("request Count: "+clothTakeOutRequest.get(1));//For debugging only.
-                System.out.println("request Count: "+parentComponent.getClothRequestId());//For debugging only.
                 if((int) clothTakeOutRequest.get(1) == parentComponent.getClothRequestId()){
                     query = "INSERT INTO ProctorApprovesClothTakeOut(handledDate,EID,clothReportId,clothCountId) " +
                             "VALUES('"+request.getHandledDate()+
                             "' ,'"+parentComponent.getHandlerId()+
-                            "', "+request.getRequestId()+
+                            "', "+clothTakeOutRequest.get(0)+
                             ", "+parentComponent.getClothRequestId()+")";
                     updateStatus = javaConnection.insertQuery(query);
+                    System.out.println("Query: "+query);//For debugging only.
                 }
             }
 
