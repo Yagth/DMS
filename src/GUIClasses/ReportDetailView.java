@@ -179,7 +179,8 @@ public class ReportDetailView extends JFrame implements Views {
     public void refreshParentTable(){
         try{
             ProctorPage parentComponent = (ProctorPage) this.parentComponent;
-            parentComponent.refreshTable();
+            Vector<Vector<Object>> tmpTableData = parentComponent.loadReports();
+            parentComponent.refreshTable(tmpTableData);
         }catch (ClassCastException ex){
             ex.printStackTrace();//For debugging only.
         }
