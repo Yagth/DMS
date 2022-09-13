@@ -1,13 +1,12 @@
 package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
+import GUIClasses.ActionListeners.ProctorView.AllReportBackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.TabExpander;
-import javax.swing.text.TabableView;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
@@ -18,6 +17,7 @@ public class ReportsView extends JFrame implements Views, TableViews {
     private JPanel butttonsPanel;
     private JTable reportList;
     private JButton nextButton;
+    private JButton backButton;
     private ProctorPage parentComponent;
     private String proctorId;
     private Vector<Vector<Object>> tableData;
@@ -42,6 +42,10 @@ public class ReportsView extends JFrame implements Views, TableViews {
             JOptionPane.showMessageDialog(this,"Couldn't read the emergency contacts due to connection error"
                     ,"Reading Error",JOptionPane.ERROR_MESSAGE);
     }
+
+    public void showParentComponent(){
+        this.parentComponent.setVisible(true);
+    }
     @Override
     public void setUpGUi() {
         this.setTitle("Reports");
@@ -58,6 +62,7 @@ public class ReportsView extends JFrame implements Views, TableViews {
             }
         }); //A custom action listener for the exit button.
         setUpTable();
+        backButton.addActionListener(new AllReportBackButtonListener(this));
         this.setVisible(true);
     }
 
