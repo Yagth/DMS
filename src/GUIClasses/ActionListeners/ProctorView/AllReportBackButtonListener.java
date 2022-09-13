@@ -14,6 +14,7 @@ public class AllReportBackButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         parentComponent.dispose();
+        parentComponent.refreshParentTable();
         parentComponent.showParentComponent();
     }
 }
