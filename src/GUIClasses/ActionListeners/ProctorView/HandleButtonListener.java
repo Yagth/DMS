@@ -30,6 +30,7 @@ public class HandleButtonListener implements ActionListener {
             return javaConnection.insertQuery(query);
         } else if(request.getRequestType().equals("RequestForNewDorm")) {
             query = "SELECT TOP 1 * FROM AvailableDorm ORDER BY NumberOfStudents ASC";
+            System.out.println("Query: "+query);//For debugging only.
             ResultSet resultSet = javaConnection.selectQuery(query);
             try{
                 String buildingNumber = null;
@@ -40,6 +41,7 @@ public class HandleButtonListener implements ActionListener {
                 }
                 query = "UPDATE Student SET BuildingNumber='"+buildingNumber+"', RoomNumber='"+roomNumber+
                         "' WHERE SID='"+request.getRequesterId()+"'";
+                System.out.println("Query: "+query);//For debugging only.
                 if(javaConnection.updateQuery(query)) return 1;
                 else return 0;
             } catch (SQLException ex){
