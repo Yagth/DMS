@@ -2,6 +2,7 @@ package GUIClasses.ActionListeners.ProctorView.StudentView;
 
 import GUIClasses.ProctorViews.StudentView;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -19,6 +20,13 @@ public class FilterButtonListener implements ActionListener {
         parentComponent.getTableData().clear();
         parentComponent.addDataToTable(filteredStudents);
         parentComponent.refreshTable();
+
+        if(filteredStudents.size() == 0 ){
+            if(parentComponent.getSelectedCondition().equals("Eligibility"))
+                JOptionPane.showMessageDialog(parentComponent,"No eligible students found");
+            else
+                JOptionPane.showMessageDialog(parentComponent,"No students matching the condition");
+        }
     }
 
     public int getFilteringColumn(){
