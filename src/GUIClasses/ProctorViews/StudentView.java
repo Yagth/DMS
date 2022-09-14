@@ -53,11 +53,13 @@ public class StudentView extends JFrame implements Views, TableViews {
         String query = "SELECT * FROM Student";
         ResultSet resultSet;
         Vector<Vector<Object>> students = new Vector<>();
+        int count = 0;
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
             try{
                 while(resultSet.next()){
                     Vector<Object> tmp = new Vector<>();
+                    tmp.add(++count);
                     tmp.add(resultSet.getString("SID"));
                     tmp.add(resultSet.getString("Fname")+" "+resultSet.getString("Lname"));
                     tmp.add(resultSet.getInt("Year"));
@@ -77,11 +79,13 @@ public class StudentView extends JFrame implements Views, TableViews {
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet;
         Vector<Vector<Object>> students = new Vector<>();
+        int count = 0;
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
             try{
                 while(resultSet.next()){
                     Vector<Object> tmp = new Vector<>();
+                    tmp.add(++count);
                     tmp.add(resultSet.getString("SID"));
                     tmp.add(resultSet.getString("Fname")+" "+resultSet.getString("Lname"));
                     tmp.add(resultSet.getInt("Year"));
@@ -124,6 +128,9 @@ public class StudentView extends JFrame implements Views, TableViews {
     public String getFilterInputText(){
         return buildingNumberTF.getText();
     }
+    public void clearFilterInputText(){
+        buildingNumberTF.setText("");
+    }
 
     public Vector<Vector<Object>> getTableData(){
         return tableData;
@@ -132,6 +139,9 @@ public class StudentView extends JFrame implements Views, TableViews {
     @Override
     public void setUpTable() {
         Vector<String> titles = new Vector();
+        tableData = new Vector<>();
+
+
         boolean readStatus;
 
         titles.add("No");
@@ -141,18 +151,16 @@ public class StudentView extends JFrame implements Views, TableViews {
         titles.add("BuildingNumber");
         titles.add("Eligibility");
 
-        tableData = new Vector<>();
+        Vector<Vector<Object>> students = loadStudents();
+
+        readStatus = !(students.size() == 0);//It will be false if the students list is null.
+        addDataToTable(students);
 
         studentListTable.setModel(new DefaultTableModel(tableData,titles));
         studentListTable.setDefaultEditor(Object.class,null);
         studentListTable.getColumn("No").setMaxWidth(50);
 
-        Vector<Vector<Object>> students = loadStudents();
-        readStatus = !(students.size() == 0);//It will be false if the students list is null.
-        addDataToTable(students);
-        refreshTable();
         displayReadStatus(readStatus);
-
     }
 
     @Override
