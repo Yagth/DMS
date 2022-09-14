@@ -28,6 +28,7 @@ public class FilterButtonListener implements ActionListener {
 
     public Vector<Vector<Object>> filterStudents(){
         Vector<Vector<Object>> students = parentComponent.getTableData();
+        System.out.println("Size of students: "+students.size());//For debugging only.
         Vector<Vector<Object>> tmp = new Vector<>();
         Object comparingObject = parentComponent.getFilterInputText();
         int index = getFilteringColumn();
