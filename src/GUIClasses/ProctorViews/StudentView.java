@@ -1,14 +1,19 @@
 package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
+import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import GUIClasses.ActionListeners.StudentView.BackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
 
 public class StudentView extends JFrame implements Views, TableViews {
     private JPanel mainPanel;
@@ -25,6 +30,7 @@ public class StudentView extends JFrame implements Views, TableViews {
     private JButton backButton;
     private ProctorPage parentComponent;
     private Proctor proctor;
+    private Vector<Vector<Object>> tableData;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
@@ -37,19 +43,70 @@ public class StudentView extends JFrame implements Views, TableViews {
         parentComponent.setVisible(true);
     }
 
+    public Vector<Vector<Object>> loadStudents(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT * FROM Students";
+        ResultSet resultSet;
+        Vector<Vector<Object>> students = new Vector<>();
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    Vector<Object> tmp = new Vector<>();
+                    tmp.add(resultSet.getString("SID"));
+                    tmp.add(resultSet.getString("Fname")+" "+resultSet.getString("Lname"));
+                    tmp.add(resultSet.getInt("Year"));
+                    tmp.add(resultSet.getString("BuildingNumber"));
+                    tmp.add(resultSet.getInt("Eligibility"));
+
+                    students.add(tmp);
+                }
+            } catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+        }
+        return students;
+    }
+
+    public void displayReadStatus(boolean readStatus){
+        if(!readStatus) JOptionPane.showMessageDialog(parentComponent,"Couldn't load students due to " +
+                "connection error","Loading error",JOptionPane.ERROR_MESSAGE);
+    }
+
     @Override
     public void setUpTable() {
+        Vector<String> titles = new Vector();
+        boolean readStatus = false;
+
+        titles.add("ID");
+        titles.add("Name");
+        titles.add("Year");
+        titles.add("BuildingNumber");
+        titles.add("Eligibility");
+
+        tableData = new Vector<>();
+
+        studentListTable.setModel(new DefaultTableModel(tableData,titles));
+        studentListTable.setDefaultEditor(Object.class,null);
+
+        Vector<Vector<Object>> students = loadStudents();
+        readStatus = !(students == null);//It will be false if the students list is null.
+        addDataToTable(students);
+        refreshTable();
+        displayReadStatus(readStatus);
 
     }
 
     @Override
     public void addDataToTable(Object object) {
-
+        Vector<Vector<Object>> students = (Vector<Vector<Object>>) object;
+        tableData = students;
     }
 
     @Override
     public void refreshTable() {
-
+        DefaultTableModel tableModel = (DefaultTableModel) studentListTable.getModel();
+        tableModel.fireTableDataChanged();
     }
 
     @Override
@@ -77,6 +134,8 @@ public class StudentView extends JFrame implements Views, TableViews {
         filterCondition.addItem("Year of students");
         filterCondition.addItem("Block");
         filterCondition.addItem("Eligibility");
+
+        setUpTable();
 
         this.setVisible(true);
     }
