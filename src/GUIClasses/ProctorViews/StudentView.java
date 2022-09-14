@@ -3,6 +3,9 @@ package GUIClasses.ProctorViews;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
+import GUIClasses.ActionListeners.ProctorView.StudentView.FilterConditionItemListener;
+import GUIClasses.ActionListeners.ProctorView.StudentView.FilterButtonListener;
+import GUIClasses.ActionListeners.ProctorView.StudentView.SearchButtonListener;
 import GUIClasses.ActionListeners.StudentView.BackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
@@ -48,6 +51,30 @@ public class StudentView extends JFrame implements Views, TableViews {
     public Vector<Vector<Object>> loadStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT * FROM Student";
+        ResultSet resultSet;
+        Vector<Vector<Object>> students = new Vector<>();
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    Vector<Object> tmp = new Vector<>();
+                    tmp.add(resultSet.getString("SID"));
+                    tmp.add(resultSet.getString("Fname")+" "+resultSet.getString("Lname"));
+                    tmp.add(resultSet.getInt("Year"));
+                    tmp.add(resultSet.getString("BuildingNumber"));
+                    tmp.add(resultSet.getInt("isEligible"));
+
+                    students.add(tmp);
+                }
+            } catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+        }
+        return students;
+    }
+
+    public Vector<Vector<Object>> loadStudents(String query){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet;
         Vector<Vector<Object>> students = new Vector<>();
         if(javaConnection.isConnected()){
@@ -148,7 +175,13 @@ public class StudentView extends JFrame implements Views, TableViews {
         setContentPane(mainPanel);
         setSize(WIDTH,HEIGHT);
         setLocationRelativeTo(null);
+
         backButton.addActionListener(new BackButtonListener(this));
+        searchButton.addActionListener(new SearchButtonListener(this));
+        filterButton.addActionListener(new FilterButtonListener(this));
+        filterCondition.addItemListener(new FilterConditionItemListener(this));
+
+
         this.addWindowListener(new WindowAdapter()
         {
             @Override
@@ -168,6 +201,7 @@ public class StudentView extends JFrame implements Views, TableViews {
         filterCondition.addItem("Year of students");
         filterCondition.addItem("Block");
         filterCondition.addItem("Eligibility");
+        filterCondition.setSelectedIndex(1);
 
         setUpTable();
 

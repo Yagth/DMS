@@ -18,6 +18,7 @@ public class SeeStudentMenuListener extends MenuItemListener{
         try{
             new StudentView(parentComponent,parentComponent.getProctor());
         } catch (NullPointerException ex){
+            ex.printStackTrace();//For debugging only.
             JOptionPane.showMessageDialog(parentComponent,"Couldn't Open this page due to some error.",
                     "Error opening page",JOptionPane.ERROR_MESSAGE);
             parentComponent.setVisible(true);
