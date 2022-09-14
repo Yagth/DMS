@@ -30,12 +30,14 @@ public class StudentDetailClickListener implements MouseListener {
         JTable table  = parentComponent.getTable();
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         int row;
+        String SID;
         try{
             row = table.getSelectedRow();
+            SID = (String) tableModel.getValueAt(row,1);
         } catch (ArrayIndexOutOfBoundsException ex){
             row = 0;
+            SID = (String) tableModel.getValueAt(row,1);
         }
-        String SID = (String) tableModel.getValueAt(row,1);
         return SID;
     }
 
