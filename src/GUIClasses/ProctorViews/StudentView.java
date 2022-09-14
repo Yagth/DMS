@@ -197,11 +197,10 @@ public class StudentView extends JFrame implements Views, TableViews {
         ImageIcon filterButtonIcon = new ImageIcon("Icons/FilterIcon.png");
         filterButton.setIcon(filterButtonIcon);
 
-        filterCondition.addItem("");
         filterCondition.addItem("Year of students");
         filterCondition.addItem("Block");
         filterCondition.addItem("Eligibility");
-        filterCondition.setSelectedIndex(1);
+        filterCondition.addItem("");
 
         setUpTable();
 
