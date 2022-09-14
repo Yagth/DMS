@@ -3,6 +3,7 @@ package GUIClasses.ProctorViews;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
+import GUIClasses.ActionListeners.ProctorView.StudentView.SearchTFFocusListener;
 import GUIClasses.ActionListeners.ProctorView.StudentView.FilterConditionItemListener;
 import GUIClasses.ActionListeners.ProctorView.StudentView.FilterButtonListener;
 import GUIClasses.ActionListeners.ProctorView.StudentView.SearchButtonListener;
@@ -195,6 +196,7 @@ public class StudentView extends JFrame implements Views, TableViews {
         searchButton.addActionListener(new SearchButtonListener(this));
         filterButton.addActionListener(new FilterButtonListener(this));
         filterCondition.addItemListener(new FilterConditionItemListener(this));
+        searchTF.addFocusListener(new SearchTFFocusListener(this));
 
 
         this.addWindowListener(new WindowAdapter()
