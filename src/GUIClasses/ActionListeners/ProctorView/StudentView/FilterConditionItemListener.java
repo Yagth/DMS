@@ -14,16 +14,22 @@ public class FilterConditionItemListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
         parentComponent.clearFilterInputText();
-        parentComponent.reloadTable();
 
         String selectedCondition = parentComponent.getSelectedCondition();
         try{
+            parentComponent.reloadTable();
             if(selectedCondition.equals("")){
                 clearFilter();
                 changeGui(false);
-            } else if (selectedCondition.equals("Year of students")) changeGui("Year",true);
-            else if (selectedCondition.equals("Block")) changeGui(true);
-            else changeGui(false);
+            } else if (selectedCondition.equals("Year of students")){
+                changeGui("Year",true);
+            }
+            else if (selectedCondition.equals("Block")) {
+                changeGui(true);
+            }
+            else {
+                changeGui(false);
+            }
         } catch (Exception ex){
             System.out.println("Inside the filter item listener");//For debugging only.
             ex.printStackTrace();//For debugging only.
@@ -32,9 +38,7 @@ public class FilterConditionItemListener implements ItemListener {
 
     public void clearFilter(){
         parentComponent.getTableData().clear();
-        Vector<Vector<Object>> students = parentComponent.loadStudents();
-        parentComponent.addDataToTable(students);
-        parentComponent.refreshTable();
+        parentComponent.reloadTable();
     }
 
     public void changeGui(String text, boolean visibility){
