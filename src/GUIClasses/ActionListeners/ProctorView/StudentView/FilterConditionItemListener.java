@@ -14,12 +14,17 @@ public class FilterConditionItemListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
         String selectedCondition = parentComponent.getSelectedCondition();
-        if(selectedCondition.equals("")){
-            clearFilter();
-            changeGui(false);
-        } else if (selectedCondition.equals("Year of students")) changeGui("Year",true);
-          else if (selectedCondition.equals("Block")) changeGui(true);
-          else changeGui(false);
+        try{
+            if(selectedCondition.equals("")){
+                clearFilter();
+                changeGui(false);
+            } else if (selectedCondition.equals("Year of students")) changeGui("Year",true);
+            else if (selectedCondition.equals("Block")) changeGui(true);
+            else changeGui(false);
+        } catch (Exception ex){
+            System.out.println("Inside the filter item listener");//For debugging only.
+            ex.printStackTrace();//For debugging only.
+        }
     }
 
     public void clearFilter(){
