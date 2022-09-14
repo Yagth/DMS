@@ -76,8 +76,9 @@ public class StudentView extends JFrame implements Views, TableViews {
     @Override
     public void setUpTable() {
         Vector<String> titles = new Vector();
-        boolean readStatus = false;
+        boolean readStatus;
 
+        titles.add("No");
         titles.add("ID");
         titles.add("Name");
         titles.add("Year");
@@ -88,6 +89,7 @@ public class StudentView extends JFrame implements Views, TableViews {
 
         studentListTable.setModel(new DefaultTableModel(tableData,titles));
         studentListTable.setDefaultEditor(Object.class,null);
+        studentListTable.getColumn("No").setMaxWidth(50);
 
         Vector<Vector<Object>> students = loadStudents();
         readStatus = !(students.size() == 0);//It will be false if the students list is null.
@@ -100,7 +102,9 @@ public class StudentView extends JFrame implements Views, TableViews {
     @Override
     public void addDataToTable(Object object) {
         Vector<Vector<Object>> students = (Vector<Vector<Object>>) object;
-        tableData = students;
+        for(Vector<Object> student : students){
+            tableData.add(student);
+        }
     }
 
     @Override
