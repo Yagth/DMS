@@ -19,6 +19,7 @@ public class SearchButtonListener implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        parentComponent.reloadTable();
         Vector<Vector<Object>> students = searchStudent();
         if(students.size() == 0) {
             JOptionPane.showMessageDialog(parentComponent,"Couldn't find the student");
