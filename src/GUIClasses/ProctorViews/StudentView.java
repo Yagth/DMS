@@ -136,8 +136,9 @@ public class StudentView extends JFrame implements Views, TableViews {
     public String getFilterInputText(){
         return buildingNumberTF.getText();
     }
-    public void clearFilterInputText(){
+    public void clearInputTexts(){
         buildingNumberTF.setText("");
+        searchTF.setText("");
     }
 
     public Vector<Vector<Object>> getTableData(){
