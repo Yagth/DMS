@@ -20,6 +20,7 @@ public class DeallocateButtonListener implements ActionListener {
         else{
             boolean updateStatus = deallocateStudent();
             displayUpdateStatus(updateStatus);
+            parentComponent.goBackToParent();
         }
     }
 
