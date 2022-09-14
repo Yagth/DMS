@@ -14,6 +14,8 @@ public class FilterConditionItemListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
         parentComponent.clearFilterInputText();
+        parentComponent.reloadTable();
+
         String selectedCondition = parentComponent.getSelectedCondition();
         try{
             if(selectedCondition.equals("")){

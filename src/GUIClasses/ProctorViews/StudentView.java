@@ -101,6 +101,13 @@ public class StudentView extends JFrame implements Views, TableViews {
         return students;
     }
 
+    public void reloadTable(){
+        tableData.clear();
+        Vector<Vector<Object>> students = loadStudents();
+        addDataToTable(students);
+        refreshTable();
+    }
+
     public void displayReadStatus(boolean readStatus){
         if(!readStatus) JOptionPane.showMessageDialog(parentComponent,"Couldn't load students due to " +
                 "connection error","Loading error",JOptionPane.ERROR_MESSAGE);
