@@ -5,9 +5,7 @@ import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
-import jdk.incubator.vector.VectorOperators;
 
-import javax.print.attribute.standard.ReferenceUriSchemesSupported;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.WindowAdapter;
