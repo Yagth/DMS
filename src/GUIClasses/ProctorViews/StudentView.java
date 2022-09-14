@@ -141,6 +141,10 @@ public class StudentView extends JFrame implements Views, TableViews {
         searchTF.setText("");
     }
 
+    public JTable getTable(){
+        return this.studentListTable;
+    }
+
     public Vector<Vector<Object>> getTableData(){
         return tableData;
     }
