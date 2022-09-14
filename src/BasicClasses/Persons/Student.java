@@ -7,6 +7,7 @@ public class Student extends Person{
     private int dormNo;
     private int buildingNo;
     private boolean eligibility;
+    private boolean hasAllEquipments;
 
     public Student(String fName, String lName, String id, String gender){
         super(fName,lName,gender);
@@ -50,6 +51,9 @@ public class Student extends Person{
     public void setEligibility(boolean eligibility) {
         this.eligibility = eligibility;
     }
+    public boolean getEligibility(){
+        return this.eligibility;
+    }
     public void setBuildingNo(String buildingNo) {
         try{
             this.buildingNo = Integer.parseInt(buildingNo);
@@ -64,6 +68,14 @@ public class Student extends Person{
             //DO nothing here to keep the variable null.
         }
     }
+
+    public void setHasAllEquipments(boolean hasAllEquipments) {
+        this.hasAllEquipments = hasAllEquipments;
+    }
+    public boolean getHasAllEquipments(){
+        return hasAllEquipments;
+    }
+
     @Override
     public String toString(){
         return this.getFullName();
