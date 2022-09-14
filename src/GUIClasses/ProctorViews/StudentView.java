@@ -3,10 +3,7 @@ package GUIClasses.ProctorViews;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
-import GUIClasses.ActionListeners.ProctorView.StudentView.SearchTFFocusListener;
-import GUIClasses.ActionListeners.ProctorView.StudentView.FilterConditionItemListener;
-import GUIClasses.ActionListeners.ProctorView.StudentView.FilterButtonListener;
-import GUIClasses.ActionListeners.ProctorView.StudentView.SearchButtonListener;
+import GUIClasses.ActionListeners.ProctorView.StudentView.*;
 import GUIClasses.ActionListeners.StudentView.BackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
@@ -170,6 +167,7 @@ public class StudentView extends JFrame implements Views, TableViews {
         addDataToTable(students);
 
         studentListTable.setModel(new DefaultTableModel(tableData,titles));
+        studentListTable.addMouseListener(new StudentDetailClickListener(this));
         studentListTable.setDefaultEditor(Object.class,null);
         studentListTable.getColumn("No").setMaxWidth(50);
 
