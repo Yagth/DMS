@@ -3,6 +3,8 @@ package GUIClasses.ProctorViews;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
+import GUIClasses.ActionListeners.ProctorView.StudentView.BackButtonListener;
+import GUIClasses.ActionListeners.ProctorView.StudentView.DeallocateButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -45,6 +47,10 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
         this.parentComponent = parentComponent;
         setUpGUi();
 
+    }
+
+    public String getStudentID(){
+        return student.getsId();
     }
     public void displayStudentInfo(){
         /*
@@ -102,6 +108,11 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
             JOptionPane.showMessageDialog(this,"Couldn't read the emergency contacts due to connection error"
                     ,"Reading Error",JOptionPane.ERROR_MESSAGE);
     }
+
+    public void goBackToParent(){
+        this.dispose();
+        parentComponent.setVisible(true);
+    }
     @Override
     public void setUpTable() {
         Vector<String> titles = new Vector<>();
@@ -139,6 +150,9 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
         this.setContentPane(mainPanel);
         this.setSize(WIDTH,HEIGHT);
         this.setLocationRelativeTo(null);
+
+        deallocateDormButton.addActionListener(new DeallocateButtonListener(this));
+        backButton.addActionListener(new BackButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {
             @Override
