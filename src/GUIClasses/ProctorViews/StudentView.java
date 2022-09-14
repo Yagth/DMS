@@ -45,7 +45,7 @@ public class StudentView extends JFrame implements Views, TableViews {
 
     public Vector<Vector<Object>> loadStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT * FROM Students";
+        String query = "SELECT * FROM Student";
         ResultSet resultSet;
         Vector<Vector<Object>> students = new Vector<>();
         if(javaConnection.isConnected()){
@@ -57,7 +57,7 @@ public class StudentView extends JFrame implements Views, TableViews {
                     tmp.add(resultSet.getString("Fname")+" "+resultSet.getString("Lname"));
                     tmp.add(resultSet.getInt("Year"));
                     tmp.add(resultSet.getString("BuildingNumber"));
-                    tmp.add(resultSet.getInt("Eligibility"));
+                    tmp.add(resultSet.getInt("isEligible"));
 
                     students.add(tmp);
                 }
@@ -90,7 +90,7 @@ public class StudentView extends JFrame implements Views, TableViews {
         studentListTable.setDefaultEditor(Object.class,null);
 
         Vector<Vector<Object>> students = loadStudents();
-        readStatus = !(students == null);//It will be false if the students list is null.
+        readStatus = !(students.size() == 0);//It will be false if the students list is null.
         addDataToTable(students);
         refreshTable();
         displayReadStatus(readStatus);
