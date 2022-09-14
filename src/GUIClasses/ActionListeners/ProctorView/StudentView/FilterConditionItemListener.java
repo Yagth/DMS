@@ -4,7 +4,6 @@ import GUIClasses.ProctorViews.StudentView;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Vector;
 
 public class FilterConditionItemListener implements ItemListener {
     private StudentView parentComponent;
@@ -13,7 +12,7 @@ public class FilterConditionItemListener implements ItemListener {
     }
     @Override
     public void itemStateChanged(ItemEvent e) {
-        parentComponent.clearFilterInputText();
+        parentComponent.clearInputTexts();
 
         String selectedCondition = parentComponent.getSelectedCondition();
         try{
