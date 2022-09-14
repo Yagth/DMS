@@ -65,7 +65,7 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
         else eligibilityL.setText("Is NOT Eligible");
 
         if(student.getHasAllEquipments()) equipmentsL.setText("Has all equipments");
-        else eligibilityL.setText("Doesn't have all equipments");
+        else equipmentsL.setText("Doesn't have all equipments");
     }
 
     public Vector<Vector<Object>> loadEmergencyContacts(){
