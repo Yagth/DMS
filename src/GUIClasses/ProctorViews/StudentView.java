@@ -28,6 +28,8 @@ public class StudentView extends JFrame implements Views, TableViews {
     private JButton nextButton;
     private JButton prevButton;
     private JButton backButton;
+    private JTextField buildingNumberTF;
+    private JLabel buildingNumberL;
     private ProctorPage parentComponent;
     private Proctor proctor;
     private Vector<Vector<Object>> tableData;
@@ -71,6 +73,33 @@ public class StudentView extends JFrame implements Views, TableViews {
     public void displayReadStatus(boolean readStatus){
         if(!readStatus) JOptionPane.showMessageDialog(parentComponent,"Couldn't load students due to " +
                 "connection error","Loading error",JOptionPane.ERROR_MESSAGE);
+    }
+
+    public String getSelectedCondition(){
+        return (String) filterCondition.getSelectedItem();
+    }
+
+    public String getSearchText(){
+        return searchTF.getText();
+    }
+
+    public void setBuildingInputVisibility(boolean visibility){
+        buildingNumberL.setVisible(visibility);
+        buildingNumberTF.setVisible(visibility);
+    }
+
+    public void changeTextForFilterInput(String text){
+        buildingNumberL.setText("");
+        buildingNumberL.setText(text);
+        buildingNumberTF.setToolTipText("Enter "+text+" here");
+    }
+
+    public String getFilterInputText(){
+        return buildingNumberTF.getText();
+    }
+
+    public Vector<Vector<Object>> getTableData(){
+        return tableData;
     }
 
     @Override
