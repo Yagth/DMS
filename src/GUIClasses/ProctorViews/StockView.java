@@ -6,9 +6,11 @@ import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Vector;
 
 public class StockView extends JFrame implements Views, TableViews {
     private JPanel mainPanel;
@@ -20,7 +22,9 @@ public class StockView extends JFrame implements Views, TableViews {
     private JPanel buttonPanel;
     private ProctorPage parentComponent;
     private Proctor proctor;
+    private boolean readStatus;
     private JButton backButton;
+    private Vector<Vector<Object>> tableData;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
@@ -29,9 +33,30 @@ public class StockView extends JFrame implements Views, TableViews {
         this.parentComponent = parentComponent;
         setUpGUi();
     }
+
+    public Vector<Vector<Object>> loadHistory(){
+        return null;
+    }
     @Override
     public void setUpTable() {
+        Vector<String> titles = new Vector<>();
+        tableData = new Vector<>();
 
+        titles.add("Proctor Id");
+        titles.add("Proctor Name");
+        titles.add("Action Type");
+        titles.add("Date");
+
+        Vector<Vector<Object>> history = loadHistory();
+        readStatus = !(history.size() == 0);
+        displayReadStatus(readStatus);
+
+        stockHistoryTable.setModel(new DefaultTableModel(tableData,titles));
+        stockHistoryTable.setDefaultEditor(Object.class,null);//To make each cell none editable.
+    }
+
+    public void displayReadStatus(boolean readStatus){
+        if(!readStatus) JOptionPane.showMessageDialog(parentComponent,"No history found");
     }
 
     @Override
