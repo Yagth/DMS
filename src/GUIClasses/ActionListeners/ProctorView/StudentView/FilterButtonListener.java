@@ -13,6 +13,8 @@ public class FilterButtonListener implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        parentComponent.reloadTable();
+
         Vector<Vector<Object>> filteredStudents = filterStudents();
         parentComponent.getTableData().clear();
         parentComponent.addDataToTable(filteredStudents);
