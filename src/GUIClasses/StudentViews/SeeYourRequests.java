@@ -3,14 +3,13 @@ package GUIClasses.StudentViews;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
-import GUIClasses.ActionListeners.SeeYourRequestBackButtonListener;
-import GUIClasses.ActionListeners.StudentPage.SeeYourRequestClickListener;
+import GUIClasses.ActionListeners.StudentView.SeeYourRequestBackButtonListener;
+import GUIClasses.ActionListeners.StudentView.StudentPage.RequestDetailClickListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
@@ -64,6 +63,10 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         return student;
     }
 
+    public Vector<Vector<Object>> getTableData() {
+        return tableData;
+    }
+
     public void displayUserInfo(){
         studentName.setText(student.getFullName());
         studentID.setText(student.getsId());
@@ -86,7 +89,7 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
 
         reportListTable.setModel(new DefaultTableModel(tableData,title));
         reportListTable.setDefaultEditor(Object.class,null); //This part is here for disabling the editing of the table.
-        reportListTable.addMouseListener(new SeeYourRequestClickListener(this));
+        reportListTable.addMouseListener(new RequestDetailClickListener(this));
     }
 
     public void loadRequests(){

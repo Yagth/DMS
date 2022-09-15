@@ -4,7 +4,7 @@ import BasicClasses.Enums.UserStatus;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Persons.Student;
-import GUIClasses.ActionListeners.LoginButtonActionListener;
+import GUIClasses.ActionListeners.StudentView.LoginButtonActionListener;
 import GUIClasses.Interfaces.Views;
 import javax.swing.*;
 import java.sql.*;
@@ -116,6 +116,10 @@ public class LoginPage extends JFrame implements Views {
                 student.setDormNo(temp.getString("RoomNumber"));
                 student.setEligibility(temp.getBoolean("isEligible"));
                 student.setPlaceOfOrigin(temp.getString("place"));
+
+                boolean noDorm = student.getBuildingNo() == 0 & student.getBuildingNo() == 0;
+                if(noDorm)
+                    JOptionPane.showMessageDialog(null,"You don't have dormitory yet.");
             }
 
         }catch (SQLException ex){
@@ -135,6 +139,7 @@ public class LoginPage extends JFrame implements Views {
                 proctor = new Proctor(temp.getString("Fname"),temp.getString("Lname")
                         ,temp.getString("Gender"));
                 proctor.setBuildingNo(temp.getString("BuildingNumber"));
+                proctor.setpId(getUsername());
             }
 
         }catch (SQLException ex){

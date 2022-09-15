@@ -18,18 +18,30 @@ public class JavaConnection {
             connection = DriverManager.getConnection(url);
             statement = connection.createStatement();
         }catch (SQLException ex){
+            ex.printStackTrace();//For debugging purposes
             JOptionPane.showMessageDialog(null,"Couldn't Connect to server","Connection error",JOptionPane.ERROR_MESSAGE);
             connection = null;
             statement = null;
             resultSet = null;
         }
     }
+    public static String stripCotation(String text){
+        while(text.contains("'")){
+            int indexOfCot = text.indexOf("'");
+            String tmp = text.substring(0,indexOfCot);
+            text = text.substring(indexOfCot+1);
+            text = tmp + text;
+        }
+        return text;
+    }
+
 
     public JavaConnection(String url, String query){
         this(url);
         try{
             statement.executeQuery(query);
         }catch (SQLException ex){
+            ex.printStackTrace();//For debugging purposes
             JOptionPane.showMessageDialog(null,"Couldn't Execute the query","Connection error",JOptionPane.ERROR);
             resultSet = null;
         }
@@ -40,8 +52,19 @@ public class JavaConnection {
             statement.execute(query);
             return 1;
         }catch (SQLException ex){
-            ex.printStackTrace();
+            System.out.println("Query: "+query);//For debugging only.
+            ex.printStackTrace();//For debugging purposes.
             return 0;
+        }
+    }
+    public boolean updateQuery(String query){
+        try{
+            statement.execute(query);
+            return true;
+        }catch (SQLException ex){
+            System.out.println("Query: "+query);//For debugging purposes.
+            ex.printStackTrace();//For debugging purposes.
+            return false;
         }
     }
 
@@ -50,7 +73,8 @@ public class JavaConnection {
         try{
             tmpResultSet = statement.executeQuery(query);
         }catch (SQLException ex){
-            ex.printStackTrace();
+            System.out.println("Query: "+query);//For debugging purposes.
+            ex.printStackTrace();//For debugging purposes.
             return null;
         }
         return tmpResultSet;

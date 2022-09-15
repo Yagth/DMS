@@ -102,7 +102,7 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     }
 
     public Cloth getClothInfo() throws NumberFormatException{
-        String name = clothNameTF.getText();
+        String name = JavaConnection.stripCotation(clothNameTF.getText());
         int amount = Integer.parseInt(clothAmountTF.getText());
         return new Cloth(name,amount);
     }

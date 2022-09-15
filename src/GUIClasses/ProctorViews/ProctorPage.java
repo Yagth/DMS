@@ -4,13 +4,8 @@ import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Requests.Request;
-import GUIClasses.ActionListeners.ProctorPage.LogoutMenuItemListener;
-import GUIClasses.ActionListeners.ProctorPage.ReportMenuItemListener;
-import GUIClasses.ActionListeners.ProctorPage.SeeDormMenuListener;
-import GUIClasses.ActionListeners.ProctorPage.SeeStudentMenuListener;
-import GUIClasses.ActionListeners.StudentPage.ClothTakeOutMenuItemListener;
-import GUIClasses.ActionListeners.StudentPage.ExtendDormMenuItemListener;
-import GUIClasses.ActionListeners.StudentPage.MaintenanceMenuItemListener;
+import GUIClasses.ActionListeners.ProctorView.DormitoryView.DormListClickListener;
+import GUIClasses.ActionListeners.ProctorView.ProctorPage.*;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -38,12 +33,10 @@ public class ProctorPage extends JFrame implements Views, TableViews {
     private JPanel ScheduleHeadline;
     private JLabel ScheduleHeadLineText;
     private JPanel ScheduleBodyPanel;
-    private JTextField BlockNumberText;
-    private JTextField DateText;
-    private JTextField OtherProctorText;
     private JLabel BlockNumberLabel;
-    private JLabel DateLabel;
-    private JLabel OtherProctorLabel;
+    private JLabel blockNumberL;
+    private JLabel toDateL;
+    private JLabel fromDateL;
     private Vector<Vector<Object>> tableData;
     private Proctor proctor;
     private boolean readStatus;
@@ -55,9 +48,6 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         setUpGUi();
         setUpTable();
     }
-    public ProctorPage(){
-        this(null);
-    }//For debugging purposes.
     public Proctor getProctor(){
         return proctor;
     }
@@ -67,26 +57,23 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         Vector<Vector<Object>> temp = null;
         if(javaConnection.isConnected()){
             temp = new Vector<>();
-            String query = "SELECT * FROM AllReports ORDER BY ReportedDate DESC";
+            String query = "SELECT * FROM AllReports WHERE HandledDate IS NULL ORDER BY ReportedDate DESC";
             ResultSet resultSet = javaConnection.selectQuery(query);
-            int count = 0;
             try{
-                String reporterId;
                 while(resultSet.next()){
-                    Vector<Object> tmp = new Vector<>();
                     String reportType = resultSet.getString("ReportType");
-                    reporterId = resultSet.getString("ReporterId");
+                    int reportId = resultSet.getInt("ReportId");
                     Date reportedDate = resultSet.getDate("ReportedDate");
                     Date currentDate = Request.getCurrentDate();
-                    if(!(reportType.equals("ClothTakeOutForm") & resultSet.getString("ReporterId").equals(reporterId))){
-                       if((reportedDate.toString()).equals((currentDate).toString())){
-                           tmp.add(++count);
-                           tmp.add(reportType);
-                           tmp.add(reportedDate);
-                           tmp.add(resultSet.getString("BuildingNumber"));
-                           tmp.add(resultSet.getString("RoomNumber"));
-                           temp.add(tmp);
-                       }
+
+                    if((reportedDate.toString()).equals((currentDate).toString())){
+                        Vector<Object> tmp = new Vector<>();
+                        tmp.add(reportId);
+                        tmp.add(reportType);
+                        tmp.add(reportedDate);
+                        tmp.add(resultSet.getString("BuildingNumber"));
+                        tmp.add(resultSet.getString("RoomNumber"));
+                        temp.add(tmp);
                     }
                 }
             } catch (SQLException ex){
@@ -96,6 +83,53 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         }
         return temp;
     }
+
+    public void setScheduleLabels(Date fromDate, Date toDate, String buildingNumber){
+        this.fromDateL.setText(fromDate.toString());
+        this.toDateL.setText(toDate.toString());
+        this.blockNumberL.setText(buildingNumber);
+    }
+
+    public void loadSchedule(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT TOP 1 * FROM ProctorSchedule WHERE PID='"+getProctor().getpId()+"' ORDER BY FromDate ASC,ToDate ASC";
+        Date fromDate = null, toDate = null;
+        String buildingNumber = "";
+        ResultSet resultSet;
+
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    fromDate = resultSet.getDate("FromDate");
+                    toDate = resultSet.getDate("ToDate");
+                    buildingNumber = resultSet.getString("BuildingNumber");
+                }
+            } catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+            if(toDateIsValid(toDate)){
+                setScheduleLabels(fromDate,toDate,buildingNumber);
+            }
+
+        }
+    }
+
+    public boolean toDateIsValid(Date date){
+        Date tmp = Request.getCurrentDate();//For debugging only.
+        System.out.println("Current date: "+tmp);//For debugging only.
+        System.out.println("Date: "+date);//For debugging only.
+        return date.after(Request.getCurrentDate());
+    }
+
+    public JTable getReportTable(){
+        return ReportTable;
+    }
+
+    public Vector<Vector<Object>> getTableData() {
+        return tableData;
+    }
+
     @Override
     public void setUpTable() {
         Vector<Object> titles = new Vector<>();
@@ -108,10 +142,17 @@ public class ProctorPage extends JFrame implements Views, TableViews {
 
         ReportTable.setModel(new DefaultTableModel(tableData,titles));
         ReportTable.setDefaultEditor(Object.class,null);
+        ReportTable.addMouseListener(new ReportDetailClickListener(this));
 
         Vector<Vector<Object>> temp = loadReports();
-        readStatus = !(temp == null);
-        addDataToTable(temp);
+        refreshTable(temp);
+
+    }
+
+    public void refreshTable(Vector<Vector<Object>> tableData){
+        this.tableData.clear();
+        readStatus = !(tableData == null);
+        addDataToTable(tableData);
         refreshTable();
     }
 
@@ -136,6 +177,8 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WIDTH,HEIGHT);
         setLocationRelativeTo(null);
+        this.getContentPane().setBackground(new Color(232,255,255));
+
 
         JMenuBar Services = new JMenuBar();
         Services.setBackground(new Color(72,131,184));
@@ -171,6 +214,9 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         Services.add(logout);
 
         setJMenuBar(Services);
+
+        loadSchedule();
+
         setVisible(true);
     }
 }

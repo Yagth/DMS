@@ -3,19 +3,17 @@ package GUIClasses.StudentViews;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
 import BasicClasses.Requests.MaintenanceRequest;
-import GUIClasses.ActionListeners.MaintenanceSubmitButtonListener;
+import GUIClasses.ActionListeners.StudentView.MaintenanceSubmitButtonListener;
 import GUIClasses.Interfaces.RequestViews;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 public class MaintenanceRequestForm extends JFrame implements RequestViews {
-    private JPanel mainPanel;
+    private JPanel MainPanel;
     private JPanel innerPanel;
     private JLabel locationLabel;
     private JTextField blockNumberTextField;
@@ -48,7 +46,7 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
     @Override
     public void setUpGUi() {
         this.setTitle("Maintenance Request");
-        this.setContentPane(mainPanel);
+        this.setContentPane(MainPanel);
         this.setSize(WIDTH, HEIGHT);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -72,7 +70,7 @@ public class MaintenanceRequestForm extends JFrame implements RequestViews {
         return roomNumberTextField.getText();
     }
     public String getDescription(){
-        return descriptionTextPane.getText();
+        return JavaConnection.stripCotation(descriptionTextPane.getText());
     }
 
     @Override

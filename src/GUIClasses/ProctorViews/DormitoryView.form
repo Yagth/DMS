@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUIClasses.ProctorViews.DormitoryView">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="6" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="5" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="980" height="381"/>
+      <xy x="20" y="20" width="1036" height="381"/>
     </constraints>
     <properties>
       <focusable value="false"/>
@@ -13,10 +13,10 @@
       <title-color color="-16777216"/>
     </border>
     <children>
-      <grid id="cdb65" binding="headingPanel" layout-manager="GridLayoutManager" row-count="3" column-count="19" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="cdb65" binding="headingPanel" layout-manager="GridLayoutManager" row-count="3" column-count="25" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="10" right="0"/>
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="8" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="1" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="8" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="bevel-raised"/>
@@ -32,7 +32,7 @@
           </component>
           <component id="dd31a" class="javax.swing.JLabel" binding="BNOLabel">
             <constraints>
-              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="BNO"/>
@@ -40,7 +40,7 @@
           </component>
           <component id="7ca44" class="javax.swing.JFormattedTextField" binding="searchBuildingNoTA">
             <constraints>
-              <grid row="0" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="1" use-parent-layout="false">
+              <grid row="0" column="6" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="1" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
@@ -60,7 +60,7 @@
           </component>
           <component id="e5861" class="javax.swing.JLabel" binding="RNOLabel">
             <constraints>
-              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+              <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="RNO"/>
@@ -68,7 +68,7 @@
           </component>
           <component id="a8b89" class="javax.swing.JFormattedTextField" binding="searchRoomNoTA">
             <constraints>
-              <grid row="1" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="1" use-parent-layout="false">
+              <grid row="1" column="6" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="1" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
@@ -78,7 +78,7 @@
           </component>
           <component id="79f03" class="javax.swing.JComboBox" binding="filterList">
             <constraints>
-              <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+              <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
             </constraints>
             <properties>
               <toolTipText value="select filer type"/>
@@ -93,30 +93,20 @@
               <text value="Filter dorm by"/>
             </properties>
           </component>
-          <component id="edf34" class="javax.swing.JTextField" binding="yearTA">
-            <constraints>
-              <grid row="2" column="13" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="1" use-parent-layout="false">
-                <preferred-size width="20" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <visible value="false"/>
-            </properties>
-          </component>
           <component id="d6fc0" class="javax.swing.JButton" binding="searchButton">
             <constraints>
-              <grid row="1" column="6" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="12" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <focusable value="false"/>
               <horizontalAlignment value="10"/>
               <text value=""/>
-              <toolTipText value="search"/>
+              <toolTipText value="search dorm"/>
             </properties>
           </component>
           <component id="33194" class="javax.swing.JButton" binding="filterButton">
             <constraints>
-              <grid row="2" column="6" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="12" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <focusable value="false"/>
@@ -127,72 +117,44 @@
           </component>
           <hspacer id="bcca3">
             <constraints>
-              <grid row="1" column="10" row-span="1" col-span="9" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="1" column="16" row-span="1" col-span="9" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
           </hspacer>
           <hspacer id="c46e8">
             <constraints>
-              <grid row="1" column="9" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="1" column="15" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
           </hspacer>
           <hspacer id="7f0e4">
             <constraints>
-              <grid row="1" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="1" column="14" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="100" height="-1"/>
               </grid>
             </constraints>
           </hspacer>
-        </children>
-      </grid>
-      <grid id="3a624" binding="totalDormInfoPanel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="10" right="0"/>
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="8" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="1" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-        <border type="bevel-lowered"/>
-        <children>
-          <component id="8d4a9" class="javax.swing.JLabel" binding="totalNoLabel">
+          <component id="6a30b" class="javax.swing.JLabel" binding="yearL">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font size="11" style="1"/>
-              <text value="Total Space :"/>
+              <font name="Lucida Fax" size="12" style="1"/>
+              <text value="year"/>
+              <visible value="false"/>
             </properties>
           </component>
-          <hspacer id="4d9c0">
+          <component id="edf34" class="javax.swing.JTextField" binding="yearTA">
             <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </hspacer>
-          <component id="6a464" class="javax.swing.JLabel" binding="totalSpaceNo">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="1" use-parent-layout="false">
+                <preferred-size width="20" height="-1"/>
+              </grid>
             </constraints>
             <properties>
-              <text value="0"/>
-            </properties>
-          </component>
-          <component id="efaf6" class="javax.swing.JLabel" binding="emptyDormNoLabel">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font size="11" style="1"/>
-              <text value="Empty dorms :"/>
-            </properties>
-          </component>
-          <component id="3ee25" class="javax.swing.JLabel" binding="numberOfDorm">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="0"/>
+              <toolTipText value="Enter the year"/>
+              <visible value="false"/>
             </properties>
           </component>
         </children>
@@ -200,7 +162,7 @@
       <grid id="fdd0e" binding="buttonPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="10" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="4" fill="2" indent="1" use-parent-layout="false"/>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="4" fill="2" indent="1" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="bevel-raised"/>
@@ -225,77 +187,83 @@
           </component>
         </children>
       </grid>
-      <grid id="209e7" binding="dormListPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="5" bottom="0" right="5"/>
-        <constraints>
-          <grid row="2" column="1" row-span="1" col-span="8" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="1" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-        <border type="bevel-raised"/>
-        <children>
-          <component id="77600" class="javax.swing.JLabel" binding="dormLocation">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="MV Boli" size="14" style="0"/>
-              <text value="Dorm location"/>
-            </properties>
-          </component>
-          <component id="3543" class="javax.swing.JLabel" binding="noStudentsLabel">
-            <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="MV Boli" size="14" style="0"/>
-              <text value="Number of Students"/>
-            </properties>
-          </component>
-          <hspacer id="e2074">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </hspacer>
-        </children>
-      </grid>
       <vspacer id="29895">
         <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <grid id="e6480" binding="listOfDormPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
+      <grid id="27524" binding="dormLIstPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="1" bottom="0" right="0"/>
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="8" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="1" use-parent-layout="false"/>
+          <grid row="2" column="1" row-span="1" col-span="8" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
-        <border type="bevel-lowered">
-          <title-color color="-16777216"/>
-        </border>
+        <border type="none"/>
         <children>
-          <grid id="3ab58" binding="dormLocationPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
+          <scrollpane id="9858f">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
-            <children/>
-          </grid>
-          <grid id="d51c0" binding="numberOfStudentsPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
+            <children>
+              <component id="296b1" class="javax.swing.JTable" binding="dormListTable">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </grid>
+      <grid id="3a624" binding="totalDormInfoPanel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="10" right="0"/>
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="8" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="bevel-lowered"/>
+        <children>
+          <component id="8d4a9" class="javax.swing.JLabel" binding="totalNoLabel">
             <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
             </constraints>
-            <properties/>
-            <border type="none"/>
-            <children/>
-          </grid>
-          <hspacer id="e1202">
+            <properties>
+              <font size="11" style="1"/>
+              <text value="Total Space :"/>
+              <toolTipText value="available space on these building"/>
+            </properties>
+          </component>
+          <hspacer id="4d9c0">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
+          <component id="6a464" class="javax.swing.JLabel" binding="totalSpaceNo">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="0"/>
+            </properties>
+          </component>
+          <component id="efaf6" class="javax.swing.JLabel" binding="emptyDormNoLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="11" style="1"/>
+              <text value="Empty dorms :"/>
+              <toolTipText value="empty dorms on this building"/>
+            </properties>
+          </component>
+          <component id="3ee25" class="javax.swing.JLabel" binding="numberOfDorm">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="0"/>
+            </properties>
+          </component>
         </children>
       </grid>
     </children>
