@@ -6,7 +6,7 @@ public class Stock extends Room{
     private int noOFMattressBase;
 
     public Stock(String roomNo, String buildinNO){
-        super("Stock",roomNo,buildinNO);
+        super("StockView",roomNo,buildinNO);
     }
 
     public int getNoOfMattress() {
