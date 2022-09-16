@@ -123,6 +123,7 @@ public class SeeYourRequests extends TableViewPage implements Views, TableViews 
 
     @Override
     public void reloadTable() {
+        tableData.clear();
         loadRequests();
         refreshTable();
     }
