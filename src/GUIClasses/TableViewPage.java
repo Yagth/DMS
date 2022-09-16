@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public abstract class TableViewPage extends JFrame {
     private int pageNumber;
-    protected static final int ROW_PER_PAGE = 20;
+    protected static final int ROW_PER_PAGE = 10;
     private int totalPage;
 
     public TableViewPage(String tableName){

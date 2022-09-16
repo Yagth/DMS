@@ -37,6 +37,7 @@ public class SeeYourRequests extends TableViewPage implements Views, TableViews 
     private JButton backButton;
     private JButton prevButton;
     private JButton nextButton;
+    private JPanel buttonPanel;
     private JavaConnection javaConnection;
     private Student student;
     private StudentPage parentComponent;
@@ -113,8 +114,6 @@ public class SeeYourRequests extends TableViewPage implements Views, TableViews 
 
     @Override
     public void setButtonVisibility() {
-        System.out.println("PageNumber: "+getPageNumber());//For debugging only.
-        System.out.println("TotalPageNumber: "+getTotalPage());//For debugging only.
         boolean visibility = nextButtonIsVisible();
         nextButton.setVisible(visibility);
         visibility = prevButtonIsVisible();
