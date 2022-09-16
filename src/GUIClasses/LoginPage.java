@@ -4,7 +4,7 @@ import BasicClasses.Enums.UserStatus;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Persons.Student;
-import GUIClasses.ActionListeners.StudentView.LoginButtonActionListener;
+import GUIClasses.ActionListeners.LoginButtonActionListener;
 import GUIClasses.Interfaces.Views;
 import javax.swing.*;
 import java.sql.*;

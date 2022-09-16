@@ -53,7 +53,8 @@ public class StudentView extends TableViewPage implements Views, TableViews {
 
     public Vector<Vector<Object>> loadStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT * FROM Student";
+        String query = "SELECT * FROM Student OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
+                " ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         ResultSet resultSet;
         Vector<Vector<Object>> students = new Vector<>();
         int count = 0;
@@ -104,6 +105,7 @@ public class StudentView extends TableViewPage implements Views, TableViews {
         return students;
     }
 
+    @Override
     public void reloadTable(){
         tableData.clear();
         Vector<Vector<Object>> students = loadStudents();
@@ -153,24 +155,29 @@ public class StudentView extends TableViewPage implements Views, TableViews {
 
     @Override
     public boolean nextButtonIsVisible() {
-        return false;
+        boolean hasNext = getPageNumber()<getTotalPage();
+        return hasNext;
     }
 
     @Override
     public boolean prevButtonIsVisible() {
-        return false;
+        boolean hasPrev = getPageNumber()>1;
+        return hasPrev;
     }
 
     @Override
     public void setButtonVisibility() {
-
+        boolean visibility = nextButtonIsVisible();
+        nextButton.setVisible(visibility);
+        visibility = prevButtonIsVisible();
+        prevButton.setVisible(visibility);
+        this.revalidate();
     }
 
     @Override
     public void setUpTable() {
         Vector<String> titles = new Vector();
         tableData = new Vector<>();
-
 
         boolean readStatus;
 
@@ -221,6 +228,7 @@ public class StudentView extends TableViewPage implements Views, TableViews {
         filterCondition.addItemListener(new FilterConditionItemListener(this));
         searchTF.addFocusListener(new SearchTFFocusListener(this));
 
+        setButtonVisibility();
 
         this.addWindowListener(new WindowAdapter()
         {
