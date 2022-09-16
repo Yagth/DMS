@@ -214,7 +214,7 @@
                   <editable value="false"/>
                   <enabled value="true"/>
                   <font name="Californian FB" size="14" style="0"/>
-                  <foreground color="-1507329"/>
+                  <foreground color="-16777216"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="200" height="100"/>
                   <opaque value="true"/>

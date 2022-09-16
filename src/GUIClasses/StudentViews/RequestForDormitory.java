@@ -15,11 +15,9 @@ import java.sql.SQLException;
 public class RequestForDormitory extends JFrame implements RequestViews {
     private JLabel titleLabel;
     private JTextField subcityTF;
-    private JLabel addressLabel;
     private JPanel inputPanel;
     private JLabel subcityLabel;
     private JTextField woredaTF;
-    private JLabel woredaLabel;
     private JTextPane descriptionPane;
     private JScrollPane descriptionSP;
     private JLabel descriptionLabel;
