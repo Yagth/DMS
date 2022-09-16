@@ -36,11 +36,6 @@ public class LoginPage extends JFrame{
 
 
     public LoginPage(){
-        try{
-            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-        } catch (Exception ex){
-            ex.printStackTrace();
-        }
         javaConnection = new JavaConnection(JavaConnection.URL);
         setUpGUi();
     }
