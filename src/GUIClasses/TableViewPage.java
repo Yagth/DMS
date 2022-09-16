@@ -49,7 +49,7 @@ public abstract class TableViewPage extends JFrame {
         return this.totalPage;
     }
 
-    public void setTotalSize(int totalPage){
-        this.totalPage = totalPage;
+    public void setTotalSize(String query){
+        this.totalPage = loadPageSize(query);
     }
 }
