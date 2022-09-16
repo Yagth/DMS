@@ -47,10 +47,15 @@ public class SeeYourRequests extends TableViewPage implements Views, TableViews 
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
 
     public SeeYourRequests(Student student, StudentPage parentComponent){
-        super("StudentReport");
         this.parentComponent = parentComponent;
         this.student = student;
         javaConnection = new JavaConnection(JavaConnection.URL);
+
+        String query = "SELECT * FROM StudentReport WHERE reporterId='"+student.getsId();
+
+        int totalPage = loadPageSize(query);
+        setTotalSize(totalPage);
+
         setUpGUi();
         setUpTable();
         loadRequests();
@@ -132,6 +137,7 @@ public class SeeYourRequests extends TableViewPage implements Views, TableViews 
         String query = "SELECT * FROM StudentReport WHERE reporterId='"+student.getsId()+
                 "' ORDER BY reportedDate DESC OFFSET "+((getPageNumber()-1)*ROW_PER_PAGE)+" ROWS"+
                 " FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
+        System.out.println("Query: "+query);//For debugging only.
         reports = javaConnection.selectQuery(query);
         try{
             while(reports.next()){

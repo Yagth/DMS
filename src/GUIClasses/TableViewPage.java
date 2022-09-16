@@ -11,9 +11,8 @@ public abstract class TableViewPage extends JFrame {
     protected static final int ROW_PER_PAGE = 10;
     private int totalPage;
 
-    public TableViewPage(String tableName){
+    public TableViewPage(){
         pageNumber = 1;
-        totalPage = loadPageSize(tableName);
     }
     public void incrementPageNumber(){
         pageNumber++;
@@ -23,9 +22,8 @@ public abstract class TableViewPage extends JFrame {
         pageNumber--;
     }
 
-    public int loadPageSize(String tableName){
+    public int loadPageSize(String query){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT COUNT(*) TotalNo FROM "+tableName;
         int total = 0;
         ResultSet resultSet;
 
