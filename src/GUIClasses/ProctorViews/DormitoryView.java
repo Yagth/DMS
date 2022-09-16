@@ -58,7 +58,7 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
         this.parentComponent = parentComponent;
         dorms = new ArrayList<>();
 
-        String query = "Student Count(*) As TotalNo FROM Dorm";
+        String query = "SELECT Count(*) As TotalNo FROM Dorm";
         loadAndSetTotalPage(query);
 
         setUpGUi();
