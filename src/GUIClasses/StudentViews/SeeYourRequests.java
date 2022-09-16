@@ -6,7 +6,7 @@ import BasicClasses.Persons.Student;
 import GUIClasses.ActionListeners.NextActionListener;
 import GUIClasses.ActionListeners.PrevActionListener;
 import GUIClasses.ActionListeners.StudentView.SeeYourRequestBackButtonListener;
-import GUIClasses.ActionListeners.StudentView.StudentPage.RequestDetailClickListener;
+import GUIClasses.ActionListeners.StudentView.RequestDetailClickListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 import GUIClasses.TableViewPage;

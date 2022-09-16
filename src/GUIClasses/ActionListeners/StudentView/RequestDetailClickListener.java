@@ -1,4 +1,4 @@
-package GUIClasses.ActionListeners.StudentView.StudentPage;
+package GUIClasses.ActionListeners.StudentView;
 
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Requests.*;
@@ -64,6 +64,7 @@ public class RequestDetailClickListener implements MouseListener {
             query = "SELECT * FROM ClothStudent WHERE ReportId="+selectedId;
         else query = "SELECT * FROM AllReports WHERE ReportId="+selectedId+" AND ReportType='"+selectedType+"'";
 
+        System.out.println("Query: "+query);//For debugging only.
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
             while(resultSet.next()){

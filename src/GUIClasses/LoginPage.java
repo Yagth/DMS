@@ -72,6 +72,9 @@ public class LoginPage extends JFrame{
         passwordL.setFont(new Font("Californian FB",Font.PLAIN,16));
 
         submitButton.addActionListener(new LoginButtonActionListener(this));
+
+        userNameTF.requestFocus();
+
         this.setVisible(true);
     }
 
