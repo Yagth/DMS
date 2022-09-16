@@ -73,6 +73,21 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     }
 
     @Override
+    public boolean nextButtonIsVisible() {
+        return false;
+    }
+
+    @Override
+    public boolean prevButtonIsVisible() {
+        return false;
+    }
+
+    @Override
+    public void setButtonVisibility() {
+
+    }
+
+    @Override
     public void setUpTable(){
         Vector<String> title = new Vector<>();
 

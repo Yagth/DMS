@@ -131,6 +131,21 @@ public class ProctorPage extends JFrame implements Views, TableViews {
     }
 
     @Override
+    public boolean nextButtonIsVisible() {
+        return false;
+    }
+
+    @Override
+    public boolean prevButtonIsVisible() {
+        return false;
+    }
+
+    @Override
+    public void setButtonVisibility() {
+
+    }
+
+    @Override
     public void setUpTable() {
         Vector<Object> titles = new Vector<>();
         tableData = new Vector<>();

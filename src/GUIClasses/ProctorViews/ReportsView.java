@@ -109,6 +109,20 @@ public class ReportsView extends JFrame implements Views, TableViews {
         this.setVisible(true);
     }
 
+    @Override
+    public boolean nextButtonIsVisible() {
+        return false;
+    }
+
+    @Override
+    public boolean prevButtonIsVisible() {
+        return false;
+    }
+
+    @Override
+    public void setButtonVisibility() {
+
+    }
 
     @Override
     public void setUpTable() {
