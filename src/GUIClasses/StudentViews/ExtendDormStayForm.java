@@ -88,7 +88,6 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
         this.setContentPane(mainPanel);
         this.setSize(new Dimension(WIDTH,HEIGHT));
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
         submitButton.addActionListener(new ExtendDormSubmitButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {
@@ -99,5 +98,13 @@ public class ExtendDormStayForm extends JFrame implements RequestViews {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+
+        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
+        Image titleLogo = tmp.getImage();
+
+        this.setIconImage(titleLogo);
+
+        this.setVisible(true);
+
     }
 }

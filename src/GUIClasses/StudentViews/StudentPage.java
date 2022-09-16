@@ -177,6 +177,11 @@ public class StudentPage extends JFrame implements TableViews {
         logout.add(signOut);
         Services.add(logout);
 
+        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
+        Image titleLogo = tmp.getImage();
+
+        this.setIconImage(titleLogo);
+
         this.setJMenuBar(Services);
         this.setVisible(true);
     }

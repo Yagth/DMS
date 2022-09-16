@@ -3,6 +3,7 @@ package GUIClasses.ProctorViews;
 import GUIClasses.LoginPage;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Test {
     public static void main(String[] args) {
@@ -11,6 +12,9 @@ public class Test {
         } catch (Exception ex){
             ex.printStackTrace();
         }
-        SwingUtilities.updateComponentTreeUI(new LoginPage());
+        LoginPage loginPage = new LoginPage();
+        loginPage.getUserNameTF().setFont(new Font("Californian FB",Font.PLAIN,14));
+        loginPage.getUsernameTF().requestFocus();
+        SwingUtilities.updateComponentTreeUI(loginPage);
     }
 }
