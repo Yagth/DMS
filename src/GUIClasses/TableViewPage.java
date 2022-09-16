@@ -26,6 +26,7 @@ public abstract class TableViewPage extends JFrame {
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         int total = 0;
         ResultSet resultSet;
+        float row = ROW_PER_PAGE;
 
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
@@ -36,7 +37,7 @@ public abstract class TableViewPage extends JFrame {
             } catch (SQLException ex){
                 ex.printStackTrace();//For debugging only.
             }
-            total = (int) Math.ceil(total /ROW_PER_PAGE);
+            total = (int) Math.ceil(total / row);
         }
         return total;
     }
@@ -48,7 +49,7 @@ public abstract class TableViewPage extends JFrame {
         return this.totalPage;
     }
 
-    public void setTotalSize(int totalSizePage){
-        this.totalPage = totalSizePage;
+    public void setTotalSize(int totalPage){
+        this.totalPage = totalPage;
     }
 }
