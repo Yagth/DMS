@@ -4,10 +4,13 @@ import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Rooms.Dormitory;
+import GUIClasses.ActionListeners.NextActionListener;
+import GUIClasses.ActionListeners.PrevActionListener;
 import GUIClasses.ActionListeners.ProctorView.AllocateDormView.AllocateDormAsRequested;
 import GUIClasses.ActionListeners.ProctorView.DormitoryView.*;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
+import GUIClasses.TableViewPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +21,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class DormitoryView extends JFrame implements Views, TableViews {
+public class DormitoryView extends TableViewPage implements Views, TableViews {
     private JFormattedTextField searchBuildingNoTA;
     private JButton searchButton;
     private JButton filterButton;
@@ -37,12 +40,12 @@ public class DormitoryView extends JFrame implements Views, TableViews {
     private JFormattedTextField searchRoomNoTA;
     private JLabel RNOLabel;
     private JLabel backLabel;
-    private JLabel previousPageLabel;
-    private JLabel nextPageLabel;
     private JTextField yearTA;
     private JTable dormListTable;
     private JPanel dormLIstPanel;
     private JLabel yearL;
+    private JButton prevButton;
+    private JButton nextButton;
     private ProctorPage parentComponent;
     private Proctor proctor;
     private Vector<Vector<Object>> tableData;
@@ -54,6 +57,10 @@ public class DormitoryView extends JFrame implements Views, TableViews {
         this.proctor = proctor;
         this.parentComponent = parentComponent;
         dorms = new ArrayList<>();
+
+        String query = "Student Count(*) As TotalNo FROM Dorm";
+        loadAndSetTotalPage(query);
+
         setUpGUi();
     }
 
@@ -217,9 +224,9 @@ public class DormitoryView extends JFrame implements Views, TableViews {
         ImageIcon backButtonIcon = new ImageIcon("Icons/backIcon.png");
         backLabel.setIcon(backButtonIcon);
         ImageIcon nextButtonIcon = new ImageIcon("Icons/nextIcon(3).png");
-        nextPageLabel.setIcon(nextButtonIcon);
+        nextButton.setIcon(nextButtonIcon);
         ImageIcon previousButtonIcon = new ImageIcon("Icons/previousIcon-20x20.png");
-        previousPageLabel.setIcon(previousButtonIcon);
+        prevButton.setIcon(previousButtonIcon);
         ImageIcon filterButtonIcon = new ImageIcon("Icons/FilterIcon.png");
         filterButton.setIcon(filterButtonIcon);
 
@@ -227,6 +234,8 @@ public class DormitoryView extends JFrame implements Views, TableViews {
         filterButton.addActionListener(new FilterButtonListener(this));
         searchBuildingNoTA.addFocusListener(new FocusListenerForTF(this));
         searchRoomNoTA.addFocusListener(new FocusListenerForTF(this));
+        nextButton.addActionListener(new NextActionListener(this));
+        prevButton.addActionListener(new PrevActionListener(this));
 
         JMenuBar menuBar = new JMenuBar();
 
@@ -253,17 +262,24 @@ public class DormitoryView extends JFrame implements Views, TableViews {
 
     @Override
     public boolean nextButtonIsVisible() {
-        return false;
+        boolean hasNext = getPageNumber()<getTotalPage();
+        return hasNext;
     }
 
     @Override
     public boolean prevButtonIsVisible() {
-        return false;
+        boolean hasPrev = getPageNumber()>1;
+        return  hasPrev;
     }
 
     @Override
     public void setButtonVisibility() {
+        boolean visibility = nextButtonIsVisible();
+        nextButton.setVisible(visibility);
+        visibility = prevButtonIsVisible();
+        prevButton.setVisible(visibility);
 
+        this.revalidate();
     }
 
     @Override

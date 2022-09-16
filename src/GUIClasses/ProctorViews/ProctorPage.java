@@ -4,11 +4,12 @@ import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Requests.Request;
+import GUIClasses.ActionListeners.NextActionListener;
+import GUIClasses.ActionListeners.PrevActionListener;
 import GUIClasses.ActionListeners.ProctorView.ProctorPage.*;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 import GUIClasses.TableViewPage;
-import jdk.incubator.vector.VectorOperators;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -48,7 +49,7 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         this.proctor = proctor;
 
         String query = "SELECT Count(*) AS TotalNo FROM AllReports WHERE HandledDate IS NULL";
-        setTotalSize(query);
+        loadAndSetTotalPage(query);
 
         setUpGUi();
         setUpTable();
@@ -215,6 +216,8 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         setLocationRelativeTo(null);
         this.getContentPane().setBackground(new Color(232,255,255));
 
+        nextButton.addActionListener(new NextActionListener(this));
+        prevButton.addActionListener(new PrevActionListener(this));
 
         JMenuBar Services = new JMenuBar();
         Services.setBackground(new Color(72,131,184));
