@@ -1,11 +1,16 @@
 package GUIClasses.ProctorViews;
 
-import GUIClasses.LoginPage3;
+import GUIClasses.LoginPage;
 
 import javax.swing.*;
 
 public class Test {
     public static void main(String[] args) {
-        SwingUtilities.updateComponentTreeUI(new LoginPage3());
+        try{
+            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        SwingUtilities.updateComponentTreeUI(new LoginPage());
     }
 }
