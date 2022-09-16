@@ -80,7 +80,11 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
        return (String) filterList.getSelectedItem();
     }
     public Dormitory getDormAt(int index){
-        return dorms.get(index);
+        try{
+            return dorms.get(index);
+        }catch (IndexOutOfBoundsException ex){
+            return dorms.get(0);
+        }
     }
 
     public JTable getTable(){
