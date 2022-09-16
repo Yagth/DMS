@@ -108,6 +108,11 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
     }
 
     @Override
+    public void reloadTable() {
+
+    }
+
+    @Override
     public void setUpTable() {
         Vector<String> titles = new Vector<>();
         titles.add("Student name");

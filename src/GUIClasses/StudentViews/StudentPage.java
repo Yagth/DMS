@@ -89,6 +89,11 @@ public class StudentPage extends JFrame implements TableViews {
     }
 
     @Override
+    public void reloadTable() {
+
+    }
+
+    @Override
     public void setUpTable(){
         Vector<String> title = new Vector<>();
         tableData = new Vector<>();

@@ -54,6 +54,11 @@ public class StockView extends JFrame implements Views, TableViews {
     }
 
     @Override
+    public void reloadTable() {
+
+    }
+
+    @Override
     public void setUpTable() {
         Vector<String> titles = new Vector<>();
         tableData = new Vector<>();

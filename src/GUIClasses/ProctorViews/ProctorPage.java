@@ -146,6 +146,11 @@ public class ProctorPage extends JFrame implements Views, TableViews {
     }
 
     @Override
+    public void reloadTable() {
+
+    }
+
+    @Override
     public void setUpTable() {
         Vector<Object> titles = new Vector<>();
         tableData = new Vector<>();

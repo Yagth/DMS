@@ -125,6 +125,11 @@ public class ReportsView extends JFrame implements Views, TableViews {
     }
 
     @Override
+    public void reloadTable() {
+
+    }
+
+    @Override
     public void setUpTable() {
         Vector<String> titles = new Vector<>();
         titles.add("Report No");

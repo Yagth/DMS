@@ -88,6 +88,11 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     }
 
     @Override
+    public void reloadTable() {
+
+    }
+
+    @Override
     public void setUpTable(){
         Vector<String> title = new Vector<>();
 
