@@ -21,11 +21,12 @@
         <children>
           <component id="499cb" class="javax.swing.JButton" binding="addButton" default-binding="true">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
               <background color="-12024904"/>
+              <font name="Californian FB" size="14"/>
               <foreground color="-1"/>
               <text value="Add"/>
               <toolTipText value="Add another cloth"/>
@@ -39,11 +40,12 @@
           </hspacer>
           <component id="ff5e7" class="javax.swing.JButton" binding="finishButton" default-binding="true">
             <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
               <background color="-12024904"/>
+              <font name="Californian FB" size="14"/>
               <foreground color="-1"/>
               <text value="Finish"/>
               <toolTipText value="submit the list to the proctors"/>
@@ -119,7 +121,7 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="Californian FB" size="14" style="0"/>
+              <font name="Californian FB" size="16" style="0"/>
               <foreground color="-1"/>
               <text value="Cloth Name"/>
             </properties>
@@ -139,7 +141,7 @@
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="Californian FB" size="14" style="0"/>
+              <font name="Californian FB" size="16" style="0"/>
               <foreground color="-1"/>
               <text value="Amount"/>
             </properties>
