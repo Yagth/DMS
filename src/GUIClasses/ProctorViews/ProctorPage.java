@@ -63,7 +63,8 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         Vector<Vector<Object>> temp = null;
         if(javaConnection.isConnected()){
             temp = new Vector<>();
-            String query = "SELECT * FROM AllReports WHERE HandledDate IS NULL ORDER BY ReportedDate DESC";
+            String query = "SELECT * FROM AllReports WHERE HandledDate IS NULL ORDER BY ReportedDate DESC " +
+                    "OFFSET "+ (getPageNumber()-1)*ROW_PER_PAGE+ " ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
             ResultSet resultSet = javaConnection.selectQuery(query);
             try{
                 while(resultSet.next()){
@@ -99,8 +100,7 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
     public void loadSchedule(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT TOP 1 * FROM ProctorSchedule WHERE PID='"+getProctor().getpId()+
-                "' ORDER BY FromDate ASC,ToDate ASC OFFSET "+ (getPageNumber()-1)*ROW_PER_PAGE+
-                "ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
+                "' ORDER BY FromDate ASC,ToDate ASC";
         Date fromDate = null, toDate = null;
         String buildingNumber = "";
         ResultSet resultSet;
