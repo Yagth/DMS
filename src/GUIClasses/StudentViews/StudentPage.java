@@ -137,24 +137,19 @@ public class StudentPage extends JFrame implements TableViews {
         this.setLocationRelativeTo(null);
 
         JMenuBar Services = new JMenuBar();
-        Services.setBackground(new Color(72,131,184));
+        Services.setBackground(new Color(232,255,255));
         JMenu Service = new JMenu("Services");
-        Service.setForeground(Color.white);
+        Service.setForeground(Color.GRAY);
 
         JMenuItem maintainanceRequest = new JMenuItem("Maintainance request");
-        maintainanceRequest.setForeground(new Color(72,131,184));
         maintainanceRequest.addActionListener(new MaintenanceMenuItemListener(this));
         JMenuItem clothTakeOutRequest = new JMenuItem("Cloth take out request");
-        clothTakeOutRequest.setForeground(new Color(72,131,184));
         clothTakeOutRequest.addActionListener(new ClothTakeOutMenuItemListener(this));
         JMenuItem StayRequest = new JMenuItem("Extend Dormitory stay request");
-        StayRequest.setForeground(new Color(72,131,184));
         StayRequest.addActionListener(new ExtendDormMenuItemListener(this));
         JMenuItem RequestForDorm = new JMenuItem("Request for a dorm");
-        RequestForDorm.setForeground(new Color(72,131,184));
         RequestForDorm.addActionListener(new RequestForDormMenuItemListener(this));
         JMenuItem SeeRequests = new JMenuItem("See your requests");
-        SeeRequests.setForeground(new Color(72,131,184));
         SeeRequests.addActionListener(new SeeYourRequestListener(this));
 
         Service.add(maintainanceRequest);
@@ -174,9 +169,9 @@ public class StudentPage extends JFrame implements TableViews {
         Services.add(Service);
 
         JMenu logout = new JMenu("Logout");
-        logout.setForeground(Color.white);
+        logout.setForeground(Color.GRAY);
         JMenuItem signOut = new JMenuItem("Logout");
-        signOut.setForeground(new Color(72,131,184));
+        signOut.setForeground(Color.BLACK);
         signOut.addActionListener(new LogoutMenuItemListener(this));
 
         logout.add(signOut);
