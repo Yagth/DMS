@@ -45,7 +45,7 @@ public class ReportDetailView extends JFrame implements Views {
     private int clothRequestId;
     private JButton handleButton;
     private Vector<Vector<Object>> clothRequests;
-    private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
+    private static final int WIDTH = 800;
     private static final int HEIGHT = 400;
 
     private JFrame parentComponent;
