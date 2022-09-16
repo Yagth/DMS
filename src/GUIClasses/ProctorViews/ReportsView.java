@@ -2,10 +2,13 @@ package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
+import GUIClasses.ActionListeners.NextActionListener;
+import GUIClasses.ActionListeners.PrevActionListener;
 import GUIClasses.ActionListeners.ProctorView.AllReportBackButtonListener;
 import GUIClasses.ActionListeners.ProctorView.ProctorPage.ReportDetailClickListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
+import GUIClasses.TableViewPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,13 +19,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-public class ReportsView extends JFrame implements Views, TableViews {
+public class ReportsView extends TableViewPage implements Views, TableViews {
     private JPanel mainPanel;
     private JPanel reportListPanel;
     private JPanel butttonsPanel;
     private JTable reportList;
     private JButton nextButton;
     private JButton backButton;
+    private JButton prevButton;
     private ProctorPage parentComponent;
     private String proctorId;
     private Vector<Vector<Object>> tableData;
@@ -33,6 +37,10 @@ public class ReportsView extends JFrame implements Views, TableViews {
     public ReportsView(ProctorPage parentComponent, String proctorId){
         this.parentComponent = parentComponent;
         this.proctorId = proctorId;
+
+        String query = "SELECT Count(*) TotalNo FROM AllReports WHERE HandledDate IS NULL";
+        loadAndSetTotalPage(query);
+
         setUpGUi();
         displayReadStatus(readStatus);
     }
@@ -105,28 +113,42 @@ public class ReportsView extends JFrame implements Views, TableViews {
             }
         }); //A custom action listener for the exit button.
         setUpTable();
+
         backButton.addActionListener(new AllReportBackButtonListener(this));
+        nextButton.addActionListener(new NextActionListener(this));
+        prevButton.addActionListener(new PrevActionListener(this));
+
+        setButtonVisibility();
+
         this.setVisible(true);
     }
 
     @Override
     public boolean nextButtonIsVisible() {
-        return false;
+        boolean hasNext = getPageNumber()<getTotalPage();
+        return hasNext;
     }
 
     @Override
     public boolean prevButtonIsVisible() {
-        return false;
+        boolean hasPrev = getPageNumber()>1;
+        return hasPrev;
     }
 
     @Override
     public void setButtonVisibility() {
+        boolean visibility = nextButtonIsVisible();
+        nextButton.setVisible(visibility);
+        visibility = prevButtonIsVisible();
+        prevButton.setVisible(visibility);
 
+        this.revalidate();
     }
 
     @Override
     public void reloadTable() {
-
+        Vector<Vector<Object>> temp = loadReports();
+        refreshTable(temp);
     }
 
     @Override
