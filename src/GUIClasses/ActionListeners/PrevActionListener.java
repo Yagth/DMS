@@ -16,5 +16,6 @@ public class PrevActionListener implements ActionListener {
         parentComponent.decrementPageNumber();
         TableViews parentComponent = (TableViews) this.parentComponent;
         parentComponent.setButtonVisibility();
+        parentComponent.reloadTable();
     }
 }

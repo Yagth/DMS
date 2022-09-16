@@ -121,6 +121,12 @@ public class SeeYourRequests extends TableViewPage implements Views, TableViews 
         this.revalidate();
     }
 
+    @Override
+    public void reloadTable() {
+        loadRequests();
+        refreshTable();
+    }
+
     public void loadRequests(){
         String query = "SELECT * FROM StudentReport WHERE reporterId='"+student.getsId()+
                 "' ORDER BY reportedDate DESC OFFSET "+((getPageNumber()-1)*ROW_PER_PAGE)+" ROWS"+

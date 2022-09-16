@@ -16,5 +16,6 @@ public class NextActionListener implements ActionListener {
         parentComponent.incrementPageNumber();
         TableViews parentComponent = (TableViews) this.parentComponent;
         parentComponent.setButtonVisibility();
+        parentComponent.reloadTable();
     }
 }
