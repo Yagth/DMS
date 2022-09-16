@@ -53,7 +53,7 @@ public class StudentView extends TableViewPage implements Views, TableViews {
 
     public Vector<Vector<Object>> loadStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT * FROM Student OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
+        String query = "SELECT * FROM Student ORDER BY (SELECT NULL) OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
                 " ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         ResultSet resultSet;
         Vector<Vector<Object>> students = new Vector<>();
