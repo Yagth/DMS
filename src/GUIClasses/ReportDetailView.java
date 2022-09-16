@@ -81,7 +81,6 @@ public class ReportDetailView extends JFrame implements Views {
             descriptionPane.setText(description);
         } else{
             descriptionPane.setText(request.getDescription());
-            System.out.println("Description: "+request.getDescription());//For debugging only.
         }
 
         if(isHandled){
