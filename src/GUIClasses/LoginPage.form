@@ -109,11 +109,6 @@
                   </hspacer>
                 </children>
               </grid>
-              <vspacer id="245b4">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </vspacer>
               <vspacer id="e64e8">
                 <constraints>
                   <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>

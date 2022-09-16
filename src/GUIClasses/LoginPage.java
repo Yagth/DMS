@@ -36,6 +36,11 @@ public class LoginPage extends JFrame implements Views {
 
     @Override
     public void setUpGUi() {
+        try{
+            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
         this.setTitle("Dormitory Management System");
         this.setContentPane(MainPanel);
         this.setSize(WIDTH,HEIGHT);
