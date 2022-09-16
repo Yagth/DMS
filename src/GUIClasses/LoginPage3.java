@@ -42,20 +42,34 @@ public class LoginPage3 extends JFrame{
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
+        ImageIcon usernameIcon = new ImageIcon("Images/user.png");
+        ImageIcon keyIcon = new ImageIcon("Images/key.png");
+        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+
+        logoL.setIcon(logo);
+        userNameL.setIcon(usernameIcon);
+        passwordL.setIcon(keyIcon);
+
         titleL.setFont(new Font("Californian FB",Font.BOLD,26));
         titleL.setText("<html>Welcome to Addis Ababa<br>University</html>");
         subtitleL.setFont(new Font("Californian FB",Font.BOLD,22));
         subtitleL.setText("<html>Dormitory Management<br>System</html>");
         descripotionL.setFont(new Font("Californian FB",Font.PLAIN,16));
-        loginL.setFont(new Font("Californian FB",Font.BOLD,20));
+        loginL.setFont(new Font("Californian FB",Font.BOLD,22));
 
         userNameTF.setBorder(BorderFactory.createEmptyBorder());
         passwordTF.setBorder(BorderFactory.createEmptyBorder());
-
-        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
-        logoL.setIcon(logo);
+        userNameL.setFont(new Font("Californian FB",Font.PLAIN,16));
+        passwordL.setFont(new Font("Californian FB",Font.PLAIN,16));
 
         this.setVisible(true);
     }
 
+    public JTextField getUserNameTF() {
+        return userNameTF;
+    }
+
+    public JPasswordField getPasswordTF() {
+        return passwordTF;
+    }
 }
