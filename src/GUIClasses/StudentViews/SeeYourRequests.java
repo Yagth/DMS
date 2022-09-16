@@ -54,7 +54,6 @@ public class SeeYourRequests extends TableViewPage implements Views, TableViews 
         String query = "SELECT Count(*) AS TotalNo FROM StudentReport WHERE reporterId='"+student.getsId()+"'";
         int totalPage = loadPageSize(query);
         setTotalSize(totalPage);
-        System.out.println("TotalPage: "+getTotalPage());//For debugging only.
 
 
         setUpGUi();
@@ -138,7 +137,6 @@ public class SeeYourRequests extends TableViewPage implements Views, TableViews 
         String query = "SELECT * FROM StudentReport WHERE reporterId='"+student.getsId()+
                 "' ORDER BY reportedDate DESC OFFSET "+((getPageNumber()-1)*ROW_PER_PAGE)+" ROWS"+
                 " FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
-        System.out.println("Query: "+query);//For debugging only.
         reports = javaConnection.selectQuery(query);
         try{
             while(reports.next()){
