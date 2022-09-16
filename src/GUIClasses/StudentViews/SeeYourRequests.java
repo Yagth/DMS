@@ -51,7 +51,7 @@ public class SeeYourRequests extends TableViewPage implements Views, TableViews 
         this.student = student;
         javaConnection = new JavaConnection(JavaConnection.URL);
 
-        String query = "SELECT * FROM StudentReport WHERE reporterId='"+student.getsId();
+        String query = "SELECT Count(*) AS TotalNo FROM StudentReport WHERE reporterId='"+student.getsId()+"'";
 
         int totalPage = loadPageSize(query);
         setTotalSize(totalPage);
