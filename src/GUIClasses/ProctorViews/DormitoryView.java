@@ -58,7 +58,8 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
         this.parentComponent = parentComponent;
         dorms = new ArrayList<>();
 
-        String query = "SELECT Count(*) As TotalNo FROM Dorm";
+        String query = "SELECT Count(*) As TotalNo FROM Dorm AS D LEFT JOIN Student AS S ON D.BuildingNumber = S.BuildingNumber" +
+                " AND D.RoomNumber = S.RoomNumber";
         loadAndSetTotalPage(query);
 
         setUpGUi();
@@ -117,11 +118,16 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
         addDataToTable(null);
         refreshTable();
     }
+
+    public int getRowPerPage(){
+        return ROW_PER_PAGE;
+    }
     public void loadDorms(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT D.BuildingNumber,D.RoomNumber, maxCapacity, COUNT(SID) AS NumberOfStudent " +
                         "FROM Dorm AS D LEFT JOIN Student AS S ON D.BuildingNumber = S.BuildingNumber " +
-                        "AND D.RoomNumber = S.RoomNumber GROUP BY D.BuildingNumber,D.RoomNumber,maxCapacity";
+                        "AND D.RoomNumber = S.RoomNumber GROUP BY D.BuildingNumber,D.RoomNumber,maxCapacity ORDER BY (SELECT NULL)" +
+                        " OFFSET "+(getTotalPage()-1)*ROW_PER_PAGE+" ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         ResultSet resultSet;
 
         if(javaConnection.isConnected()){

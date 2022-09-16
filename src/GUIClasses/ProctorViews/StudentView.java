@@ -7,6 +7,7 @@ import GUIClasses.ActionListeners.ProctorView.StudentView.*;
 import GUIClasses.ActionListeners.StudentView.BackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
+import GUIClasses.TableViewPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-public class StudentView extends JFrame implements Views, TableViews {
+public class StudentView extends TableViewPage implements Views, TableViews {
     private JPanel mainPanel;
     private JPanel upperPanel;
     private JFormattedTextField searchTF;
@@ -40,6 +41,10 @@ public class StudentView extends JFrame implements Views, TableViews {
     public StudentView(ProctorPage parentComponent,Proctor proctor){
         this.parentComponent = parentComponent;
         this.proctor = proctor;
+
+        String query = "SELECT Count(*) TotalNo FROM Student";
+        loadAndSetTotalPage(query);
+
         setUpGUi();
     }
     public void showParentComponent(){
