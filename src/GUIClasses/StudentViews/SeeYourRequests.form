@@ -31,18 +31,6 @@
             </properties>
             <border type="etched"/>
             <children>
-              <component id="6237e" class="javax.swing.JLabel" binding="nameL">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <background color="-16777216"/>
-                  <enabled value="false"/>
-                  <font name="Californian FB" size="16" style="1"/>
-                  <foreground color="-16777216"/>
-                  <text value="Name"/>
-                </properties>
-              </component>
               <component id="55dac" class="javax.swing.JLabel" binding="IDL">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -122,6 +110,16 @@
                   <grid row="1" column="9" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
+              <component id="c675e" class="javax.swing.JLabel" binding="nameL">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Californian FB" size="16" style="1"/>
+                  <foreground color="-16777216"/>
+                  <text value="Name"/>
+                </properties>
+              </component>
             </children>
           </grid>
         </children>

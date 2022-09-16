@@ -23,7 +23,6 @@ public class SeeYourRequests extends TableViewPage implements Views, TableViews 
     private JPanel mainPanel;
     private JPanel topPanel;
     private JPanel studentInfoPanel;
-    private JLabel nameL;
     private JLabel IDL;
     private JLabel studentName;
     private JLabel studentID;
@@ -38,6 +37,7 @@ public class SeeYourRequests extends TableViewPage implements Views, TableViews 
     private JButton prevButton;
     private JButton nextButton;
     private JPanel buttonPanel;
+    private JLabel nameL;
     private JavaConnection javaConnection;
     private Student student;
     private StudentPage parentComponent;
