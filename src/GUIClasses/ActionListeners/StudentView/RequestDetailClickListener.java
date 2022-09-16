@@ -47,6 +47,26 @@ public class RequestDetailClickListener implements MouseListener {
         }
         return null;
     }
+
+    public String getReporterName(Request tmp){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT Fname,Lname FROM STUDENT WHERE SID='"+tmp.getRequesterId()+"'";
+        ResultSet resultSet;
+        String reporterName="";
+
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    reporterName = resultSet.getString("Fname")+" "
+                            +resultSet.getString("Lname");
+                }
+            }catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+        }
+        return reporterName;
+    }
     @Override
     public void mouseClicked(MouseEvent e) {
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
@@ -64,7 +84,6 @@ public class RequestDetailClickListener implements MouseListener {
             query = "SELECT * FROM ClothStudent WHERE ReportId="+selectedId;
         else query = "SELECT * FROM AllReports WHERE ReportId="+selectedId+" AND ReportType='"+selectedType+"'";
 
-        System.out.println("Query: "+query);//For debugging only.
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
             while(resultSet.next()){
@@ -81,7 +100,8 @@ public class RequestDetailClickListener implements MouseListener {
                 request.setLocation(location);
                 Date tmpDate = loadHandledDate(selectedId);
                 request.setHandledDate(tmpDate);
-                new ReportDetailView(parentComponent,request,reporterId);
+                String reporterName = getReporterName(request);
+                new ReportDetailView(parentComponent,request,reporterName);
                 parentComponent.setVisible(false);
             }
         }
