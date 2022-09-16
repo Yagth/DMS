@@ -67,7 +67,7 @@
             </constraints>
             <properties>
               <background color="-5329231"/>
-              <font name="Footlight MT Light" size="20" style="1"/>
+              <font name="Californian FB" size="24" style="1"/>
               <foreground color="-16777216"/>
               <opaque value="false"/>
               <text value="Enter the clothes you want to take out"/>
