@@ -20,7 +20,7 @@ public class AllocateDormAsRequested implements ActionListener {
     private HashMap<String, Student> students;
     private ArrayList<Integer> requests;
     private ArrayList<String> reporterIds;
-    private int remainingStudents; //The remaining students after the allocation.
+    private int remainingStudents; //The remaining students after the allocation .
     public AllocateDormAsRequested(DormitoryView parentComponent){
         this.parentComponent = parentComponent;
         availableDorms = new ArrayList<>();
