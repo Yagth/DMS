@@ -239,8 +239,9 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
         ImageIcon filterButtonIcon = new ImageIcon("Images/FilterIcon.png");
         filterButton.setIcon(filterButtonIcon);
 
-        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
-        Image titleLogo = tmp.getImage();
+        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+
+        Image titleLogo = logo.getImage();
 
         this.setIconImage(titleLogo);
 

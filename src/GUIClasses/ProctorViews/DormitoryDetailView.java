@@ -164,8 +164,9 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
 
         backButton.addActionListener(new DormitoryDetailBackListener(this));
 
-        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
-        Image titleLogo = tmp.getImage();
+        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+
+        Image titleLogo = logo.getImage();
 
         this.setIconImage(titleLogo);
 

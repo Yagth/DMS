@@ -213,8 +213,9 @@ public class ReportDetailView extends JFrame implements Views {
         if(request.getRequestType().equalsIgnoreCase("ClothTakeOutForm")) handleButton.setText("Approve");
         System.out.println("Location: "+request.getLocation());//For debugging only
 
-        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
-        Image titleLogo = tmp.getImage();
+        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+
+        Image titleLogo = logo.getImage();
 
         this.setIconImage(titleLogo);
 

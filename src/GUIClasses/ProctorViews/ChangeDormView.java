@@ -166,8 +166,9 @@ public class ChangeDormView extends JFrame implements Views {
         toBuildingNoTF.addFocusListener(new ToBuildingNoTFListener(this));
         fromBuildingNoTF.addFocusListener(new FromBuildingNoTFListener(this));
 
-        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
-        Image titleLogo = tmp.getImage();
+        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+
+        Image titleLogo = logo.getImage();
 
         this.setIconImage(titleLogo);
 

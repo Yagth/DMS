@@ -164,8 +164,9 @@ public class StockView extends TableViewPage implements Views, TableViews {
             }
         }); //A custom action listener for the exit button.
 
-        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
-        Image titleLogo = tmp.getImage();
+        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+
+        Image titleLogo = logo.getImage();
 
         this.setIconImage(titleLogo);
 
