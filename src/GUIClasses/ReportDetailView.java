@@ -209,6 +209,8 @@ public class ReportDetailView extends JFrame implements Views {
             }
         }); //A custom action listener for the exit button.
 
+        if(request.getRequestType().equalsIgnoreCase("ClothTakeOutForm")) handleButton.setText("Approve");
+
         boolean isInProctorView = isInProctorView();
         reporterIdL.setVisible(isInProctorView);
         Reporter.setVisible(isInProctorView);
