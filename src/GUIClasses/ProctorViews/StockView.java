@@ -113,4 +113,9 @@ public class StockView extends JFrame implements Views, TableViews {
         setUpTable();
         setVisible(true);
     }
+
+    public void goBackToParent(){
+        this.dispose();
+        parentComponent.setVisible(true);
+    }
 }
