@@ -31,12 +31,18 @@ public class AllocateDormAsRequested implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus = false;
+
+        String query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
+                " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
+                Request.getCurrentDate()+"' , '"+parentComponent.getBuildingNo()+"')";
+
         loadAvailableDorms();
         loadReporterAndReportId();
         loadStudents();
         sortDormOnAvailableSpace();
         sortDormOnBuildingNo();
         updateStatus = allocateStudents();
+        insertHistory(query);
         updateRequestStatus();
         displayUpdateStatus(updateStatus);
     }
@@ -208,6 +214,12 @@ public class AllocateDormAsRequested implements ActionListener {
             else
                 JOptionPane.showMessageDialog(parentComponent,"Couldn't allocate "+ remainingStudents+" students due to some problem.\n " +
                         "Make sure there is available space and also the destination exits.");
+        }
+    }
+    public void insertHistory(String query){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        if(javaConnection.isConnected()){
+            javaConnection.insertQuery(query);
         }
     }
 }

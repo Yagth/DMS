@@ -2,6 +2,7 @@ package GUIClasses.ActionListeners.ProctorView.ChangeDormView;
 
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
+import BasicClasses.Requests.Request;
 import BasicClasses.Rooms.Dormitory;
 import GUIClasses.ProctorViews.ChangeDormView;
 
@@ -34,6 +35,9 @@ public class ChangeButtonListener implements ActionListener {
         Student student = parentComponent.getStudent();
         int numberOfStudents = 0;
         String query ="";
+        String query2 = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
+                " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Change Dorm', '"+
+                Request.getCurrentDate()+"' , '"+parentComponent.getBuildingNo()+"')";
 
         if(toBuildingNo.equals("")){
             JOptionPane.showMessageDialog(parentComponent,"Destination building is empty",
@@ -105,8 +109,10 @@ public class ChangeButtonListener implements ActionListener {
             query = "UPDATE STUDENT SET BuildingNumber='"+toBuildingNo+"', " +
                     "RoomNumber='"+toRoomNo+"' " +
                     "WHERE SID ='"+student.getsId()+"';";
-            if(javaConnection.isConnected())
+            if(javaConnection.isConnected()){
                 updateStatus = javaConnection.updateQuery(query);
+                insertHistory(query2);
+            }
         }
         else {
             if(fromBuildingNo.equals("")){
@@ -128,6 +134,7 @@ public class ChangeButtonListener implements ActionListener {
 
                 groupStudents(fromBuildingNo);
                 updateStatus = changeStudents(fromBuildingNo,toBuildingNo);
+                insertHistory(query2);
             }
         }
         displayUpdateStatus(updateStatus);
@@ -326,6 +333,14 @@ public class ChangeButtonListener implements ActionListener {
         else
             JOptionPane.showMessageDialog(parentComponent,"Couldn't change all students due to some problem.\n " +
                     "Make sure there is available space and also the destination exits.");
+    }
+
+    public void insertHistory(String query){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+
+        if(javaConnection.isConnected()){
+            javaConnection.insertQuery(query);
+        }
     }
 
     //The following method is only for debugging.
