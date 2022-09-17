@@ -179,7 +179,12 @@ public class AllocateDormAsRequested implements ActionListener {
                         "', RoomNumber='"+student.getDormNo()+
                         "' WHERE SID='"+student.getsId()+"'";
                 updateStatus = javaConnection.updateQuery(query);
+
+                String query2 = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
+                        " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";//Decrementing the stock on every student allocation.
+                javaConnection.insertQuery(query2);
             }
+
             updateStatus &= (totalSpace >= reporterIds.size());
             remainingStudents = reporterIds.size()-totalSpace;
             if(remainingStudents<0) remainingStudents = 0;
