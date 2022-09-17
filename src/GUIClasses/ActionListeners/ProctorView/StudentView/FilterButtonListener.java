@@ -26,6 +26,7 @@ public class FilterButtonListener implements ActionListener {
                 JOptionPane.showMessageDialog(parentComponent,"No eligible students found");
             else
                 JOptionPane.showMessageDialog(parentComponent,"No students matching the condition");
+            parentComponent.reloadTable();
         }
     }
 

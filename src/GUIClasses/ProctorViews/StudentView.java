@@ -240,9 +240,9 @@ public class StudentView extends TableViewPage implements Views, TableViews {
             }
         }); //A custom action listener for the exit button.
 
-        ImageIcon searchButtonIcon = new ImageIcon("Icons/SearchIcon.png");
+        ImageIcon searchButtonIcon = new ImageIcon("Images/SearchIcon.png");
         searchButton.setIcon(searchButtonIcon);
-        ImageIcon filterButtonIcon = new ImageIcon("Icons/FilterIcon.png");
+        ImageIcon filterButtonIcon = new ImageIcon("Images/FilterIcon.png");
         filterButton.setIcon(filterButtonIcon);
 
         filterCondition.addItem("");
