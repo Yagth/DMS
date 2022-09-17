@@ -157,8 +157,9 @@ public class StudentPage extends JFrame implements TableViews {
         Service.add(StayRequest);
 
         try{
-            if(student.getPlaceOfOrigin().equalsIgnoreCase("Addis Ababa"))
-                Service.add(RequestForDorm);
+            boolean hasNoDorm = student.getDormNo() == 0 || student.getBuildingNo() == 0;
+            boolean isLocalStudent = student.getPlaceOfOrigin().equalsIgnoreCase("Addis Ababa");
+            if(isLocalStudent & (hasNoDorm)) Service.add(RequestForDorm);
         } catch (NullPointerException ex){
             ex.printStackTrace();
         }
