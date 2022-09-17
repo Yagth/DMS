@@ -120,8 +120,6 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
 
     public boolean toDateIsValid(Date date){
         Date tmp = Request.getCurrentDate();//For debugging only.
-        System.out.println("Current date: "+tmp);//For debugging only.
-        System.out.println("Date: "+date);//For debugging only.
         boolean isValid = false;
         try{
             isValid = date.after(Request.getCurrentDate());
