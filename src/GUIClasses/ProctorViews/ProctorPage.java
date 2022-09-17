@@ -4,10 +4,12 @@ import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Requests.Request;
-import GUIClasses.ActionListeners.ProctorView.DormitoryView.DormListClickListener;
+import GUIClasses.ActionListeners.NextActionListener;
+import GUIClasses.ActionListeners.PrevActionListener;
 import GUIClasses.ActionListeners.ProctorView.ProctorPage.*;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
+import GUIClasses.TableViewPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,13 +19,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-public class ProctorPage extends JFrame implements Views, TableViews {
+public class ProctorPage extends TableViewPage implements Views, TableViews {
     private JPanel MainPanel;
     private JPanel TopPanel;
     private JPanel CentralPanel;
     private JPanel BottomPanel;
-    private JButton PrevButton;
-    private JButton NextButton;
+    private JButton prevButton;
+    private JButton nextButton;
     private JPanel SchedulePanel;
     private JPanel ReportPanel;
     private JTable ReportTable;
@@ -45,6 +47,10 @@ public class ProctorPage extends JFrame implements Views, TableViews {
 
     public ProctorPage(Proctor proctor){
         this.proctor = proctor;
+
+        String query = "SELECT Count(*) AS TotalNo FROM AllReports WHERE HandledDate IS NULL";
+        loadAndSetTotalPage(query);
+
         setUpGUi();
         setUpTable();
     }
@@ -57,7 +63,8 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         Vector<Vector<Object>> temp = null;
         if(javaConnection.isConnected()){
             temp = new Vector<>();
-            String query = "SELECT * FROM AllReports WHERE HandledDate IS NULL ORDER BY ReportedDate DESC";
+            String query = "SELECT * FROM AllReports WHERE HandledDate IS NULL ORDER BY ReportedDate DESC " +
+                    "OFFSET "+ (getPageNumber()-1)*ROW_PER_PAGE+ " ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
             ResultSet resultSet = javaConnection.selectQuery(query);
             try{
                 while(resultSet.next()){
@@ -92,7 +99,8 @@ public class ProctorPage extends JFrame implements Views, TableViews {
 
     public void loadSchedule(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT TOP 1 * FROM ProctorSchedule WHERE PID='"+getProctor().getpId()+"' ORDER BY FromDate ASC,ToDate ASC";
+        String query = "SELECT TOP 1 * FROM ProctorSchedule WHERE PID='"+getProctor().getpId()+
+                "' ORDER BY FromDate ASC,ToDate ASC";
         Date fromDate = null, toDate = null;
         String buildingNumber = "";
         ResultSet resultSet;
@@ -128,6 +136,35 @@ public class ProctorPage extends JFrame implements Views, TableViews {
 
     public Vector<Vector<Object>> getTableData() {
         return tableData;
+    }
+
+    @Override
+    public boolean nextButtonIsVisible() {
+        boolean hasNext = getPageNumber()<getTotalPage();
+        return  hasNext;
+    }
+
+    @Override
+    public boolean prevButtonIsVisible() {
+        boolean hasPrev = getPageNumber()>1;
+        return  hasPrev;
+    }
+
+    @Override
+    public void setButtonVisibility() {
+        boolean visibility = nextButtonIsVisible();
+        nextButton.setVisible(visibility);
+        visibility = prevButtonIsVisible();
+        prevButton.setVisible(visibility);
+
+        this.revalidate();
+    }
+
+    @Override
+    public void reloadTable() {
+        Vector<Vector<Object>> temp = loadReports();
+        refreshTable(temp);
+        refreshTable();
     }
 
     @Override
@@ -179,6 +216,8 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         setLocationRelativeTo(null);
         this.getContentPane().setBackground(new Color(232,255,255));
 
+        nextButton.addActionListener(new NextActionListener(this));
+        prevButton.addActionListener(new PrevActionListener(this));
 
         JMenuBar Services = new JMenuBar();
         Services.setBackground(new Color(72,131,184));
@@ -216,6 +255,7 @@ public class ProctorPage extends JFrame implements Views, TableViews {
         setJMenuBar(Services);
 
         loadSchedule();
+        setButtonVisibility();
 
         setVisible(true);
     }

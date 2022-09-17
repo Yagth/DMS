@@ -91,6 +91,27 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         parentComponent.setVisible(true);
     }
 
+
+    @Override
+    public boolean nextButtonIsVisible() {
+        return false;
+    }
+
+    @Override
+    public boolean prevButtonIsVisible() {
+        return false;
+    }
+
+    @Override
+    public void setButtonVisibility() {
+
+    }
+
+    @Override
+    public void reloadTable() {
+
+    }
+
     @Override
     public void setUpTable() {
         Vector<String> titles = new Vector<>();

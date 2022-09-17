@@ -113,6 +113,27 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
         this.dispose();
         parentComponent.setVisible(true);
     }
+
+    @Override
+    public boolean nextButtonIsVisible() {
+        return false;
+    }
+
+    @Override
+    public boolean prevButtonIsVisible() {
+        return false;
+    }
+
+    @Override
+    public void setButtonVisibility() {
+
+    }
+
+    @Override
+    public void reloadTable() {
+
+    }
+
     @Override
     public void setUpTable() {
         Vector<String> titles = new Vector<>();

@@ -7,6 +7,7 @@ import GUIClasses.ActionListeners.ProctorView.StudentView.*;
 import GUIClasses.ActionListeners.StudentView.BackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
+import GUIClasses.TableViewPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-public class StudentView extends JFrame implements Views, TableViews {
+public class StudentView extends TableViewPage implements Views, TableViews {
     private JPanel mainPanel;
     private JPanel upperPanel;
     private JFormattedTextField searchTF;
@@ -40,6 +41,10 @@ public class StudentView extends JFrame implements Views, TableViews {
     public StudentView(ProctorPage parentComponent,Proctor proctor){
         this.parentComponent = parentComponent;
         this.proctor = proctor;
+
+        String query = "SELECT Count(*) TotalNo FROM Student";
+        loadAndSetTotalPage(query);
+
         setUpGUi();
     }
     public void showParentComponent(){
@@ -48,7 +53,8 @@ public class StudentView extends JFrame implements Views, TableViews {
 
     public Vector<Vector<Object>> loadStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT * FROM Student";
+        String query = "SELECT * FROM Student ORDER BY (SELECT NULL) OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
+                " ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         ResultSet resultSet;
         Vector<Vector<Object>> students = new Vector<>();
         int count = 0;
@@ -99,6 +105,7 @@ public class StudentView extends JFrame implements Views, TableViews {
         return students;
     }
 
+    @Override
     public void reloadTable(){
         tableData.clear();
         Vector<Vector<Object>> students = loadStudents();
@@ -147,10 +154,30 @@ public class StudentView extends JFrame implements Views, TableViews {
     }
 
     @Override
+    public boolean nextButtonIsVisible() {
+        boolean hasNext = getPageNumber()<getTotalPage();
+        return hasNext;
+    }
+
+    @Override
+    public boolean prevButtonIsVisible() {
+        boolean hasPrev = getPageNumber()>1;
+        return hasPrev;
+    }
+
+    @Override
+    public void setButtonVisibility() {
+        boolean visibility = nextButtonIsVisible();
+        nextButton.setVisible(visibility);
+        visibility = prevButtonIsVisible();
+        prevButton.setVisible(visibility);
+        this.revalidate();
+    }
+
+    @Override
     public void setUpTable() {
         Vector<String> titles = new Vector();
         tableData = new Vector<>();
-
 
         boolean readStatus;
 
@@ -201,6 +228,7 @@ public class StudentView extends JFrame implements Views, TableViews {
         filterCondition.addItemListener(new FilterConditionItemListener(this));
         searchTF.addFocusListener(new SearchTFFocusListener(this));
 
+        setButtonVisibility();
 
         this.addWindowListener(new WindowAdapter()
         {

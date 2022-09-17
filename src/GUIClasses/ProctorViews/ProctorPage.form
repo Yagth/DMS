@@ -190,7 +190,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="41d46" class="javax.swing.JButton" binding="PrevButton">
+          <component id="41d46" class="javax.swing.JButton" binding="prevButton">
             <constraints>
               <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -201,7 +201,7 @@
               <text value="Previous"/>
             </properties>
           </component>
-          <component id="4ccad" class="javax.swing.JButton" binding="NextButton">
+          <component id="4ccad" class="javax.swing.JButton" binding="nextButton">
             <constraints>
               <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>

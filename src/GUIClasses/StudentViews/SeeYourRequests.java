@@ -3,10 +3,13 @@ package GUIClasses.StudentViews;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
+import GUIClasses.ActionListeners.NextActionListener;
+import GUIClasses.ActionListeners.PrevActionListener;
 import GUIClasses.ActionListeners.StudentView.SeeYourRequestBackButtonListener;
 import GUIClasses.ActionListeners.StudentView.StudentPage.RequestDetailClickListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
+import GUIClasses.TableViewPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,7 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-public class SeeYourRequests extends JFrame implements Views, TableViews {
+public class SeeYourRequests extends TableViewPage implements Views, TableViews {
     private JPanel mainPanel;
     private JPanel topPanel;
     private JPanel studentInfoPanel;
@@ -32,6 +35,9 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
     private JScrollPane reportListSP;
     private JLabel titleL;
     private JButton backButton;
+    private JButton prevButton;
+    private JButton nextButton;
+    private JPanel buttonPanel;
     private JavaConnection javaConnection;
     private Student student;
     private StudentPage parentComponent;
@@ -44,6 +50,10 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         this.parentComponent = parentComponent;
         this.student = student;
         javaConnection = new JavaConnection(JavaConnection.URL);
+
+        String query = "SELECT Count(*) AS TotalNo FROM StudentReport WHERE reporterId='"+student.getsId()+"'";
+        loadAndSetTotalPage(query);
+
         setUpGUi();
         setUpTable();
         loadRequests();
@@ -92,8 +102,39 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         reportListTable.addMouseListener(new RequestDetailClickListener(this));
     }
 
+
+    @Override
+    public boolean nextButtonIsVisible() {
+        boolean hasNextPage = getPageNumber() < getTotalPage();
+        return hasNextPage;
+    }
+
+    @Override
+    public boolean prevButtonIsVisible() {
+        boolean hasPrevPage = getPageNumber()>1;
+        return hasPrevPage;
+    }
+
+    @Override
+    public void setButtonVisibility() {
+        boolean visibility = nextButtonIsVisible();
+        nextButton.setVisible(visibility);
+        visibility = prevButtonIsVisible();
+        prevButton.setVisible(visibility);
+        this.revalidate();
+    }
+
+    @Override
+    public void reloadTable() {
+        tableData.clear();
+        loadRequests();
+        refreshTable();
+    }
+
     public void loadRequests(){
-        String query = "SELECT * FROM StudentReport WHERE reporterId='"+student.getsId()+"' ORDER BY reportedDate DESC";
+        String query = "SELECT * FROM StudentReport WHERE reporterId='"+student.getsId()+
+                "' ORDER BY reportedDate DESC OFFSET "+((getPageNumber()-1)*ROW_PER_PAGE)+" ROWS"+
+                " FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         reports = javaConnection.selectQuery(query);
         try{
             while(reports.next()){
@@ -130,9 +171,14 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
         this.setTitle("Your Requests");
         this.setContentPane(mainPanel);
         this.setSize(WIDTH,HEIGHT);
-        this.setVisible(true);
         this.setLocationRelativeTo(parentComponent);
+
         backButton.addActionListener(new SeeYourRequestBackButtonListener(this));
+        nextButton.addActionListener(new NextActionListener(this));
+        prevButton.addActionListener(new PrevActionListener(this));
+
+        setButtonVisibility();
+
         this.addWindowListener(new WindowAdapter()
         {
             @Override
@@ -143,5 +189,6 @@ public class SeeYourRequests extends JFrame implements Views, TableViews {
             }
         }); //A custom action listener for the exit button.
         displayUserInfo();
+        this.setVisible(true);
     }
 }
