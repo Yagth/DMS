@@ -45,7 +45,7 @@ public class StockView extends JFrame implements Views, TableViews {
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet;
         String query = "SELECT * FROM Proctor AS P JOIN ProctorControlsStock AS PCS ON P.EID = PCS.EID WHERE PCS.buildingNumber='"+proctor.getBuildingNo()+"' ";
-
+        System.out.println("Query: "+query);//For debugging only.
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
             try{
@@ -54,7 +54,7 @@ public class StockView extends JFrame implements Views, TableViews {
                     tmp.add(resultSet.getString("EID"));
                     tmp.add(resultSet.getString("Fname")+" "+resultSet.getString("Lname"));
                     tmp.add(resultSet.getString("actionType"));
-                    tmp.add(resultSet.getString("date"));
+                    tmp.add(resultSet.getString("actionDate"));
                     history.add(tmp);
                 }
             }catch (SQLException ex){
