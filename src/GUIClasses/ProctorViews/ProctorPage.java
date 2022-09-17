@@ -122,7 +122,13 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         Date tmp = Request.getCurrentDate();//For debugging only.
         System.out.println("Current date: "+tmp);//For debugging only.
         System.out.println("Date: "+date);//For debugging only.
-        return date.after(Request.getCurrentDate());
+        boolean isValid = false;
+        try{
+            isValid = date.after(Request.getCurrentDate());
+        } catch (NullPointerException ex){
+            ex.printStackTrace();//For debugging only.
+        }
+        return isValid;
     }
 
     public JTable getReportTable(){
