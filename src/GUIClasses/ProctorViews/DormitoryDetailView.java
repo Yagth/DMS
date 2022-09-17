@@ -39,9 +39,6 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         setUpGUi();
         displayReadStatus(readStatus);
     }
-    public DormitoryDetailView(){
-        this(null,null,null);
-    }//For debugging only constructor.
     private Vector<Vector<Object>> loadStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         Vector<Vector<Object>> tmp =null;
@@ -53,7 +50,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
             try{
                 while(resultSet.next()){
                     Vector<Object> temp = new Vector<>();
-                    temp.add(resultSet.getString("Fname")+resultSet.getString("Lname"));
+                    temp.add(resultSet.getString("Fname")+" "+resultSet.getString("Lname"));
                     temp.add(resultSet.getString("SID"));
                     temp.add(resultSet.getInt("Year"));
                     temp.add(resultSet.getBoolean("isEligible"));
