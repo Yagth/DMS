@@ -9,6 +9,7 @@ import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.YearTFListener;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
@@ -95,6 +96,11 @@ public class DeallocateDormView extends JFrame implements Views {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+
+        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
+        Image titleLogo = tmp.getImage();
+
+        this.setIconImage(titleLogo);
 
         this.setVisible(true);
         conditions.addItem("deallocate Batch of students");

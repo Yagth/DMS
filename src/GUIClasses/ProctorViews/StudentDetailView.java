@@ -10,6 +10,7 @@ import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
@@ -186,6 +187,12 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+
+        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
+        Image titleLogo = tmp.getImage();
+
+        this.setIconImage(titleLogo);
+
         setUpTable();
         displayStudentInfo();
         this.setVisible(true);

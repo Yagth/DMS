@@ -11,6 +11,7 @@ import GUIClasses.TableViewPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
@@ -221,6 +222,11 @@ public class StudentView extends TableViewPage implements Views, TableViews {
         setContentPane(mainPanel);
         setSize(WIDTH,HEIGHT);
         setLocationRelativeTo(null);
+
+        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
+        Image titleLogo = tmp.getImage();
+
+        this.setIconImage(titleLogo);
 
         backButton.addActionListener(new BackButtonListener(this));
         searchButton.addActionListener(new SearchButtonListener(this));

@@ -8,6 +8,7 @@ import GUIClasses.ActionListeners.ProctorView.ChangeDormView.*;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
@@ -164,6 +165,12 @@ public class ChangeDormView extends JFrame implements Views {
         changeButton.addActionListener(new ChangeButtonListener(this));
         toBuildingNoTF.addFocusListener(new ToBuildingNoTFListener(this));
         fromBuildingNoTF.addFocusListener(new FromBuildingNoTFListener(this));
+
+        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
+        Image titleLogo = tmp.getImage();
+
+        this.setIconImage(titleLogo);
+
         this.addWindowListener(new WindowAdapter()
         {
             @Override

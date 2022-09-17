@@ -218,6 +218,11 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         nextButton.addActionListener(new NextActionListener(this));
         prevButton.addActionListener(new PrevActionListener(this));
 
+        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
+        Image titleLogo = tmp.getImage();
+
+        this.setIconImage(titleLogo);
+
         JMenuBar Services = new JMenuBar();
         Services.setBackground(new Color(232,255,255));
         Services.setOpaque(true);

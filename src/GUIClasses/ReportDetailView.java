@@ -11,6 +11,7 @@ import GUIClasses.ProctorViews.ReportsView;
 import GUIClasses.StudentViews.SeeYourRequests;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
@@ -211,6 +212,12 @@ public class ReportDetailView extends JFrame implements Views {
 
         if(request.getRequestType().equalsIgnoreCase("ClothTakeOutForm")) handleButton.setText("Approve");
         System.out.println("Location: "+request.getLocation());//For debugging only
+
+        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
+        Image titleLogo = tmp.getImage();
+
+        this.setIconImage(titleLogo);
+
         boolean isInProctorView = isInProctorView();
         reporterIdL.setVisible(isInProctorView);
         Reporter.setVisible(isInProctorView);

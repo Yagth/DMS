@@ -12,6 +12,7 @@ import GUIClasses.TableViewPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
@@ -113,6 +114,11 @@ public class ReportsView extends TableViewPage implements Views, TableViews {
             }
         }); //A custom action listener for the exit button.
         setUpTable();
+
+        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
+        Image titleLogo = tmp.getImage();
+
+        this.setIconImage(titleLogo);
 
         backButton.addActionListener(new AllReportBackButtonListener(this));
         nextButton.addActionListener(new NextActionListener(this));
