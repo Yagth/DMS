@@ -3,6 +3,7 @@ package GUIClasses.ProctorViews;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Rooms.Dormitory;
+import GUIClasses.ActionListeners.ProctorView.DormitoryView.DormitoryDetailBackListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -159,6 +160,9 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+
+        backButton.addActionListener(new DormitoryDetailBackListener(this));
+
         loadDormInfo();
         setUpTable();
 
