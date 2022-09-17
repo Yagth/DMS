@@ -2,6 +2,7 @@ package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Persons.Proctor;
+import GUIClasses.ActionListeners.ProctorView.StockView.BackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -110,6 +111,9 @@ public class StockView extends JFrame implements Views, TableViews {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+
+        backButton.addActionListener(new BackButtonListener(this));
+
         setUpTable();
         setVisible(true);
     }
