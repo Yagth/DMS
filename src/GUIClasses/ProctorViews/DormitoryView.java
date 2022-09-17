@@ -228,6 +228,7 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
         totalSpaceNo.setText(String.valueOf(totalAvailableSpace()));
         numberOfDorm.setText(String.valueOf(emptyDorms()));
 
+        setButtonVisibility();
 
         ImageIcon searchButtonIcon = new ImageIcon("Images/SearchIcon.png");
         searchButton.setIcon(searchButtonIcon);
@@ -290,7 +291,9 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
 
     @Override
     public void reloadTable() {
-
+        tableData.clear();
+        loadDorms();
+        addDataToTable(null);
     }
 
     @Override
