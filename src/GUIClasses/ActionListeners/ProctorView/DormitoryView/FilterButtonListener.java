@@ -66,7 +66,7 @@ public class FilterButtonListener implements ActionListener {
         } else {
             query = "SELECT DISTINCT A.BuildingNumber, A.RoomNumber, maxCapacity, NumberOfStudents " +
                     "FROM AvailableDorm AS A LEFT JOIN Student AS S ON A.BuildingNumber = S.BuildingNumber " +
-                    "AND A.RoomNumber = S.RoomNumber ORDER BY NumberOfStudents ASC ORDER BY (SELECT NULL)"+
+                    "AND A.RoomNumber = S.RoomNumber ORDER BY NumberOfStudents ASC "+
                     " OFFSET "+(parentComponent.getTotalPage()-1)* parentComponent.getRowPerPage()+
                     " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY;";
         }

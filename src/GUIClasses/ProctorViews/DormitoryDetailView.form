@@ -218,6 +218,7 @@
                 <constraints/>
                 <properties>
                   <background color="-1507329"/>
+                  <foreground color="-16777216"/>
                 </properties>
               </component>
             </children>
