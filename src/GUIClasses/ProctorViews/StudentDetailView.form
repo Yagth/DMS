@@ -64,6 +64,8 @@
                     <properties>
                       <background color="-1507329"/>
                       <foreground color="-16777216"/>
+                      <rowHeight value="25"/>
+                      <rowMargin value="3"/>
                     </properties>
                   </component>
                 </children>
