@@ -74,6 +74,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         lockerNoL.setText(String.valueOf(dorm.getNoOfLockers()));
         chairsNoL.setText(String.valueOf(dorm.getNoOfChairs()));
         tableNoL.setText(String.valueOf(dorm.getNoOfTables()));
+        maxCapacityL.setText(String.valueOf(dorm.getMaxCapacity()));
         keyHolderL.setText(dorm.getKeyHolderId());
     }
     public void displayReadStatus(boolean readStatus){
