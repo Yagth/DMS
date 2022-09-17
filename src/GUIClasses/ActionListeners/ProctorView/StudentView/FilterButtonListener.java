@@ -40,13 +40,21 @@ public class FilterButtonListener implements ActionListener {
     public Vector<Vector<Object>> filterStudents(){
         Vector<Vector<Object>> students = parentComponent.getTableData();
         Vector<Vector<Object>> tmp = new Vector<>();
-        Object comparingObject = parentComponent.getFilterInputText();
         int index = getFilteringColumn();
+        if(parentComponent.getSelectedCondition().equals("Eligibility")){
+            for(Vector<Object> student : students){
+                if(student.get(index).toString().equals("True"))
+                    tmp.add(student);
+            }
+        }
+        else{
+            Object comparingObject = parentComponent.getFilterInputText();
 
 
-        for(Vector<Object> student : students){
-            if(comparingObject.equals(student.get(index).toString())){
-                tmp.add(student);
+            for(Vector<Object> student : students){
+                if(comparingObject.equals(student.get(index).toString())){
+                    tmp.add(student);
+                }
             }
         }
         return tmp;
