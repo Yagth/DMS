@@ -6,7 +6,7 @@ import BasicClasses.Persons.Proctor;
 import GUIClasses.ActionListeners.ProctorView.StockView.BackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
-import com.microsoft.sqlserver.jdbc.JaasConfiguration;
+import GUIClasses.TableViewPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-public class StockView extends JFrame implements Views, TableViews {
+public class StockView extends TableViewPage implements Views, TableViews {
     private JPanel mainPanel;
     private JPanel headerPanel;
     private JPanel stockDetailPanel;
@@ -29,6 +29,8 @@ public class StockView extends JFrame implements Views, TableViews {
     private Proctor proctor;
     private boolean readStatus;
     private JButton backButton;
+    private JButton nextButton;
+    private JButton prevButton;
     private Vector<Vector<Object>> tableData;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
@@ -44,8 +46,8 @@ public class StockView extends JFrame implements Views, TableViews {
         Vector<Vector<Object>> history = new Vector<>();
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet;
-        String query = "SELECT * FROM Proctor AS P JOIN ProctorControlsStock AS PCS ON P.EID = PCS.EID WHERE PCS.buildingNumber='"+proctor.getBuildingNo()+"' ";
-        System.out.println("Query: "+query);//For debugging only.
+        String query = "SELECT * FROM Proctor AS P JOIN ProctorControlsStock AS PCS ON P.EID = PCS.EID WHERE PCS.buildingNumber='"+proctor.getBuildingNo()+
+                "' ORDER BY actionDate DESC OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+" ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
             try{
@@ -66,16 +68,20 @@ public class StockView extends JFrame implements Views, TableViews {
 
     @Override
     public boolean nextButtonIsVisible() {
-        return false;
+        boolean hasNext = getPageNumber()<getTotalPage();
+        return hasNext;
     }
 
     @Override
     public boolean prevButtonIsVisible() {
-        return false;
+        boolean hasPrev = getPageNumber()>1;
+        return hasPrev;
     }
 
     @Override
     public void setButtonVisibility() {
+        boolean visibility = nextButtonIsVisible();
+        nextButton
 
     }
 
