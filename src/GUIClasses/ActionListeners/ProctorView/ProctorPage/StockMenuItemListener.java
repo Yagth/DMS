@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class StockMenuItemListener extends MenuItemListener{
-    private ProctorPage parentComponent;
 
     public StockMenuItemListener(ProctorPage parentComponent) {
         super(parentComponent);

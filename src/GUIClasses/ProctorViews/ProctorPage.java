@@ -235,6 +235,7 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         seeReports.setForeground(Color.BLACK);
         seeReports.addActionListener(new ReportMenuItemListener(this));
         JMenuItem seeStocks = new JMenuItem("See Stocks");
+        seeStocks.addActionListener(new StockMenuItemListener(this));
         seeStocks.setForeground(Color.BLACK);
 
         Service.add(seeDormitories);
