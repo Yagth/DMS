@@ -38,6 +38,8 @@ public class DeallocateButtonListener implements ActionListener {
                             "confirm",JOptionPane.YES_NO_OPTION);
                     if(!(parentComponent.getNumberOfStudentsL().getText().equals("0"))){ // If there are students satisfying the condition.
                         if(choice==0) updateStatus = deallocate(query) & deallocate(query2);
+                        System.out.println("Query: "+query);//For debugging only.
+                        System.out.println("Query2: "+query2);//FOr debugging only.
                         displayUpdateStatus(updateStatus);
                     }
                     else{
