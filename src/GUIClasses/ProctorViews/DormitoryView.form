@@ -242,7 +242,9 @@
             <children>
               <component id="296b1" class="javax.swing.JTable" binding="dormListTable">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <background color="-1507329"/>
+                </properties>
               </component>
             </children>
           </scrollpane>

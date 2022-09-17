@@ -116,6 +116,7 @@
             <properties>
               <background color="-13860888"/>
               <font name="Californian FB" size="16" style="0"/>
+              <foreground color="-1"/>
               <text value="Deallocate"/>
             </properties>
           </component>
@@ -152,6 +153,7 @@
         <properties>
           <background color="-13860888"/>
           <font name="Californian FB" size="16" style="0"/>
+          <foreground color="-1"/>
           <text value="Back"/>
         </properties>
       </component>
