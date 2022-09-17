@@ -230,6 +230,7 @@
             </constraints>
             <properties>
               <font name="Californian FB" size="16" style="1"/>
+              <foreground color="-16777216"/>
               <text value="Description"/>
             </properties>
           </component>
