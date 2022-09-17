@@ -26,6 +26,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
     private JTable studentList;
     private JButton backButton;
     private JLabel roomNoL;
+    private JLabel maxCapacityL;
     private DormitoryView parentComponent;
     private Proctor proctor;
     private Dormitory dorm;
