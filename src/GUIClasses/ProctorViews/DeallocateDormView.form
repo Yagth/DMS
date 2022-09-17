@@ -132,6 +132,7 @@
             </constraints>
             <properties>
               <font name="Californian FB" size="14" style="0"/>
+              <toolTipText value="Enter the year/batch of the students"/>
               <visible value="false"/>
             </properties>
           </component>
