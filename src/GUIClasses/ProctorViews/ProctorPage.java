@@ -215,21 +215,23 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         prevButton.addActionListener(new PrevActionListener(this));
 
         JMenuBar Services = new JMenuBar();
-        Services.setBackground(new Color(72,131,184));
+        Services.setBackground(new Color(232,255,255));
+        Services.setOpaque(true);
+
         JMenu Service = new JMenu("Services");
-        Service.setForeground(Color.white);
+        Service.setForeground(Color.GRAY);
 
         JMenuItem seeDormitories = new JMenuItem("See Dormitories");
-        seeDormitories.setForeground(new Color(72,131,184));
+        seeDormitories.setForeground(Color.BLACK);
         seeDormitories.addActionListener(new SeeDormMenuListener(this));
         JMenuItem seeStudents = new JMenuItem("See Students");
-        seeStudents.setForeground(new Color(72,131,184));
+        seeStudents.setForeground(Color.BLACK);
         seeStudents.addActionListener(new SeeStudentMenuListener(this));
         JMenuItem seeReports = new JMenuItem("All Reports");
-        seeReports.setForeground(new Color(72,131,184));
+        seeReports.setForeground(Color.BLACK);
         seeReports.addActionListener(new ReportMenuItemListener(this));
         JMenuItem seeStocks = new JMenuItem("See Stocks");
-        seeStocks.setForeground(new Color(72,131,184));
+        seeStocks.setForeground(Color.BLACK);
 
         Service.add(seeDormitories);
         Service.add(seeStudents);
@@ -237,9 +239,9 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         Service.add(seeStocks);
 
         JMenu logout = new JMenu("Logout");
-        logout.setForeground(Color.white);
+        logout.setForeground(Color.GRAY);
         JMenuItem signOut = new JMenuItem("Logout");
-        signOut.setForeground(new Color(72,131,184));
+        signOut.setForeground(Color.BLACK);
         signOut.addActionListener(new LogoutMenuItemListener(this));
 
         logout.add(signOut);
