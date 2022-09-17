@@ -38,6 +38,12 @@ public class StockView extends TableViewPage implements Views, TableViews {
     public StockView(ProctorPage parentComponent,Proctor proctor){
         this.proctor = proctor;
         this.parentComponent = parentComponent;
+
+        String query = "SELECT Count(*) AS TotalNo FROM Proctor AS P JOIN " +
+                "ProctorControlsStock AS PCS ON P.EID = PCS.EID WHERE " +
+                "PCS.buildingNumber='"+proctor.getBuildingNo()+"'";
+        loadAndSetTotalPage(query);
+
         setUpGUi();
         System.out.println("After setUpGui");//For debugging only.
     }
@@ -81,13 +87,20 @@ public class StockView extends TableViewPage implements Views, TableViews {
     @Override
     public void setButtonVisibility() {
         boolean visibility = nextButtonIsVisible();
-        nextButton
+        nextButton.setVisible(visibility);
+        visibility = prevButtonIsVisible();
+        prevButton.setVisible(visibility);
+
+        this.revalidate();
 
     }
 
     @Override
     public void reloadTable() {
-
+        tableData.clear();
+        Vector<Vector<Object>> tmp = loadHistory();
+        addDataToTable(tmp);
+        refreshTable();
     }
 
     @Override
