@@ -68,7 +68,7 @@ public class StudentView extends TableViewPage implements Views, TableViews {
                     tmp.add(resultSet.getString("Fname")+" "+resultSet.getString("Lname"));
                     tmp.add(resultSet.getInt("Year"));
                     tmp.add(resultSet.getString("BuildingNumber"));
-                    tmp.add(resultSet.getInt("isEligible"));
+                    tmp.add(resultSet.getBoolean("isEligible"));
 
                     students.add(tmp);
                 }
