@@ -21,6 +21,7 @@ public class SearchButtonListener implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        parentComponent.clearDorms();
         loadSearchedDorm();
         parentComponent.changeTableData(dorms);
         if(dorms.size() == 0)
