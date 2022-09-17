@@ -32,7 +32,7 @@
             </constraints>
             <properties>
               <font name="Californian FB" size="14" style="0"/>
-              <foreground color="-8685443"/>
+              <foreground color="-16777216"/>
               <text value="Location"/>
             </properties>
           </component>
@@ -73,7 +73,7 @@
             </constraints>
             <properties>
               <font name="Californian FB" size="14" style="0"/>
-              <foreground color="-8685443"/>
+              <foreground color="-16777216"/>
               <text value="Room Number"/>
             </properties>
           </component>
@@ -82,9 +82,10 @@
               <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <background color="-12024904"/>
+              <background color="-13860888"/>
+              <enabled value="true"/>
               <font name="Californian FB" size="16" style="0"/>
-              <foreground color="-1546"/>
+              <foreground color="-1"/>
               <text value="Submit"/>
             </properties>
           </component>
@@ -115,7 +116,7 @@
             </constraints>
             <properties>
               <font name="Californian FB" size="14" style="0"/>
-              <foreground color="-8685443"/>
+              <foreground color="-16777216"/>
               <text value="Building Number"/>
             </properties>
           </component>
@@ -147,7 +148,7 @@
             </constraints>
             <properties>
               <font name="Californian FB" size="14" style="0"/>
-              <foreground color="-8685443"/>
+              <foreground color="-16777216"/>
               <text value="Description"/>
             </properties>
           </component>
@@ -159,7 +160,7 @@
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-12024904"/>
+          <background color="-13860888"/>
         </properties>
         <border type="none"/>
         <children>
@@ -168,7 +169,7 @@
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="Californian FB" size="16" style="1"/>
+              <font name="Californian FB" size="20" style="1"/>
               <foreground color="-1546"/>
               <text value="Fill the following form"/>
             </properties>

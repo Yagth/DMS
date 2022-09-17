@@ -25,8 +25,8 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <background color="-12024904"/>
-              <font name="Californian FB" size="14"/>
+              <background color="-13860888"/>
+              <font name="Californian FB" size="16"/>
               <foreground color="-1"/>
               <text value="Add"/>
               <toolTipText value="Add another cloth"/>
@@ -44,8 +44,8 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <background color="-12024904"/>
-              <font name="Californian FB" size="14"/>
+              <background color="-13860888"/>
+              <font name="Californian FB" size="16"/>
               <foreground color="-1"/>
               <text value="Finish"/>
               <toolTipText value="submit the list to the proctors"/>
@@ -90,6 +90,8 @@
             <constraints/>
             <properties>
               <autoCreateRowSorter value="false"/>
+              <background color="-1507329"/>
+              <foreground color="-16777216"/>
               <opaque value="false"/>
               <preferredScrollableViewportSize width="500" height="150"/>
             </properties>
@@ -102,7 +104,7 @@
           <grid row="5" column="0" row-span="1" col-span="15" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-12024904"/>
+          <background color="-13860888"/>
         </properties>
         <border type="none"/>
         <children>
