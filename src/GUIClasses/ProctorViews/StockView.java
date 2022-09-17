@@ -44,7 +44,7 @@ public class StockView extends JFrame implements Views, TableViews {
         Vector<Vector<Object>> history = new Vector<>();
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet;
-        String query = "SELECT * FROM Proctor AS P JOIN ProctorControlsStock AS PCS ON P.EID = PCS.EID WHERE buildingNumber='"+proctor.getBuildingNo()+"' ";
+        String query = "SELECT * FROM Proctor AS P JOIN ProctorControlsStock AS PCS ON P.EID = PCS.EID WHERE PCS.buildingNumber='"+proctor.getBuildingNo()+"' ";
 
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
