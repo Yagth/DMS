@@ -147,7 +147,7 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="Californian FB" size="14" style="0"/>
+              <font name="Californian FB" size="14" style="1"/>
               <foreground color="-16777216"/>
               <text value="Student Name"/>
             </properties>
@@ -192,102 +192,102 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="f1900" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="Californian FB" size="14" style="0"/>
-              <foreground color="-16777216"/>
-              <text value="Id"/>
-            </properties>
-          </component>
-          <component id="5df9c" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="Californian FB" size="14" style="0"/>
-              <foreground color="-16777216"/>
-              <text value="Year"/>
-            </properties>
-          </component>
-          <component id="43811" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="Californian FB" size="14" style="0"/>
-              <foreground color="-16777216"/>
-              <text value="Building Number"/>
-            </properties>
-          </component>
-          <component id="90d25" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="Californian FB" size="14" style="0"/>
-              <foreground color="-16777216"/>
-              <text value="Dorm Number"/>
-            </properties>
-          </component>
-          <component id="a1872" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="Californian FB" size="14" style="0"/>
-              <foreground color="-16777216"/>
-              <text value="Phone number"/>
-            </properties>
-          </component>
           <component id="cfc34" class="javax.swing.JLabel">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="Californian FB" size="14" style="0"/>
+              <font name="Californian FB" size="14" style="1"/>
               <foreground color="-16777216"/>
               <text value="Gender"/>
             </properties>
           </component>
-          <component id="6d35f" class="javax.swing.JLabel">
+          <component id="21ff1" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Californian FB" size="14" style="1"/>
+              <foreground color="-16777216"/>
+              <text value="Id"/>
+            </properties>
+          </component>
+          <component id="7eaa2" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Californian FB" size="14" style="1"/>
+              <foreground color="-16777216"/>
+              <text value="Year"/>
+            </properties>
+          </component>
+          <component id="9e85d" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Californian FB" size="14" style="1"/>
+              <foreground color="-16777216"/>
+              <text value="Building Number"/>
+            </properties>
+          </component>
+          <component id="80e60" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Californian FB" size="14" style="1"/>
+              <foreground color="-16777216"/>
+              <text value="Dorm Number"/>
+            </properties>
+          </component>
+          <component id="af9d1" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Californian FB" size="14" style="1"/>
+              <foreground color="-16777216"/>
+              <text value="Phone Number"/>
+            </properties>
+          </component>
+          <component id="7c092" class="javax.swing.JLabel">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="Californian FB" size="14" style="0"/>
+              <font name="Californian FB" size="14" style="1"/>
               <foreground color="-16777216"/>
               <text value="Eligibility"/>
             </properties>
           </component>
-          <component id="2a0a5" class="javax.swing.JLabel">
+          <component id="ad736" class="javax.swing.JLabel">
             <constraints>
               <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="Californian FB" size="14" style="0"/>
+              <font name="Californian FB" size="14" style="1"/>
               <foreground color="-16777216"/>
               <text value="Departement"/>
             </properties>
           </component>
-          <component id="d574" class="javax.swing.JLabel">
+          <component id="bc400" class="javax.swing.JLabel">
             <constraints>
               <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="Californian FB" size="14" style="0"/>
+              <font name="Californian FB" size="14" style="1"/>
               <foreground color="-16777216"/>
               <text value="Equipments"/>
             </properties>
           </component>
-          <component id="82c29" class="javax.swing.JLabel">
+          <component id="50783" class="javax.swing.JLabel">
             <constraints>
               <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="Californian FB" size="14" style="0"/>
+              <font name="Californian FB" size="14" style="1"/>
               <foreground color="-16777216"/>
               <text value="Place of origin"/>
             </properties>
