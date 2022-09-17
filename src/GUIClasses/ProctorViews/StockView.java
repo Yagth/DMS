@@ -137,7 +137,9 @@ public class StockView extends TableViewPage implements Views, TableViews {
     @Override
     public void addDataToTable(Object object) {
         Vector<Vector<Object>> history = (Vector<Vector<Object>>) object;
-        tableData = history;
+        for(Vector<Object> tmp: history){
+            tableData.add(tmp);
+        }
     }
 
     @Override
