@@ -1,16 +1,20 @@
 package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
+import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import GUIClasses.ActionListeners.ProctorView.StockView.BackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
+import com.microsoft.sqlserver.jdbc.JaasConfiguration;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 public class StockView extends JFrame implements Views, TableViews {
@@ -37,7 +41,27 @@ public class StockView extends JFrame implements Views, TableViews {
     }
 
     public Vector<Vector<Object>> loadHistory(){
-        return null;
+        Vector<Vector<Object>> history = new Vector<>();
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        ResultSet resultSet;
+        String query = "SELECT * FROM Proctor AS P JOIN ProctorControlsStock AS PCS ON P.EID = PCS.EID WHERE buildingNumber='"+proctor.getBuildingNo()+"' ";
+
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    Vector<Object> tmp = new Vector<>();
+                    tmp.add(resultSet.getString("EID"));
+                    tmp.add(resultSet.getString("Fname")+" "+resultSet.getString("Lname"));
+                    tmp.add(resultSet.getString("actionType"));
+                    tmp.add(resultSet.getString("date"));
+                    history.add(tmp);
+                }
+            }catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+        }
+        return history;
     }
 
     @Override
@@ -71,11 +95,14 @@ public class StockView extends JFrame implements Views, TableViews {
         titles.add("Date");
 
         Vector<Vector<Object>> history = loadHistory();
+        addDataToTable(history);
+        refreshTable();
         try{
             readStatus = !(history.size() == 0);
         }catch (NullPointerException ex){
             readStatus = false;
         }
+
         displayReadStatus(readStatus);
 
         stockHistoryTable.setModel(new DefaultTableModel(tableData,titles));
@@ -88,12 +115,14 @@ public class StockView extends JFrame implements Views, TableViews {
 
     @Override
     public void addDataToTable(Object object) {
-
+        Vector<Vector<Object>> history = (Vector<Vector<Object>>) object;
+        tableData = history;
     }
 
     @Override
     public void refreshTable() {
-
+        DefaultTableModel tableModel = (DefaultTableModel) stockHistoryTable.getModel();
+        tableModel.fireTableDataChanged();
     }
 
     @Override
