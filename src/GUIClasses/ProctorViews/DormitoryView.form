@@ -150,9 +150,9 @@
               <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="Californian FB" size="14" style="0"/>
+              <font name="Californian FB" size="16" style="0"/>
               <foreground color="-16777216"/>
-              <text value="year"/>
+              <text value="Year"/>
               <visible value="false"/>
             </properties>
           </component>
