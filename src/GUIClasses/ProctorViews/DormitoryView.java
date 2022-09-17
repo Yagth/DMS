@@ -190,8 +190,11 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
         return emptyDorm;
     }
 
-    public String getBuildingNo(){
+    public String getBuildingNoTA(){
         return searchBuildingNoTA.getText();
+    }
+    public String getProctorBuilding(){
+        return String.valueOf(proctor.getBuildingNo());
     }
 
     public String getRoomNo(){
@@ -212,8 +215,7 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
         this.addWindowListener(new WindowAdapter()
         {
             @Override
-            public void windowClosing(WindowEvent e)
-            {
+            public void windowClosing(WindowEvent e) {
                 e.getWindow().dispose();
                 parentComponent.setVisible(true);
             }

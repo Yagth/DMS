@@ -31,12 +31,18 @@ public class AllocateDormAsRequested implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus = false;
+
+        String query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
+                " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
+                Request.getCurrentDate()+"' , '"+parentComponent.getProctorBuilding()+"')";
+
         loadAvailableDorms();
         loadReporterAndReportId();
         loadStudents();
         sortDormOnAvailableSpace();
         sortDormOnBuildingNo();
         updateStatus = allocateStudents();
+        insertHistory(query);
         updateRequestStatus();
         displayUpdateStatus(updateStatus);
     }
@@ -173,7 +179,12 @@ public class AllocateDormAsRequested implements ActionListener {
                         "', RoomNumber='"+student.getDormNo()+
                         "' WHERE SID='"+student.getsId()+"'";
                 updateStatus = javaConnection.updateQuery(query);
+
+                String query2 = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
+                        " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";//Decrementing the stock on every student allocation.
+                javaConnection.insertQuery(query2);
             }
+
             updateStatus &= (totalSpace >= reporterIds.size());
             remainingStudents = reporterIds.size()-totalSpace;
             if(remainingStudents<0) remainingStudents = 0;
@@ -208,6 +219,12 @@ public class AllocateDormAsRequested implements ActionListener {
             else
                 JOptionPane.showMessageDialog(parentComponent,"Couldn't allocate "+ remainingStudents+" students due to some problem.\n " +
                         "Make sure there is available space and also the destination exits.");
+        }
+    }
+    public void insertHistory(String query){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        if(javaConnection.isConnected()){
+            javaConnection.insertQuery(query);
         }
     }
 }

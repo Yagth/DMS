@@ -1,6 +1,5 @@
 package GUIClasses.ActionListeners.ProctorView.DormitoryView;
 
-import BasicClasses.Rooms.Dormitory;
 import GUIClasses.ProctorViews.DormitoryView;
 
 import java.awt.event.FocusEvent;
@@ -16,7 +15,7 @@ public class FocusListenerForTF implements FocusListener {
 
     @Override
     public void focusGained(FocusEvent e) {
-        buildingNo = parentComponent.getBuildingNo();
+        buildingNo = parentComponent.getBuildingNoTA();
         roomNo = parentComponent.getRoomNo();
     }
 
@@ -27,7 +26,7 @@ public class FocusListenerForTF implements FocusListener {
             parentComponent.loadDorms();
             parentComponent.addDataToTable(null);
         }else{
-            buildingNo = parentComponent.getBuildingNo();
+            buildingNo = parentComponent.getBuildingNoTA();
             roomNo = parentComponent.getRoomNo();
         }
     }

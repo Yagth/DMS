@@ -1,6 +1,7 @@
 package GUIClasses.ActionListeners.ProctorView.DeallocateDormView;
 
 import BasicClasses.Others.JavaConnection;
+import BasicClasses.Requests.Request;
 import GUIClasses.ProctorViews.DeallocateDormView;
 
 import javax.swing.*;
@@ -22,6 +23,9 @@ public class DeallocateButtonListener implements ActionListener {
             if(!(buildingNumber.equals(""))){
                 String year = parentComponent.getYearTF().getText();
                 String query = null, query2 = null;
+                String query3= "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
+                        " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Deallocate Dorm', '"+
+                        Request.getCurrentDate()+"' , '"+parentComponent.getFromBuildingNumber()+"')";
                 if(year.equals("")){
                     JOptionPane.showMessageDialog(parentComponent,"Year can't be empty on this condition");
                 }
@@ -37,9 +41,10 @@ public class DeallocateButtonListener implements ActionListener {
                     int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure these students has returned their equipments?",
                             "confirm",JOptionPane.YES_NO_OPTION);
                     if(!(parentComponent.getNumberOfStudentsL().getText().equals("0"))){ // If there are students satisfying the condition.
-                        if(choice==0) updateStatus = deallocate(query) & deallocate(query2);
+                        if(choice==0) updateStatus = deallocate(query) & deallocate(query2) & deallocate(query3);
                         System.out.println("Query: "+query);//For debugging only.
                         System.out.println("Query2: "+query2);//FOr debugging only.
+                        System.out.println("Query3: "+query3);//FOr debugging only.
                         displayUpdateStatus(updateStatus);
                     }
                     else{

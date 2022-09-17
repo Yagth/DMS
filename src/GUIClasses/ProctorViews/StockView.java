@@ -1,19 +1,25 @@
 package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
+import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
+import GUIClasses.ActionListeners.NextActionListener;
+import GUIClasses.ActionListeners.PrevActionListener;
 import GUIClasses.ActionListeners.ProctorView.StockView.BackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
+import GUIClasses.TableViewPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
-public class StockView extends JFrame implements Views, TableViews {
+public class StockView extends TableViewPage implements Views, TableViews {
     private JPanel mainPanel;
     private JPanel headerPanel;
     private JPanel stockDetailPanel;
@@ -25,6 +31,8 @@ public class StockView extends JFrame implements Views, TableViews {
     private Proctor proctor;
     private boolean readStatus;
     private JButton backButton;
+    private JButton nextButton;
+    private JButton prevButton;
     private Vector<Vector<Object>> tableData;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
@@ -32,32 +40,69 @@ public class StockView extends JFrame implements Views, TableViews {
     public StockView(ProctorPage parentComponent,Proctor proctor){
         this.proctor = proctor;
         this.parentComponent = parentComponent;
+
+        String query = "SELECT Count(*) AS TotalNo FROM Proctor AS P JOIN " +
+                "ProctorControlsStock AS PCS ON P.EID = PCS.EID WHERE " +
+                "PCS.buildingNumber='"+proctor.getBuildingNo()+"'";
+        loadAndSetTotalPage(query);
+
         setUpGUi();
         System.out.println("After setUpGui");//For debugging only.
     }
 
     public Vector<Vector<Object>> loadHistory(){
-        return null;
+        Vector<Vector<Object>> history = new Vector<>();
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        ResultSet resultSet;
+        String query = "SELECT * FROM Proctor AS P RIGHT JOIN ProctorControlsStock AS PCS ON P.EID = PCS.EID WHERE PCS.buildingNumber='"+proctor.getBuildingNo()+
+                "' ORDER BY actionDate DESC OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+" ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    Vector<Object> tmp = new Vector<>();
+                    tmp.add(resultSet.getString("EID"));
+                    tmp.add(resultSet.getString("Fname")+" "+resultSet.getString("Lname"));
+                    tmp.add(resultSet.getString("actionType"));
+                    tmp.add(resultSet.getString("actionDate"));
+                    history.add(tmp);
+                }
+            }catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+        }
+        return history;
     }
 
     @Override
     public boolean nextButtonIsVisible() {
-        return false;
+        boolean hasNext = getPageNumber()<getTotalPage();
+        return hasNext;
     }
 
     @Override
     public boolean prevButtonIsVisible() {
-        return false;
+        boolean hasPrev = getPageNumber()>1;
+        return hasPrev;
     }
 
     @Override
     public void setButtonVisibility() {
+        boolean visibility = nextButtonIsVisible();
+        nextButton.setVisible(visibility);
+        visibility = prevButtonIsVisible();
+        prevButton.setVisible(visibility);
+
+        this.revalidate();
 
     }
 
     @Override
     public void reloadTable() {
-
+        tableData.clear();
+        Vector<Vector<Object>> tmp = loadHistory();
+        addDataToTable(tmp);
+        refreshTable();
     }
 
     @Override
@@ -71,11 +116,14 @@ public class StockView extends JFrame implements Views, TableViews {
         titles.add("Date");
 
         Vector<Vector<Object>> history = loadHistory();
+        addDataToTable(history);
+        refreshTable();
         try{
             readStatus = !(history.size() == 0);
         }catch (NullPointerException ex){
             readStatus = false;
         }
+
         displayReadStatus(readStatus);
 
         stockHistoryTable.setModel(new DefaultTableModel(tableData,titles));
@@ -88,12 +136,16 @@ public class StockView extends JFrame implements Views, TableViews {
 
     @Override
     public void addDataToTable(Object object) {
-
+        Vector<Vector<Object>> history = (Vector<Vector<Object>>) object;
+        for(Vector<Object> tmp: history){
+            tableData.add(tmp);
+        }
     }
 
     @Override
     public void refreshTable() {
-
+        DefaultTableModel tableModel = (DefaultTableModel) stockHistoryTable.getModel();
+        tableModel.fireTableDataChanged();
     }
 
     @Override
@@ -113,7 +165,10 @@ public class StockView extends JFrame implements Views, TableViews {
         }); //A custom action listener for the exit button.
 
         backButton.addActionListener(new BackButtonListener(this));
+        nextButton.addActionListener(new NextActionListener(this));
+        prevButton.addActionListener(new PrevActionListener(this));
 
+        setButtonVisibility();
         setUpTable();
         setVisible(true);
     }
