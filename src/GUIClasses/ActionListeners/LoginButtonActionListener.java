@@ -1,6 +1,7 @@
 package GUIClasses.ActionListeners;
 
 import BasicClasses.Enums.UserStatus;
+import BasicClasses.Others.JavaConnection;
 import GUIClasses.LoginPage;
 import GUIClasses.ProctorViews.ProctorPage;
 import GUIClasses.StudentViews.StudentPage;
@@ -18,6 +19,8 @@ public class LoginButtonActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+            parentComponent.setJavaConnection(javaConnection);
             boolean  isUser = parentComponent.checkUser();
 
             if(isUser){

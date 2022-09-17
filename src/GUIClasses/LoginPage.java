@@ -28,7 +28,7 @@ public class LoginPage extends JFrame{
     private JLabel subtitleL;
     private JLabel descripotionL;
     private JLabel loginL;
-    JavaConnection javaConnection;
+    private JavaConnection javaConnection;
     UserStatus userStatus;
     public static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     public static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
@@ -36,8 +36,11 @@ public class LoginPage extends JFrame{
 
 
     public LoginPage(){
-        javaConnection = new JavaConnection(JavaConnection.URL);
         setUpGUi();
+    }
+
+    public void setJavaConnection(JavaConnection javaConnection){
+        this.javaConnection = javaConnection;
     }
     public void setUpGUi() {
         this.setTitle("Dormitory Management System");
