@@ -52,7 +52,7 @@ public class StockView extends TableViewPage implements Views, TableViews {
         Vector<Vector<Object>> history = new Vector<>();
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet;
-        String query = "SELECT * FROM Proctor AS P JOIN ProctorControlsStock AS PCS ON P.EID = PCS.EID WHERE PCS.buildingNumber='"+proctor.getBuildingNo()+
+        String query = "SELECT * FROM Proctor AS P RIGHT JOIN ProctorControlsStock AS PCS ON P.EID = PCS.EID WHERE PCS.buildingNumber='"+proctor.getBuildingNo()+
                 "' ORDER BY actionDate DESC OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+" ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
