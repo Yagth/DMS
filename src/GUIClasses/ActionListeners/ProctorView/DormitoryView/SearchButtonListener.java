@@ -30,7 +30,7 @@ public class SearchButtonListener implements ActionListener {
     }
     public void loadSearchedDorm(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String buildingNumber = parentComponent.getBuildingNo();
+        String buildingNumber = parentComponent.getBuildingNoTA();
         String roomNumber = parentComponent.getRoomNo();
         String query = "";
         ResultSet resultSet;

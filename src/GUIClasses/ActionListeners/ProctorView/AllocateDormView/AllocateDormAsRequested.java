@@ -34,7 +34,7 @@ public class AllocateDormAsRequested implements ActionListener {
 
         String query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
                 " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
-                Request.getCurrentDate()+"' , '"+parentComponent.getBuildingNo()+"')";
+                Request.getCurrentDate()+"' , '"+parentComponent.getProctorBuilding()+"')";
 
         loadAvailableDorms();
         loadReporterAndReportId();
