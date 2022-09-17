@@ -8,6 +8,8 @@ import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -148,6 +150,15 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         this.setTitle("Detail Info of the dorm");
         this.setSize(600,700);
         this.setLocationRelativeTo(parentComponent);
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                e.getWindow().dispose();
+                parentComponent.setVisible(true);
+            }
+        }); //A custom action listener for the exit button.
         loadDormInfo();
         setUpTable();
 
