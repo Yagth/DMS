@@ -69,7 +69,11 @@ public class StockView extends JFrame implements Views, TableViews {
         titles.add("Date");
 
         Vector<Vector<Object>> history = loadHistory();
-        readStatus = !(history.size() == 0);
+        try{
+            readStatus = !(history.size() == 0);
+        }catch (NullPointerException ex){
+            readStatus = false;
+        }
         displayReadStatus(readStatus);
 
         stockHistoryTable.setModel(new DefaultTableModel(tableData,titles));
