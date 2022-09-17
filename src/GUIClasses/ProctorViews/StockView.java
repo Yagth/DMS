@@ -32,6 +32,7 @@ public class StockView extends JFrame implements Views, TableViews {
         this.proctor = proctor;
         this.parentComponent = parentComponent;
         setUpGUi();
+        System.out.println("After setUpGui");//For debugging only.
     }
 
     public Vector<Vector<Object>> loadHistory(){
@@ -110,5 +111,6 @@ public class StockView extends JFrame implements Views, TableViews {
             }
         }); //A custom action listener for the exit button.
         setUpTable();
+        setVisible(true);
     }
 }
