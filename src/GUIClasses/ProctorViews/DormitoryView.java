@@ -113,10 +113,9 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
     }
 
     public void changeTableData(ArrayList<Dormitory> dorms){
-        this.dorms = dorms;
         tableData.clear();
+        this.dorms = dorms;
         addDataToTable(null);
-        refreshTable();
     }
 
     public int getRowPerPage(){
