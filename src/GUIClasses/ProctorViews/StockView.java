@@ -2,6 +2,7 @@ package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Persons.Proctor;
+import GUIClasses.ActionListeners.ProctorView.StockView.BackButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -32,6 +33,7 @@ public class StockView extends JFrame implements Views, TableViews {
         this.proctor = proctor;
         this.parentComponent = parentComponent;
         setUpGUi();
+        System.out.println("After setUpGui");//For debugging only.
     }
 
     public Vector<Vector<Object>> loadHistory(){
@@ -69,7 +71,11 @@ public class StockView extends JFrame implements Views, TableViews {
         titles.add("Date");
 
         Vector<Vector<Object>> history = loadHistory();
-        readStatus = !(history.size() == 0);
+        try{
+            readStatus = !(history.size() == 0);
+        }catch (NullPointerException ex){
+            readStatus = false;
+        }
         displayReadStatus(readStatus);
 
         stockHistoryTable.setModel(new DefaultTableModel(tableData,titles));
@@ -105,6 +111,15 @@ public class StockView extends JFrame implements Views, TableViews {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+
+        backButton.addActionListener(new BackButtonListener(this));
+
         setUpTable();
+        setVisible(true);
+    }
+
+    public void goBackToParent(){
+        this.dispose();
+        parentComponent.setVisible(true);
     }
 }

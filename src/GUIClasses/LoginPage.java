@@ -1,60 +1,103 @@
 package GUIClasses;
 
+import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Enums.UserStatus;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Persons.Student;
 import GUIClasses.ActionListeners.LoginButtonActionListener;
-import GUIClasses.Interfaces.Views;
-import javax.swing.*;
-import java.sql.*;
 
-public class LoginPage extends JFrame implements Views {
-    private JPanel MainPanel;
-    private JPanel BottomPanel;
-    private JPanel CentralPanel;
-    private JPanel TopPanel;
-    private JLabel Tittle;
-    private JTextField UsernameTF;
-    private JPasswordField passwordField;
-    private JButton LoginButton;
-    private JLabel Username;
-    private JLabel Password;
-    private JPanel centralCenter;
-    private JPanel WestSpace;
-    private JLabel DMS;
-    JavaConnection javaConnection;
+import javax.swing.*;
+import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class LoginPage extends JFrame{
+    private JPanel mainPanel;
+    private JPanel rightPanel;
+    private JButton submitButton;
+    private JTextField userNameTF;
+    private JPasswordField passwordTF;
+    private JPanel loginPanel;
+    private JLabel userNameL;
+    private JLabel passwordL;
+    private JLabel logoL;
+    private JPanel logoPanel;
+    private JPanel leftPanel;
+    private JLabel titleL;
+    private JLabel subtitleL;
+    private JLabel descripotionL;
+    private JLabel loginL;
+    private JavaConnection javaConnection;
     UserStatus userStatus;
-    private static final int WIDTH = 900;
-    private static final int HEIGHT = 400;
+    public static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
+    public static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
+
 
 
     public LoginPage(){
         setUpGUi();
-        javaConnection = new JavaConnection(JavaConnection.URL);
     }
 
-    @Override
+    public void setJavaConnection(JavaConnection javaConnection){
+        this.javaConnection = javaConnection;
+    }
     public void setUpGUi() {
         this.setTitle("Dormitory Management System");
-        this.setContentPane(MainPanel);
+        this.setContentPane(mainPanel);
         this.setSize(WIDTH,HEIGHT);
+        this.getContentPane().setBackground(new Color(232,255,255));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
 
-        LoginButton.addActionListener(new LoginButtonActionListener(this));
+        ImageIcon usernameIcon = new ImageIcon("Images/user.png");
+        ImageIcon keyIcon = new ImageIcon("Images/key.png");
+        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
+        Image titleLogo = tmp.getImage();
+
+        this.setIconImage(titleLogo);
+
+        logoL.setIcon(logo);
+        userNameL.setIcon(usernameIcon);
+        passwordL.setIcon(keyIcon);
+
+        titleL.setFont(new Font("Californian FB",Font.BOLD,26));
+        titleL.setText("<html>Welcome to Addis Ababa<br>University</html>");
+        subtitleL.setFont(new Font("Californian FB",Font.BOLD,22));
+        subtitleL.setText("<html>Dormitory Management<br>System</html>");
+        descripotionL.setFont(new Font("Californian FB",Font.PLAIN,16));
+        loginL.setFont(new Font("Californian FB",Font.BOLD,22));
+
+        userNameTF.setBorder(BorderFactory.createEmptyBorder());
+        passwordTF.setBorder(BorderFactory.createEmptyBorder());
+        userNameL.setFont(new Font("Californian FB",Font.PLAIN,16));
+        passwordL.setFont(new Font("Californian FB",Font.PLAIN,16));
+
+        submitButton.addActionListener(new LoginButtonActionListener(this));
+
+        userNameTF.requestFocus();
+
+        this.setVisible(true);
+    }
+
+    public JTextField getUserNameTF() {
+        return userNameTF;
+    }
+
+    public JPasswordField getPasswordTF() {
+        return passwordTF;
     }
 
     public JTextField getUsernameTF(){
-        return UsernameTF;
+        return userNameTF;
     }
     public String getUsername(){
-        return UsernameTF.getText();
+        return userNameTF.getText();
     }
 
     public String getPassword(){
-        return passwordField.getText();
+        return passwordTF.getText();
     }
 
     public UserStatus getUserStatus() {
@@ -62,8 +105,8 @@ public class LoginPage extends JFrame implements Views {
     }
 
     public void clear(){
-        Username.setText("");
-        Password.setText("");
+        userNameTF.setText("");
+        passwordTF.setText("");
     }
     public void checkAndSetUserStatus(){
         String tmp = getUsername().substring(0,3);
@@ -150,4 +193,3 @@ public class LoginPage extends JFrame implements Views {
         return proctor;
     }
 }
-

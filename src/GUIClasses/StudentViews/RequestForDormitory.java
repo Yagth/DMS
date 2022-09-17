@@ -7,6 +7,7 @@ import GUIClasses.ActionListeners.StudentView.RequestForDormitorySubmitButtonLis
 import GUIClasses.Interfaces.RequestViews;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
@@ -15,11 +16,9 @@ import java.sql.SQLException;
 public class RequestForDormitory extends JFrame implements RequestViews {
     private JLabel titleLabel;
     private JTextField subcityTF;
-    private JLabel addressLabel;
     private JPanel inputPanel;
     private JLabel subcityLabel;
     private JTextField woredaTF;
-    private JLabel woredaLabel;
     private JTextPane descriptionPane;
     private JScrollPane descriptionSP;
     private JLabel descriptionLabel;
@@ -107,7 +106,6 @@ public class RequestForDormitory extends JFrame implements RequestViews {
         this.setSize(WIDTH,HEIGHT);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setVisible(true);
         submitButton.addActionListener(new RequestForDormitorySubmitButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {
@@ -118,5 +116,12 @@ public class RequestForDormitory extends JFrame implements RequestViews {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+
+        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
+        Image titleLogo = tmp.getImage();
+
+        this.setIconImage(titleLogo);
+
+        this.setVisible(true);
     }
 }

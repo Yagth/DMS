@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="20" width="478" height="293"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-1507329"/>
+    </properties>
     <border type="none"/>
     <children>
       <vspacer id="145d4">
@@ -18,7 +20,9 @@
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="2" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <opaque value="false"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="47d50" class="javax.swing.JLabel" binding="titleLabel">
@@ -46,6 +50,7 @@
             </constraints>
             <properties>
               <background color="-12024904"/>
+              <font name="Californian FB" size="16"/>
               <foreground color="-1"/>
               <margin top="0" left="0" bottom="0" right="0"/>
               <text value="Submit"/>
@@ -68,6 +73,7 @@
               <component id="4b0fe" class="javax.swing.JTextPane" binding="descriptionPane">
                 <constraints/>
                 <properties>
+                  <background color="-1507329"/>
                   <margin top="10" left="3" bottom="3" right="3"/>
                 </properties>
               </component>

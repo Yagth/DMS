@@ -114,6 +114,10 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
         parentComponent.setVisible(true);
     }
 
+    public void reloadParentTable(){
+        parentComponent.reloadTable();
+    }
+
     @Override
     public boolean nextButtonIsVisible() {
         return false;
@@ -131,7 +135,6 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
 
     @Override
     public void reloadTable() {
-
     }
 
     @Override

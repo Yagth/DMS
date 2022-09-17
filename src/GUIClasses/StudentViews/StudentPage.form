@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-1507329"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="e8b7" binding="topPanel" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -13,16 +15,18 @@
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <opaque value="false"/>
+        </properties>
         <border type="bevel-raised"/>
         <children>
           <grid id="a58f" binding="studentInfoPanel" layout-manager="GridLayoutManager" row-count="4" column-count="10" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <background color="-12024904"/>
+              <background color="-1507329"/>
             </properties>
             <border type="none"/>
             <children>
@@ -31,7 +35,8 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <foreground color="-1546"/>
+                  <font name="Californian FB" size="16" style="1"/>
+                  <foreground color="-16777216"/>
                   <text value="Name :"/>
                 </properties>
               </component>
@@ -40,34 +45,38 @@
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <foreground color="-1546"/>
+                  <font name="Californian FB" size="16" style="1"/>
+                  <foreground color="-16777216"/>
                   <text value="ID :"/>
                 </properties>
               </component>
               <component id="b0fe3" class="javax.swing.JLabel" binding="studentName">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="1" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <foreground color="-1546"/>
+                  <font name="Californian FB" size="14" style="1"/>
+                  <foreground color="-8685443"/>
                   <text value=""/>
                 </properties>
               </component>
               <component id="8a59a" class="javax.swing.JLabel" binding="studentID">
                 <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="1" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <foreground color="-1546"/>
+                  <font name="Californian FB" size="14" style="1"/>
+                  <foreground color="-8685443"/>
                   <text value=""/>
                 </properties>
               </component>
               <component id="9d699" class="javax.swing.JLabel" binding="studentBuildingNo">
                 <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="1" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <foreground color="-1546"/>
+                  <font name="Californian FB" size="14" style="1"/>
+                  <foreground color="-8685443"/>
                   <text value=""/>
                 </properties>
               </component>
@@ -78,16 +87,18 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <foreground color="-1546"/>
+                  <font name="Californian FB" size="16" style="1"/>
+                  <foreground color="-16777216"/>
                   <text value="Building Number :"/>
                 </properties>
               </component>
               <component id="7419f" class="javax.swing.JLabel" binding="studentDormNo">
                 <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="1" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <foreground color="-1546"/>
+                  <font name="Californian FB" size="14" style="1"/>
+                  <foreground color="-8685443"/>
                   <text value=""/>
                 </properties>
               </component>
@@ -98,7 +109,8 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <foreground color="-1546"/>
+                  <font name="Californian FB" size="16" style="1"/>
+                  <foreground color="-16777216"/>
                   <text value="Dorm Number :"/>
                 </properties>
               </component>
@@ -109,20 +121,33 @@
               </hspacer>
             </children>
           </grid>
-          <component id="43359" class="javax.swing.JLabel" binding="titleL">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <foreground color="-12024904"/>
-              <text value="Student info"/>
-            </properties>
-          </component>
           <vspacer id="9af19">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
+          <grid id="faaca" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-13860888"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="43359" class="javax.swing.JLabel" binding="titleL">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Californian FB" size="22" style="1"/>
+                  <foreground color="-1"/>
+                  <text value="Student info"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
         </children>
       </grid>
       <grid id="a110b" binding="dormMatesInfo" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -130,33 +155,53 @@
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <opaque value="false"/>
+        </properties>
         <border type="bevel-raised"/>
         <children>
-          <component id="b8c6d" class="javax.swing.JLabel" binding="dormMateL">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <foreground color="-12024904"/>
-              <text value="Dorm Mates"/>
-            </properties>
-          </component>
           <scrollpane id="4dc1a" binding="tableSP">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-1507329"/>
+              <font name="Californian FB" size="16" style="1"/>
               <horizontalScrollBarPolicy value="31"/>
             </properties>
             <border type="none"/>
             <children>
               <component id="791b" class="javax.swing.JTable" binding="dormMateTable">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <background color="-1507329"/>
+                  <opaque value="false"/>
+                </properties>
               </component>
             </children>
           </scrollpane>
+          <grid id="efdf7" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-13860888"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="b8c6d" class="javax.swing.JLabel" binding="dormMateL">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Californian FB" size="14" style="1"/>
+                  <foreground color="-1"/>
+                  <text value="Dorm Mates"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
         </children>
       </grid>
     </children>

@@ -3,9 +3,10 @@
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="5" bottom="10" right="50"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="552" height="400"/>
     </constraints>
     <properties>
+      <background color="-1507329"/>
       <preferredSize width="373" height="100"/>
     </properties>
     <border type="none"/>
@@ -15,23 +16,31 @@
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <opaque value="false"/>
+        </properties>
         <border type="none"/>
         <children>
-          <grid id="62ede" binding="topPanel" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="62ede" binding="topPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-13860888"/>
+              <opaque value="true"/>
+            </properties>
             <border type="bevel-raised"/>
             <children>
-              <grid id="844c1" binding="requestInfoPanel" layout-manager="GridLayoutManager" row-count="7" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="844c1" binding="requestInfoPanel" layout-manager="GridLayoutManager" row-count="7" column-count="16" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-13860888"/>
+                  <opaque value="false"/>
+                </properties>
                 <border type="etched"/>
                 <children>
                   <component id="c72e7" class="javax.swing.JLabel" binding="typeL">
@@ -39,6 +48,8 @@
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Californian FB" size="16" style="1"/>
+                      <foreground color="-1"/>
                       <text value="Report Type"/>
                     </properties>
                   </component>
@@ -47,30 +58,28 @@
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Californian FB" size="16" style="1"/>
+                      <foreground color="-1"/>
                       <text value="Reported Date"/>
-                    </properties>
-                  </component>
-                  <component id="12705" class="javax.swing.JLabel" binding="reportTypeL">
-                    <constraints>
-                      <grid row="2" column="1" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value=""/>
                     </properties>
                   </component>
                   <component id="10ec" class="javax.swing.JLabel" binding="reportedDateL">
                     <constraints>
-                      <grid row="3" column="1" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="3" column="1" row-span="1" col-span="13" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Californian FB" size="16" style="0"/>
+                      <foreground color="-1507329"/>
                       <text value=""/>
                     </properties>
                   </component>
                   <component id="a88c9" class="javax.swing.JLabel" binding="reportStatusL">
                     <constraints>
-                      <grid row="5" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="5" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Californian FB" size="14" style="0"/>
+                      <foreground color="-1507329"/>
                       <text value=""/>
                     </properties>
                   </component>
@@ -81,14 +90,18 @@
                       </grid>
                     </constraints>
                     <properties>
+                      <font name="Californian FB" size="16" style="1"/>
+                      <foreground color="-1"/>
                       <text value="Status"/>
                     </properties>
                   </component>
                   <component id="e01f7" class="javax.swing.JLabel" binding="reportLocationL">
                     <constraints>
-                      <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Californian FB" size="16" style="0"/>
+                      <foreground color="-1507329"/>
                       <text value=""/>
                     </properties>
                   </component>
@@ -99,6 +112,8 @@
                       </grid>
                     </constraints>
                     <properties>
+                      <font name="Californian FB" size="16" style="1"/>
+                      <foreground color="-1"/>
                       <text value="Report Location"/>
                     </properties>
                   </component>
@@ -107,15 +122,18 @@
                       <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font style="2"/>
+                      <font name="Californian FB" size="14" style="2"/>
+                      <foreground color="-1507329"/>
                       <text value="handled date"/>
                     </properties>
                   </component>
                   <component id="8fdf9" class="javax.swing.JLabel" binding="reportHandledDate">
                     <constraints>
-                      <grid row="6" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="6" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Californian FB" size="14" style="2"/>
+                      <foreground color="-1507329"/>
                       <text value=""/>
                     </properties>
                   </component>
@@ -124,16 +142,9 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Californian FB" size="16" style="1"/>
+                      <foreground color="-1"/>
                       <text value="Reporter Name"/>
-                      <visible value="false"/>
-                    </properties>
-                  </component>
-                  <component id="82981" class="javax.swing.JLabel" binding="reporterName">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value=""/>
                       <visible value="false"/>
                     </properties>
                   </component>
@@ -142,26 +153,51 @@
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Californian FB" size="16" style="1"/>
+                      <foreground color="-1"/>
                       <text value="Reporter Id"/>
                       <visible value="false"/>
                     </properties>
                   </component>
                   <component id="9b166" class="javax.swing.JLabel" binding="Reporter">
                     <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="1" row-span="1" col-span="15" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font name="Californian FB" size="16" style="0"/>
+                      <foreground color="-1507329"/>
+                      <text value=""/>
+                      <visible value="false"/>
+                    </properties>
+                  </component>
+                  <hspacer id="8ea8e">
+                    <constraints>
+                      <grid row="3" column="14" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
+                  <component id="12705" class="javax.swing.JLabel" binding="reportTypeL">
+                    <constraints>
+                      <grid row="2" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="Californian FB" size="16" style="0"/>
+                      <foreground color="-1507329"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                  <component id="4ffb3" class="javax.swing.JLabel" binding="reporterName">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="10" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="Californian FB" size="16" style="0"/>
+                      <foreground color="-1507329"/>
                       <text value=""/>
                       <visible value="false"/>
                     </properties>
                   </component>
                 </children>
               </grid>
-              <hspacer id="8ea8e">
-                <constraints>
-                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </hspacer>
             </children>
           </grid>
           <scrollpane id="dbd8f">
@@ -176,8 +212,11 @@
                 <properties>
                   <editable value="false"/>
                   <enabled value="true"/>
+                  <font name="Californian FB" size="14" style="0"/>
+                  <foreground color="-16777216"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="200" height="100"/>
+                  <opaque value="true"/>
                   <preferredSize width="300" height="100"/>
                 </properties>
               </component>
@@ -185,9 +224,11 @@
           </scrollpane>
           <component id="b4b20" class="javax.swing.JLabel" binding="descriptionLabel">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Californian FB" size="16" style="1"/>
+              <foreground color="-16777216"/>
               <text value="Description"/>
             </properties>
           </component>
@@ -203,7 +244,9 @@
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="1" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <opaque value="false"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="6a9cb" class="javax.swing.JButton" binding="backButton" default-binding="true">
@@ -211,6 +254,9 @@
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-13860888"/>
+              <font name="Californian FB" size="16" style="0"/>
+              <foreground color="-1"/>
               <text value="Back"/>
             </properties>
           </component>
@@ -224,6 +270,9 @@
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-13860888"/>
+              <font name="Californian FB" size="16" style="0"/>
+              <foreground color="-1"/>
               <text value="Handle"/>
               <visible value="false"/>
             </properties>

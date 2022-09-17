@@ -21,7 +21,6 @@ import java.util.Vector;
 
 public class ProctorPage extends TableViewPage implements Views, TableViews {
     private JPanel MainPanel;
-    private JPanel TopPanel;
     private JPanel CentralPanel;
     private JPanel BottomPanel;
     private JButton prevButton;
@@ -30,12 +29,8 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
     private JPanel ReportPanel;
     private JTable ReportTable;
     private JPanel ReportsMTpanel;
-    private JLabel ReportsMTlabel;
     private JScrollPane ReportScrollPane;
-    private JPanel ScheduleHeadline;
-    private JLabel ScheduleHeadLineText;
     private JPanel ScheduleBodyPanel;
-    private JLabel BlockNumberLabel;
     private JLabel blockNumberL;
     private JLabel toDateL;
     private JLabel fromDateL;
@@ -125,9 +120,13 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
 
     public boolean toDateIsValid(Date date){
         Date tmp = Request.getCurrentDate();//For debugging only.
-        System.out.println("Current date: "+tmp);//For debugging only.
-        System.out.println("Date: "+date);//For debugging only.
-        return date.after(Request.getCurrentDate());
+        boolean isValid = false;
+        try{
+            isValid = date.after(Request.getCurrentDate());
+        } catch (NullPointerException ex){
+            ex.printStackTrace();//For debugging only.
+        }
+        return isValid;
     }
 
     public JTable getReportTable(){
@@ -197,7 +196,7 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
     public void addDataToTable(Object object) {
         Vector<Vector<Object>> temp = (Vector<Vector<Object>>) object;
         for(int i = 0; i<temp.size();i++){
-                tableData.add(temp.get(i));
+            tableData.add(temp.get(i));
         }
     }
 
@@ -220,21 +219,24 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         prevButton.addActionListener(new PrevActionListener(this));
 
         JMenuBar Services = new JMenuBar();
-        Services.setBackground(new Color(72,131,184));
+        Services.setBackground(new Color(232,255,255));
+        Services.setOpaque(true);
+
         JMenu Service = new JMenu("Services");
-        Service.setForeground(Color.white);
+        Service.setForeground(Color.GRAY);
 
         JMenuItem seeDormitories = new JMenuItem("See Dormitories");
-        seeDormitories.setForeground(new Color(72,131,184));
+        seeDormitories.setForeground(Color.BLACK);
         seeDormitories.addActionListener(new SeeDormMenuListener(this));
         JMenuItem seeStudents = new JMenuItem("See Students");
-        seeStudents.setForeground(new Color(72,131,184));
+        seeStudents.setForeground(Color.BLACK);
         seeStudents.addActionListener(new SeeStudentMenuListener(this));
         JMenuItem seeReports = new JMenuItem("All Reports");
-        seeReports.setForeground(new Color(72,131,184));
+        seeReports.setForeground(Color.BLACK);
         seeReports.addActionListener(new ReportMenuItemListener(this));
         JMenuItem seeStocks = new JMenuItem("See Stocks");
-        seeStocks.setForeground(new Color(72,131,184));
+        seeStocks.addActionListener(new StockMenuItemListener(this));
+        seeStocks.setForeground(Color.BLACK);
 
         Service.add(seeDormitories);
         Service.add(seeStudents);
@@ -242,9 +244,9 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         Service.add(seeStocks);
 
         JMenu logout = new JMenu("Logout");
-        logout.setForeground(Color.white);
+        logout.setForeground(Color.GRAY);
         JMenuItem signOut = new JMenuItem("Logout");
-        signOut.setForeground(new Color(72,131,184));
+        signOut.setForeground(Color.BLACK);
         signOut.addActionListener(new LogoutMenuItemListener(this));
 
         logout.add(signOut);

@@ -11,6 +11,7 @@ import GUIClasses.Interfaces.TableViews;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
@@ -58,7 +59,6 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         this.setSize(WIDTH,HEIGHT);
         this.setLocationRelativeTo(parentComponent);
         this.setResizable(false);
-        this.setVisible(true);
         this.addButton.addActionListener(new AddButtonListener(this));
         this.finishButton.addActionListener(new FinishButtonListener(this));
         this.addWindowListener(new WindowAdapter()
@@ -70,6 +70,12 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+        ImageIcon tmp = new ImageIcon("Images/AAULOGOSmall.png");
+        Image titleLogo = tmp.getImage();
+
+        this.setIconImage(titleLogo);
+
+        this.setVisible(true);
     }
 
     @Override

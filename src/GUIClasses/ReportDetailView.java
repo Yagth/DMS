@@ -45,8 +45,8 @@ public class ReportDetailView extends JFrame implements Views {
     private int clothRequestId;
     private JButton handleButton;
     private Vector<Vector<Object>> clothRequests;
-    private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
-    private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 400;
 
     private JFrame parentComponent;
     public ReportDetailView(JFrame parentComponent,Request request,String reporterName){
@@ -209,6 +209,8 @@ public class ReportDetailView extends JFrame implements Views {
             }
         }); //A custom action listener for the exit button.
 
+        if(request.getRequestType().equalsIgnoreCase("ClothTakeOutForm")) handleButton.setText("Approve");
+        System.out.println("Location: "+request.getLocation());//For debugging only
         boolean isInProctorView = isInProctorView();
         reporterIdL.setVisible(isInProctorView);
         Reporter.setVisible(isInProctorView);

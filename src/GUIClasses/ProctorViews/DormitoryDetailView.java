@@ -3,11 +3,14 @@ package GUIClasses.ProctorViews;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Rooms.Dormitory;
+import GUIClasses.ActionListeners.ProctorView.DormitoryView.DormitoryDetailBackListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -26,6 +29,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
     private JTable studentList;
     private JButton backButton;
     private JLabel roomNoL;
+    private JLabel maxCapacityL;
     private DormitoryView parentComponent;
     private Proctor proctor;
     private Dormitory dorm;
@@ -38,9 +42,6 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         setUpGUi();
         displayReadStatus(readStatus);
     }
-    public DormitoryDetailView(){
-        this(null,null,null);
-    }//For debugging only constructor.
     private Vector<Vector<Object>> loadStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         Vector<Vector<Object>> tmp =null;
@@ -52,7 +53,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
             try{
                 while(resultSet.next()){
                     Vector<Object> temp = new Vector<>();
-                    temp.add(resultSet.getString("Fname")+resultSet.getString("Lname"));
+                    temp.add(resultSet.getString("Fname")+" "+resultSet.getString("Lname"));
                     temp.add(resultSet.getString("SID"));
                     temp.add(resultSet.getInt("Year"));
                     temp.add(resultSet.getBoolean("isEligible"));
@@ -73,6 +74,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         lockerNoL.setText(String.valueOf(dorm.getNoOfLockers()));
         chairsNoL.setText(String.valueOf(dorm.getNoOfChairs()));
         tableNoL.setText(String.valueOf(dorm.getNoOfTables()));
+        maxCapacityL.setText(String.valueOf(dorm.getMaxCapacity()));
         keyHolderL.setText(dorm.getKeyHolderId());
     }
     public void displayReadStatus(boolean readStatus){
@@ -149,6 +151,18 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         this.setTitle("Detail Info of the dorm");
         this.setSize(600,700);
         this.setLocationRelativeTo(parentComponent);
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                e.getWindow().dispose();
+                parentComponent.setVisible(true);
+            }
+        }); //A custom action listener for the exit button.
+
+        backButton.addActionListener(new DormitoryDetailBackListener(this));
+
         loadDormInfo();
         setUpTable();
 

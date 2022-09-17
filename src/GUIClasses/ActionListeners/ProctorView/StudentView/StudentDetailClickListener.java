@@ -23,6 +23,7 @@ public class StudentDetailClickListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         String SID = getClickedRowSID();
         Student student = loadStudent(SID);
+        parentComponent.setVisible(false);
         new StudentDetailView(student,parentComponent);
     }
 

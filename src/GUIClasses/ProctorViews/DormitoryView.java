@@ -113,10 +113,9 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
     }
 
     public void changeTableData(ArrayList<Dormitory> dorms){
-        this.dorms = dorms;
         tableData.clear();
+        this.dorms = dorms;
         addDataToTable(null);
-        refreshTable();
     }
 
     public int getRowPerPage(){
@@ -228,16 +227,13 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
         totalSpaceNo.setText(String.valueOf(totalAvailableSpace()));
         numberOfDorm.setText(String.valueOf(emptyDorms()));
 
+        setButtonVisibility();
 
-        ImageIcon searchButtonIcon = new ImageIcon("Icons/SearchIcon.png");
+        ImageIcon searchButtonIcon = new ImageIcon("Images/SearchIcon.png");
         searchButton.setIcon(searchButtonIcon);
-        ImageIcon backButtonIcon = new ImageIcon("Icons/backIcon.png");
+        ImageIcon backButtonIcon = new ImageIcon("Images/backIcon.png");
         backLabel.setIcon(backButtonIcon);
-        ImageIcon nextButtonIcon = new ImageIcon("Icons/nextIcon(3).png");
-        nextButton.setIcon(nextButtonIcon);
-        ImageIcon previousButtonIcon = new ImageIcon("Icons/previousIcon-20x20.png");
-        prevButton.setIcon(previousButtonIcon);
-        ImageIcon filterButtonIcon = new ImageIcon("Icons/FilterIcon.png");
+        ImageIcon filterButtonIcon = new ImageIcon("Images/FilterIcon.png");
         filterButton.setIcon(filterButtonIcon);
 
         searchButton.addActionListener(new SearchButtonListener(this));
@@ -294,7 +290,9 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
 
     @Override
     public void reloadTable() {
-
+        tableData.clear();
+        loadDorms();
+        addDataToTable(null);
     }
 
     @Override
