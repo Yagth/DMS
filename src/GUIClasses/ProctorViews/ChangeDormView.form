@@ -32,7 +32,7 @@
         <properties>
           <background color="-13860888"/>
           <font name="Californian FB" size="14" style="0"/>
-          <foreground color="-16777216"/>
+          <foreground color="-1"/>
         </properties>
       </component>
       <component id="435e" class="javax.swing.JLabel" binding="fromBuildingNoL">
