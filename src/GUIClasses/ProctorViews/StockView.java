@@ -162,6 +162,7 @@ public class StockView extends TableViewPage implements Views, TableViews {
 
         backButton.addActionListener(new BackButtonListener(this));
 
+        setButtonVisibility();
         setUpTable();
         setVisible(true);
     }
