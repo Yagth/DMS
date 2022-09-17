@@ -21,7 +21,6 @@ import java.util.Vector;
 
 public class ProctorPage extends TableViewPage implements Views, TableViews {
     private JPanel MainPanel;
-    private JPanel TopPanel;
     private JPanel CentralPanel;
     private JPanel BottomPanel;
     private JButton prevButton;
@@ -30,12 +29,8 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
     private JPanel ReportPanel;
     private JTable ReportTable;
     private JPanel ReportsMTpanel;
-    private JLabel ReportsMTlabel;
     private JScrollPane ReportScrollPane;
-    private JPanel ScheduleHeadline;
-    private JLabel ScheduleHeadLineText;
     private JPanel ScheduleBodyPanel;
-    private JLabel BlockNumberLabel;
     private JLabel blockNumberL;
     private JLabel toDateL;
     private JLabel fromDateL;
