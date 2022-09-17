@@ -29,7 +29,7 @@ public class DeallocateButtonListener implements ActionListener {
                     int yearInt = Integer.parseInt(year);
                     boolean updateStatus = false;
                     query2 ="UPDATE STUDENT SET RoomNumber=null, BuildingNumber=null WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"';";
-                    query = "UPDATE StockView SET" +
+                    query = "UPDATE Stock SET" +
                                 " TotalPillow+=(SELECT COUNT(SID) FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"')," +
                                 " TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"' ),"+
                                 " TotalMatressBase+=(SELECT COUNT(SID) FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"')"+
@@ -59,7 +59,7 @@ public class DeallocateButtonListener implements ActionListener {
             String query = null, query2 = null;
             boolean updateStatus = false;
             query2 = "UPDATE STUDENT SET BuildingNumber=null, RoomNumber=null WHERE isEligible="+0+";";
-            query = "UPDATE StockView SET" +
+            query = "UPDATE Stock SET" +
                         " TotalPillow+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0), " +
                         " TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0), " +
                         " TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0) " +
