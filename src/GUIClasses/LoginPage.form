@@ -61,9 +61,10 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-13860888"/>
+                  <background color="-1"/>
                   <font name="Californian FB" size="16" style="0"/>
-                  <opaque value="false"/>
+                  <foreground color="-16777216"/>
+                  <opaque value="true"/>
                 </properties>
               </component>
               <component id="3878f" class="javax.swing.JLabel" binding="passwordL">
@@ -82,8 +83,9 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-13860888"/>
-                  <opaque value="false"/>
+                  <background color="-1"/>
+                  <foreground color="-16777216"/>
+                  <opaque value="true"/>
                 </properties>
               </component>
               <component id="2196c" class="javax.swing.JButton" binding="submitButton" default-binding="true">
