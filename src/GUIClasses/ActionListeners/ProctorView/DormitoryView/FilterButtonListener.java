@@ -20,6 +20,7 @@ public class FilterButtonListener implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        dorms.clear();
         String query = checkCondition();
         if(query.equals(""))
             return;
@@ -27,7 +28,6 @@ public class FilterButtonListener implements ActionListener {
         parentComponent.changeTableData(dorms);
         if(dorms.size() == 0)
             JOptionPane.showMessageDialog(parentComponent,"No dorms found with this condition");
-        dorms.clear();
     }
 
     public void loadDorms(String query){
