@@ -76,7 +76,8 @@ public class AllocateDormAsRequested implements ActionListener {
             JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
             boolean updateStatus = false;
             for(Dormitory dorm: availableDorms){
-                String query = "UPDATE (SELECT * TOP 1 FROM STUDENTS WHERE BuildingNumber IS NULL AND RoomNumber IS NULL)" +
+                String query = "UPDATE (SELECT TOP 1 * FROM STUDENTS WHERE BuildingNumber IS NULL AND RoomNumber IS NULL" +
+                        " ORDER BY Fname)" +
                         "SET BuildingNumber='"+dorm.getBuildingNo()+"' , RoomNumber='"+dorm.getRoomNO()+"' ";
                 updateStatus = javaConnection.updateQuery(query);
                 remainingStudents --;
@@ -86,7 +87,7 @@ public class AllocateDormAsRequested implements ActionListener {
     }
 
     public boolean allocateLocalStudents(){
-        boolean updateStatus = false;
+        boolean updateStatus;
 
         remainingStudents = reporterIds.size();
         if(remainingStudents == 0){
