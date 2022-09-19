@@ -43,7 +43,7 @@ public class FilterButtonListener implements ActionListener {
         int index = getFilteringColumn();
         if(parentComponent.getSelectedCondition().equals("Eligibility")){
             for(Vector<Object> student : students){
-                if(student.get(index).toString().equals("True"))
+                if(student.get(index).toString().equals("true"))
                     tmp.add(student);
             }
         }
