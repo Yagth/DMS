@@ -22,8 +22,8 @@ public class FilterButtonListener implements ActionListener {
         parentComponent.refreshTable();
 
         if(filteredStudents.size() == 0 ){
-            if(parentComponent.getSelectedCondition().equals("Eligibility"))
-                JOptionPane.showMessageDialog(parentComponent,"No eligible students found");
+            if(parentComponent.getSelectedCondition().equals("Not Eligible"))
+                JOptionPane.showMessageDialog(parentComponent,"All are eligible students");
             else
                 JOptionPane.showMessageDialog(parentComponent,"No students matching the condition");
             parentComponent.reloadTable();
@@ -41,9 +41,9 @@ public class FilterButtonListener implements ActionListener {
         Vector<Vector<Object>> students = parentComponent.getTableData();
         Vector<Vector<Object>> tmp = new Vector<>();
         int index = getFilteringColumn();
-        if(parentComponent.getSelectedCondition().equals("Eligibility")){
+        if(parentComponent.getSelectedCondition().equals("Not Eligible")){
             for(Vector<Object> student : students){
-                if(student.get(index).toString().equals("true"))
+                if(student.get(index).toString().equals("false"))
                     tmp.add(student);
             }
         }

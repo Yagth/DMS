@@ -259,7 +259,7 @@ public class StudentView extends TableViewPage implements Views, TableViews {
         filterCondition.addItem("");
         filterCondition.addItem("Year of students");
         filterCondition.addItem("Block");
-        filterCondition.addItem("Eligibility");
+        filterCondition.addItem("Not Eligible");
 
         setUpTable();
 
