@@ -59,6 +59,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 incrementPageNumber();
                 if(getPageNumber()>getTotalPage()) resetPageNumber();
                 updateRequestStatus();
+                updateDormInfo();
             } while(remainingStudents>0);
 
         }else{
@@ -81,6 +82,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 updateStatus = allocate();
                 incrementPageNumber();
                 if(getPageNumber()>getTotalPage()) resetPageNumber();
+                updateDormInfo();
             }while(remainingStudents>0);
         }
         insertHistory(query);
