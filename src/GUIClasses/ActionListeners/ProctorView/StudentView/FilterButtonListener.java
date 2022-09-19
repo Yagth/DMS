@@ -52,9 +52,14 @@ public class FilterButtonListener implements ActionListener {
 
 
             for(Vector<Object> student : students){
-                if(comparingObject.equals(student.get(index).toString())){
-                    tmp.add(student);
+                try{
+                    if(comparingObject.equals(student.get(index).toString())){
+                        tmp.add(student);
+                    }
+                } catch (NullPointerException ex){
+                    ex.printStackTrace();//For debugging only.
                 }
+
             }
         }
         return tmp;
