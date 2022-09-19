@@ -42,15 +42,14 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
                 Request.getCurrentDate()+"' , '"+parentComponent.getProctorBuilding()+"')";
 
-        loadAvailableDorms();
-        sortDormOnBuildingNo();
-        totalSpace = getTotalSpace();
-
         int choice = JOptionPane.showConfirmDialog(parentComponent,"Do you want to allocate new students?");
         if(choice == 1){
             students.clear();
 
             do{
+                loadAvailableDorms();
+                sortDormOnBuildingNo();
+                totalSpace = getTotalSpace();
                 loadReport();
                 loadLocalStudents();
                 remainingStudents = students.size();
@@ -62,12 +61,18 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
 
         }else{
             students.clear();
-
             do{
                 query = "SELECT COUNT(*) AS TotalNo FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
                         "AND Place != 'ADDIS ABABA' AND isEligible = 1 ";
                 remainingStudents = getTotalStudentNo(query);
 
+                System.out.println("Query: "+query);
+                System.out.println("RemainingStudents: "+remainingStudents);
+                System.out.println("TotalSpace: "+totalSpace);
+
+                loadAvailableDorms();
+                sortDormOnBuildingNo();
+                totalSpace = getTotalSpace();
                 loadNewStudents();
                 updateStatus = allocate();
                 if(!updateStatus) return;
@@ -90,9 +95,21 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
             //To update the students stored on the memory.
             for(Student student : students.values()){
                 Dormitory dorm = availableDorms.get(count);
+
+                System.out.println("Student Gender: "+student.getGender());
+                System.out.println("Dorm Gender: "+dorm.getDormType());
+
+
                 if(student.getGender().equalsIgnoreCase(dorm.getDormType())){
+                    System.out.println("Dorm BNO: "+dorm.getBuildingNo());
+                    System.out.println("Dorm RNO: "+dorm.getRoomNO());
+
                     student.setBuildingNo(dorm.getBuildingNo());
                     student.setDormNo(dorm.getRoomNO());
+
+                    System.out.println("Student BNO: "+student.getBuildingNo());
+                    System.out.println("Student RNO: "+student.getDormNo());
+
                     count++;
                 }
             }
@@ -106,8 +123,9 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
 
                 JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
                 String query = "";
-                boolean hasDorm = !(student.getDormNo() == 0 & student.getBuildingNo() == 0);
+                boolean hasDorm = student.getDormNo() != 0 & student.getBuildingNo() != 0;
 
+                System.out.println("Has dorm: "+hasDorm);
                 if(hasDorm){
                     query = "UPDATE Student SET BuildingNumber = '"+student.getBuildingNo()+
                             "', RoomNumber = '"+student.getDormNo()+"' WHERE SID = '"+student.getsId()+"' ";

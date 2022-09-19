@@ -10,11 +10,15 @@ public class Test {
         try{
             UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
         } catch (Exception ex){
-            ex.printStackTrace();
+            //DO nothing.
         }
-        LoginPage loginPage = new LoginPage();
-        loginPage.getUserNameTF().setFont(new Font("Californian FB",Font.PLAIN,14));
-        loginPage.getUsernameTF().requestFocus();
-        SwingUtilities.updateComponentTreeUI(loginPage);
+        try{
+            LoginPage loginPage = new LoginPage();
+            loginPage.getUserNameTF().setFont(new Font("Californian FB",Font.PLAIN,14));
+            loginPage.getUsernameTF().requestFocus();
+            SwingUtilities.updateComponentTreeUI(loginPage);
+        } catch (Exception ex){
+            //DO nothing.
+        }
     }
 }
