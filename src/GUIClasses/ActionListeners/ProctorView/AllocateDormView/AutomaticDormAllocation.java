@@ -57,6 +57,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 updateStatus = allocate();
                 incrementPageNumber();
                 updateRequestStatus();
+                updateDormInfo();
             } while(remainingStudents>0);
 
         }else{
@@ -78,6 +79,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 loadNewStudents();
                 updateStatus = allocate();
                 incrementPageNumber();
+                updateDormInfo();
             }while(remainingStudents>0);
         }
         insertHistory(query);
@@ -98,20 +100,16 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
             for(Student student : students.values()){
                 if(count<availableDorms.size()){
                     Dormitory dorm = availableDorms.get(count);
-                    System.out.println("Student Gender: "+student.getGender());
-                    System.out.println("Dorm Gender: "+dorm.getDormType());
-
-                    if(student.getGender().equalsIgnoreCase(dorm.getDormType())){
-                        System.out.println("Dorm BNO: "+dorm.getBuildingNo());
-                        System.out.println("Dorm RNO: "+dorm.getRoomNO());
-
-                        student.setBuildingNo(dorm.getBuildingNo());
-                        student.setDormNo(dorm.getRoomNO());
-
-                        System.out.println("Student BNO: "+student.getBuildingNo());
-                        System.out.println("Student RNO: "+student.getDormNo());
-
-                        count++;
+                    boolean hasLockers = dorm.getNoOfLockers()>dorm.getNoOfStudents();
+                    boolean isRightGender = student.getGender().equalsIgnoreCase(dorm.getDormType());
+                    boolean isFirstStudent = (dorm.getNoOfStudents() == 0);
+                    if(hasLockers & isRightGender){
+                            student.setBuildingNo(dorm.getBuildingNo());
+                            student.setDormNo(dorm.getRoomNO());
+                            if(isFirstStudent){
+                                dorm.setKeyHolderId(student.getsId());
+                            }
+                            count++;
                     }
                 }
             }
@@ -145,8 +143,6 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 }
             }
         }
-        if(!updateStatus) JOptionPane.showMessageDialog(parentComponent,"Allocation terminated due to some error."
-                ,"Allocation error",JOptionPane.ERROR_MESSAGE);
 
         return updateStatus;
     }
@@ -221,6 +217,16 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
             ex.printStackTrace();//For debugging only.
         }
         return totalSpace;
+    }
+
+    public void updateDormInfo(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query;
+        for(Dormitory dorm: availableDorms){
+            query = "UPDATE Dorm SET KeyHolder='"+dorm.getKeyHolderId()+
+                    "' WHERE BuildingNumber='"+dorm.getBuildingNo()+"' AND RoomNumber='"+dorm.getRoomNO()+"' ";
+            javaConnection.updateQuery(query);
+        }
     }
     public void loadNewStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);

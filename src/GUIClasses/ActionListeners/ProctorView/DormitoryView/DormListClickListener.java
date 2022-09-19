@@ -19,6 +19,9 @@ public class DormListClickListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         Dormitory dorm = getClickedDorm();
+
+        if(dorm == null) return;
+
         dorm = updateDormData(dorm);
         parentComponent.setVisible(false);
         new DormitoryDetailView(dorm,parentComponent.getProctor(),parentComponent);
@@ -27,7 +30,7 @@ public class DormListClickListener implements MouseListener {
     public Dormitory getClickedDorm(){
         JTable table = parentComponent.getTable();
         int clickedRow = table.getSelectedRow();
-        if(clickedRow == -1) clickedRow = 0;
+        if(clickedRow == -1) return null;
         System.out.println("Clicked row: "+clickedRow);//For debugging only.
         Dormitory tmp = parentComponent.getDormAt(clickedRow);
         return tmp;
