@@ -115,7 +115,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                     query = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
                             " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";//Decrementing the stock on every student allocation.
                     updateStatus &= javaConnection.updateQuery(query);
-                    students.remove(student.getsId());//Removing the student from memory after allocation.
+                    it.remove();//Removing the student from memory after allocation.
                     remainingStudents--;
                 }
             }
