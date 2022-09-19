@@ -3,6 +3,8 @@ package GUIClasses.ProctorViews;
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
+import GUIClasses.ActionListeners.NextActionListener;
+import GUIClasses.ActionListeners.PrevActionListener;
 import GUIClasses.ActionListeners.ProctorView.StudentView.*;
 import GUIClasses.ActionListeners.StudentView.BackButtonListener;
 import GUIClasses.Interfaces.TableViews;
@@ -230,6 +232,8 @@ public class StudentView extends TableViewPage implements Views, TableViews {
         this.setIconImage(titleLogo);
 
         backButton.addActionListener(new BackButtonListener(this));
+        nextButton.addActionListener(new NextActionListener(this));
+        prevButton.addActionListener(new PrevActionListener(this));
         searchButton.addActionListener(new SearchButtonListener(this));
         filterButton.addActionListener(new FilterButtonListener(this));
         filterCondition.addItemListener(new FilterConditionItemListener(this));
