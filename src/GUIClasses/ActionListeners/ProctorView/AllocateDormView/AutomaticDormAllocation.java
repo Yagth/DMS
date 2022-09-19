@@ -58,7 +58,6 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 updateStatus = allocate();
                 incrementPageNumber();
                 updateRequestStatus();
-                updateDormInfo();
             } while(remainingStudents>0);
 
         }else{
@@ -80,7 +79,6 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 loadNewStudents();
                 updateStatus = allocate();
                 incrementPageNumber();
-                updateDormInfo();
             }while(remainingStudents>0 & (getPageNumber()<=getTotalPage()));
         }
         insertHistory(query);
@@ -104,6 +102,11 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                     boolean hasLockers = dorm.getNoOfLockers()>dorm.getNoOfStudents();
                     boolean isRightGender = student.getGender().equalsIgnoreCase(dorm.getDormType());
                     boolean isFirstStudent = (dorm.getNoOfStudents() == 0);
+
+                    System.out.println("Has Lockers: "+hasLockers);
+                    System.out.println("Is the right Gender: "+isRightGender);
+                    System.out.println("Is first Student: "+isFirstStudent);
+
                     if(hasLockers & isRightGender){
                             student.setBuildingNo(dorm.getBuildingNo());
                             student.setDormNo(dorm.getRoomNO());
@@ -162,6 +165,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 int maxCapacity = resultSet.getInt("maxCapacity");
                 Dormitory tmpDorm = new Dormitory(roomNo,buildingNumber,maxCapacity);
                 tmpDorm.setNoOfStudents(resultSet.getInt("NumberOfStudents"));
+                tmpDorm.setNoOfLockers(resultSet.getInt("Lockers"));
                 tmpDorm.setDormType(resultSet.getString("DormType"));
                 availableDorms.add(tmpDorm);
             }
@@ -315,7 +319,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
         else{
             if(remainingStudents != 0)
                 JOptionPane.showMessageDialog(parentComponent,"Couldn't allocate "+ remainingStudents+" students due to some problem.\n " +
-                        "Make sure there is available space and also the destination exits.");
+                        "Make sure there is available space.");
         }
     }
     public void insertHistory(String query){
