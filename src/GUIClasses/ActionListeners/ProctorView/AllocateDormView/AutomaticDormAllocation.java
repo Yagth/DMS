@@ -102,7 +102,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 boolean hasDorm = !(student.getDormNo() == 0 & student.getBuildingNo() == 0);
                 if(hasDorm){
                     query = "UPDATE Student SET BuildingNumber = '"+student.getBuildingNo()+
-                            ", RoomNumber = '"+student.getDormNo()+"' WHERE SID = '"+student.getsId()+"' ";
+                            "', RoomNumber = '"+student.getDormNo()+"' WHERE SID = '"+student.getsId()+"' ";
                     updateStatus = javaConnection.updateQuery(query);
                     query = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
                             " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";//Decrementing the stock on every student allocation.
@@ -202,7 +202,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 String lName = resultSet.getString("Lname");
                 String gender = resultSet.getString("Gender");
 
-                Student tmpStudent = new Student(sid,fName,lName,gender);
+                Student tmpStudent = new Student(fName,lName,sid,gender);
                 students.put(sid,tmpStudent);
             }
         }catch (SQLException ex){
