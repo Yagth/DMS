@@ -40,8 +40,9 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
         boolean updateStatus = false;
         String query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
                 " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
-                Request.getCurrentDate()+"' , '"+parentComponent.getProctorBuilding()+"')";
+                Request.getCurrentDate()+"' , '"+parentComponent.getProctor().getBuildingNo()+"')";
 
+        System.out.println("Query: "+query);
         int choice = JOptionPane.showConfirmDialog(parentComponent,"Do you want to allocate new students?");
         if(choice == 1){
             students.clear();
@@ -54,7 +55,6 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 loadLocalStudents();
                 remainingStudents = students.size();
                 updateStatus = allocate();
-                if(!updateStatus) return;
                 incrementPageNumber();
                 updateRequestStatus();
             } while(remainingStudents>0);
@@ -68,18 +68,20 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
 
                 System.out.println("Query: "+query);
                 System.out.println("RemainingStudents: "+remainingStudents);
-                System.out.println("TotalSpace: "+totalSpace);
 
                 loadAvailableDorms();
                 sortDormOnBuildingNo();
                 totalSpace = getTotalSpace();
+
+                System.out.println("TotalSpace: "+totalSpace);
+
                 loadNewStudents();
                 updateStatus = allocate();
-                if(!updateStatus) return;
                 incrementPageNumber();
             }while(remainingStudents>0);
         }
         insertHistory(query);
+        displayUpdateStatus(updateStatus);
     }
     public boolean allocate(){
         boolean updateStatus = false;
@@ -94,23 +96,23 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
             int count = 0;
             //To update the students stored on the memory.
             for(Student student : students.values()){
-                Dormitory dorm = availableDorms.get(count);
+                if(count<availableDorms.size()){
+                    Dormitory dorm = availableDorms.get(count);
+                    System.out.println("Student Gender: "+student.getGender());
+                    System.out.println("Dorm Gender: "+dorm.getDormType());
 
-                System.out.println("Student Gender: "+student.getGender());
-                System.out.println("Dorm Gender: "+dorm.getDormType());
+                    if(student.getGender().equalsIgnoreCase(dorm.getDormType())){
+                        System.out.println("Dorm BNO: "+dorm.getBuildingNo());
+                        System.out.println("Dorm RNO: "+dorm.getRoomNO());
 
+                        student.setBuildingNo(dorm.getBuildingNo());
+                        student.setDormNo(dorm.getRoomNO());
 
-                if(student.getGender().equalsIgnoreCase(dorm.getDormType())){
-                    System.out.println("Dorm BNO: "+dorm.getBuildingNo());
-                    System.out.println("Dorm RNO: "+dorm.getRoomNO());
+                        System.out.println("Student BNO: "+student.getBuildingNo());
+                        System.out.println("Student RNO: "+student.getDormNo());
 
-                    student.setBuildingNo(dorm.getBuildingNo());
-                    student.setDormNo(dorm.getRoomNO());
-
-                    System.out.println("Student BNO: "+student.getBuildingNo());
-                    System.out.println("Student RNO: "+student.getDormNo());
-
-                    count++;
+                        count++;
+                    }
                 }
             }
 
@@ -154,6 +156,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
         String query = "SELECT * FROM AvailableDorm ORDER BY NumberOfStudents ASC OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
                 " ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         ResultSet resultSet = javaConnection.selectQuery(query);
+        System.out.println("Query: "+query);
 
         try{
             availableDorms.clear();//Erasing previously loaded dorms.
@@ -282,14 +285,6 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
         }
     }
 
-    public int getAvailableSpaces(){
-            int totalSpace = 0;
-            for(Dormitory dormitory: availableDorms){
-                totalSpace += dormitory.getMaxCapacity() - dormitory.getNoOfStudents();
-            }
-            return totalSpace;
-    }
-
     public void updateRequestStatus(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         int size = requests.size()-remainingStudents; //To prevent setting the status of the unhandled reports.
@@ -311,8 +306,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
         if(updateStatus)
             JOptionPane.showMessageDialog(parentComponent,"Allocation Successful.");
         else{
-            if(remainingStudents == 0);
-            else
+            if(remainingStudents != 0)
                 JOptionPane.showMessageDialog(parentComponent,"Couldn't allocate "+ remainingStudents+" students due to some problem.\n " +
                         "Make sure there is available space and also the destination exits.");
         }
