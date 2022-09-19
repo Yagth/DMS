@@ -80,7 +80,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 updateStatus = allocate();
                 incrementPageNumber();
                 updateDormInfo();
-            }while(remainingStudents>0);
+            }while(remainingStudents>0 & (getPageNumber()<=getTotalPage()));
         }
         insertHistory(query);
         displayUpdateStatus(updateStatus);
