@@ -175,7 +175,7 @@ public class LoginPage extends JFrame{
 
     public Proctor createProctor(){
         Proctor proctor = null;
-        String query = "SELECT * FROM Proctor WHERE EID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
+        String query = "SELECT * FROM ProctorBuilding WHERE EID=\'"+getUsername()+"\' AND Password=\'"+getPassword()+"\'";
         ResultSet temp = javaConnection.selectQuery(query);
         try {
             while (temp.next()) {
