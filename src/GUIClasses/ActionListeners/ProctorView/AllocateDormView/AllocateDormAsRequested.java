@@ -5,6 +5,7 @@ import BasicClasses.Persons.Student;
 import BasicClasses.Requests.Request;
 import BasicClasses.Rooms.Dormitory;
 import GUIClasses.ProctorViews.DormitoryView;
+import GUIClasses.TableViewPage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,15 +15,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AllocateDormAsRequested implements ActionListener {
+public class AllocateDormAsRequested extends TableViewPage implements ActionListener {
     private DormitoryView parentComponent;
     private ArrayList<Dormitory> availableDorms;
     private HashMap<String, Student> students;
     private ArrayList<Integer> requests;
     private ArrayList<String> reporterIds;
-    private int remainingStudents; //The remaining students after the allocation .
+    private int remainingStudents; //The remaining students after the allocation.
+    private int totalSpace;
     public AllocateDormAsRequested(DormitoryView parentComponent){
         this.parentComponent = parentComponent;
+        String query = "SELECT COUNT(*) AS TotalNo FROM AvailableDorm";
+        loadAndSetTotalPage(query);
+
         availableDorms = new ArrayList<>();
         students = new HashMap<>();
         reporterIds = new ArrayList<>();
@@ -34,56 +39,53 @@ public class AllocateDormAsRequested implements ActionListener {
         String query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
                 " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
                 Request.getCurrentDate()+"' , '"+parentComponent.getProctorBuilding()+"')";
+        totalSpace = getTotalSpace();
+        remainingStudents = getTotalStudentNo();
+
+        if(totalSpace<remainingStudents) {
+            int choice = JOptionPane.showConfirmDialog(parentComponent,"There is not enough space for all students.\nDo you still want to continue?");
+            if(choice == 1) return;
+        }
 
         loadAvailableDorms();
-        sortDormOnAvailableSpace();
         sortDormOnBuildingNo();
-        insertHistory(query);
 
         int choice = JOptionPane.showConfirmDialog(parentComponent,"Do you want to allocate new students?");
         if(choice == 1)
             updateStatus = allocateLocalStudents();
-        else updateStatus = allocateNewStudents();
+        else updateStatus = allocate();
 
+        insertHistory(query);
         displayUpdateStatus(updateStatus);
     }
-    public boolean allocateNewStudents(){
-        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+    public boolean allocate(){
         boolean updateStatus = false;
-        int remainingStudents = 0;
-        String query = "SELECT COUNT(*) AS Students FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL" +
-                " AND Place != 'ADDIS ABABA'";
+        int count = 0;
+        for(Student student : students.values()){
+            Dormitory dorm = availableDorms.get(count);
+            if(student.getGender().equalsIgnoreCase(dorm.getDormType())){
+                student.setBuildingNo(dorm.getBuildingNo());
+                student.setDormNo(dorm.getRoomNO());
+                count++;
+            }
+        }
 
-        ResultSet resultSet;
-        if(javaConnection.isConnected()){
-            resultSet = javaConnection.selectQuery(query);
-            try{
-                while(resultSet.next()){
-                    remainingStudents = resultSet.getInt("Students");
-                }
-            } catch (SQLException ex){
-                ex.printStackTrace();//For debugging only.
-            }
-            updateStatus = updateDormInfo(remainingStudents);
-        }
-        return updateStatus;
-    }
-    public boolean updateDormInfo(int remainingStudents){
-        if(remainingStudents == 0){
-            return true;
-        }
-        else{
+        for(Student student : students.values()){
             JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-            boolean updateStatus = false;
-            for(Dormitory dorm: availableDorms){
-                String query = "UPDATE (SELECT TOP 1 * FROM STUDENTS WHERE BuildingNumber IS NULL AND RoomNumber IS NULL" +
-                        " ORDER BY Fname)" +
-                        "SET BuildingNumber='"+dorm.getBuildingNo()+"' , RoomNumber='"+dorm.getRoomNO()+"' ";
+            String query = "";
+            boolean hasDorm = !(student.getDormNo() == 0 & student.getBuildingNo() == 0);
+            if(hasDorm){
+                query = "UPDATE Student SET BuildingNumber = '"+student.getBuildingNo()+
+                        ", RoomNumber = '"+student.getDormNo()+"' WHERE SID = '"+student.getsId()+"' ";
                 updateStatus = javaConnection.updateQuery(query);
-                remainingStudents --;
+                String query2 = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
+                        " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";//Decrementing the stock on every student allocation.
+                updateStatus &= javaConnection.updateQuery(query2);
+                students.remove(student.getsId());
             }
-            return updateDormInfo(remainingStudents) & updateStatus;
         }
+
+        return updateStatus;
     }
 
     public boolean allocateLocalStudents(){
@@ -95,8 +97,8 @@ public class AllocateDormAsRequested implements ActionListener {
             return false;
         }
 
-        loadReporterAndReportId();
-        loadStudents();
+        loadReport();
+        loadLocalStudents();
         updateStatus = allocateStudents();
         updateRequestStatus();
         return updateStatus;
@@ -104,32 +106,26 @@ public class AllocateDormAsRequested implements ActionListener {
 
     public void loadAvailableDorms(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT * FROM AvailableDorm";
+        String query = "SELECT * FROM AvailableDorm ORDER BY NumberOfStudents ASC OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
+                " ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
+            availableDorms.clear();//Erasing previously loaded dorms.
             while(resultSet.next()){
-                JavaConnection javaConnection1 = new JavaConnection(JavaConnection.URL);
                 String roomNo = resultSet.getString("roomNumber");
                 String buildingNumber = resultSet.getString("buildingNumber");
                 int maxCapacity = resultSet.getInt("maxCapacity");
-                Dormitory tmp = new Dormitory(roomNo,buildingNumber,maxCapacity);
-
-                String query2 = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
-                        "WHERE BuildingNumber='"+buildingNumber+"' AND RoomNumber='"+roomNo+"'";
-                ResultSet rs = javaConnection1.selectQuery(query2);
-
-                while(rs.next()){
-                    tmp.setNoOfStudents(rs.getInt("numberOfStudents"));
-                }
-                availableDorms.add(tmp);
+                Dormitory tmpDorm = new Dormitory(roomNo,buildingNumber,maxCapacity);
+                tmpDorm.setNoOfStudents(resultSet.getInt("NumberOfStudents"));
+                tmpDorm.setDormType(resultSet.getString("DormType"));
+                availableDorms.add(tmpDorm);
             }
         } catch (SQLException ex){
-            ex.printStackTrace();
-            //Leave the implementation of this block.
+            ex.printStackTrace();//For debugging only.
         }
     }
 
-    public void loadReporterAndReportId(){
+    public void loadReport(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT ReportId, ReporterId FROM dormRequests ORDER BY ReportedDate ASC";//Gives priority to the reported date.
         ResultSet resultSet;
@@ -147,7 +143,60 @@ public class AllocateDormAsRequested implements ActionListener {
         }
     }
 
-    public void loadStudents(){
+    public int getTotalStudentNo(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT COUNT(*) AS TotalNo FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
+                "AND Place != 'ADDIS ABABA' AND isEligible = 1 ";
+        ResultSet resultSet;
+        int totalNewStudents = 0;
+        resultSet = javaConnection.selectQuery(query);
+        try{
+            while(resultSet.next()){
+                totalNewStudents = resultSet.getInt("TotalNo");
+            }
+        } catch (SQLException ex){
+            ex.printStackTrace();//For debugging only.
+        }
+        return totalNewStudents;
+    }
+
+    public int getTotalSpace(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT SUM(MaxCapacity) - SUM(NumberOfStudents) AS TotalSpace FROM AvailableDorm WHERE (MaxCapacity - NumberOfStudents)>lockers";
+        ResultSet resultSet;
+        int totalSpace = 0;
+        resultSet = javaConnection.selectQuery(query);
+        try{
+            while(resultSet.next()){
+                totalSpace = resultSet.getInt("TotalSpace");
+            }
+        } catch (SQLException ex){
+            ex.printStackTrace();//For debugging only.
+        }
+        return totalSpace;
+    }
+    public void loadNewStudents(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT * STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
+                "AND Place != 'ADDIS ABABA' AND isEligible = 1 ORDER BY Fname OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
+                " ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
+        ResultSet resultSet = javaConnection.selectQuery(query);
+
+        try{
+            while(resultSet.next()){
+                String sid = resultSet.getString("SID");
+                String fName = resultSet.getString("Fname");
+                String lName = resultSet.getString("Lname");
+                String gender = resultSet.getString("Gender");
+
+                Student tmpStudent = new Student(sid,fName,lName,gender);
+                students.put(sid,tmpStudent);
+            }
+        }catch (SQLException ex){
+            ex.printStackTrace();//For debugging only.
+        }
+    }
+    public void loadLocalStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet;
         if(javaConnection.isConnected()){
