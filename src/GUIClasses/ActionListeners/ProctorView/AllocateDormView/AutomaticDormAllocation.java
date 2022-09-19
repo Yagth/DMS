@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class AutomaticDormAllocation extends TableViewPage implements ActionListener {
     private DormitoryView parentComponent;
@@ -96,10 +97,13 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
             }
 
             //To update the database accordingly.
-            for(Student student : students.values()){
+            Iterator it = students.entrySet().iterator();
+            while(it.hasNext()){
+                Student student = (Student) it.next();
                 JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
                 String query = "";
                 boolean hasDorm = !(student.getDormNo() == 0 & student.getBuildingNo() == 0);
+
                 if(hasDorm){
                     query = "UPDATE Student SET BuildingNumber = '"+student.getBuildingNo()+
                             "', RoomNumber = '"+student.getDormNo()+"' WHERE SID = '"+student.getsId()+"' ";
