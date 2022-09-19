@@ -36,6 +36,12 @@ public class AllocateDormAsRequested implements ActionListener {
                 " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
                 Request.getCurrentDate()+"' , '"+parentComponent.getProctorBuilding()+"')";
 
+        remainingStudents = reporterIds.size();
+        if(remainingStudents == 0){
+            displayUpdateStatus(false);
+            return;
+        }
+
         loadAvailableDorms();
         loadReporterAndReportId();
         loadStudents();
