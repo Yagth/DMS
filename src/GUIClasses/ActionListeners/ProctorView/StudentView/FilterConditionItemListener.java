@@ -30,8 +30,7 @@ public class FilterConditionItemListener implements ItemListener {
                 changeGui(false);
             }
         } catch (Exception ex){
-            System.out.println("Inside the filter item listener");//For debugging only.
-            ex.printStackTrace();//For debugging only.
+
         }
     }
 
