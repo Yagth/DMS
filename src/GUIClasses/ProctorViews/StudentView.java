@@ -40,6 +40,8 @@ public class StudentView extends TableViewPage implements Views, TableViews {
     private Vector<Vector<Object>> tableData;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
+    private int count = 0;
+
 
     public StudentView(ProctorPage parentComponent,Proctor proctor){
         this.parentComponent = parentComponent;
@@ -86,7 +88,6 @@ public class StudentView extends TableViewPage implements Views, TableViews {
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet;
         Vector<Vector<Object>> students = new Vector<>();
-        int count = 0;
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
             try{
