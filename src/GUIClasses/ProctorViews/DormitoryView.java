@@ -130,8 +130,6 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
                         " OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+" ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         ResultSet resultSet;
 
-        System.out.println("Query: "+query);//For debugging only.
-
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
             Dormitory tmp;
@@ -302,6 +300,7 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
     @Override
     public void reloadTable() {
         tableData.clear();
+        dorms.clear();
         loadDorms();
         addDataToTable(null);
     }
