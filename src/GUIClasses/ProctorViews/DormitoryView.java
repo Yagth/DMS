@@ -127,8 +127,10 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
         String query = "SELECT D.BuildingNumber,D.RoomNumber, maxCapacity, COUNT(SID) AS NumberOfStudent " +
                         "FROM Dorm AS D LEFT JOIN Student AS S ON D.BuildingNumber = S.BuildingNumber " +
                         "AND D.RoomNumber = S.RoomNumber GROUP BY D.BuildingNumber,D.RoomNumber,maxCapacity ORDER BY (SELECT NULL)" +
-                        " OFFSET "+(getTotalPage()-1)*ROW_PER_PAGE+" ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
+                        " OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+" ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         ResultSet resultSet;
+
+        System.out.println("Query: "+query);//For debugging only.
 
         if(javaConnection.isConnected()){
             resultSet = javaConnection.selectQuery(query);
