@@ -27,8 +27,6 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
     private int totalSpace;
     public AutomaticDormAllocation(DormitoryView parentComponent){
         this.parentComponent = parentComponent;
-        String query = "SELECT COUNT(*) AS TotalNo FROM AvailableDorm";
-        loadAndSetTotalPage(query);
 
         availableDorms = new ArrayList<>();
         students = new HashMap<>();
@@ -41,6 +39,9 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
         String query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
                 " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
                 Request.getCurrentDate()+"' , '"+parentComponent.getProctor().getBuildingNo()+"')";
+        String query2 = "SELECT COUNT(*) AS TotalNo FROM AvailableDorm";
+        loadAndSetTotalPage(query2);
+        resetPageNumber();
 
         System.out.println("Query: "+query);
         int choice = JOptionPane.showConfirmDialog(parentComponent,"Do you want to allocate new students?");
@@ -125,7 +126,6 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                 String query = "";
                 boolean hasDorm = student.getDormNo() != 0 & student.getBuildingNo() != 0;
 
-                System.out.println("Has dorm: "+hasDorm);
                 if(hasDorm){
                     query = "UPDATE Student SET BuildingNumber = '"+student.getBuildingNo()+
                             "', RoomNumber = '"+student.getDormNo()+"' WHERE SID = '"+student.getsId()+"' ";
@@ -223,6 +223,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query;
         for(Dormitory dorm: availableDorms){
+            System.out.println("Key Holder: "+dorm.getKeyHolderId());
             query = "UPDATE Dorm SET KeyHolder='"+dorm.getKeyHolderId()+
                     "' WHERE BuildingNumber='"+dorm.getBuildingNo()+"' AND RoomNumber='"+dorm.getRoomNO()+"' ";
             javaConnection.updateQuery(query);
