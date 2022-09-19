@@ -31,26 +31,74 @@ public class AllocateDormAsRequested implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus = false;
-
         String query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
                 " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
                 Request.getCurrentDate()+"' , '"+parentComponent.getProctorBuilding()+"')";
 
+        loadAvailableDorms();
+        sortDormOnAvailableSpace();
+        sortDormOnBuildingNo();
+        insertHistory(query);
+
+        int choice = JOptionPane.showConfirmDialog(parentComponent,"Do you want to allocate new students?");
+        if(choice == 1)
+            updateStatus = allocateLocalStudents();
+        else updateStatus = allocateNewStudents();
+
+        displayUpdateStatus(updateStatus);
+    }
+    public boolean allocateNewStudents(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        boolean updateStatus = false;
+        int remainingStudents = 0;
+        String query = "SELECT COUNT(*) AS Students FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL" +
+                " AND Place != 'ADDIS ABABA'";
+
+        ResultSet resultSet;
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    remainingStudents = resultSet.getInt("Students");
+                }
+            } catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
+            }
+            updateStatus = updateDormInfo(remainingStudents);
+        }
+        return updateStatus;
+    }
+    public boolean updateDormInfo(int remainingStudents){
+        if(remainingStudents == 0){
+            return true;
+        }
+        else{
+            JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+            boolean updateStatus = false;
+            for(Dormitory dorm: availableDorms){
+                String query = "UPDATE (SELECT * TOP 1 FROM STUDENTS WHERE BuildingNumber IS NULL AND RoomNumber IS NULL)" +
+                        "SET BuildingNumber='"+dorm.getBuildingNo()+"' , RoomNumber='"+dorm.getRoomNO()+"' ";
+                updateStatus = javaConnection.updateQuery(query);
+                remainingStudents --;
+            }
+            return updateDormInfo(remainingStudents) & updateStatus;
+        }
+    }
+
+    public boolean allocateLocalStudents(){
+        boolean updateStatus = false;
+
         remainingStudents = reporterIds.size();
         if(remainingStudents == 0){
             displayUpdateStatus(false);
-            return;
+            return false;
         }
 
-        loadAvailableDorms();
         loadReporterAndReportId();
         loadStudents();
-        sortDormOnAvailableSpace();
-        sortDormOnBuildingNo();
         updateStatus = allocateStudents();
-        insertHistory(query);
         updateRequestStatus();
-        displayUpdateStatus(updateStatus);
+        return updateStatus;
     }
 
     public void loadAvailableDorms(){
