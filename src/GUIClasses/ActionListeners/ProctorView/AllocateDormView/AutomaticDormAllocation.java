@@ -190,7 +190,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
     }
     public void loadNewStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT * STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
+        String query = "SELECT * FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
                 "AND Place != 'ADDIS ABABA' AND isEligible = 1 ORDER BY Fname OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
                 " ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         ResultSet resultSet = javaConnection.selectQuery(query);
