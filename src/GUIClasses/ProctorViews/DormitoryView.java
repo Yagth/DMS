@@ -6,7 +6,7 @@ import BasicClasses.Persons.Proctor;
 import BasicClasses.Rooms.Dormitory;
 import GUIClasses.ActionListeners.NextActionListener;
 import GUIClasses.ActionListeners.PrevActionListener;
-import GUIClasses.ActionListeners.ProctorView.AllocateDormView.AllocateDormAsRequested;
+import GUIClasses.ActionListeners.ProctorView.AllocateDormView.AutomaticDormAllocation;
 import GUIClasses.ActionListeners.ProctorView.DormitoryView.*;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
@@ -258,7 +258,7 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
         JMenu actions = new JMenu("Actions");
 
         JMenuItem allocate = new JMenuItem("Allocate Dorms");
-        allocate.addActionListener(new AllocateDormAsRequested(this));
+        allocate.addActionListener(new AutomaticDormAllocation(this));
         JMenuItem deallocate = new JMenuItem("Deallocate all dorms");
         deallocate.addActionListener(new DeallocateMenuListener(this));
         JMenuItem change = new JMenuItem("Change Dorm");

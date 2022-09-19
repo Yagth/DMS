@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AllocateDormAsRequested extends TableViewPage implements ActionListener {
+public class AutomaticDormAllocation extends TableViewPage implements ActionListener {
     private DormitoryView parentComponent;
     private ArrayList<Dormitory> availableDorms;
     private HashMap<String, Student> students;
@@ -23,7 +23,7 @@ public class AllocateDormAsRequested extends TableViewPage implements ActionList
     private ArrayList<String> reporterIds;
     private int remainingStudents; //The remaining students after the allocation.
     private int totalSpace;
-    public AllocateDormAsRequested(DormitoryView parentComponent){
+    public AutomaticDormAllocation(DormitoryView parentComponent){
         this.parentComponent = parentComponent;
         String query = "SELECT COUNT(*) AS TotalNo FROM AvailableDorm";
         loadAndSetTotalPage(query);
@@ -39,68 +39,82 @@ public class AllocateDormAsRequested extends TableViewPage implements ActionList
         String query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
                 " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
                 Request.getCurrentDate()+"' , '"+parentComponent.getProctorBuilding()+"')";
-        totalSpace = getTotalSpace();
-        remainingStudents = getTotalStudentNo();
-
-        if(totalSpace<remainingStudents) {
-            int choice = JOptionPane.showConfirmDialog(parentComponent,"There is not enough space for all students.\nDo you still want to continue?");
-            if(choice == 1) return;
-        }
 
         loadAvailableDorms();
         sortDormOnBuildingNo();
+        totalSpace = getTotalSpace();
 
         int choice = JOptionPane.showConfirmDialog(parentComponent,"Do you want to allocate new students?");
-        if(choice == 1)
-            updateStatus = allocateLocalStudents();
-        else updateStatus = allocate();
+        if(choice == 1){
+            students.clear();
 
+            do{
+                loadReport();
+                loadLocalStudents();
+                remainingStudents = students.size();
+                updateStatus = allocate();
+                if(!updateStatus) return;
+                incrementPageNumber();
+                updateRequestStatus();
+            } while(remainingStudents>0);
+
+        }else{
+            students.clear();
+
+            do{
+                query = "SELECT COUNT(*) AS TotalNo FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
+                        "AND Place != 'ADDIS ABABA' AND isEligible = 1 ";
+                remainingStudents = getTotalStudentNo(query);
+
+                loadNewStudents();
+                updateStatus = allocate();
+                if(!updateStatus) return;
+                incrementPageNumber();
+            }while(remainingStudents>0);
+        }
         insertHistory(query);
-        displayUpdateStatus(updateStatus);
     }
     public boolean allocate(){
         boolean updateStatus = false;
-        int count = 0;
-        for(Student student : students.values()){
-            Dormitory dorm = availableDorms.get(count);
-            if(student.getGender().equalsIgnoreCase(dorm.getDormType())){
-                student.setBuildingNo(dorm.getBuildingNo());
-                student.setDormNo(dorm.getRoomNO());
-                count++;
-            }
-        }
-
-        for(Student student : students.values()){
-            JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-            String query = "";
-            boolean hasDorm = !(student.getDormNo() == 0 & student.getBuildingNo() == 0);
-            if(hasDorm){
-                query = "UPDATE Student SET BuildingNumber = '"+student.getBuildingNo()+
-                        ", RoomNumber = '"+student.getDormNo()+"' WHERE SID = '"+student.getsId()+"' ";
-                updateStatus = javaConnection.updateQuery(query);
-                String query2 = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
-                        " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";//Decrementing the stock on every student allocation.
-                updateStatus &= javaConnection.updateQuery(query2);
-                students.remove(student.getsId());
-            }
-        }
-
-        return updateStatus;
-    }
-
-    public boolean allocateLocalStudents(){
-        boolean updateStatus;
-
-        remainingStudents = reporterIds.size();
-        if(remainingStudents == 0){
-            displayUpdateStatus(false);
+        int choice = 0;
+        if(totalSpace<remainingStudents) {
+            choice = JOptionPane.showConfirmDialog(parentComponent,"There is not enough space for all students.\nDo you still want to continue?");
+            if(choice == 1) return false;
+        } else if(remainingStudents == 0){
+            JOptionPane.showMessageDialog(parentComponent,"No students left to allocate.");
             return false;
-        }
+        } else{
+            int count = 0;
+            //To update the students stored on the memory.
+            for(Student student : students.values()){
+                Dormitory dorm = availableDorms.get(count);
+                if(student.getGender().equalsIgnoreCase(dorm.getDormType())){
+                    student.setBuildingNo(dorm.getBuildingNo());
+                    student.setDormNo(dorm.getRoomNO());
+                    count++;
+                }
+            }
 
-        loadReport();
-        loadLocalStudents();
-        updateStatus = allocateStudents();
-        updateRequestStatus();
+            //To update the database accordingly.
+            for(Student student : students.values()){
+                JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+                String query = "";
+                boolean hasDorm = !(student.getDormNo() == 0 & student.getBuildingNo() == 0);
+                if(hasDorm){
+                    query = "UPDATE Student SET BuildingNumber = '"+student.getBuildingNo()+
+                            ", RoomNumber = '"+student.getDormNo()+"' WHERE SID = '"+student.getsId()+"' ";
+                    updateStatus = javaConnection.updateQuery(query);
+                    query = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
+                            " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";//Decrementing the stock on every student allocation.
+                    updateStatus &= javaConnection.updateQuery(query);
+                    students.remove(student.getsId());//Removing the student from memory after allocation.
+                    remainingStudents--;
+                }
+            }
+        }
+        if(!updateStatus) JOptionPane.showMessageDialog(parentComponent,"Allocation terminated due to some error."
+                ,"Allocation error",JOptionPane.ERROR_MESSAGE);
+
         return updateStatus;
     }
 
@@ -109,6 +123,7 @@ public class AllocateDormAsRequested extends TableViewPage implements ActionList
         String query = "SELECT * FROM AvailableDorm ORDER BY NumberOfStudents ASC OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
                 " ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         ResultSet resultSet = javaConnection.selectQuery(query);
+
         try{
             availableDorms.clear();//Erasing previously loaded dorms.
             while(resultSet.next()){
@@ -143,10 +158,8 @@ public class AllocateDormAsRequested extends TableViewPage implements ActionList
         }
     }
 
-    public int getTotalStudentNo(){
+    public int getTotalStudentNo(String query){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT COUNT(*) AS TotalNo FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
-                "AND Place != 'ADDIS ABABA' AND isEligible = 1 ";
         ResultSet resultSet;
         int totalNewStudents = 0;
         resultSet = javaConnection.selectQuery(query);
@@ -238,62 +251,12 @@ public class AllocateDormAsRequested extends TableViewPage implements ActionList
         }
     }
 
-    public void sortDormOnAvailableSpace(){
-        for(int i = 0; i<availableDorms.size(); i++){
-            for(int j = 0; j<availableDorms.size(); j++){
-                Dormitory tmp;
-                try{
-                    int availableSpace1 = availableDorms.get(j).getMaxCapacity()-availableDorms.get(j).getNoOfStudents();
-                    int availableSpace2 = availableDorms.get(j+1).getMaxCapacity()-availableDorms.get(j+1).getNoOfStudents();
-                    if( availableSpace1 < availableSpace2 ){
-                        tmp = availableDorms.get(j+1);
-                        availableDorms.set(j+1,availableDorms.get(j));
-                        availableDorms.set(j,tmp);
-                    }
-                } catch (IndexOutOfBoundsException ex){
-                    //No need to implement this block.
-                }
-            }
-        }
-    }
-
     public int getAvailableSpaces(){
             int totalSpace = 0;
             for(Dormitory dormitory: availableDorms){
                 totalSpace += dormitory.getMaxCapacity() - dormitory.getNoOfStudents();
             }
             return totalSpace;
-    }
-
-    public boolean allocateStudents(){
-        boolean updateStatus = false;
-        int totalSpace = getAvailableSpaces();
-        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "";
-        for(int i = 0; i<reporterIds.size(); i++){
-            Dormitory tmpDorm = availableDorms.get(i);
-            String SID = reporterIds.get(i);
-            students.get(SID).setBuildingNo(tmpDorm.getBuildingNo());
-            students.get(SID).setDormNo(tmpDorm.getRoomNO());
-        }
-
-        if(javaConnection.isConnected()){
-            for(Student student: students.values()){
-                query = "UPDATE Student SET BuildingNumber='"+student.getBuildingNo() +
-                        "', RoomNumber='"+student.getDormNo()+
-                        "' WHERE SID='"+student.getsId()+"'";
-                updateStatus = javaConnection.updateQuery(query);
-
-                String query2 = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
-                        " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";//Decrementing the stock on every student allocation.
-                javaConnection.insertQuery(query2);
-            }
-
-            updateStatus &= (totalSpace >= reporterIds.size());
-            remainingStudents = reporterIds.size()-totalSpace;
-            if(remainingStudents<0) remainingStudents = 0;
-        }
-        return updateStatus;
     }
 
     public void updateRequestStatus(){
@@ -310,7 +273,6 @@ public class AllocateDormAsRequested extends TableViewPage implements ActionList
             }catch (IndexOutOfBoundsException ex){
                 //No need to implement this code.
             }
-
         }
     }
 
@@ -318,8 +280,7 @@ public class AllocateDormAsRequested extends TableViewPage implements ActionList
         if(updateStatus)
             JOptionPane.showMessageDialog(parentComponent,"Allocation Successful.");
         else{
-            if(remainingStudents == 0)
-                JOptionPane.showMessageDialog(parentComponent,"No students left to allocate.");
+            if(remainingStudents == 0);
             else
                 JOptionPane.showMessageDialog(parentComponent,"Couldn't allocate "+ remainingStudents+" students due to some problem.\n " +
                         "Make sure there is available space and also the destination exits.");
