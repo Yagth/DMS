@@ -5,6 +5,7 @@ import BasicClasses.Requests.Request;
 import BasicClasses.Rooms.Dormitory;
 import GUIClasses.ProctorViews.AllocationForm;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -21,6 +22,11 @@ public class ManualAllocationButtonListener extends RequestedStudentDormAllocati
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus = false;
+
+        if(parentComponent.getBuildingNumber().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(parentComponent,"Please enter valid building Number");
+            return;
+        }
         String query = "SELECT COUNT(*) AS TotalNo FROM AvailableDorm WHERE BuildingNumber='"+parentComponent.getBuildingNumber()+"' ";
         loadAndSetTotalPage(query);
         resetPageNumber();
