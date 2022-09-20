@@ -16,7 +16,7 @@ public class ManualAllocationButtonListener extends RequestedStudentDormAllocati
 
 
     public ManualAllocationButtonListener(AllocationForm parentComponent){
-        super(null);
+        super(parentComponent.getParentComponent());
         this.parentComponent = parentComponent;
     }
     @Override

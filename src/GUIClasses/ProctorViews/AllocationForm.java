@@ -27,6 +27,9 @@ public class AllocationForm extends JFrame implements Views {
     public String getBuildingNumber(){
         return buildingNoTF.getText();
     }
+    public DormitoryView getParentComponent(){
+        return parentComponent;
+    }
 
     public void goToParent(){
         this.dispose();
@@ -35,7 +38,7 @@ public class AllocationForm extends JFrame implements Views {
     @Override
     public void setUpGUi() {
         this.setTitle("Manual Allocation");
-        this.setSize(500,300);
+        this.setSize(800,300);
         this.setContentPane(mainPanel);
         this.setLocationRelativeTo(parentComponent);
         allocateButton.addActionListener(new ManualAllocationButtonListener(this));
