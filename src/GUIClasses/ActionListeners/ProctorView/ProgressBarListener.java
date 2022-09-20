@@ -35,7 +35,7 @@ public abstract class ProgressBarListener extends TableViewPage implements Actio
                 remainingStudents = getTotalStudentNo(query);
                 totalStudents = remainingStudents;
                 do{
-                    Thread.sleep(500);
+                    Thread.sleep(50);
                     loadAvailableDorms();
                     sortDormOnBuildingNo();
                     totalSpace = getTotalSpace();
