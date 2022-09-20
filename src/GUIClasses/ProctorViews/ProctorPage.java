@@ -7,6 +7,7 @@ import BasicClasses.Requests.Request;
 import GUIClasses.ActionListeners.NextActionListener;
 import GUIClasses.ActionListeners.PrevActionListener;
 import GUIClasses.ActionListeners.ProctorView.ProctorPage.*;
+import GUIClasses.ActionListeners.StudentView.StudentPage.ChangePasswordMenuItemListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 import GUIClasses.TableViewPage;
@@ -249,16 +250,21 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         Service.add(seeReports);
         Service.add(seeStocks);
 
-        JMenu logout = new JMenu("Logout");
-        logout.setForeground(Color.GRAY);
+        JMenu otherActions = new JMenu("Logout");
+        otherActions.setForeground(Color.GRAY);
+
+        JMenuItem changePassword = new JMenuItem("Change Password");
+        changePassword.setForeground(Color.BLACK);
+        changePassword.addActionListener(new ChangePasswordItemListener(this));
         JMenuItem signOut = new JMenuItem("Logout");
         signOut.setForeground(Color.BLACK);
         signOut.addActionListener(new LogoutMenuItemListener(this));
 
-        logout.add(signOut);
+        otherActions.add(changePassword);
+        otherActions.add(signOut);
 
         Services.add(Service);
-        Services.add(logout);
+        Services.add(otherActions);
 
         setJMenuBar(Services);
 

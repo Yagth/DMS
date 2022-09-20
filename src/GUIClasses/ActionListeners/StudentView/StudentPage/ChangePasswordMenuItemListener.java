@@ -13,7 +13,7 @@ public class ChangePasswordMenuItemListener extends MenuItemListener implements 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new ChangePasswordForm(parentComponent);
+        new ChangePasswordForm(parentComponent,parentComponent.getStudent().getsId());
         parentComponent.setVisible(false);
     }
 }
