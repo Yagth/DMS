@@ -125,7 +125,7 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
 
                 if(hasDorm){
                     query = "UPDATE Student SET BuildingNumber = '"+student.getBuildingNo()+
-                            "', RoomNumber = '"+student.getDormNo()+"' pillow=1,matress=1,bedBase=1 WHERE SID = '"+student.getsId()+"' ";
+                            "', RoomNumber = '"+student.getDormNo()+"', pillow=1,matress=1,bedBase=1 WHERE SID = '"+student.getsId()+"' ";
                     updateStatus = javaConnection.updateQuery(query);
 
                     System.out.println("Query: "+query);
