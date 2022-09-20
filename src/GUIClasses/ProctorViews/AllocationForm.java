@@ -6,6 +6,8 @@ import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class AllocationForm extends JFrame implements Views {
     private JPanel mainPanel;
@@ -41,6 +43,17 @@ public class AllocationForm extends JFrame implements Views {
         this.setSize(800,300);
         this.setContentPane(mainPanel);
         this.setLocationRelativeTo(parentComponent);
+
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                e.getWindow().dispose();
+                parentComponent.setVisible(true);
+            }
+        }); //A custom action listener for the exit button.
+
         allocateButton.addActionListener(new ManualAllocationButtonListener(this));
         this.setVisible(true);
     }
