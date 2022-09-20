@@ -29,29 +29,7 @@ public class HandleButtonListener implements ActionListener {
             System.out.println("Query in first if: "+query);//For debugging only.
             return javaConnection.insertQuery(query);
         } else if(request.getRequestType().equals("RequestForNewDorm")) {
-            query = "SELECT TOP 1 * FROM AvailableDorm ORDER BY NumberOfStudents ASC";
-            System.out.println("Query in second if: "+query);//For debugging only.
-            ResultSet resultSet = javaConnection.selectQuery(query);
-            try{
-                String buildingNumber = null;
-                String roomNumber = null;
-                while(resultSet.next()){
-                    buildingNumber = resultSet.getString("BuildingNumber");
-                    roomNumber = resultSet.getString("RoomNumber");
-                }
-                query = "UPDATE Student SET BuildingNumber='"+buildingNumber+"', RoomNumber='"+roomNumber+
-                        "' WHERE SID='"+request.getRequesterId()+"'";
-                System.out.println("Query: "+query);//For debugging only.
-                boolean updateStatus = javaConnection.updateQuery(query);
-                query = "INSERT INTO ProctorHandlesReport(handledDate,EID,ReportId) " +
-                        "VALUES('"+request.getHandledDate()+
-                        "' ,'"+parentComponent.getHandlerId()+
-                        "', "+request.getRequestId()+")";
-                if(javaConnection.insertQuery(query) == 1 && updateStatus) return 1;
-                else return 0;
-            } catch (SQLException ex){
-                return 0;
-            }
+            return automaticAllocation(request);
         } else{
             Vector<Vector<Object>> tmpClothRequest = parentComponent.getClothRequests();
             int updateStatus = 0;
@@ -66,6 +44,33 @@ public class HandleButtonListener implements ActionListener {
                 }
             }
             return updateStatus;
+        }
+    }
+
+    public int automaticAllocation(Request request){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT TOP 1 * FROM AvailableDorm ORDER BY NumberOfStudents ASC";
+        System.out.println("Query in second if: "+query);//For debugging only.
+        ResultSet resultSet = javaConnection.selectQuery(query);
+        try{
+            String buildingNumber = null;
+            String roomNumber = null;
+            while(resultSet.next()){
+                buildingNumber = resultSet.getString("BuildingNumber");
+                roomNumber = resultSet.getString("RoomNumber");
+            }
+            query = "UPDATE Student SET BuildingNumber='"+buildingNumber+"', RoomNumber='"+roomNumber+
+                    "' WHERE SID='"+request.getRequesterId()+"'";
+            System.out.println("Query: "+query);//For debugging only.
+            boolean updateStatus = javaConnection.updateQuery(query);
+            query = "INSERT INTO ProctorHandlesReport(handledDate,EID,ReportId) " +
+                    "VALUES('"+request.getHandledDate()+
+                    "' ,'"+parentComponent.getHandlerId()+
+                    "', "+request.getRequestId()+")";
+            if(javaConnection.insertQuery(query) == 1 && updateStatus) return 1;
+            else return 0;
+        } catch (SQLException ex){
+            return 0;
         }
     }
 

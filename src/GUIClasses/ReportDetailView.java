@@ -225,6 +225,9 @@ public class ReportDetailView extends JFrame implements Views {
         reporterName.setVisible(isInProctorView);
         reporterNameL.setVisible(isInProctorView);
         handleButton.setVisible(isInProctorView);
-        if(isInProctorView) handleButton.addActionListener(new HandleButtonListener(this));
+        if(isInProctorView) {
+            handleButton.addActionListener(new HandleButtonListener(this));
+            if(request.getRequestType().equalsIgnoreCase("RequestForNewDorm")) handleButton.setText("Allocate");
+        }
     }
 }
