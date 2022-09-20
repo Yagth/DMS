@@ -47,11 +47,13 @@ public class SingleStudentAllocationListener implements ActionListener {
 
         allocationIsValid = isValid(tmpDorm);
 
+        System.out.println("Allocation is valid: "+allocationIsValid);
         if(allocationIsValid) {
 
             JavaConnection javaConnection1 = new JavaConnection(JavaConnection.URL);
             query = "UPDATE Student SET BuildingNumber='"+buildingNumber+"', SET RoomNumber='"
                     +roomNumber+"', Pillow=1, BedBase=1,Matress=1 WHERE SID='"+student.getsId()+"' ";
+            System.out.println("Query: "+query);
             updateStatus = javaConnection1.updateQuery(query);
             query = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
                     " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";
@@ -94,7 +96,7 @@ public class SingleStudentAllocationListener implements ActionListener {
             JOptionPane.showMessageDialog(parentComponent,"The student isn't eligible");
             return false;
         }else{
-            return hasSpace & hasLocker & isRightGender;
+            return hasSpace & hasLocker & isRightGender & isEligible;
         }
     }
 
