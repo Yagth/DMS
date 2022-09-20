@@ -1,10 +1,12 @@
 package GUIClasses.ActionListeners.ProctorView.AllocateDormView;
 
 import BasicClasses.Others.JavaConnection;
+import BasicClasses.Others.LoadingThread;
 import BasicClasses.Persons.Student;
 import BasicClasses.Requests.Request;
 import BasicClasses.Rooms.Dormitory;
 import GUIClasses.ProctorViews.DormitoryView;
+import GUIClasses.ProctorViews.LoadingClass;
 import GUIClasses.TableViewPage;
 
 import javax.swing.*;
@@ -35,6 +37,10 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
         String query;
         String query2 = "SELECT COUNT(*) AS TotalNo FROM AvailableDorm";
 
+//        LoadingClass loadingClass = new LoadingClass(parentComponent);
+//        Thread loadingThread = new LoadingThread(loadingClass);
+//        loadingThread.start();
+
         loadAndSetTotalPage(query2);
         resetPageNumber();
 
@@ -48,18 +54,16 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
 
         insertHistory(query);
         displayUpdateStatus(updateStatus);
+//        loadingThread.interrupt();
     }
 
     public boolean allocateAllStudents(){
         String query;
         boolean updateStatus;
+        query = "SELECT COUNT(*) AS TotalNo FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
+                "AND Place != 'ADDIS ABABA' AND isEligible = 1 ";
+        remainingStudents = getTotalStudentNo(query);
         do{
-            query = "SELECT COUNT(*) AS TotalNo FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
-                    "AND Place != 'ADDIS ABABA' AND isEligible = 1 ";
-            remainingStudents = getTotalStudentNo(query);
-
-            System.out.println("Query: "+query);
-            System.out.println("RemainingStudents: "+remainingStudents);
 
             loadAvailableDorms();
             sortDormOnBuildingNo();
@@ -124,12 +128,15 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
                             "', RoomNumber = '"+student.getDormNo()+"' pillow=1,matress=1,bedBase=1 WHERE SID = '"+student.getsId()+"' ";
                     updateStatus = javaConnection.updateQuery(query);
 
+                    System.out.println("Query: "+query);
+
                     query = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
                             " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";//Decrementing the stock on every student allocation.
 
                     updateStatus &= javaConnection.updateQuery(query);
                     it.remove();//Removing the student from memory after allocation.
                     remainingStudents--;
+                    System.out.println("Remaining students: "+ remainingStudents);
                 }
             }
         }
