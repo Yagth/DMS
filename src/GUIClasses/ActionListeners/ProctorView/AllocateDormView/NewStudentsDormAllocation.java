@@ -93,6 +93,7 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
             @Override
             protected void process(List<Integer> chunks) {
                 JLabel label = parentComponent.getLoadingL();
+                label.setVisible(true);
                 incrementDots(label);
 
                 int remainingStudents = chunks.get(chunks.size()-1);
@@ -108,6 +109,8 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
                 boolean updateStatus1;
                 try {
                     updateStatus1 = get();
+                    parentComponent.getLoadingProgressBar().setVisible(false);
+                    parentComponent.getLoadingL().setVisible(false);
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
                 } catch (ExecutionException ex) {
