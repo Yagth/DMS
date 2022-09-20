@@ -14,8 +14,6 @@ public class AllocationForm extends JFrame implements Views {
     private JTextField buildingNoTF;
     private JButton allocateButton;
     private JPanel innerPanel;
-    private JProgressBar loadingProgressBar;
-    private JLabel loadingL;
     private DormitoryView parentComponent;
     private Proctor proctor;
 

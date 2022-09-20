@@ -4,6 +4,7 @@ import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Student;
 import BasicClasses.Requests.Request;
 import BasicClasses.Rooms.Dormitory;
+import GUIClasses.ActionListeners.ProctorView.ProgressBarListener;
 import GUIClasses.ProctorViews.ChangeDormView;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-public class ChangeButtonListener implements ActionListener {
+public class ChangeButtonListener extends ProgressBarListener {
     private ChangeDormView parentComponent;
     private ArrayList<Dormitory> availableDorms;
     private ArrayList<ArrayList<Student>> groupOfStudents; //Collection of students that are in the same dorm.
