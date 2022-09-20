@@ -10,11 +10,15 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class RequestedStudentDormAllocation extends NewStudentsDormAllocation {
-    private DormitoryView parentComponent;
+    protected ArrayList<Integer> requests;
+    protected ArrayList<String> reporterIds;
     public RequestedStudentDormAllocation(DormitoryView parentComponent){
         super(parentComponent);
+        reporterIds = new ArrayList<>();
+        requests = new ArrayList<>();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -86,6 +90,24 @@ public class RequestedStudentDormAllocation extends NewStudentsDormAllocation {
                 } catch (SQLException ex){
                     ex.printStackTrace();//For debugging only.
                 }
+            }
+        }
+    }
+
+    public void loadReport(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT ReportId, ReporterId FROM dormRequests ORDER BY ReportedDate ASC";//Gives priority to the reported date.
+        ResultSet resultSet;
+        if(javaConnection.isConnected()){
+            resultSet = javaConnection.selectQuery(query);
+            try{
+                while(resultSet.next()){
+                    reporterIds.add(resultSet.getString("ReporterId"));
+                    requests.add(resultSet.getInt("ReportId"));
+                }
+
+            } catch (SQLException ex){
+                ex.printStackTrace();//For debugging only.
             }
         }
     }

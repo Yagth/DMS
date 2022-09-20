@@ -23,6 +23,9 @@ public class AllocationForm extends JFrame implements Views {
     public Proctor getProctor(){
         return proctor;
     }
+    public String getBuildingNumber(){
+        return buildingNoTF.getText();
+    }
 
     public void goToParent(){
         this.dispose();

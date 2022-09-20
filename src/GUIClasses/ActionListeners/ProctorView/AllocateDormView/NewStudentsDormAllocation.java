@@ -21,8 +21,6 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
     protected DormitoryView parentComponent;
     protected ArrayList<Dormitory> availableDorms;
     protected HashMap<String, Student> students;
-    protected ArrayList<Integer> requests;
-    protected ArrayList<String> reporterIds;
     protected int remainingStudents; //The remaining students after the allocation.
     protected int totalSpace;
     public NewStudentsDormAllocation(DormitoryView parentComponent){
@@ -30,8 +28,6 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
 
         availableDorms = new ArrayList<>();
         students = new HashMap<>();
-        reporterIds = new ArrayList<>();
-        requests = new ArrayList<>();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -165,24 +161,6 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
             }
         } catch (SQLException ex){
             ex.printStackTrace();//For debugging only.
-        }
-    }
-
-    public void loadReport(){
-        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT ReportId, ReporterId FROM dormRequests ORDER BY ReportedDate ASC";//Gives priority to the reported date.
-        ResultSet resultSet;
-        if(javaConnection.isConnected()){
-            resultSet = javaConnection.selectQuery(query);
-            try{
-                while(resultSet.next()){
-                    reporterIds.add(resultSet.getString("ReporterId"));
-                    requests.add(resultSet.getInt("ReportId"));
-                }
-
-            } catch (SQLException ex){
-                ex.printStackTrace();//For debugging only.
-            }
         }
     }
 
