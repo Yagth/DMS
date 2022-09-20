@@ -51,7 +51,7 @@ public class SingleStudentAllocationListener implements ActionListener {
         if(allocationIsValid) {
 
             JavaConnection javaConnection1 = new JavaConnection(JavaConnection.URL);
-            query = "UPDATE Student SET BuildingNumber='"+buildingNumber+"', SET RoomNumber='"
+            query = "UPDATE Student SET BuildingNumber='"+buildingNumber+"', RoomNumber='"
                     +roomNumber+"', Pillow=1, BedBase=1,Matress=1 WHERE SID='"+student.getsId()+"' ";
             System.out.println("Query: "+query);
             updateStatus = javaConnection1.updateQuery(query);
