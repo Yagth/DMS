@@ -67,8 +67,8 @@ public class StudentPage extends JFrame implements TableViews {
 
     public void addKeyHolderName(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT Fname+' '+Lname Name FROM STUDENT WHERE SID=(SELECT KeyHolderId FROM DORM WHERE BuildingNumber='"
-                +student.getBuildingNo()+"' AND RoomNumber'"+student.getDormNo()+"') ";
+        String query = "SELECT Fname+' '+Lname Name FROM STUDENT WHERE SID=(SELECT KeyHolder FROM DORM WHERE BuildingNumber='"
+                +student.getBuildingNo()+"' AND RoomNumber='"+student.getDormNo()+"') ";
         String name = "";
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
