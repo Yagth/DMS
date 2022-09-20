@@ -46,6 +46,7 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
         resetPageNumber();
         students.clear();
 
+        allocateStudents();
 
         query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
                 " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
