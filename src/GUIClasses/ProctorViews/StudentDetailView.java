@@ -2,7 +2,10 @@ package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
+import BasicClasses.Persons.Proctor;
 import BasicClasses.Persons.Student;
+import GUIClasses.ActionListeners.ProctorView.AllocateDormView.SingleStudentAllocationListener;
+import GUIClasses.ActionListeners.ProctorView.StudentView.AllocateButtonListener;
 import GUIClasses.ActionListeners.ProctorView.StudentView.BackButtonListener;
 import GUIClasses.ActionListeners.ProctorView.StudentView.DeallocateButtonListener;
 import GUIClasses.Interfaces.TableViews;
@@ -36,6 +39,7 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
     private JLabel phoneNumberL;
     private JLabel yearL;
     private JLabel genderL;
+    private JButton allocateButton;
     private Student student;
     private StudentView parentComponent;
     private Vector<Vector<Object>> tableData;
@@ -114,9 +118,35 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
                     ,"Reading Error",JOptionPane.INFORMATION_MESSAGE);
     }
 
+    public Proctor getProctor(){
+        return parentComponent.getProctor();
+    }
     public void goBackToParent(){
         this.dispose();
         parentComponent.setVisible(true);
+    }
+
+    public boolean allocateButtonVisibility(){
+        boolean hasNoDorm = (student.getBuildingNo() == 0 & student.getDormNo() == 0);
+        boolean makeVisible = hasNoDorm;
+
+        return makeVisible;
+    }
+
+    public boolean deallocateButtonVisibility(){
+        boolean hasDorm = (student.getBuildingNo() != 0 & student.getDormNo() != 0);
+        boolean makeVisible = hasDorm;
+
+        return makeVisible;
+    }
+
+    public void setButtonsVisibility(){
+        boolean visibility = allocateButtonVisibility();
+        allocateButton.setVisible(visibility);
+        visibility = deallocateButtonVisibility();
+        deallocateDormButton.setVisible(visibility);
+
+        this.revalidate();
     }
 
     public void reloadParentTable(){
@@ -180,7 +210,10 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
         this.setSize(WIDTH,HEIGHT);
         this.setLocationRelativeTo(null);
 
+        setButtonsVisibility();
+
         deallocateDormButton.addActionListener(new DeallocateButtonListener(this));
+        allocateButton.addActionListener(new AllocateButtonListener(this));
         backButton.addActionListener(new BackButtonListener(this));
         this.addWindowListener(new WindowAdapter()
         {

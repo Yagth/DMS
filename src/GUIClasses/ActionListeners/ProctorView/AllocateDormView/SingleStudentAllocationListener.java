@@ -93,5 +93,7 @@ public class SingleStudentAllocationListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus = allocateStudent();
+        parentComponent.getParentComponent().displayStudentInfo();
+        parentComponent.dispose();
     }
 }

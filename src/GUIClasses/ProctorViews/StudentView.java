@@ -140,6 +140,9 @@ public class StudentView extends TableViewPage implements Views, TableViews {
         buildingNumberTF.setToolTipText("Enter "+text+" here");
     }
 
+    public Proctor getProctor(){
+        return proctor;
+    }
     public String getFilterInputText(){
         return buildingNumberTF.getText();
     }
