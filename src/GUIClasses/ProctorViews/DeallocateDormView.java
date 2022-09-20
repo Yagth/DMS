@@ -2,10 +2,8 @@ package GUIClasses.ProctorViews;
 
 import BasicClasses.Others.JavaConnection;
 import BasicClasses.Persons.Proctor;
-import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.DeallocateBackButtonListener;
-import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.DeallocateBatchItemListener;
-import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.DeallocateButtonListener;
-import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.YearTFFocusListener;
+import GUIClasses.ActionListeners.ProctorView.ChangeDormView.FromBuildingNoTFListener;
+import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.*;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
@@ -31,10 +29,6 @@ public class DeallocateDormView extends JFrame implements Views {
         this.proctor = proctor;
         setUpGUi();
     }
-
-    public DeallocateDormView(){
-        this(null,null);
-    }//For debugging only constructor.
 
     public int getYear(){
         try{
@@ -85,6 +79,7 @@ public class DeallocateDormView extends JFrame implements Views {
         this.setLocationRelativeTo(parentComponent);
         yearTF.setText("");
         yearTF.addFocusListener(new YearTFFocusListener(this));
+        fromBuildingNoTF.addFocusListener(new FromDormTFFocusListener(this));
         deallocateButton.addActionListener(new DeallocateButtonListener(this));
         backButton.addActionListener(new DeallocateBackButtonListener(this));
         this.addWindowListener(new WindowAdapter()
