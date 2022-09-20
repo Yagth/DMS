@@ -178,8 +178,8 @@ public class StudentPage extends JFrame implements TableViews {
         changePassword.setForeground(Color.BLACK);
         changePassword.addActionListener(new ChangePasswordMenuItemListener(this));
 
-        otherActions.add(signOut);
         otherActions.add(changePassword);
+        otherActions.add(signOut);
         Services.add(otherActions);
 
         ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
