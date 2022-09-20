@@ -33,6 +33,10 @@ public class StockView extends TableViewPage implements Views, TableViews {
     private JButton backButton;
     private JButton nextButton;
     private JButton prevButton;
+    private JLabel roomNumberL;
+    private JLabel mattressL;
+    private JLabel mattressBaseL;
+    private JLabel pillowL;
     private Vector<Vector<Object>> tableData;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
@@ -47,7 +51,7 @@ public class StockView extends TableViewPage implements Views, TableViews {
         loadAndSetTotalPage(query);
 
         setUpGUi();
-        System.out.println("After setUpGui");//For debugging only.
+        displayStockInfo();
     }
 
     public Vector<Vector<Object>> loadHistory(){
@@ -72,6 +76,24 @@ public class StockView extends TableViewPage implements Views, TableViews {
             }
         }
         return history;
+    }
+
+    public void displayStockInfo(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT * FROM Stock WHERE BuildingNumber='"+proctor.getBuildingNo()+"' ";
+        ResultSet resultSet = javaConnection.selectQuery(query);
+
+        try{
+            while(resultSet.next()){
+                buildingNumberL.setText(resultSet.getString("buildingNumber"));
+                roomNumberL.setText(resultSet.getString("RoomNumber"));
+                mattressL.setText(resultSet.getString("TotalMatress"));
+                mattressBaseL.setText(resultSet.getString("TotalMatressBase"));
+                pillowL.setText(resultSet.getString("TotalPillow"));
+            }
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 
     @Override

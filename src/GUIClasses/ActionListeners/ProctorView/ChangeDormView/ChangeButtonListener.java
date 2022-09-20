@@ -35,10 +35,9 @@ public class ChangeButtonListener implements ActionListener {
         Student student = parentComponent.getStudent();
         int numberOfStudents = 0;
         String query ="";
-        String query2 = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
+        String historyQuery = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
                 " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Change Dorm', '"+
                 Request.getCurrentDate()+"' , '"+parentComponent.getBuildingNo()+"')";
-
         if(toBuildingNo.equals("")){
             JOptionPane.showMessageDialog(parentComponent,"Destination building is empty",
                     "Empty message",JOptionPane.ERROR_MESSAGE);
@@ -111,7 +110,11 @@ public class ChangeButtonListener implements ActionListener {
                     "WHERE SID ='"+student.getsId()+"';";
             if(javaConnection.isConnected()){
                 updateStatus = javaConnection.updateQuery(query);
-                insertHistory(query2);
+                insertHistory(historyQuery);
+                historyQuery = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
+                        " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Change Dorm', '"+
+                        Request.getCurrentDate()+"' , '"+parentComponent.getDestinationBuildingNo()+"')";
+                insertHistory(historyQuery);
             }
         }
         else {
@@ -134,7 +137,7 @@ public class ChangeButtonListener implements ActionListener {
 
                 groupStudents(fromBuildingNo);
                 updateStatus = changeStudents(fromBuildingNo,toBuildingNo);
-                insertHistory(query2);
+                insertHistory(query);
             }
         }
         displayUpdateStatus(updateStatus);

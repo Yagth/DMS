@@ -67,7 +67,7 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="e9d8e" class="javax.swing.JLabel">
+          <component id="e9d8e" class="javax.swing.JLabel" binding="roomNumberL">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
             </constraints>
@@ -87,7 +87,7 @@
               <text value="Location"/>
             </properties>
           </component>
-          <component id="fff2" class="javax.swing.JLabel">
+          <component id="fff2" class="javax.swing.JLabel" binding="mattressL">
             <constraints>
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
             </constraints>
@@ -97,7 +97,7 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="1b152" class="javax.swing.JLabel">
+          <component id="1b152" class="javax.swing.JLabel" binding="mattressBaseL">
             <constraints>
               <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
             </constraints>
@@ -107,7 +107,7 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="1252d" class="javax.swing.JLabel">
+          <component id="1252d" class="javax.swing.JLabel" binding="pillowL">
             <constraints>
               <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
             </constraints>
