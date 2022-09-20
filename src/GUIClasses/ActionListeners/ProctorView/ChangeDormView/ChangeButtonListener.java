@@ -290,6 +290,4 @@ public class ChangeButtonListener extends ProgressBarListener {
         }
     }
 
-    //The following method is only for debugging.
-
 }
