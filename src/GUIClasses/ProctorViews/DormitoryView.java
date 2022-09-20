@@ -49,6 +49,7 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
     private JLabel yearL;
     private JButton prevButton;
     private JButton nextButton;
+    private JProgressBar loadingProgressBar;
     private ProctorPage parentComponent;
     private Proctor proctor;
     private Vector<Vector<Object>> tableData;
@@ -218,6 +219,10 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
     public void clearDorms(){
         dorms.clear();
         tableData.clear();
+    }
+
+    public JProgressBar getLoadingProgressBar(){
+        return loadingProgressBar;
     }
 
     @Override

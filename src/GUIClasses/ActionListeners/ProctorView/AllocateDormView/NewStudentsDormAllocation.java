@@ -15,10 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 public class NewStudentsDormAllocation extends TableViewPage implements ActionListener {
     protected DormitoryView parentComponent;
@@ -38,20 +36,57 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
         boolean updateStatus;
         String query;
         String query2 = "SELECT COUNT(*) AS TotalNo FROM AvailableDorm";
-        parentComponent.setVisible(false);
 
         loadAndSetTotalPage(query2);
         resetPageNumber();
         students.clear();
-        updateStatus = allocateAllStudents();
+        SwingWorker<Boolean,Integer> worker = new SwingWorker<Boolean, Integer>() {
+            @Override
+            protected Boolean doInBackground() throws Exception {
+                boolean updateStatus1;
+                do{
+                    loadAvailableDorms();
+                    sortDormOnBuildingNo();
+                    totalSpace = getTotalSpace();
+
+                    System.out.println("TotalSpace: "+totalSpace);
+
+                    loadNewStudents();
+                    updateStatus1 = allocate();
+                    incrementPageNumber();
+                    if(getPageNumber()>getTotalPage()) resetPageNumber();
+                    updateDormInfo();
+                    publish(remainingStudents);
+                }while(remainingStudents>0);
+                return updateStatus1;
+            }
+            @Override
+            protected void process(List<Integer> chunks) {
+                int remainingStudents = chunks.get(chunks.size()-1);
+                JProgressBar tmp = parentComponent.getLoadingProgressBar();
+                tmp.setValue(remainingStudents);
+            }
+            @Override
+            protected void done() {
+                boolean updateStatus1 = false;
+                try {
+                    updateStatus1 = get();
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                }
+                displayUpdateStatus(updateStatus1);
+            }
+        };
+
+        worker.execute();
 
         query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
                 " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
                 Request.getCurrentDate()+"' , '"+parentComponent.getProctor().getBuildingNo()+"')";
 
         insertHistory(query);
-        displayUpdateStatus(updateStatus);
-        parentComponent.setVisible(true);
     }
 
     public boolean allocateAllStudents(){
