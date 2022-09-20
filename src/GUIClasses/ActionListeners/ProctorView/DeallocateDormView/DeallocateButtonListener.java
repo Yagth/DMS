@@ -32,7 +32,7 @@ public class DeallocateButtonListener implements ActionListener {
                 else{
                     int yearInt = Integer.parseInt(year);
                     boolean updateStatus = false;
-                    query2 ="UPDATE STUDENT SET RoomNumber=null, BuildingNumber=null, pillow=0,matress=0,bedBase=0, WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"';";
+                    query2 ="UPDATE STUDENT SET RoomNumber=null, BuildingNumber=null, pillow=0,matress=0,bedBase=0 WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"';";
                     query = "UPDATE Stock SET" +
                                 " TotalPillow+=(SELECT COUNT(SID) FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"')," +
                                 " TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE year="+yearInt+" AND BuildingNumber='"+buildingNumber+"' ),"+
@@ -43,6 +43,9 @@ public class DeallocateButtonListener implements ActionListener {
                     if(!(parentComponent.getNumberOfStudentsL().getText().equals("0"))){ // If there are students satisfying the condition.
                         if(choice==0) updateStatus = deallocate(query) & deallocate(query2) & deallocate(query3);
                         else return;
+                        System.out.println(query);
+                        System.out.println(query2);
+                        System.out.println(query3);
                         displayUpdateStatus(updateStatus);
                     }
                     else{
