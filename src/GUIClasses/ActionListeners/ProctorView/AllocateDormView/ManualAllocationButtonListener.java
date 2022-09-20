@@ -20,6 +20,7 @@ public class ManualAllocationButtonListener extends RequestedStudentDormAllocati
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        boolean updateStatus;
 
         if(parentComponent.getBuildingNumber().equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(parentComponent,"Please enter valid building Number");
@@ -30,13 +31,15 @@ public class ManualAllocationButtonListener extends RequestedStudentDormAllocati
         resetPageNumber();
 
         students.clear();
-        allocateStudents();
+        updateStatus = allocateAllStudents();
 
         query= "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
                 " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
                 Request.getCurrentDate()+"' , '"+parentComponent.getProctor().getBuildingNo()+"')";
 
         insertHistory(query);
+        displayUpdateStatus(updateStatus);
+        parentComponent.dispose();
         parentComponent.goToParent();
     }
 
