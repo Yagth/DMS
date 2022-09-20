@@ -16,6 +16,7 @@ public class ChangePasswordForm extends JFrame implements Views {
 
     public ChangePasswordForm(JFrame parentComponent){
         this.parentComponent = parentComponent;
+        setUpGUi();
     }
     @Override
     public void setUpGUi() {
@@ -32,6 +33,7 @@ public class ChangePasswordForm extends JFrame implements Views {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+
         this.setVisible(true);
     }
 }
