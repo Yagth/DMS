@@ -48,7 +48,10 @@ public class ChangePasswordForm extends JFrame implements Views {
         newPassTF.setText("");
         confirmPassTF.setText("");
     }
-
+    public void goBackToParent(){
+        this.dispose();
+        parentComponent.setVisible(true);
+    }
     public void setUserStatus(){
         if(id.substring(0,3).equals("UGR")) userStatus = UserStatus.STUDENT;
         else userStatus = UserStatus.PROCTOR;

@@ -32,6 +32,7 @@ public class ChangePasswordButtonListener implements ActionListener {
             else
                 JOptionPane.showMessageDialog(parentComponent,"Couldn't change password due to some reason.");
         }
+        parentComponent.goBackToParent();
     }
 
     public boolean changePassword(String newPassword){
