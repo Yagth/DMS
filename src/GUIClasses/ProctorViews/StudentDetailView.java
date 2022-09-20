@@ -104,6 +104,10 @@ public class StudentDetailView extends JFrame implements Views, TableViews {
         return contacts;
     }
 
+    public Student getStudent(){
+        return student;
+    }
+
     public void displayReadStatus(boolean readStatus){
         if(!readStatus)
             JOptionPane.showMessageDialog(this,"Couldn't load the emergency contacts"
