@@ -21,7 +21,7 @@ public class ManualAllocationButtonListener extends RequestedStudentDormAllocati
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus = false;
-        String query = "SELECT COUNT(*) AS TotalNo FROM AvailableDorm";
+        String query = "SELECT COUNT(*) AS TotalNo FROM AvailableDorm WHERE BuildingNumber='"+parentComponent.getBuildingNumber()+"' ";
         loadAndSetTotalPage(query);
         resetPageNumber();
 

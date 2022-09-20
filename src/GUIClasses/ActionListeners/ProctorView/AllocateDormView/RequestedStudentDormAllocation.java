@@ -63,8 +63,10 @@ public class RequestedStudentDormAllocation extends NewStudentsDormAllocation {
             remainingStudents = students.size();
             updateStatus = allocate();
             incrementPageNumber();
+
             if(getPageNumber()>getTotalPage()) resetPageNumber();
             updateRequestStatus();
+
             updateDormInfo();
         } while(remainingStudents>0);
         return updateStatus;
