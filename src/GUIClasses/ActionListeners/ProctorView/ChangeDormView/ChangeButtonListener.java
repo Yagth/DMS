@@ -263,25 +263,6 @@ public class ChangeButtonListener extends ProgressBarListener {
         }
     }
 
-    public void sortDormOnAvailableSpace(){
-        for(int i = 0; i<availableDorms.size(); i++){
-            for(int j = 0; j<availableDorms.size(); j++){
-                Dormitory tmp;
-                try{
-                    int availableSpace1 = availableDorms.get(j).getMaxCapacity()-availableDorms.get(j).getNoOfStudents();
-                    int availableSpace2 = availableDorms.get(j+1).getMaxCapacity()-availableDorms.get(j+1).getNoOfStudents();
-                    if( availableSpace1 < availableSpace2 ){
-                        tmp = availableDorms.get(j+1);
-                        availableDorms.set(j+1,availableDorms.get(j));
-                        availableDorms.set(j,tmp);
-                    }
-                } catch (IndexOutOfBoundsException ex){
-                    //No need to implement this block.
-                }
-            }
-        }
-    }
-
     public int getAvailableSpaceOnBuilding(){
         int totalSpace = 0;
         for(Dormitory dormitory: availableDorms){
