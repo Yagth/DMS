@@ -7,7 +7,6 @@ import GUIClasses.ProctorViews.AllocationForm;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -21,7 +20,7 @@ public class ManualAllocationButtonListener extends RequestedStudentDormAllocati
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        boolean updateStatus = false;
+        boolean updateStatus;
 
         if(parentComponent.getBuildingNumber().equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(parentComponent,"Please enter valid building Number");
