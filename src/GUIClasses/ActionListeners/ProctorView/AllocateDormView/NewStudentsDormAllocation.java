@@ -263,7 +263,7 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
             javaConnection.updateQuery(query);
         }
     }
-    public void loadNewStudents(){
+    private void loadNewStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT * FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
                 "AND Place != 'ADDIS ABABA' AND isEligible = 1 ORDER BY Fname OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
