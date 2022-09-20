@@ -76,6 +76,7 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
                 remainingStudents = getTotalStudentNo(query);
                 totalStudents = remainingStudents;
                 do{
+                    Thread.sleep(500);
                     loadAvailableDorms();
                     sortDormOnBuildingNo();
                     totalSpace = getTotalSpace();
