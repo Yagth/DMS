@@ -17,7 +17,6 @@ import java.util.TreeSet;
 
 public class ChangeButtonListener extends ProgressBarListener {
     private ChangeDormView parentComponent;
-    private ArrayList<Dormitory> availableDorms;
     private ArrayList<ArrayList<Student>> groupOfStudents; //Collection of students that are in the same dorm.
 
     public ChangeButtonListener(ChangeDormView parentComponent){
@@ -128,14 +127,6 @@ public class ChangeButtonListener extends ProgressBarListener {
             if(javaConnection.isConnected()){
                 loadAvailableDorms();
 
-                sortDormOnAvailableSpace();
-                System.out.println("--Available dorms after sort on space--");
-                displayAvailableDorms();
-
-                sortDormOnBuildingNo();
-                System.out.println("--Available dorms after sort on buildingNumber--");
-                displayAvailableDorms();
-
                 groupStudents(fromBuildingNo);
                 updateStatus = changeStudents(fromBuildingNo,toBuildingNo);
                 insertHistory(query);
@@ -162,8 +153,6 @@ public class ChangeButtonListener extends ProgressBarListener {
         } catch (SQLException ex){
             ex.printStackTrace(); //For debugging only.
         }
-        System.out.println("Total Students: "+totalStudents);//For debugging only.
-        System.out.println("Total space: "+totalSpace);//For debugging only.
 
         for(int i = 0; i<availableDorms.size();i++){
             Dormitory tmp = availableDorms.get(i);
@@ -236,33 +225,6 @@ public class ChangeButtonListener extends ProgressBarListener {
                 }
             }
             groupOfStudents.add(sameDorm);
-        }
-    }
-    public void loadAvailableDorms(){
-        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        String query = "SELECT * FROM AvailableDorm";
-        ResultSet resultSet = javaConnection.selectQuery(query);
-        try{
-            while(resultSet.next()){
-                JavaConnection javaConnection1 = new JavaConnection(JavaConnection.URL);
-                String roomNo = resultSet.getString("roomNumber");
-                String buildingNumber = resultSet.getString("buildingNumber");
-                int maxCapacity = resultSet.getInt("maxCapacity");
-                Dormitory tmp = new Dormitory(roomNo,buildingNumber,maxCapacity);
-
-                String query2 = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
-                        "WHERE BuildingNumber='"+buildingNumber+"' AND RoomNumber='"+roomNo+"'";
-                ResultSet rs = javaConnection1.selectQuery(query2);
-
-                while(rs.next()){
-                    tmp.setNoOfStudents(rs.getInt("numberOfStudents"));
-                }
-
-                availableDorms.add(tmp);
-            }
-        } catch (SQLException ex){
-            ex.printStackTrace();
-            //Leave the implementation of this block.
         }
     }
     public void sortDormOnBuildingNo(){
@@ -348,10 +310,5 @@ public class ChangeButtonListener extends ProgressBarListener {
     }
 
     //The following method is only for debugging.
-    private void displayAvailableDorms(){
-        for(Dormitory dorm: availableDorms){
-            System.out.println("BuildingNumber: "+dorm.getBuildingNo());
-            System.out.println("Available Space: "+(dorm.getMaxCapacity()-dorm.getNoOfStudents()));
-        }
-    }
+
 }
