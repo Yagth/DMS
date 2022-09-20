@@ -1,13 +1,10 @@
 package GUIClasses.ActionListeners.ProctorView.AllocateDormView;
 
 import BasicClasses.Others.JavaConnection;
-import BasicClasses.Others.LoadingThread;
 import BasicClasses.Persons.Student;
 import BasicClasses.Requests.Request;
 import BasicClasses.Rooms.Dormitory;
-import GUIClasses.LoginPage;
 import GUIClasses.ProctorViews.DormitoryView;
-import GUIClasses.ProctorViews.LoadingClass;
 import GUIClasses.TableViewPage;
 
 import javax.swing.*;
@@ -24,13 +21,21 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
     protected HashMap<String, Student> students;
     protected int remainingStudents; //The remaining students after the allocation.
     protected int totalSpace;
-    protected LoadingClass loadingClass;
     public NewStudentsDormAllocation(DormitoryView parentComponent){
         this.parentComponent = parentComponent;
 
         availableDorms = new ArrayList<>();
         students = new HashMap<>();
     }
+
+    public void setRemainingStudents(int remainingStudents) {
+        this.remainingStudents = remainingStudents;
+    }
+
+    public void setTotalSpace(int totalSpace) {
+        this.totalSpace = totalSpace;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus;
@@ -95,6 +100,16 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
                 Request.getCurrentDate()+"' , '"+parentComponent.getProctor().getBuildingNo()+"')";
 
         insertHistory(query);
+    }
+    public void incrementDots(JLabel loadingL){
+        String labelText = loadingL.getText();
+
+        if(labelText.substring(labelText.length()-3).equals("...")){
+            labelText = labelText.substring(0,labelText.length()-3);
+        } else{
+            labelText += ".";
+        }
+        loadingL.setText(labelText);
     }
 
     public boolean allocateAllStudents(){
@@ -248,7 +263,7 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
             javaConnection.updateQuery(query);
         }
     }
-    private void loadNewStudents(){
+    public void loadNewStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT * FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
                 "AND Place != 'ADDIS ABABA' AND isEligible = 1 ORDER BY Fname OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
