@@ -47,10 +47,8 @@ public class SingleStudentAllocationListener implements ActionListener {
 
         allocationIsValid = isValid(tmpDorm);
 
-        if(!allocationIsValid) {
-            JOptionPane.showMessageDialog(parentComponent, "Can't allocate student to this dorm"
-                    , "Allocation error.", JOptionPane.ERROR_MESSAGE);
-        }else{
+        if(allocationIsValid) {
+
             JavaConnection javaConnection1 = new JavaConnection(JavaConnection.URL);
             query = "UPDATE Student SET BuildingNumber='"+buildingNumber+"', SET RoomNumber='"
                     +roomNumber+"', Pillow=1, BedBase=1,Matress=1 WHERE SID='"+student.getsId()+"' ";
