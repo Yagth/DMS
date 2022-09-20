@@ -45,6 +45,26 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
         loadAndSetTotalPage(query2);
         resetPageNumber();
         students.clear();
+
+
+        query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
+                " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
+                Request.getCurrentDate()+"' , '"+parentComponent.getProctor().getBuildingNo()+"')";
+
+        insertHistory(query);
+    }
+    public void incrementDots(JLabel loadingL){
+        String labelText = loadingL.getText();
+
+        if(labelText.substring(labelText.length()-3).equals("...")){
+            labelText = labelText.substring(0,labelText.length()-3);
+        } else{
+            labelText += ".";
+        }
+        loadingL.setText(labelText);
+    }
+
+    private void allocateStudents(){
         SwingWorker<Boolean,Integer> worker = new SwingWorker<Boolean, Integer>() {
             int totalStudents;
             @Override
@@ -72,8 +92,12 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
             }
             @Override
             protected void process(List<Integer> chunks) {
+                JLabel label = parentComponent.getLoadingL();
+                incrementDots(label);
+
                 int remainingStudents = chunks.get(chunks.size()-1);
                 JProgressBar tmp = parentComponent.getLoadingProgressBar();
+
                 tmp.setMinimum(0);
                 tmp.setMaximum(totalStudents);
                 tmp.setVisible(true);
@@ -94,24 +118,7 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
         };
 
         worker.execute();
-
-        query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
-                " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
-                Request.getCurrentDate()+"' , '"+parentComponent.getProctor().getBuildingNo()+"')";
-
-        insertHistory(query);
     }
-    public void incrementDots(JLabel loadingL){
-        String labelText = loadingL.getText();
-
-        if(labelText.substring(labelText.length()-3).equals("...")){
-            labelText = labelText.substring(0,labelText.length()-3);
-        } else{
-            labelText += ".";
-        }
-        loadingL.setText(labelText);
-    }
-
     public boolean allocateAllStudents(){
         String query;
         boolean updateStatus;
