@@ -14,6 +14,5 @@ public class ChangePasswordItemListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         new ChangePasswordForm(proctorPage,proctorPage.getProctor().getpId());
-        proctorPage.setVisible(false);
     }
 }
