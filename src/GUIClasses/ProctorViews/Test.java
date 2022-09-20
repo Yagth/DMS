@@ -1,5 +1,6 @@
 package GUIClasses.ProctorViews;
 
+import GUIClasses.ChangePasswordForm;
 import GUIClasses.LoginPage;
 
 import javax.swing.*;
