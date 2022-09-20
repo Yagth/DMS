@@ -50,10 +50,9 @@ public class StudentPage extends JFrame implements TableViews {
     } // This constructor is only for debugging purposes.
 
     public void loadDormMates(){
-        String url = JavaConnection.URL;
-        String query = "SELECT Fname, Lname, PhoneNumber FROM Student as S, Student_Phonenumber as SP WHERE S.SID = SP.SID AND BuildingNumber=\'"
-                + student.getBuildingNo()+"\' AND RoomNumber=\'"+ student.getDormNo()+"\' AND S.SID != \'"+ student.getsId()+"\'";
-        JavaConnection javaConnection = new JavaConnection(url);
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT Fname, Lname, PhoneNumber FROM Student as S LEFT JOIN Student_Phonenumber as SP ON S.SID = SP.SID WHERE BuildingNumber='"
+                + student.getBuildingNo()+"' AND RoomNumber='"+ student.getDormNo()+"' AND S.SID != '"+ student.getsId()+"'";
         dormMates = javaConnection.selectQuery(query);
     }
 
