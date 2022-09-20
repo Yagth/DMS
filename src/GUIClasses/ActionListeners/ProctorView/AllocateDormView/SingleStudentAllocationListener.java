@@ -23,7 +23,7 @@ public class SingleStudentAllocationListener implements ActionListener {
     }
     public boolean allocateStudent(){
         Dormitory tmpDorm = null;
-        boolean dormIsValid;
+        boolean allocationIsValid;
         boolean updateStatus = false;
         buildingNumber = parentComponent.getBuildingNumber();
         roomNumber = parentComponent.getRoomNumber();
@@ -45,15 +45,15 @@ public class SingleStudentAllocationListener implements ActionListener {
             ex.printStackTrace();//For debugging only.
         }
 
-        dormIsValid = dormIsValid(tmpDorm);
+        allocationIsValid = isValid(tmpDorm);
 
-        if(!dormIsValid) {
+        if(!allocationIsValid) {
             JOptionPane.showMessageDialog(parentComponent, "Can't allocate student to this dorm"
                     , "Allocation error.", JOptionPane.ERROR_MESSAGE);
         }else{
             JavaConnection javaConnection1 = new JavaConnection(JavaConnection.URL);
             query = "UPDATE Student SET BuildingNumber='"+buildingNumber+"', SET RoomNumber='"
-                    +roomNumber+"' WHERE SID='"+student.getsId()+"' ";
+                    +roomNumber+"', Pillow=1, BedBase=1,Matress=1 WHERE SID='"+student.getsId()+"' ";
             updateStatus = javaConnection1.updateQuery(query);
             query = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
                     " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";
@@ -72,30 +72,40 @@ public class SingleStudentAllocationListener implements ActionListener {
             javaConnection.insertQuery(query);
         }
     }
-    public boolean dormIsValid(Dormitory dorm){
+    public boolean isValid(Dormitory dorm){
         boolean hasSpace;
         boolean hasLocker;
         boolean isRightGender;
+        boolean isEligible;
 
         hasSpace = dorm.getNoOfStudents()<dorm.getMaxCapacity();
         hasLocker = dorm.getNoOfStudents()<dorm.getNoOfLockers();
         isRightGender = dorm.getDormType().equalsIgnoreCase(student.getGender());
 
-        return hasSpace & hasLocker & isRightGender;
+        if(!hasSpace) {
+            JOptionPane.showMessageDialog(parentComponent,"The dorm doesn't have enough space");
+            return false;
+        } else if(!hasLocker){
+            JOptionPane.showMessageDialog(parentComponent,"The dorm doesn't have enough locker");
+            return false;
+        } else if(!isRightGender){
+            JOptionPane.showMessageDialog(parentComponent,"The dorm isn't the right gender");
+            return false;
+        } else{
+            return hasSpace & hasLocker & isRightGender;
+        }
     }
 
     public void displayUpdateStatus(boolean updateStatus){
         if(updateStatus)
             JOptionPane.showMessageDialog(parentComponent,"Allocation Successful.");
-        else{
-            JOptionPane.showMessageDialog(parentComponent,"Couldn't allocate students due to some problem.\n " +
-                    "Make sure there is available space.");
-        }
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus = allocateStudent();
-        parentComponent.getParentComponent().displayStudentInfo();
         parentComponent.dispose();
+        parentComponent.getParentComponent().dispose();
+        parentComponent.getParentComponent().goBackToParent();
+        displayUpdateStatus(updateStatus);
     }
 }
