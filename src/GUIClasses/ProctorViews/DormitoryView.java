@@ -2,6 +2,7 @@ package GUIClasses.ProctorViews;
 
 import BasicClasses.Enums.SizeOfMajorClasses;
 import BasicClasses.Others.JavaConnection;
+import BasicClasses.Others.LoadingThread;
 import BasicClasses.Persons.Proctor;
 import BasicClasses.Rooms.Dormitory;
 import GUIClasses.ActionListeners.NextActionListener;
@@ -54,11 +55,13 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
     private ArrayList<Dormitory> dorms;
     private static final int WIDTH = SizeOfMajorClasses.WIDTH.getSize();
     private static final int HEIGHT = SizeOfMajorClasses.HEIGHT.getSize();
+    private LoadingThread loadingThread;
 
     public DormitoryView(Proctor proctor, ProctorPage parentComponent){
         this.proctor = proctor;
         this.parentComponent = parentComponent;
         dorms = new ArrayList<>();
+        loadingThread =  new LoadingThread();
 
         String query = "SELECT Count(*) As TotalNo FROM Dorm AS D LEFT JOIN Student AS S ON D.BuildingNumber = S.BuildingNumber" +
                 " AND D.RoomNumber = S.RoomNumber";
@@ -71,6 +74,14 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
         parentComponent.setVisible(true);
     }
 
+    public void startThread(){
+        loadingThread.start();
+    }
+
+    public void interruptThread(){
+        loadingThread.interrupt();
+        loadingThread.dispose();
+    }
     public JLabel getBackLabel() {
         return backLabel;
     }

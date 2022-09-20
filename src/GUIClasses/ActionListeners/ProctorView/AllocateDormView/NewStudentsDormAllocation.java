@@ -5,6 +5,7 @@ import BasicClasses.Others.LoadingThread;
 import BasicClasses.Persons.Student;
 import BasicClasses.Requests.Request;
 import BasicClasses.Rooms.Dormitory;
+import GUIClasses.LoginPage;
 import GUIClasses.ProctorViews.DormitoryView;
 import GUIClasses.ProctorViews.LoadingClass;
 import GUIClasses.TableViewPage;
@@ -25,6 +26,7 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
     protected HashMap<String, Student> students;
     protected int remainingStudents; //The remaining students after the allocation.
     protected int totalSpace;
+    protected LoadingClass loadingClass;
     public NewStudentsDormAllocation(DormitoryView parentComponent){
         this.parentComponent = parentComponent;
 
@@ -33,19 +35,14 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        boolean updateStatus = false;
+        boolean updateStatus;
         String query;
         String query2 = "SELECT COUNT(*) AS TotalNo FROM AvailableDorm";
-
-//        LoadingClass loadingClass = new LoadingClass(parentComponent);
-//        Thread loadingThread = new LoadingThread(loadingClass);
-//        loadingThread.start();
+        parentComponent.setVisible(false);
 
         loadAndSetTotalPage(query2);
         resetPageNumber();
-
         students.clear();
-
         updateStatus = allocateAllStudents();
 
         query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
@@ -54,7 +51,7 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
 
         insertHistory(query);
         displayUpdateStatus(updateStatus);
-//        loadingThread.interrupt();
+        parentComponent.setVisible(true);
     }
 
     public boolean allocateAllStudents(){

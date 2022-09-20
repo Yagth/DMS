@@ -1,5 +1,6 @@
 package GUIClasses.ProctorViews;
 
+import BasicClasses.Others.LoadingThread;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
@@ -26,9 +27,11 @@ public class LoadingClass extends JFrame implements Views {
         loadingL.setText(labelText);
     }
     public void fill(){
+        System.out.println("Inside fill method.");
         for(int i = 0; i<=100; i++){
             try {
                 Thread.sleep(1000);
+                System.out.println("Filling: "+i);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -40,12 +43,8 @@ public class LoadingClass extends JFrame implements Views {
     public void setUpGUi() {
         this.setTitle("Loading");
         this.setContentPane(mainPanel);
+        this.setSize(400,200);
         this.setLocationRelativeTo(parentComponent);
-        this.setSize(400,300);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-
-        loadingProgressBar.setStringPainted(true);
-
-        this.setVisible(true);
     }
 }
