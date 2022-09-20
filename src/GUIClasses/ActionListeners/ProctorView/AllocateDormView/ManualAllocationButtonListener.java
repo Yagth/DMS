@@ -40,6 +40,8 @@ public class ManualAllocationButtonListener extends RequestedStudentDormAllocati
 
         insertHistory(query);
         displayUpdateStatus(updateStatus);
+        parentComponent.dispose();
+        parentComponent.goToParent();
     }
 
     @Override
