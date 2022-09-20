@@ -168,18 +168,19 @@ public class StudentPage extends JFrame implements TableViews {
 
         Services.add(Service);
 
-        JMenu logout = new JMenu("Other Actions");
-        logout.setForeground(Color.GRAY);
+        JMenu otherActions = new JMenu("Other Actions");
+        otherActions.setForeground(Color.GRAY);
         JMenuItem signOut = new JMenuItem("Logout");
         signOut.setForeground(Color.BLACK);
         signOut.addActionListener(new LogoutMenuItemListener(this));
 
         JMenuItem changePassword = new JMenuItem("Change Password");
         changePassword.setForeground(Color.BLACK);
-        changePassword.addActionListener(new LogoutMenuItemListener(this));
+        changePassword.addActionListener(new ChangePasswordMenuItemListener(this));
 
-        logout.add(signOut);
-        Services.add(logout);
+        otherActions.add(signOut);
+        otherActions.add(changePassword);
+        Services.add(otherActions);
 
         ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
 
