@@ -5,7 +5,7 @@ import BasicClasses.Persons.Proctor;
 import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.DeallocateBackButtonListener;
 import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.DeallocateBatchItemListener;
 import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.DeallocateButtonListener;
-import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.YearTFListener;
+import GUIClasses.ActionListeners.ProctorView.DeallocateDormView.YearTFFocusListener;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
@@ -84,7 +84,7 @@ public class DeallocateDormView extends JFrame implements Views {
         this.setSize(600,300);
         this.setLocationRelativeTo(parentComponent);
         yearTF.setText("");
-        yearTF.addActionListener(new YearTFListener(this));
+        yearTF.addFocusListener(new YearTFFocusListener(this));
         deallocateButton.addActionListener(new DeallocateButtonListener(this));
         backButton.addActionListener(new DeallocateBackButtonListener(this));
         this.addWindowListener(new WindowAdapter()
@@ -120,7 +120,14 @@ public class DeallocateDormView extends JFrame implements Views {
         fromBuildingNoTF.setVisible(visibility);
         fromBuildingNoL.setVisible(visibility);
     }
-
+    public void setNumberOfStudentsL(String buildingNumber){
+        String condition = getSelectedCondition();
+        if(condition.equals("deallocate Batch of students")){
+            String query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT WHERE Year="+getYear()+" AND RoomNumber IS NOT NULL AND BuildingNumber='"+buildingNumber+"' ";
+            numberOfStudentsL.setText(String.valueOf(getNoOfStudent(query)));
+            numberOfStudentsL.setVisible(true);
+        }
+    }
     public void setNumberOfStudentsL(){
         String condition = getSelectedCondition();
         if(condition.equals("deallocate Batch of students")){
