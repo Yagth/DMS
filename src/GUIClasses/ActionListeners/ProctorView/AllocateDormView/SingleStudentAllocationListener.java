@@ -19,21 +19,23 @@ public class SingleStudentAllocationListener implements ActionListener {
     private Student student;
     public SingleStudentAllocationListener(SingleStudentAllocationForm parentComponent){
         this.parentComponent = parentComponent;
-        buildingNumber = parentComponent.getBuildingNumber();
-        roomNumber = parentComponent.getRoomNumber();
         student = parentComponent.getStudent();
     }
     public boolean allocateStudent(){
+        Dormitory tmpDorm = null;
+        boolean dormIsValid;
+        boolean updateStatus = false;
+        buildingNumber = parentComponent.getBuildingNumber();
+        roomNumber = parentComponent.getRoomNumber();
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT * FROM AvailableDorm WHERE BuildingNumber='"
                 +buildingNumber+"' AND RoomNumber='"+roomNumber+"' ";
 
+        System.out.println("query: "+query);
         ResultSet resultSet = javaConnection.selectQuery(query);
-        Dormitory tmpDorm = null;
-        boolean dormIsValid;
-        boolean updateStatus = false;
         try{
             while(resultSet.next()){
+                System.out.println("Inside while");
                 tmpDorm = new Dormitory(roomNumber,buildingNumber,resultSet.getInt("maxCapacity"));
                 tmpDorm.setNoOfLockers(resultSet.getInt("Lockers"));
                 tmpDorm.setNoOfStudents(resultSet.getInt("NumberOfStudents"));

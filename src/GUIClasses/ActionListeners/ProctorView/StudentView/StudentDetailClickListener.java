@@ -58,9 +58,9 @@ public class StudentDetailClickListener implements MouseListener {
                                         resultSet.getString("Gender")
                                 );
                     student.setDepartment(resultSet.getString("Department"));
-                    int pillow = resultSet.getInt("pillowNo");
-                    int bedBase = resultSet.getInt("bedBaseNo");
-                    int matress = resultSet.getInt("MatressNo");
+                    int pillow = resultSet.getInt("pillow");
+                    int bedBase = resultSet.getInt("bedBase");
+                    int matress = resultSet.getInt("Matress");
 
                     boolean hasAllEquipments = (pillow == 1 & bedBase == 1 & matress == 1);
                     boolean isEligible = (resultSet.getInt("isEligible") == 1);
