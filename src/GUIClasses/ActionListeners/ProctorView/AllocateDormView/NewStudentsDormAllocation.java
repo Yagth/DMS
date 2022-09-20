@@ -41,9 +41,14 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
         resetPageNumber();
         students.clear();
         SwingWorker<Boolean,Integer> worker = new SwingWorker<Boolean, Integer>() {
+            int totalStudents;
             @Override
             protected Boolean doInBackground() throws Exception {
                 boolean updateStatus1;
+                String query = "SELECT COUNT(*) AS TotalNo FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
+                        "AND Place != 'ADDIS ABABA' AND isEligible = 1 ";
+                remainingStudents = getTotalStudentNo(query);
+                totalStudents = remainingStudents;
                 do{
                     loadAvailableDorms();
                     sortDormOnBuildingNo();
@@ -64,11 +69,14 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
             protected void process(List<Integer> chunks) {
                 int remainingStudents = chunks.get(chunks.size()-1);
                 JProgressBar tmp = parentComponent.getLoadingProgressBar();
-                tmp.setValue(remainingStudents);
+                tmp.setMinimum(0);
+                tmp.setMaximum(totalStudents);
+                tmp.setVisible(true);
+                tmp.setValue(totalStudents - remainingStudents);
             }
             @Override
             protected void done() {
-                boolean updateStatus1 = false;
+                boolean updateStatus1;
                 try {
                     updateStatus1 = get();
                 } catch (InterruptedException ex) {
