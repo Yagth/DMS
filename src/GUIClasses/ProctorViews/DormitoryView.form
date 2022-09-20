@@ -76,7 +76,7 @@
             <properties>
               <font name="Californian FB" size="14" style="0"/>
               <foreground color="-16777216"/>
-              <toolTipText value="Enter the dorm numer"/>
+              <toolTipText value="Enter the dorm number"/>
             </properties>
           </component>
           <component id="79f03" class="javax.swing.JComboBox" binding="filterList">
