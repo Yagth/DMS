@@ -1,6 +1,8 @@
 package GUIClasses;
 
 import BasicClasses.Enums.UserStatus;
+import GUIClasses.ActionListeners.ChangePasswordButtonListener;
+import GUIClasses.ActionListeners.ProctorView.ChangeDormView.ChangeButtonListener;
 import GUIClasses.Interfaces.Views;
 
 import javax.swing.*;
@@ -59,7 +61,7 @@ public class ChangePasswordForm extends JFrame implements Views {
     public void setUpGUi() {
         this.setTitle("Change password");
         this.setContentPane(mainPanel);
-        this.setSize(400,200);
+        this.setSize(500,300);
         this.setLocationRelativeTo(parentComponent);
         this.addWindowListener(new WindowAdapter()
         {
@@ -70,6 +72,8 @@ public class ChangePasswordForm extends JFrame implements Views {
                 parentComponent.setVisible(true);
             }
         }); //A custom action listener for the exit button.
+
+        changeButton.addActionListener(new ChangePasswordButtonListener(this));
 
         this.setVisible(true);
     }
