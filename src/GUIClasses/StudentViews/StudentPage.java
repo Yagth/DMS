@@ -32,6 +32,7 @@ public class StudentPage extends JFrame implements TableViews {
     private JPanel dormMatesInfo;
     private JTable dormMateTable;
     private JScrollPane tableSP;
+    private JLabel keyHolderL;
     private Vector<Vector<String>> tableData;
     private static final SizeOfMajorClasses WIDTH = SizeOfMajorClasses.WIDTH;
     private static final SizeOfMajorClasses HEIGHT = SizeOfMajorClasses.HEIGHT;
@@ -61,6 +62,24 @@ public class StudentPage extends JFrame implements TableViews {
         studentID.setText(student.getsId());
         studentBuildingNo.setText(String.valueOf(student.getBuildingNo()));
         studentDormNo.setText(String.valueOf(student.getDormNo()));
+        addKeyHolderName();
+    }
+
+    public void addKeyHolderName(){
+        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
+        String query = "SELECT Fname+' '+Lname Name FROM STUDENT WHERE SID=(SELECT KeyHolderId FROM DORM WHERE BuildingNumber='"
+                +student.getBuildingNo()+"' AND RoomNumber'"+student.getDormNo()+"') ";
+        String name = "";
+        ResultSet resultSet = javaConnection.selectQuery(query);
+        try{
+            while(resultSet.next()){
+                name = resultSet.getString("Name");
+            }
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+
+        keyHolderL.setText(name);
     }
 
     public void addDormMatesToView(){
