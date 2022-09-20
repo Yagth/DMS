@@ -62,8 +62,6 @@ public class JavaConnection {
             statement.execute(query);
             return true;
         }catch (SQLException ex){
-            System.out.println("Query: "+query);//For debugging purposes.
-            ex.printStackTrace();//For debugging purposes.
             return false;
         }
     }

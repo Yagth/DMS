@@ -107,9 +107,8 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
                     boolean isRightGender = student.getGender().equalsIgnoreCase(dorm.getDormType());
                     boolean isFirstStudent = (dorm.getNoOfStudents() == 0);
 
-                    System.out.println("Has Lockers: "+hasLockers);
-                    System.out.println("Is the right Gender: "+isRightGender);
                     System.out.println("Is first Student: "+isFirstStudent);
+                    System.out.println("SID: "+student.getsId());
 
                     if(hasLockers & isRightGender){
                             student.setBuildingNo(dorm.getBuildingNo());
@@ -231,7 +230,6 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query;
         for(Dormitory dorm: availableDorms){
-            System.out.println("Key Holder: "+dorm.getKeyHolderId());
             query = "UPDATE Dorm SET KeyHolder='"+dorm.getKeyHolderId()+
                     "' WHERE BuildingNumber='"+dorm.getBuildingNo()+"' AND RoomNumber='"+dorm.getRoomNO()+"' ";
             javaConnection.updateQuery(query);
