@@ -17,15 +17,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class AutomaticDormAllocation extends TableViewPage implements ActionListener {
-    private DormitoryView parentComponent;
-    private ArrayList<Dormitory> availableDorms;
-    private HashMap<String, Student> students;
-    private ArrayList<Integer> requests;
-    private ArrayList<String> reporterIds;
-    private int remainingStudents; //The remaining students after the allocation.
-    private int totalSpace;
-    public AutomaticDormAllocation(DormitoryView parentComponent){
+public class NewStudentsDormAllocation extends TableViewPage implements ActionListener {
+    protected DormitoryView parentComponent;
+    protected ArrayList<Dormitory> availableDorms;
+    protected HashMap<String, Student> students;
+    protected ArrayList<Integer> requests;
+    protected ArrayList<String> reporterIds;
+    protected int remainingStudents; //The remaining students after the allocation.
+    protected int totalSpace;
+    public NewStudentsDormAllocation(DormitoryView parentComponent){
         this.parentComponent = parentComponent;
 
         availableDorms = new ArrayList<>();
@@ -36,57 +36,48 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus = false;
-        String query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
-                " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
-                Request.getCurrentDate()+"' , '"+parentComponent.getProctor().getBuildingNo()+"')";
+        String query;
         String query2 = "SELECT COUNT(*) AS TotalNo FROM AvailableDorm";
+
         loadAndSetTotalPage(query2);
         resetPageNumber();
 
-        System.out.println("Query: "+query);
-        int choice = JOptionPane.showConfirmDialog(parentComponent,"Do you want to allocate new students?");
-        if(choice == 1){
-            students.clear();
+        students.clear();
 
-            do{
-                loadAvailableDorms();
-                sortDormOnBuildingNo();
-                totalSpace = getTotalSpace();
-                loadReport();
-                loadLocalStudents();
-                remainingStudents = students.size();
-                updateStatus = allocate();
-                incrementPageNumber();
-                if(getPageNumber()>getTotalPage()) resetPageNumber();
-                updateRequestStatus();
-                updateDormInfo();
-            } while(remainingStudents>0);
+        updateStatus = allocateAllStudents();
 
-        }else{
-            students.clear();
-            do{
-                query = "SELECT COUNT(*) AS TotalNo FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
-                        "AND Place != 'ADDIS ABABA' AND isEligible = 1 ";
-                remainingStudents = getTotalStudentNo(query);
+        query = "INSERT INTO ProctorControlsStock(EID,ActionType,ActionDate,BuildingNumber) "+
+                " VALUES('"+parentComponent.getProctor().getpId()+"' , 'Allocate Dorm', '"+
+                Request.getCurrentDate()+"' , '"+parentComponent.getProctor().getBuildingNo()+"')";
 
-                System.out.println("Query: "+query);
-                System.out.println("RemainingStudents: "+remainingStudents);
-
-                loadAvailableDorms();
-                sortDormOnBuildingNo();
-                totalSpace = getTotalSpace();
-
-                System.out.println("TotalSpace: "+totalSpace);
-
-                loadNewStudents();
-                updateStatus = allocate();
-                incrementPageNumber();
-                if(getPageNumber()>getTotalPage()) resetPageNumber();
-                updateDormInfo();
-            }while(remainingStudents>0);
-        }
         insertHistory(query);
         displayUpdateStatus(updateStatus);
+    }
+
+    public boolean allocateAllStudents(){
+        String query;
+        boolean updateStatus;
+        do{
+            query = "SELECT COUNT(*) AS TotalNo FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
+                    "AND Place != 'ADDIS ABABA' AND isEligible = 1 ";
+            remainingStudents = getTotalStudentNo(query);
+
+            System.out.println("Query: "+query);
+            System.out.println("RemainingStudents: "+remainingStudents);
+
+            loadAvailableDorms();
+            sortDormOnBuildingNo();
+            totalSpace = getTotalSpace();
+
+            System.out.println("TotalSpace: "+totalSpace);
+
+            loadNewStudents();
+            updateStatus = allocate();
+            incrementPageNumber();
+            if(getPageNumber()>getTotalPage()) resetPageNumber();
+            updateDormInfo();
+        }while(remainingStudents>0);
+        return updateStatus;
     }
     public boolean allocate(){
         boolean updateStatus = false;
@@ -235,7 +226,7 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
             javaConnection.updateQuery(query);
         }
     }
-    public void loadNewStudents(){
+    private void loadNewStudents(){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT * FROM STUDENT WHERE BuildingNumber IS NULL AND RoomNumber IS NULL " +
                 "AND Place != 'ADDIS ABABA' AND isEligible = 1 ORDER BY Fname OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
@@ -254,29 +245,6 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
             }
         }catch (SQLException ex){
             ex.printStackTrace();//For debugging only.
-        }
-    }
-    public void loadLocalStudents(){
-        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        ResultSet resultSet;
-        if(javaConnection.isConnected()){
-            for(String SID: reporterIds){
-                Student tmp;
-                String query = "SELECT * FROM Student WHERE SID='"+SID+"'";
-                resultSet = javaConnection.selectQuery(query);
-                try{
-                    resultSet.next();
-                    tmp = new Student(
-                            resultSet.getString("Fname"),
-                            resultSet.getString("Lname"),
-                            SID,
-                            resultSet.getString("Gender")
-                    );
-                    students.put(SID,tmp);
-                } catch (SQLException ex){
-                    ex.printStackTrace();//For debugging only.
-                }
-            }
         }
     }
     public void sortDormOnBuildingNo(){
@@ -298,22 +266,6 @@ public class AutomaticDormAllocation extends TableViewPage implements ActionList
         }
     }
 
-    public void updateRequestStatus(){
-        JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
-        int size = requests.size()-remainingStudents; //To prevent setting the status of the unhandled reports.
-        for(int i = 0; i< size; i++){
-            try{
-                String query = "INSERT INTO ProctorHandlesReport(EID,ReportId,handledDate) " +
-                        "VALUES('"+parentComponent.getProctor().getpId()+"', "+
-                        requests.get(i)+", '"+ Request.getCurrentDate()+"')";
-                if(javaConnection.isConnected()){
-                    javaConnection.insertQuery(query);
-                }
-            }catch (IndexOutOfBoundsException ex){
-                //No need to implement this code.
-            }
-        }
-    }
 
     public void displayUpdateStatus(boolean updateStatus){
         if(updateStatus)
