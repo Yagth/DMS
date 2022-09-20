@@ -1,6 +1,7 @@
 package GUIClasses.ProctorViews;
 
 import BasicClasses.Persons.Proctor;
+import GUIClasses.ActionListeners.ProctorView.AllocateDormView.ManualAllocationButtonListener;
 import GUIClasses.Interfaces.TableViews;
 import GUIClasses.Interfaces.Views;
 
@@ -36,6 +37,7 @@ public class AllocationForm extends JFrame implements Views {
         this.setTitle("Manual Allocation");
         this.setContentPane(mainPanel);
         this.setLocationRelativeTo(parentComponent);
+        allocateButton.addActionListener(new ManualAllocationButtonListener(this));
         this.setVisible(true);
     }
 }
