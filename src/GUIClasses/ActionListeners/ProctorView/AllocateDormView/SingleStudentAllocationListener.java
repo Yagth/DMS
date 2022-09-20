@@ -81,6 +81,7 @@ public class SingleStudentAllocationListener implements ActionListener {
         hasSpace = dorm.getNoOfStudents()<dorm.getMaxCapacity();
         hasLocker = dorm.getNoOfStudents()<dorm.getNoOfLockers();
         isRightGender = dorm.getDormType().equalsIgnoreCase(student.getGender());
+        isEligible = student.getEligibility();
 
         if(!hasSpace) {
             JOptionPane.showMessageDialog(parentComponent,"The dorm doesn't have enough space");
@@ -91,7 +92,10 @@ public class SingleStudentAllocationListener implements ActionListener {
         } else if(!isRightGender){
             JOptionPane.showMessageDialog(parentComponent,"The dorm isn't the right gender");
             return false;
-        } else{
+        } else if(!isEligible){
+            JOptionPane.showMessageDialog(parentComponent,"The student isn't eligible");
+            return false;
+        }else{
             return hasSpace & hasLocker & isRightGender;
         }
     }
@@ -104,6 +108,7 @@ public class SingleStudentAllocationListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         boolean updateStatus = allocateStudent();
         parentComponent.dispose();
+        parentComponent.getParentComponent().reloadParentTable();
         parentComponent.getParentComponent().dispose();
         parentComponent.getParentComponent().goBackToParent();
         displayUpdateStatus(updateStatus);
