@@ -288,8 +288,8 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
 
         actions.add(allocate);
         actions.add(allocateLocal);
-        actions.add(deallocate);
         actions.add(change);
+        actions.add(deallocate);
 
         menuBar.add(actions);
         setUpTable();
