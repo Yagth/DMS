@@ -250,7 +250,7 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         Service.add(seeReports);
         Service.add(seeStocks);
 
-        JMenu otherActions = new JMenu("Logout");
+        JMenu otherActions = new JMenu("Other Actions");
         otherActions.setForeground(Color.GRAY);
 
         JMenuItem changePassword = new JMenuItem("Change Password");
