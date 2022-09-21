@@ -58,7 +58,7 @@ public class FilterButtonListener implements ActionListener {
             int year = parentComponent.getYear();
             if(year == 0) return "";
             query = "SELECT DISTINCT A.BuildingNumber, A.RoomNumber, maxCapacity, NumberOfStudents " +
-                    "FROM Dorm AS A JOIN Student AS S ON A.BuildingNumber = S.BuildingNumber " +
+                    "FROM AvailableDorm AS A JOIN Student AS S ON A.BuildingNumber = S.BuildingNumber " +
                     "AND A.RoomNumber = S.RoomNumber AND year = "+parentComponent.getYear()+" ORDER BY NumberOfStudents "+
                     " OFFSET "+(parentComponent.getPageNumber()-1)* parentComponent.getRowPerPage()+
                     " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY;";
@@ -71,7 +71,7 @@ public class FilterButtonListener implements ActionListener {
                     " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY;";
         } else{
             query = "SELECT BuildingNumber, RoomNumber, maxCapacity, NumberOfStudents " +
-                    "FROM Dorm ORDER BY NumberOfStudents"+
+                    "FROM AvailableDorm ORDER BY NumberOfStudents"+
                     " OFFSET "+(parentComponent.getPageNumber()-1)* parentComponent.getRowPerPage()+
                     " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY;";
         }
