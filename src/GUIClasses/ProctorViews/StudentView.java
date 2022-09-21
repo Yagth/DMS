@@ -116,6 +116,13 @@ public class StudentView extends TableViewPage implements Views, TableViews {
         refreshTable();
     }
 
+    public void reloadTable(String query){
+        tableData.clear();
+        Vector<Vector<Object>> students = loadStudents(query);
+        addDataToTable(students);
+        refreshTable();
+    }
+
     public void displayReadStatus(boolean readStatus){
         if(!readStatus) JOptionPane.showMessageDialog(parentComponent,"Couldn't load students due to " +
                 "connection error","Loading error",JOptionPane.ERROR_MESSAGE);
@@ -149,6 +156,10 @@ public class StudentView extends TableViewPage implements Views, TableViews {
     public void clearInputTexts(){
         buildingNumberTF.setText("");
         searchTF.setText("");
+    }
+
+    public int getRowPerPage(){
+        return ROW_PER_PAGE;
     }
 
     public JTable getTable(){

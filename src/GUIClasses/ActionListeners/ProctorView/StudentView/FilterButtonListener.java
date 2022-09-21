@@ -15,11 +15,10 @@ public class FilterButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         parentComponent.reloadTable();
+        String query = getFilteringQuery();
+        filterStudents(query);
 
-        Vector<Vector<Object>> filteredStudents = filterStudents();
-        parentComponent.getTableData().clear();
-        parentComponent.addDataToTable(filteredStudents);
-        parentComponent.refreshTable();
+        Vector<Vector<Object>> filteredStudents = parentComponent.getTableData();
 
         if(filteredStudents.size() == 0 ){
             if(parentComponent.getSelectedCondition().equals("Not Eligible"))
@@ -30,38 +29,32 @@ public class FilterButtonListener implements ActionListener {
         }
     }
 
-    public int getFilteringColumn(){
+    public String getFilteringQuery(){
         String selectedCondition = parentComponent.getSelectedCondition();
-        if(selectedCondition.equals("Year of students")) return 3; //This is the column index for the year in the table.
-        else if(selectedCondition.equals("Block")) return 4; //This is the column index for the buildingNumber in the table.
-        else return 5; //This is the column index for the eligibility in the table.
+        String query = "";
+        if(selectedCondition.equals("Year of students")){
+            query = "SELECT * FROM Student WHERE year = "+parentComponent.getFilterInputText()+
+                    " ORDER BY (SELECT NULL) OFFSET "
+                    +(parentComponent.getPageNumber()-1)*parentComponent.getRowPerPage()+
+                    " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY";
+        } else if(selectedCondition.equals("Block")){
+            query = "SELECT * FROM Student WHERE BuildingNumber = '"+parentComponent.getFilterInputText()+
+                    "' ORDER BY (SELECT NULL) OFFSET "
+                    +(parentComponent.getPageNumber()-1)*parentComponent.getRowPerPage()+
+                    " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY";
+        } else if(selectedCondition.equals("Not Eligible")){
+            query = "SELECT * FROM Student WHERE isEligible = 0 ORDER BY (SELECT NULL) OFFSET "
+                    +(parentComponent.getPageNumber()-1)*parentComponent.getRowPerPage()+
+                    " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY";
+        } else{
+            query = "SELECT * FROM Student ORDER BY (SELECT NULL) OFFSET "
+                    +(parentComponent.getPageNumber()-1)*parentComponent.getRowPerPage()+
+                    " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY";
+        }
+        return  query;
     }
 
-    public Vector<Vector<Object>> filterStudents(){
-        Vector<Vector<Object>> students = parentComponent.getTableData();
-        Vector<Vector<Object>> tmp = new Vector<>();
-        int index = getFilteringColumn();
-        if(parentComponent.getSelectedCondition().equals("Not Eligible")){
-            for(Vector<Object> student : students){
-                if(student.get(index).toString().equals("false"))
-                    tmp.add(student);
-            }
-        }
-        else{
-            Object comparingObject = parentComponent.getFilterInputText();
-
-
-            for(Vector<Object> student : students){
-                try{
-                    if(comparingObject.equals(student.get(index).toString())){
-                        tmp.add(student);
-                    }
-                } catch (NullPointerException ex){
-                    ex.printStackTrace();//For debugging only.
-                }
-
-            }
-        }
-        return tmp;
+    public void filterStudents(String query){
+        parentComponent.reloadTable(query);
     }
 }
