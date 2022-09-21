@@ -166,7 +166,8 @@ public class ChangeButtonListener implements ActionListener {
             try{
                 for(int j = 0; j<groupOfStudents.get(i).size();j++){
                     Student st = groupOfStudents.get(i).get(j);
-                    if(tmp.getNoOfStudents()<tmp.getMaxCapacity()){
+                    boolean isValidDorm = tmp.getNoOfStudents()<tmp.getMaxCapacity() & tmp.getDormType().equals(st.getGender());
+                    if(isValidDorm){
                         st.setBuildingNo(toBuildingNO);
                         st.setDormNo(tmp.getRoomNO());
                         tmp.setNoOfStudents(tmp.getNoOfStudents()+1); //Increment number of student in every addition.
