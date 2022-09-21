@@ -10,8 +10,6 @@ public abstract class TableViewPage extends JFrame {
     private int pageNumber;
     protected static final int ROW_PER_PAGE = 15;
     private int totalPage;
-    private String query;
-
     public TableViewPage(){
         pageNumber = 1;
     }
@@ -29,9 +27,6 @@ public abstract class TableViewPage extends JFrame {
         this.pageNumber = pageNumber;
     }
 
-    public void setQuery(String query){
-        this.query = query;
-    }
     public int loadPageSize(String query){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         int total = 0;
