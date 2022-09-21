@@ -55,6 +55,11 @@ public class FilterButtonListener implements ActionListener {
     }
 
     public void filterStudents(String query){
-        parentComponent.reloadTable(query);
+        try{
+            parentComponent.reloadTable(query);
+        } catch (NullPointerException ex){
+            JOptionPane.showMessageDialog(parentComponent,"Couldn't filter because of some reasons.");
+            parentComponent.reloadTable();
+        }
     }
 }
