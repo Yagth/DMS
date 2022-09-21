@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.StubNotFoundException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 import java.util.jar.JarOutputStream;
 
@@ -34,11 +35,16 @@ public class SearchButtonListener implements ActionListener {
     public Vector<Vector<Object>> searchStudent(){
         String query = "SELECT * FROM Student WHERE SID='"+ parentComponent.getSearchText()+"'";
         Vector<Vector<Object>> students;
-        students = parentComponent.loadStudents(query);
-        if(students.size() == 0){
-            query = "SELECT * FROM Student WHERE Fname+' '+lname LIKE '%"+parentComponent.getSearchText()+"%'";//loading students with name containing in the search text field.
+        try{
             students = parentComponent.loadStudents(query);
+            if(students.size() == 0){
+                query = "SELECT * FROM Student WHERE Fname+' '+lname LIKE '%"+parentComponent.getSearchText()+"%'";//loading students with name containing in the search text field.
+                students = parentComponent.loadStudents(query);
+            }
+        } catch (SQLException ex){
+            return null;
         }
+
         return students;
     }
 }
