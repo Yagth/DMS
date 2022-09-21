@@ -1,10 +1,12 @@
 package GUIClasses.ActionListeners.ProctorView.StudentView;
 
 import GUIClasses.ProctorViews.StudentView;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Vector;
 
 public class FilterButtonListener implements ActionListener {
@@ -57,7 +59,7 @@ public class FilterButtonListener implements ActionListener {
     public void filterStudents(String query){
         try{
             parentComponent.reloadTable(query);
-        } catch (NullPointerException ex){
+        } catch (NullPointerException | SQLException ex){
             JOptionPane.showMessageDialog(parentComponent,"Couldn't filter because of some reasons.");
             parentComponent.reloadTable();
         }

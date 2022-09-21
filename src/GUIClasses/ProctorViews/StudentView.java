@@ -82,7 +82,7 @@ public class StudentView extends TableViewPage implements Views, TableViews {
         return students;
     }
 
-    public Vector<Vector<Object>> loadStudents(String query){
+    public Vector<Vector<Object>> loadStudents(String query) throws SQLException {
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         ResultSet resultSet;
         Vector<Vector<Object>> students = new Vector<>();
@@ -103,6 +103,7 @@ public class StudentView extends TableViewPage implements Views, TableViews {
                 }
             } catch (SQLException ex){
                 ex.printStackTrace();//For debugging only.
+                throw ex;
             }
         }
         return students;
@@ -116,7 +117,7 @@ public class StudentView extends TableViewPage implements Views, TableViews {
         refreshTable();
     }
 
-    public void reloadTable(String query){
+    public void reloadTable(String query) throws SQLException{
         tableData.clear();
         Vector<Vector<Object>> students = loadStudents(query);
         addDataToTable(students);
