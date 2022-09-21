@@ -56,6 +56,5 @@ public class FilterButtonListener implements ActionListener {
 
     public void filterStudents(String query){
         parentComponent.reloadTable(query);
-        parentComponent.setQuery(query);
     }
 }
