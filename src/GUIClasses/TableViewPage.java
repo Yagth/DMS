@@ -22,6 +22,11 @@ public abstract class TableViewPage extends JFrame {
         pageNumber--;
     }
 
+    public void setPageNumber(int totalItem){
+        float row = ROW_PER_PAGE;
+        int pageNumber = (int) Math.ceil(totalItem / row);
+        this.pageNumber = pageNumber;
+    }
     public int loadPageSize(String query){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         int total = 0;

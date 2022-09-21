@@ -26,6 +26,7 @@ public class FilterButtonListener implements ActionListener {
             return;
         loadDorms(query);
         parentComponent.changeTableData(dorms);
+        parentComponent.setPageNumber(dorms.size());
         if(dorms.size() == 0)
             JOptionPane.showMessageDialog(parentComponent,"No dorms found with this condition");
     }
