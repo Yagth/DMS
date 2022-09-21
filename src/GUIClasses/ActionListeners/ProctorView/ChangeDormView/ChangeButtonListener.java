@@ -81,7 +81,13 @@ public class ChangeButtonListener extends ProgressBarListener {
         else {
             int totalSpace = getAvailableSpaceOnBuilding();
             remainingStudents = getTotalStudents(fromBuildingNo);
-            if(fromBuildingNo.equals("")){
+            totalStudents = getTotalStudents(fromBuildingNo);
+
+            if(totalStudents == 0){
+                JOptionPane.showMessageDialog(parentComponent,"There are no students to change.",
+                        "Empty message",JOptionPane.ERROR_MESSAGE);
+                return;
+            } else if(fromBuildingNo.equals("")){
                 JOptionPane.showMessageDialog(parentComponent,"From building is empty",
                         "Empty message",JOptionPane.ERROR_MESSAGE);
                 return;
@@ -107,7 +113,6 @@ public class ChangeButtonListener extends ProgressBarListener {
             @Override
             protected Boolean doInBackground() throws Exception {
                 boolean updateStatus1;
-                totalStudents = getTotalStudents(fromBuildingNo);
                 do{
                     Thread.sleep(50);
                     loadAvailableDorms(toBuildingNo);
