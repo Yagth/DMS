@@ -290,6 +290,7 @@ public class ChangeButtonListener extends ProgressBarListener {
         }
         boolean updateStatus = false;
         for(ArrayList<Student> students: groupOfStudents){
+
             Iterator it = students.iterator();
             while(it.hasNext()) {
                 Map.Entry entry = (Map.Entry) it.next();
