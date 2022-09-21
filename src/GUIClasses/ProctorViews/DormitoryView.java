@@ -237,6 +237,7 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
             }
         }); //A custom action listener for the exit button.
 
+        filterList.addItem("");
         filterList.addItem("Year of Students");
         filterList.addItem("Available space");
         filterList.setSelectedIndex(1);
