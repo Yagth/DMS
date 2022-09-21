@@ -92,7 +92,7 @@ public class ChangeButtonListener extends ProgressBarListener {
             }
 
             if(javaConnection.isConnected()){
-                updateStatus = changeStudents(toBuildingNo,fromBuildingNo);
+                changeAllStudents(toBuildingNo,fromBuildingNo);
             }
         }
         insertHistory(query);
