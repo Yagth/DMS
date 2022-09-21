@@ -69,7 +69,20 @@ public class FilterButtonListener implements ActionListener {
                     "AND A.RoomNumber = S.RoomNumber ORDER BY NumberOfStudents ASC "+
                     " OFFSET "+(parentComponent.getPageNumber()-1)* parentComponent.getRowPerPage()+
                     " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY;";
-        } else{
+        } else if(condition.equals("Female Dorms")){
+            query = "SELECT DISTINCT A.BuildingNumber, A.RoomNumber, maxCapacity, NumberOfStudents " +
+                    "FROM AvailableDorm AS A LEFT JOIN Student AS S ON A.BuildingNumber = S.BuildingNumber " +
+                    "AND A.RoomNumber = S.RoomNumber WHERE dormType='F' ORDER BY NumberOfStudents ASC "+
+                    " OFFSET "+(parentComponent.getPageNumber()-1)* parentComponent.getRowPerPage()+
+                    " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY;";
+        } else if(condition.equals("Male Dorms")){
+            query = "SELECT DISTINCT A.BuildingNumber, A.RoomNumber, maxCapacity, NumberOfStudents " +
+                    "FROM AvailableDorm AS A LEFT JOIN Student AS S ON A.BuildingNumber = S.BuildingNumber " +
+                    "AND A.RoomNumber = S.RoomNumber WHERE dormType='M' ORDER BY NumberOfStudents ASC "+
+                    " OFFSET "+(parentComponent.getPageNumber()-1)* parentComponent.getRowPerPage()+
+                    " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY;";
+        }
+        else{
             query = "SELECT BuildingNumber, RoomNumber, maxCapacity, NumberOfStudents " +
                     "FROM AvailableDorm ORDER BY(SELECT NULL)"+
                     " OFFSET "+(parentComponent.getPageNumber()-1)* parentComponent.getRowPerPage()+

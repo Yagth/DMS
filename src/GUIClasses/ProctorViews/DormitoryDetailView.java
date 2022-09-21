@@ -31,6 +31,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
     private JButton backButton;
     private JLabel roomNoL;
     private JLabel maxCapacityL;
+    private JLabel dormTypeL;
     private DormitoryView parentComponent;
     private Proctor proctor;
     private Dormitory dorm;
@@ -77,6 +78,7 @@ public class DormitoryDetailView extends JFrame implements Views, TableViews {
         tableNoL.setText(String.valueOf(dorm.getNoOfTables()));
         maxCapacityL.setText(String.valueOf(dorm.getMaxCapacity()));
         keyHolderL.setText(dorm.getKeyHolderId());
+        dormTypeL.setText(dorm.getDormType());
     }
     public void displayReadStatus(boolean readStatus){
         String message = "Couldn't read data from server due to connection error ";

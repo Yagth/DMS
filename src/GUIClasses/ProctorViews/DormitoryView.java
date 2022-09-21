@@ -240,6 +240,9 @@ public class DormitoryView extends TableViewPage implements Views, TableViews {
         filterList.addItem("");
         filterList.addItem("Year of Students");
         filterList.addItem("Available space");
+        filterList.addItem("Male Dorms");
+        filterList.addItem("Female Dorms");
+
         filterList.setSelectedIndex(0);
         filterList.addItemListener(new FilterConditionItemListener(this));
         backLabel.addMouseListener(new BackLabelListener(this));
