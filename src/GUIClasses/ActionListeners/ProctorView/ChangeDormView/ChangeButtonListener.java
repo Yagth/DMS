@@ -13,9 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class ChangeButtonListener extends ProgressBarListener {
@@ -92,6 +90,8 @@ public class ChangeButtonListener extends ProgressBarListener {
                         "Empty message",JOptionPane.ERROR_MESSAGE);
                 return;
             } else if(totalSpace<remainingStudents){
+                System.out.println("Total Space: "+totalSpace);
+                System.out.println("Remaining students: "+remainingStudents);
                 int confirm = JOptionPane.showConfirmDialog(parentComponent,"Some students may be left out because of lack of space, proceed?",
                         "Empty message",JOptionPane.YES_NO_OPTION);
                 if(confirm == 1) return;
@@ -290,13 +290,16 @@ public class ChangeButtonListener extends ProgressBarListener {
         }
         boolean updateStatus = false;
         for(ArrayList<Student> students: groupOfStudents){
-            for(Student student: students){
+            Iterator it = students.iterator();
+            while(it.hasNext()) {
+                Map.Entry entry = (Map.Entry) it.next();
+                Student student = (Student) entry.getValue();
                 query = "UPDATE STUDENT SET BuildingNumber='"+student.getBuildingNo()+
                         "', RoomNumber='"+student.getDormNo()+
                         "' WHERE SID='"+student.getsId()+"';";
                 System.out.println("Query: "+query);//Remove after debugging.
                 updateStatus = javaConnection.updateQuery(query);
-                students.remove(student);
+                it.remove();
                 remainingStudents--;
             }
         }
