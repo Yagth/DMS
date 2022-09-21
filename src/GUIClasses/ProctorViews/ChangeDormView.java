@@ -31,6 +31,10 @@ public class ChangeDormView extends JFrame implements Views {
     private JLabel noOfStudentsL;
     private JLabel fromBuildingNoL;
     private JLabel availableSpaceL;
+    private JPanel headerPanel;
+    private JPanel progressBarPanel;
+    private JProgressBar loadingProgressBar;
+    private JLabel loadingL;
     private Proctor proctor;
     private Student student; //Only for the single student change;
     private DormitoryView parentComponent;
@@ -188,6 +192,14 @@ public class ChangeDormView extends JFrame implements Views {
         conditions.addItem("Change single student");
 
         this.pack();
+    }
+
+    public JLabel getLoadingL(){
+        return loadingL;
+    }
+
+    public JProgressBar getLoadingProgressBar(){
+        return loadingProgressBar;
     }
 
     public Proctor getProctor() {
