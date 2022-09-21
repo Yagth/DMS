@@ -71,7 +71,7 @@ public class FilterButtonListener implements ActionListener {
                     " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY;";
         } else{
             query = "SELECT BuildingNumber, RoomNumber, maxCapacity, NumberOfStudents " +
-                    "FROM AvailableDorm "+
+                    "FROM AvailableDorm ORDER BY(SELECT NULL)"+
                     " OFFSET "+(parentComponent.getPageNumber()-1)* parentComponent.getRowPerPage()+
                     " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY;";
         }
