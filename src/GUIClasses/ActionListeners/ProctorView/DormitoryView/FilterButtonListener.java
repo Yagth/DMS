@@ -70,7 +70,7 @@ public class FilterButtonListener implements ActionListener {
                     " OFFSET "+(parentComponent.getPageNumber()-1)* parentComponent.getRowPerPage()+
                     " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY;";
         } else{
-            query = "SELECT A.BuildingNumber, A.RoomNumber, maxCapacity, NumberOfStudents " +
+            query = "SELECT BuildingNumber, RoomNumber, maxCapacity, NumberOfStudents " +
                     "FROM Dorm ORDER BY NumberOfStudents"+
                     " OFFSET "+(parentComponent.getPageNumber()-1)* parentComponent.getRowPerPage()+
                     " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY;";
