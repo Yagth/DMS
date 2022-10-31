@@ -38,8 +38,7 @@ public class HandleButtonListener implements ActionListener {
                     query = "INSERT INTO ProctorApprovesClothTakeOut(handledDate,EID,clothReportId) " +
                             "VALUES('"+request.getHandledDate()+
                             "' ,'"+parentComponent.getHandlerId()+
-                            "', "+clothTakeOutRequest.get(0)+
-                            ", "+parentComponent.getClothRequestId()+")";
+                            "', "+clothTakeOutRequest.get(0)+ ")";
                     updateStatus = javaConnection.insertQuery(query);
                 }
             }
