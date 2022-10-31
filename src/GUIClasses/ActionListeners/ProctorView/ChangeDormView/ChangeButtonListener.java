@@ -246,6 +246,7 @@ public class ChangeButtonListener implements ActionListener {
                 String buildingNumber = resultSet.getString("buildingNumber");
                 int maxCapacity = resultSet.getInt("maxCapacity");
                 Dormitory tmp = new Dormitory(roomNo,buildingNumber,maxCapacity);
+                tmp.setDormType(resultSet.getString("dormType"));
 
                 String query2 = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
                         "WHERE BuildingNumber='"+buildingNumber+"' AND RoomNumber='"+roomNo+"'";
