@@ -35,7 +35,7 @@ public class HandleButtonListener implements ActionListener {
             int updateStatus = 0;
             for(Vector<Object> clothTakeOutRequest: tmpClothRequest){
                 if((int) clothTakeOutRequest.get(1) == parentComponent.getClothRequestId()){
-                    query = "INSERT INTO ProctorApprovesClothTakeOut(handledDate,EID,clothReportId,clothCountId) " +
+                    query = "INSERT INTO ProctorApprovesClothTakeOut(handledDate,EID,clothReportId) " +
                             "VALUES('"+request.getHandledDate()+
                             "' ,'"+parentComponent.getHandlerId()+
                             "', "+clothTakeOutRequest.get(0)+
