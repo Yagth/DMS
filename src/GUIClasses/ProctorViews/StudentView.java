@@ -240,7 +240,7 @@ public class StudentView extends TableViewPage implements Views, TableViews {
         setSize(WIDTH,HEIGHT);
         setLocationRelativeTo(null);
 
-        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+        ImageIcon logo = new ImageIcon("Images/DMS-logo.png");
 
         Image titleLogo = logo.getImage();
 

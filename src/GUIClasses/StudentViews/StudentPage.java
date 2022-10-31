@@ -201,7 +201,7 @@ public class StudentPage extends JFrame implements TableViews {
         otherActions.add(signOut);
         Services.add(otherActions);
 
-        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+        ImageIcon logo = new ImageIcon("Images/DMS-logo.png");
 
         Image titleLogo = logo.getImage();
 

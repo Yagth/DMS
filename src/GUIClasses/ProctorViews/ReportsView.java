@@ -115,7 +115,7 @@ public class ReportsView extends TableViewPage implements Views, TableViews {
         }); //A custom action listener for the exit button.
         setUpTable();
 
-        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+        ImageIcon logo = new ImageIcon("Images/DMS-logo.png");
 
         Image titleLogo = logo.getImage();
 

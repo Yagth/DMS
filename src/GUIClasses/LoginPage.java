@@ -52,7 +52,7 @@ public class LoginPage extends JFrame{
 
         ImageIcon usernameIcon = new ImageIcon("Images/user.png");
         ImageIcon keyIcon = new ImageIcon("Images/key.png");
-        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+        ImageIcon logo = new ImageIcon("Images/DMS-logo.png");
 
         Image titleLogo = logo.getImage();
 

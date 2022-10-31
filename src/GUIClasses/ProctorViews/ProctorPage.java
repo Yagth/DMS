@@ -220,7 +220,7 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         nextButton.addActionListener(new NextActionListener(this));
         prevButton.addActionListener(new PrevActionListener(this));
 
-        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+        ImageIcon logo = new ImageIcon("Images/DMS-logo.png");
 
         Image titleLogo = logo.getImage();
 

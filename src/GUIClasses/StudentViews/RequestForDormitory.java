@@ -117,7 +117,7 @@ public class RequestForDormitory extends JFrame implements RequestViews {
             }
         }); //A custom action listener for the exit button.
 
-        ImageIcon logo = new ImageIcon("Images/AAULOGO.png");
+        ImageIcon logo = new ImageIcon("Images/DMS-logo.png");
 
         Image titleLogo = logo.getImage();
 
