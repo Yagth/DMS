@@ -28,9 +28,9 @@ public class Test {
     }
 
     public static void displayFrame(){
-        JFrame displayFrame = new JFrame();
-
         ImageIcon logo = new ImageIcon("Images/DMS-logo-small.png");
+
+        JFrame displayFrame = new JFrame();
 
         Image titleLogo = logo.getImage();
 
