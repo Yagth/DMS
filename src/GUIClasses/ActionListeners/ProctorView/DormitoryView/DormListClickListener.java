@@ -31,7 +31,6 @@ public class DormListClickListener implements MouseListener {
         JTable table = parentComponent.getTable();
         int clickedRow = table.getSelectedRow();
         if(clickedRow == -1) return null;
-        System.out.println("Clicked row: "+clickedRow);//For debugging only.
         Dormitory tmp = parentComponent.getDormAt(clickedRow);
         return tmp;
     }

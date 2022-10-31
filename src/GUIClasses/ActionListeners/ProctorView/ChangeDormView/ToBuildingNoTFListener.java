@@ -46,7 +46,6 @@ public class ToBuildingNoTFListener implements FocusListener {
                 String query2 = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT " +
                         "WHERE BuildingNumber='"+buildingNumber+"' AND RoomNumber='"+roomNo+"'";
                 ResultSet rs = javaConnection1.selectQuery(query2);
-                System.out.println("Query to select Number of Students: "+query2);//Remove after debugging.
 
                 while(rs.next()){
                     tmp.setNoOfStudents(rs.getInt("numberOfStudents"));
@@ -54,7 +53,6 @@ public class ToBuildingNoTFListener implements FocusListener {
 
                 availableDorms.add(tmp);
             }
-            System.out.println("available dorms size: "+availableDorms.size());//Remove after debugging.
         } catch (SQLException ex){
             ex.printStackTrace();
             //Leave the implementation of this block.

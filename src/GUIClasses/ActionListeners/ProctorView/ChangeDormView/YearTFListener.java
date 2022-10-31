@@ -19,9 +19,7 @@ public class YearTFListener implements FocusListener {
     public void focusLost(FocusEvent e) {
         String query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT WHERE year="
                 +parentComponent.getYear();
-        System.out.println("Query: "+query);
         int noOfStudents = parentComponent.getNoOfStudent(query);
-        System.out.println("Number of students: "+noOfStudents);
         parentComponent.setNumberOfStudentsL(noOfStudents);
     }
 }

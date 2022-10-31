@@ -185,7 +185,6 @@ public class ReportDetailView extends JFrame implements Views {
             parentComponent.refreshTable(tmpTableData);
 
         }catch (ClassCastException ex){
-            System.out.println("ReportsView");//For debugging only.
             ReportsView parentComponent = (ReportsView) this.parentComponent;
             Vector<Vector<Object>> tmpTableData = parentComponent.loadReports();
             parentComponent.refreshTable(tmpTableData);
@@ -211,7 +210,6 @@ public class ReportDetailView extends JFrame implements Views {
         }); //A custom action listener for the exit button.
 
         if(request.getRequestType().equalsIgnoreCase("ClothTakeOutForm")) handleButton.setText("Approve");
-        System.out.println("Location: "+request.getLocation());//For debugging only
 
         ImageIcon logo = new ImageIcon("Images/DMS-logo.png");
 

@@ -125,12 +125,8 @@ public class ChangeButtonListener implements ActionListener {
                 loadAvailableDorms();
 
                 sortDormOnAvailableSpace();
-                System.out.println("--Available dorms after sort on space--");
-                displayAvailableDorms();
 
                 sortDormOnBuildingNo();
-                System.out.println("--Available dorms after sort on buildingNumber--");
-                displayAvailableDorms();
 
                 groupStudents(fromBuildingNo);
                 updateStatus = changeStudents(fromBuildingNo,toBuildingNo);
@@ -158,8 +154,6 @@ public class ChangeButtonListener implements ActionListener {
         } catch (SQLException ex){
             ex.printStackTrace(); //For debugging only.
         }
-        System.out.println("Total Students: "+totalStudents);//For debugging only.
-        System.out.println("Total space: "+totalSpace);//For debugging only.
 
         for(int i = 0; i<availableDorms.size();i++){
             Dormitory tmp = availableDorms.get(i);
@@ -191,7 +185,6 @@ public class ChangeButtonListener implements ActionListener {
                 query = "UPDATE STUDENT SET BuildingNumber='"+student.getBuildingNo()+
                         "', RoomNumber='"+student.getDormNo()+
                         "' WHERE SID='"+student.getsId()+"';";
-                System.out.println("Query: "+query);//Remove after debugging.
                 updateStatus = javaConnection.updateQuery(query);
             }
         }
@@ -274,7 +267,6 @@ public class ChangeButtonListener implements ActionListener {
                     The following code will sort the dorms by giving priority to the
                     dorms that are found in the proctor's building.
                     */
-                    System.out.println("IsFoundInProctorsBuilding");
                     tmp = availableDorms.get(j);
                     availableDorms.set(j,availableDorms.get(0));
                     availableDorms.set(0,tmp);
@@ -342,14 +334,6 @@ public class ChangeButtonListener implements ActionListener {
 
         if(javaConnection.isConnected()){
             javaConnection.insertQuery(query);
-        }
-    }
-
-    //The following method is only for debugging.
-    private void displayAvailableDorms(){
-        for(Dormitory dorm: availableDorms){
-            System.out.println("BuildingNumber: "+dorm.getBuildingNo());
-            System.out.println("Available Space: "+(dorm.getMaxCapacity()-dorm.getNoOfStudents()));
         }
     }
 }

@@ -89,7 +89,6 @@ public class FilterButtonListener implements ActionListener {
                     " OFFSET "+(parentComponent.getPageNumber()-1)* parentComponent.getRowPerPage()+
                     " ROWS FETCH NEXT "+parentComponent.getRowPerPage()+" ROWS ONLY;";
         }
-        System.out.println("Query: "+query);//For debugging only.
         return query;
     }
 }

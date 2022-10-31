@@ -81,7 +81,6 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
                     sortDormOnBuildingNo();
                     totalSpace = getTotalSpace();
 
-                    System.out.println("TotalSpace: "+totalSpace);
 
                     loadNewStudents();
                     updateStatus1 = allocate();
@@ -136,7 +135,6 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
             sortDormOnBuildingNo();
             totalSpace = getTotalSpace();
 
-            System.out.println("TotalSpace: "+totalSpace);
 
             loadNewStudents();
             updateStatus = allocate();
@@ -165,8 +163,6 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
                     boolean isRightGender = student.getGender().equalsIgnoreCase(dorm.getDormType());
                     boolean isFirstStudent = (dorm.getNoOfStudents() == 0);
 
-                    System.out.println("Is first Student: "+isFirstStudent);
-                    System.out.println("SID: "+student.getsId());
 
                     if(hasLockers & isRightGender){
                             student.setBuildingNo(dorm.getBuildingNo());
@@ -195,7 +191,6 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
                             "', RoomNumber = '"+student.getDormNo()+"', pillow=1,matress=1,bedBase=1 WHERE SID = '"+student.getsId()+"' ";
                     updateStatus = javaConnection.updateQuery(query);
 
-                    System.out.println("Query: "+query);
 
                     query = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
                             " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";//Decrementing the stock on every student allocation.
@@ -203,7 +198,6 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
                     updateStatus &= javaConnection.updateQuery(query);
                     it.remove();//Removing the student from memory after allocation.
                     remainingStudents--;
-                    System.out.println("Remaining students: "+ remainingStudents);
                 }
             }
         }
@@ -216,7 +210,6 @@ public class NewStudentsDormAllocation extends TableViewPage implements ActionLi
         String query = "SELECT * FROM AvailableDorm ORDER BY NumberOfStudents ASC OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
                 " ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         ResultSet resultSet = javaConnection.selectQuery(query);
-        System.out.println("Query: "+query);
 
         try{
             availableDorms.clear();//Erasing previously loaded dorms.

@@ -57,7 +57,6 @@ public class ReportDetailClickListener implements MouseListener {
                         request.setLocation(resultSet.getString("BuildingNumber")+"-"+resultSet.getString("RoomNumber"));
                         request.setDescription(resultSet.getString("Description"));
                         request.setRequestId(tempId);
-                        System.out.println("Temp ID: "+tempId);//For debugging only.
                         return request;
                     }
                     else if(reportType.equals("ExtendDormStayRequest")){

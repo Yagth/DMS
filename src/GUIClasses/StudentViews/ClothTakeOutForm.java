@@ -161,11 +161,9 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
             String query = "INSERT INTO ClothTakeOut(reportCount,reportType,ClothName,Amount)" +
                             "VALUES('" +clothList.getRequestCount()+"','" +clothList.getRequestType()+"','"+ c.getClothName()+ "','" +
                     c.getClothAmount()+"');";
-            System.out.println("Query: "+query);//For debugging purposes.
             if (javaConnection.isConnected()) tmp1 = javaConnection.insertQuery(query);//If query is successful the java connection returns 1.
             query = "INSERT INTO StudentTakesClothOut(ReporterId,ClothRequestId,reportedDate)" +
                     "VALUES('" +clothList.getRequesterId()+"','"+ getCurrentClothRequestId()+"','"+ clothList.getRequestedDate()+ "');";
-            System.out.println("Query: "+query);//For debugging purposes.
             if(javaConnection.isConnected()) tmp2 = javaConnection.insertQuery(query);//If query is successful the java connection returns 1.
         }
         if(tmp1==1 & tmp2==1){//If both queries are successful.
@@ -195,7 +193,6 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
     }
     public Integer getCurrentClothRequestId(){
         String query = "SELECT LAST_VALUE(ReportId) OVER(ORDER BY reportCount) reportId FROM ClothTakeOut where reportCount="+clothList.getRequestCount();
-        System.out.println("Query: "+query);//For debugging purposes.
         ResultSet tmp = javaConnection.selectQuery(query);
         int requestId = 0;
         try{
@@ -204,7 +201,6 @@ public class ClothTakeOutForm extends JFrame implements RequestViews, TableViews
         } catch (SQLException ex){
             ex.printStackTrace();
         }
-        System.out.println("ReportId: "+requestId);//For debugging.
         return requestId;
     }
     public boolean checkSimilarNameCloth(Cloth cloth){

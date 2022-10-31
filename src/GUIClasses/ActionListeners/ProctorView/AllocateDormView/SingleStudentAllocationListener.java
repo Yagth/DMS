@@ -31,11 +31,9 @@ public class SingleStudentAllocationListener implements ActionListener {
         String query = "SELECT * FROM AvailableDorm WHERE BuildingNumber='"
                 +buildingNumber+"' AND RoomNumber='"+roomNumber+"' ";
 
-        System.out.println("query: "+query);
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
             while(resultSet.next()){
-                System.out.println("Inside while");
                 tmpDorm = new Dormitory(roomNumber,buildingNumber,resultSet.getInt("maxCapacity"));
                 tmpDorm.setNoOfLockers(resultSet.getInt("Lockers"));
                 tmpDorm.setNoOfStudents(resultSet.getInt("NumberOfStudents"));
@@ -47,13 +45,11 @@ public class SingleStudentAllocationListener implements ActionListener {
 
         allocationIsValid = isValid(tmpDorm);
 
-        System.out.println("Allocation is valid: "+allocationIsValid);
         if(allocationIsValid) {
 
             JavaConnection javaConnection1 = new JavaConnection(JavaConnection.URL);
             query = "UPDATE Student SET BuildingNumber='"+buildingNumber+"', RoomNumber='"
                     +roomNumber+"', Pillow=1, BedBase=1,Matress=1 WHERE SID='"+student.getsId()+"' ";
-            System.out.println("Query: "+query);
             updateStatus = javaConnection1.updateQuery(query);
             query = "UPDATE Stock SET TotalPillow-=1, TotalMatress-=1," +
                     " TotalMatressBase-=1 WHERE BuildingNumber='"+student.getBuildingNo()+"';";

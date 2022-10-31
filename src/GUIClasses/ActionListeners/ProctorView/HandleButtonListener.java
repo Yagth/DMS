@@ -26,7 +26,6 @@ public class HandleButtonListener implements ActionListener {
                     "VALUES('"+request.getHandledDate()+
                     "' ,'"+parentComponent.getHandlerId()+
                     "', "+request.getRequestId()+")";
-            System.out.println("Query in first if: "+query);//For debugging only.
             return javaConnection.insertQuery(query);
         } else if(request.getRequestType().equals("RequestForNewDorm")) {
             return automaticAllocation(request);
@@ -49,7 +48,6 @@ public class HandleButtonListener implements ActionListener {
     public int automaticAllocation(Request request){
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT TOP 1 * FROM AvailableDorm ORDER BY NumberOfStudents ASC";
-        System.out.println("Query in second if: "+query);//For debugging only.
         ResultSet resultSet = javaConnection.selectQuery(query);
         try{
             String buildingNumber = null;
@@ -60,7 +58,6 @@ public class HandleButtonListener implements ActionListener {
             }
             query = "UPDATE Student SET BuildingNumber='"+buildingNumber+"', RoomNumber='"+roomNumber+
                     "' WHERE SID='"+request.getRequesterId()+"'";
-            System.out.println("Query: "+query);//For debugging only.
             boolean updateStatus = javaConnection.updateQuery(query);
             query = "INSERT INTO ProctorHandlesReport(handledDate,EID,ReportId) " +
                     "VALUES('"+request.getHandledDate()+

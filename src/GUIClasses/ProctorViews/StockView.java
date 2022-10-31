@@ -47,7 +47,6 @@ public class StockView extends TableViewPage implements Views, TableViews {
         loadAndSetTotalPage(query);
 
         setUpGUi();
-        System.out.println("After setUpGui");//For debugging only.
     }
 
     public Vector<Vector<Object>> loadHistory(){

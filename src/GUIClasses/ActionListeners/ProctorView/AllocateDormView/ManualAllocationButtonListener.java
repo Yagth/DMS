@@ -50,7 +50,6 @@ public class ManualAllocationButtonListener extends RequestedStudentDormAllocati
                 "' ORDER BY NumberOfStudents ASC OFFSET "+(getPageNumber()-1)*ROW_PER_PAGE+
                 " ROWS FETCH NEXT "+ROW_PER_PAGE+" ROWS ONLY";
         ResultSet resultSet = javaConnection.selectQuery(query);
-        System.out.println("Query: "+query);
 
         try{
             availableDorms.clear();//Erasing previously loaded dorms.

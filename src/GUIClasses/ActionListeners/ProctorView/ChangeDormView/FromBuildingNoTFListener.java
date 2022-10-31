@@ -17,9 +17,7 @@ public class FromBuildingNoTFListener implements FocusListener {
     public void focusLost(FocusEvent e) {
         String query = "SELECT COUNT(SID) AS numberOfStudents FROM STUDENT WHERE year="
                 +parentComponent.getYear()+ " AND BuildingNumber='"+parentComponent.getBuildingNo()+"'";
-        System.out.println("Query: "+query);
         int noOfStudents = parentComponent.getNoOfStudent(query);
-        System.out.println("Number of students: "+noOfStudents);
         parentComponent.setNumberOfStudentsL(noOfStudents);
     }
 }

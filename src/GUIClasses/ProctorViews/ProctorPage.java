@@ -97,7 +97,6 @@ public class ProctorPage extends TableViewPage implements Views, TableViews {
         JavaConnection javaConnection = new JavaConnection(JavaConnection.URL);
         String query = "SELECT TOP 1 * FROM ProctorSchedule WHERE PID='"+getProctor().getpId()+
                 "' AND ToDate >= GETDATE() ORDER BY FromDate ASC,ToDate ASC";
-        System.out.println("Query : "+query);
         Date fromDate = null, toDate = null;
         String buildingNumber = "";
         ResultSet resultSet;

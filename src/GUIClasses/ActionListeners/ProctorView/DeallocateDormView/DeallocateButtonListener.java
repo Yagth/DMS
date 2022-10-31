@@ -43,9 +43,6 @@ public class DeallocateButtonListener implements ActionListener {
                     if(!(parentComponent.getNumberOfStudentsL().getText().equals("0"))){ // If there are students satisfying the condition.
                         if(choice==0) updateStatus = deallocate(query) & deallocate(query2) & deallocate(query3);
                         else return;
-                        System.out.println(query);
-                        System.out.println(query2);
-                        System.out.println(query3);
                         displayUpdateStatus(updateStatus);
                     }
                     else{
@@ -89,7 +86,6 @@ public class DeallocateButtonListener implements ActionListener {
         if(javaConnection.isConnected()){
             updateStatus = javaConnection.updateQuery(query);
         }
-        System.out.println("Deallocate status: "+updateStatus);
         return updateStatus;
     }
 

@@ -87,7 +87,6 @@ public class ChangeDormView extends JFrame implements Views {
                 while(resultSet.next()){
                     fname = resultSet.getString("Fname");
                     studentIsFound = !(fname == null);
-                    System.out.println("Student is found: "+studentIsFound); //Remove after debugging.
                     if(studentIsFound){
                         student = new Student(fname,resultSet.getString("Lname"),
                                 SID,resultSet.getString("Gender"));
@@ -97,7 +96,6 @@ public class ChangeDormView extends JFrame implements Views {
                 }
             } catch (SQLException ex){
                 ex.printStackTrace();//For debugging only.
-                System.out.println("Inside the getStudent catch block");
             }
         }
         return  studentIsFound; //Returns true if the student is found.

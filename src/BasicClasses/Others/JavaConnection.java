@@ -52,7 +52,6 @@ public class JavaConnection {
             statement.execute(query);
             return 1;
         }catch (SQLException ex){
-            System.out.println("Query: "+query);//For debugging only.
             ex.printStackTrace();//For debugging purposes.
             return 0;
         }
@@ -71,7 +70,6 @@ public class JavaConnection {
         try{
             tmpResultSet = statement.executeQuery(query);
         }catch (SQLException ex){
-            System.out.println("Query: "+query);//For debugging purposes.
             ex.printStackTrace();//For debugging purposes.
             return null;
         }
