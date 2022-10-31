@@ -1,5 +1,3 @@
-package GUIClasses.ProctorViews;
-
 import BasicClasses.Enums.SizeOfMajorClasses;
 import GUIClasses.DisplayPanel;
 import GUIClasses.LoginPage;
