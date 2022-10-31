@@ -30,6 +30,12 @@ public class Test {
     public static void displayFrame(){
         JFrame displayFrame = new JFrame();
 
+        ImageIcon logo = new ImageIcon("Images/DMS-logo-small.png");
+
+        Image titleLogo = logo.getImage();
+
+        displayFrame.setIconImage(titleLogo);
+
         displayFrame.setUndecorated(true);
         displayFrame.setSize(new Dimension(SizeOfMajorClasses.WIDTH.getSize(), SizeOfMajorClasses.HEIGHT.getSize()));
 
