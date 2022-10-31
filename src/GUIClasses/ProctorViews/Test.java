@@ -39,8 +39,10 @@ public class Test {
         displayFrame.setUndecorated(true);
         displayFrame.setSize(new Dimension(SizeOfMajorClasses.WIDTH.getSize(), SizeOfMajorClasses.HEIGHT.getSize()));
 
-        DisplayPanel imagePanel = new DisplayPanel(displayFrame.getWidth(), displayFrame.getHeight());
+        DisplayPanel imagePanel = new DisplayPanel(displayFrame.getWidth());
         displayFrame.add(imagePanel);
+
+        displayFrame.setResizable(false);
 
         displayFrame.setLocationRelativeTo(null);
         displayFrame.setVisible(true);
