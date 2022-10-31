@@ -68,11 +68,11 @@ public class DeallocateButtonListener implements ActionListener {
             query = "UPDATE Stock SET" +
                         " TotalPillow+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0), " +
                         " TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0), " +
-                        " TotalMatress+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0) " +
+                        " TotalMatressBase+=(SELECT COUNT(SID) FROM STUDENT WHERE isEligible=0) " +
                     " WHERE BuildingNumber='"+buildingNumber+"';";
             int choice = JOptionPane.showConfirmDialog(parentComponent,"Are you sure you want to deallocate these students?",
                     "confirm",JOptionPane.YES_NO_OPTION);
-            if(!(parentComponent.getNumberOfStudentsL().getText().equals("0"))){ // If there are students satisfying the condition.
+            if((!parentComponent.getNumberOfStudentsL().getText().equals("0"))){ // If there are students satisfying the condition.
                 if(choice==0) updateStatus = deallocate(query) & deallocate(query2);
                 displayUpdateStatus(updateStatus);
             }
@@ -89,6 +89,7 @@ public class DeallocateButtonListener implements ActionListener {
         if(javaConnection.isConnected()){
             updateStatus = javaConnection.updateQuery(query);
         }
+        System.out.println("Deallocate status: "+updateStatus);
         return updateStatus;
     }
 
