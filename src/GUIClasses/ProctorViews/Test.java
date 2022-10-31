@@ -47,7 +47,7 @@ public class Test {
         displayFrame.setLocationRelativeTo(null);
         displayFrame.setVisible(true);
         try {
-            Thread.sleep(3500);
+            Thread.sleep(4500);
         } catch (Exception ex){
 
         }
